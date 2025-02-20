@@ -1,0 +1,123 @@
+---
+import { Image } from "astro:assets";
+import Logo from "../assets/logo.png";
+import FacebookLogo from "../assets/social/facebook.png";
+import TwitterLogo from "../assets/social/x.png";
+import InstagramLogo from "../assets/social/insta.png";
+import LinkedInLogo from "../assets/social/linkedin.png";
+import Mail from "../assets/social/mail.svg";
+import Phone from "../assets/social/phone.svg";
+import ContactForm from "./home/ContactForm.astro";
+---
+
+<footer class="bg-[#000000] text-[#ffffff] pt-16">
+  <div class="app-max-width flex flex-col">
+    <ContactForm />
+    <section class="flex w-full justify-between font-medium py-16">
+      <div class="flex flex-col space-y-8 justify-between w-[40%]">
+        <Image src={Logo} alt="Logo" class="w-[233px] h-[48px]" />
+        <p class="font-semibold">
+          NixxonTech is a creative agency with finest design, development and
+          animation expertise.
+        </p>
+        <div class="flex space-x-4">
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            class="bg-primary-blue p-1 rounded-full"
+          >
+            <Image
+              src={FacebookLogo}
+              alt="Facebook"
+              class="aspect-square w-6"
+            />
+          </a>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            class="bg-primary-blue p-1 rounded-full"
+          >
+            <Image src={TwitterLogo} alt="Twitter" class="aspect-square w-6" />
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            class="bg-primary-blue p-1 rounded-full"
+          >
+            <Image
+              src={InstagramLogo}
+              alt="Instagram"
+              class="aspect-square w-6"
+            />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            class="bg-primary-blue p-1 rounded-full"
+          >
+            <Image
+              src={LinkedInLogo}
+              alt="LinkedIn"
+              class="aspect-square w-6"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="flex flex-col  space-y-4 font-medium">
+        <h5 class="text-2xl mb-4">Office</h5>
+        <p>Troy St. Ste B, Dothan, AL 36303</p>
+        <p class="flex items-center space-x-3">
+          <Image src={Mail} alt="Mail" class="aspect-square w-6 inline" />
+          <span>info@NixxonTech.com</span>
+        </p>
+        <p class="flex items-center space-x-3">
+          <Image src={Phone} alt="Phone" class="aspect-square w-6 inline" />
+          <span>334-123-4567</span>
+        </p>
+      </div>
+      <nav class="flex flex-col  font-medium">
+        <h5 class="text-2xl mb-4">Menu</h5>
+        <ul>
+          <li>
+            <a href="/about">Home</a>
+          </li>
+          <li>
+            <a href="/about">About Us</a>
+          </li>
+          <li>
+            <a href="/services">Services</a>
+          </li>
+          <li>
+            <a href="/about">Portfolio</a>
+          </li>
+          <li>
+            <a href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
+      <nav class="flex flex-col ">
+        <h5 class="text-2xl mb-4">Menu</h5>
+        <ul>
+          <li>
+            <a href="/about">Home</a>
+          </li>
+          <li>
+            <a href="/about">About Us</a>
+          </li>
+          <li>
+            <a href="/services">Services</a>
+          </li>
+          <li>
+            <a href="/about">Portfolio</a>
+          </li>
+          <li>
+            <a href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+  </div>
+  <p class="text-center text-white py-2 border-t border-[#ffffff]/50">
+    Powered By NixxonTech
+  </p>
+</footer>
