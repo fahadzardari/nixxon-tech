@@ -1,0 +1,9 @@
+---
+import Background from "../../assets/get-started-section-bg.webp";
+const {className = ""} = Astro.props;
+---
+
+
+<section class=`bg-cover object-cover bg-no-repeat py-32 max-h-[600px] flex flex-col items-center justify-center ${className}` style=`background-image: url(${Background.src})`>
+  <slot />
+</section>

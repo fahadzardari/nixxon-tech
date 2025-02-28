@@ -1,0 +1,71 @@
+---
+import Heading from "../common/Heading.astro";
+import CollaborateCard from "./CollaborateCard.astro";
+import ideaIcon from "../../assets/icons/home/idea.png";
+import rocketIcon from "../../assets/icons/home/rocket.png";
+import creationIcon from "../../assets/icons/home/creation.png";
+import innovationIcon from "../../assets/icons/home/innovation.png";
+---
+
+<section class="app-max-width py-8 flex flex-col space-y-16 mb-16" aria-labelledby="collaborate-heading">
+  <div class="flex flex-row justify-between mx-auto w-4/5">
+    <article class="border-r pr-4 py-2 flex flex-col justify-between space-y-3 text-right w-auto border-black">
+      <h2 class="font-medium text-5xl">2.5K</h2>
+      <p class="text-md uppercase">Projects</p>
+    </article>
+    <article class="border-r pr-4 py-2 flex flex-col justify-between space-y-3 text-right w-auto border-black">
+      <h2 class="font-medium text-5xl">725</h2>
+      <p class="text-md uppercase">Clients</p>
+    </article>
+    <article class="border-r pr-4 py-2 flex flex-col justify-between space-y-3 text-right w-auto border-black">
+      <h2 class="font-medium text-5xl">32</h2>
+      <p class="text-md uppercase">Countries</p>
+    </article>
+    <article class="border-r pr-4 py-2 flex flex-col justify-between space-y-3 text-right w-auto border-black">
+      <h2 class="font-medium text-5xl">24</h2>
+      <p class="text-md uppercase">Creatives</p>
+    </article>
+  </div>
+  <div class="flex flex-col space-y-12">
+    <Heading>
+      <h2 class="text-4xl font-medium">How We <span class="text-primary-blue">Collaborate</span> With You</h2>
+    </Heading>
+    <h3 class="text-[#2A2111] capitalize">
+      From brand identity to customer acquisition, we offer end-to-end marketing
+      solutions. Our services include:
+    </h3>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-x-6 list-none">
+      <li>
+        <CollaborateCard
+          title="Thinking Big"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          icon={ideaIcon}
+        />
+      </li>
+      <li>
+        <CollaborateCard
+          title="Starting Small"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          icon={rocketIcon}
+        />
+      </li>
+      <li>
+        <CollaborateCard
+          title="Creating Fast"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          icon={creationIcon}
+        />
+      </li>
+      <li>
+        <CollaborateCard
+          title="Innovating Scale"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          icon={innovationIcon}
+        />
+      </li>
+    </ul>
+    <a href="/how-we-work" class="bg-primary-blue rounded-full px-8 py-2 w-fit text-white cursor-pointer no-underline inline-block">
+      How We Work
+    </a>
+  </div>
+</section>

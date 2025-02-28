@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import Heading from "../common/Heading.astro";
+import AboutUsVideoImage from "../../assets/home/about/video.png";
+import GIFImage from "../../assets/home/about/gif.gif";
+---
+
+<section class="app-max-width py-16">
+  <Heading>
+    <h2 id="about-us-heading" class="text-4xl font-medium">
+      Get Ahead of the Competition <br />
+      <span class="text-primary-blue">and Lead the Charts</span>
+    </h2>
+  </Heading>
+
+  <p class="my-4">
+    Reach out beyond the crowd and leave a lasting impression with our
+    assistance. You can boost revenue, bring in more customers, and fortify your
+    brand with our tailored solutions. With confidence, your vision can be
+    fulfilled because of our experience.
+  </p>
+
+  <Image
+    src={AboutUsVideoImage}
+    alt={"About Us"}
+    class={"w-full max-h-[640px] mx-auto my-8"}
+  />
+
+  <div class="flex space-x-6 items-center justify-between mt-16">
+    <div class="w-1/2">
+      <Image
+        src={GIFImage}
+        alt={"About Us"}
+        class={"w-full h-auto rounded-tr-[23px] rounded-bl-[23px] rounded-tl-[90px] rounded-br-[90px]"}
+      />
+    </div>
+    <div class="w-1/2 flex flex-col space-y-4">
+      <h4 class="text-lg">About Us</h4>
+      <h3 class="text-primary-blue text-4xl font-medium capitalize">Mission to elevate business growth</h3>
+      <p class="text-[#2A2111] text-[16px]">
+        NixxonTech is a premier Digital agency, offering superior business
+        advancement solutions across diverse sectors. Our goal is to enhance
+        progress, innovation, and outcomes, driven by a mission to elevate
+        business growth.
+      </p>
+      <a href="#" class="text-primary-blue">
+        Read More <span>&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>

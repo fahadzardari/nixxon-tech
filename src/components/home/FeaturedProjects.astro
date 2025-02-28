@@ -1,0 +1,25 @@
+---
+import Heading from "../common/Heading.astro";
+import ProjectCard from "./ProjectCard.astro";
+import ProjectsSlider from "./ProjectsSlider";
+
+// Your project data could come from here
+const projects = [
+  // Add your project data here
+  // Example: { id: 1, title: 'Project 1', description: '...', image: '...' },
+];
+---
+
+<section
+  class="app-max-width py-8 flex flex-col space-y-16"
+  aria-labelledby="featured-projects-heading"
+>
+  <div class="flex flex-col space-y-12">
+    <Heading>
+      <h2 id="featured-projects-heading" class="text-4xl font-medium">
+        Featured Projects
+      </h2>
+    </Heading>
+    <ProjectsSlider client:load />
+  </div>
+</section>

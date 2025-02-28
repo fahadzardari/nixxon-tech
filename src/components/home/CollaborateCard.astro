@@ -1,0 +1,17 @@
+---
+import ideaIcon from "../../assets/icons/home/idea.png";
+import { Image } from "astro:assets";
+const {
+  title = "Collaborate",
+  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  icon = ideaIcon,
+} = Astro.props;
+---
+
+<article class="flex flex-col space-y-4">
+  <div class="flex flex-row space-x-2">
+    <Image src={icon} alt="Collaborate Icon" class="w-6 h-6" />
+    <h2 class="text-lg font-400">{title}</h2>
+  </div>
+  <p class="text-[13px] text-[#2A2111]">{description}</p>
+</article>
