@@ -7,34 +7,65 @@ import creationIcon from "../../assets/icons/home/creation.png";
 import innovationIcon from "../../assets/icons/home/innovation.png";
 ---
 
-<section class="app-max-width py-8 flex flex-col space-y-16 mb-16" aria-labelledby="collaborate-heading" id="collaborate-section">
-  <div class="flex flex-row justify-between mx-auto w-4/5" id="stats-container">
-    <article class="border-r pr-4 py-2 flex flex-col justify-between space-y-3 text-right w-auto border-black stats-item opacity-0">
-      <h2 class="font-medium text-5xl"><span class="counter" data-target="2500">0</span>K</h2>
+<section
+  class="app-max-width py-8 flex flex-col space-y-16 mb-16"
+  aria-labelledby="collaborate-heading"
+  id="collaborate-section"
+>
+  <div
+    class="flex flex-col md:flex-row justify-between mx-auto w-full md:w-4/5 gap-4 md:gap-0"
+    id="stats-container"
+  >
+    <article
+      class="flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end md:text-right px-4 py-2 border-b md:border-b-0 md:border-r border-black stats-item opacity-0"
+    >
+      <h2 class="font-medium text-3xl md:text-5xl">
+        <span class="counter" data-target="2500">0</span>K
+      </h2>
       <p class="text-md uppercase">Projects</p>
     </article>
-    <article class="border-r pr-4 py-2 flex flex-col justify-between space-y-3 text-right w-auto border-black stats-item opacity-0">
-      <h2 class="font-medium text-5xl"><span class="counter" data-target="725">0</span></h2>
+    <article
+      class="flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end md:text-right px-4 py-2 border-b md:border-b-0 md:border-r border-black stats-item opacity-0"
+    >
+      <h2 class="font-medium text-3xl md:text-5xl">
+        <span class="counter" data-target="725">0</span>
+      </h2>
       <p class="text-md uppercase">Clients</p>
     </article>
-    <article class="border-r pr-4 py-2 flex flex-col justify-between space-y-3 text-right w-auto border-black stats-item opacity-0">
-      <h2 class="font-medium text-5xl"><span class="counter" data-target="32">0</span></h2>
+    <article
+      class="flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end md:text-right px-4 py-2 border-b md:border-b-0 md:border-r border-black stats-item opacity-0"
+    >
+      <h2 class="font-medium text-3xl md:text-5xl">
+        <span class="counter" data-target="32">0</span>
+      </h2>
       <p class="text-md uppercase">Countries</p>
     </article>
-    <article class="border-r pr-4 py-2 flex flex-col justify-between space-y-3 text-right w-auto border-black stats-item opacity-0">
-      <h2 class="font-medium text-5xl"><span class="counter" data-target="24">0</span></h2>
+    <article
+      class="flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end md:text-right px-4 py-2 stats-item opacity-0"
+    >
+      <h2 class="font-medium text-3xl md:text-5xl">
+        <span class="counter" data-target="24">0</span>
+      </h2>
       <p class="text-md uppercase">Creatives</p>
     </article>
   </div>
   <div class="flex flex-col space-y-12">
     <Heading>
-      <h2 class="text-4xl font-medium" id="collaborate-heading">How We <span class="text-primary-blue">Collaborate</span> With You</h2>
+      <h2 class="text-4xl font-medium" id="collaborate-heading">
+        How We <span class="text-primary-blue">Collaborate</span> With You
+      </h2>
     </Heading>
-    <h3 class="text-[#2A2111] capitalize opacity-0" id="collaborate-description">
+    <h3
+      class="text-[#2A2111] capitalize opacity-0"
+      id="collaborate-description"
+    >
       From brand identity to customer acquisition, we offer end-to-end marketing
       solutions. Our services include:
     </h3>
-    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 list-none" id="cards-container">
+    <ul
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 list-none"
+      id="cards-container"
+    >
       <li class="card-item opacity-0">
         <CollaborateCard
           title="Thinking Big"
@@ -64,7 +95,11 @@ import innovationIcon from "../../assets/icons/home/innovation.png";
         />
       </li>
     </ul>
-    <a href="/how-we-work" class="bg-primary-blue rounded-full px-8 py-2 w-fit text-white cursor-pointer no-underline inline-block opacity-0" id="cta-button">
+    <a
+      href="/how-we-work"
+      class="bg-primary-blue rounded-full px-8 py-2 w-fit text-white cursor-pointer no-underline inline-block opacity-0"
+      id="cta-button"
+    >
       How We Work
     </a>
   </div>
@@ -74,107 +109,132 @@ import innovationIcon from "../../assets/icons/home/innovation.png";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import SplitType from "split-type";
-  
+
   // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
-  
+
   document.addEventListener("DOMContentLoaded", () => {
     // Initialize split text for heading
     const headingText = new SplitType("#collaborate-heading", {
       types: "words",
-      tagName: "span"
+      tagName: "span",
     });
-    
-    // Create main timeline
-    const tl = gsap.timeline({
+
+    // Create separate timeline for stats
+    const statsTimeline = gsap.timeline({
       scrollTrigger: {
-        trigger: "#collaborate-section",
+        trigger: "#stats-container",
         start: "top 75%",
-        toggleActions: "play none none none"
-      }
+        toggleActions: "play none none none",
+      },
     });
-    
+
     // Stats items animation
-    tl.to(".stats-item", {
+    statsTimeline.to(".stats-item", {
       opacity: 1,
       y: 0,
       stagger: 0.15,
       duration: 0.8,
-      ease: "power2.out"
+      ease: "power2.out",
     });
-    
+
     // Animate counter numbers
-    const counterElements = document.querySelectorAll('.counter');
-    counterElements.forEach(counter => {
-      const targetValue = parseInt(counter.getAttribute('data-target'));
-      
+    const counterElements = document.querySelectorAll(".counter");
+    counterElements.forEach((counter) => {
+      const targetValue = parseInt(counter.getAttribute("data-target"));
+
       // Determine if we need to show decimals (for the 2.5K value)
       let decimals = 0;
       if (targetValue === 2500) {
         counter.innerHTML = "0";
         decimals = 1;
       }
-      
-      tl.to(counter, {
-        innerHTML: targetValue === 2500 ? "2.5" : targetValue,
-        duration: 2,
-        snap: { innerHTML: decimals === 1 ? 0.1 : 1 },
-        ease: "power2.out"
-      }, "-=0.5");
+
+      statsTimeline.to(
+        counter,
+        {
+          innerHTML: targetValue === 2500 ? "2.5" : targetValue,
+          duration: 2,
+          snap: { innerHTML: decimals === 1 ? 0.1 : 1 },
+          ease: "power2.out",
+        },
+        "-=0.5"
+      );
     });
-    
+
+    // Create content timeline
+    const contentTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#collaborate-heading",
+        start: "top 85%",
+        toggleActions: "play none none none",
+      },
+    });
+
     // Heading animation
-    tl.from(headingText.words, {
+    contentTimeline.from(headingText.words, {
       opacity: 0,
       y: 20,
       stagger: 0.1,
       duration: 0.7,
-      ease: "power2.out"
-    }, "-=1.5");
-    
+      ease: "power2.out",
+    });
+
     // Description animation
-    tl.to("#collaborate-description", {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      ease: "power2.out"
-    }, "-=0.3");
-    
+    contentTimeline.to(
+      "#collaborate-description",
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+
     // Cards animation
-    tl.to(".card-item", {
-      opacity: 1,
-      y: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "power2.out"
-    }, "-=0.5");
-    
+    contentTimeline.to(
+      ".card-item",
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    );
+
     // CTA button animation
-    tl.to("#cta-button", {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      ease: "power2.out"
-    }, "-=0.3");
-    
-    
+    contentTimeline.to(
+      "#cta-button",
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
     // Button hover animation
     const ctaButton = document.querySelector("#cta-button");
-    ctaButton.addEventListener("mouseenter", () => {
-      gsap.to(ctaButton, {
-        scale: 1.05,
-        duration: 0.3,
-        ease: "power4.out"
+    if (ctaButton) {
+      ctaButton.addEventListener("mouseenter", () => {
+        gsap.to(ctaButton, {
+          scale: 1.05,
+          duration: 0.3,
+          ease: "power4.out",
+        });
       });
-    });
-    
-    ctaButton.addEventListener("mouseleave", () => {
-      gsap.to(ctaButton, {
-        scale: 1,
-        duration: 0.3,
-        ease: "power1.out"
+
+      ctaButton.addEventListener("mouseleave", () => {
+        gsap.to(ctaButton, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power1.out",
+        });
       });
-    });
+    }
   });
 </script>
 
@@ -183,15 +243,15 @@ import innovationIcon from "../../assets/icons/home/innovation.png";
   .stats-item {
     transform: translateY(20px);
   }
-  
+
   #collaborate-description {
     transform: translateY(20px);
   }
-  
+
   .card-item {
     transform: translateY(30px);
   }
-  
+
   #cta-button {
     transform: translateY(20px);
     transition: transform 0.3s ease;

@@ -2,36 +2,41 @@
 import { Image } from "astro:assets";
 import Logo from "../assets/logo.webp";
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Contact', href: '/contact' },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Contact", href: "/contact" },
 ];
 ---
 
-<header class="bg-transparent  fixed w-full z-50">
+<header class="bg-transparent fixed w-screen z-50">
   <div class="app-max-width px-4">
-    <nav class="flex justify-between items-center h-16" aria-label="Main navigation">
+    <nav
+      class="flex justify-between items-center h-16"
+      aria-label="Main navigation"
+    >
       <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="/">
           <Image src={Logo} alt="Logo" class="h-8 w-auto" />
-        </a>          
+        </a>
       </div>
 
       <!-- Desktop Menu -->
       <ul class="hidden md:flex space-x-8 list-none">
-        {navItems.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              class="text-white hover:text-[#39D0FF] transition duration-300"
-              aria-current={item.href === '/' ? 'page' : undefined}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-white hover:text-[#39D0FF] transition duration-300"
+                aria-current={item.href === "/" ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
 
       <!-- Mobile Menu Button -->
@@ -51,8 +56,7 @@ const navItems = [
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          ></path>
+            d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </nav>
@@ -62,7 +66,7 @@ const navItems = [
 <!-- Mobile Menu Aside -->
 <aside
   id="mobile-menu"
-  class="fixed top-0 -left-full w-64 h-full bg-white shadow-lg transition-transform duration-300 ease-in-out z-50"
+  class="fixed top-0 -right-full w-64 h-full bg-white shadow-lg transition-transform duration-300 ease-in-out z-50"
   aria-label="Mobile navigation"
 >
   <nav class="h-full pt-16 pb-4 px-4">
@@ -81,52 +85,57 @@ const navItems = [
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
-          d="M6 18L18 6M6 6l12 12"
-        ></path>
+          d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
     <ul class="list-none space-y-4">
-      {navItems.map((item) => (
-        <li>
-          <a
-            href={item.href}
-            class="block py-2 text-gray-700 hover:text-blue-600 transition duration-300"
-            aria-current={item.href === '/' ? 'page' : undefined}
-          >
-            {item.label}
-          </a>
-        </li>
-      ))}
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="block py-2 text-gray-700 hover:text-blue-600 transition duration-300"
+              aria-current={item.href === "/" ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </nav>
 </aside>
 
 <script>
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenuClose = document.getElementById('mobile-menu-close');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenuClose = document.getElementById("mobile-menu-close");
+  const mobileMenu = document.getElementById("mobile-menu");
 
   function toggleMenu(show: boolean) {
     if (!mobileMenu || !mobileMenuButton) return;
-    
+
     if (show) {
-      mobileMenu.classList.remove('-left-full');
-      mobileMenu.classList.add('left-0');
-      mobileMenuButton.setAttribute('aria-expanded', 'true');
+      mobileMenu.classList.remove("-right-full");
+      mobileMenu.classList.add("right-0");
+      mobileMenuButton.setAttribute("aria-expanded", "true");
     } else {
-      mobileMenu.classList.add('-left-full');
-      mobileMenu.classList.remove('left-0');
-      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.add("-right-full");
+      mobileMenu.classList.remove("right-0");
+      mobileMenuButton.setAttribute("aria-expanded", "false");
     }
   }
 
-  mobileMenuButton?.addEventListener('click', () => toggleMenu(true));
-  mobileMenuClose?.addEventListener('click', () => toggleMenu(false));
+  mobileMenuButton?.addEventListener("click", () => toggleMenu(true));
+  mobileMenuClose?.addEventListener("click", () => toggleMenu(false));
 
   // Close menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (mobileMenu && !mobileMenu.contains(e.target as Node) && 
-        mobileMenuButton && !mobileMenuButton.contains(e.target as Node)) {
+  document.addEventListener("click", (e) => {
+    if (
+      mobileMenu &&
+      !mobileMenu.contains(e.target as Node) &&
+      mobileMenuButton &&
+      !mobileMenuButton.contains(e.target as Node)
+    ) {
       toggleMenu(false);
     }
   });

@@ -35,12 +35,12 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
-      className="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center px-16 min-h-screen w-full pt-16"
+      className="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center px-4 md:px-16 min-h-screen w-full pt-16"
     >
       <div className="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"></div>
 
       {/* Left Side Text */}
-      <div className="app-max-width flex text-white h-[60vh] items-end justify-between relative">
+      <div className="app-max-width flex text-white md:h-[60vh] items-end justify-between relative">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -48,7 +48,7 @@ const Hero = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className=""
         >
-          <div className="md:w-full -mr-[500px] relative z-10">
+          <div className="md:w-full md:-mr-[500px] relative z-10">
             <h1 className="text-5xl font-bold capitalize">
               We at NixxonTech are dedicated to helping businesses succeed
               online.
@@ -79,7 +79,7 @@ const Hero = () => {
         </motion.div>
         {/* Right Side Image with Motion */}
         <motion.div
-          className="relative -ml-96 w-full  z-0"
+          className="hidden md:block md:relative -ml-96 w-full  z-0"
           initial={{ opacity: 0, x: 50 }}
           animate={{
             opacity: 1,
