@@ -24,12 +24,12 @@ const Hero = () => {
       rotate: [0, 2, 0, -2, 0],
       scale: [1, 1.02, 1, 1.01, 1],
       transition: {
-        duration: 8,
+        duration: 10,
         ease: "easeInOut",
         repeat: Infinity,
         repeatType: "loop",
-      }
-    }
+      },
+    },
   };
 
   return (
@@ -79,21 +79,22 @@ const Hero = () => {
         </motion.div>
         {/* Right Side Image with Motion */}
         <motion.div
-          className="relative -ml-96 w-full -mt-60 z-0"
+          className="relative -ml-96 w-full  z-0"
           initial={{ opacity: 0, x: 50 }}
-          animate={{ 
-            opacity: 1, 
+          animate={{
+            opacity: 1,
             x: 0,
-            ...waveAnimation.animate 
           }}
           style={{
             scale: imageScale,
             rotate: imageRotate,
           }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          whileHover={{ scale: 1.05, rotate: 5 }}
         >
-          <img src={Art.src} alt="3D VR Person" className="w-full" />
+          {/* Apply wave animation as a child motion element */}
+          <motion.div animate={waveAnimation.animate} className="w-full h-full">
+            <img src={Art.src} alt="3D VR Person" className="w-full" />
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -15,7 +15,7 @@
 }
 
 .app-max-width {
-  max-width: 1140px;
+  max-width: 1280px;
   margin: 0 auto;
   padding-inline: 2rem;
 }
@@ -28,7 +28,6 @@ body {
   background-image: url("../assets/bg.webp");
 }
 
-
 .hero-text {
   opacity: 0;
   transform: translateY(20px);
@@ -36,10 +35,15 @@ body {
 }
 
 @keyframes fadeUp {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
 
 .swiper-button-prev,
 .swiper-button-next {

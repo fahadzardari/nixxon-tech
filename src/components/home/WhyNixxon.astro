@@ -1,0 +1,162 @@
+---
+import Heading from "../common/Heading.astro";
+import LeaningArt from "../../assets/home/art/leaning.svg";
+import Image from "astro/components/Image.astro";
+---
+
+<section class="app-max-width py-16">
+  <Heading>
+    <h2 class="text-primary-blue text-4xl" id="why-nixxon-heading">
+      Why Choose <span class="text-primary-blue text-pretty">Nixxon</span>
+    </h2>
+  </Heading>
+  <div class="relative flex mt-16 w-full">
+    <Image
+      src={LeaningArt}
+      alt="Leaning Art"
+      title="Guy Leaning"
+      class="z-0 left-0 w-1/2 opacity-0" 
+      id="nixxon-illustration"
+    />
+    <ul
+      class="list-none flex justify-between flex-col space-y-4 text-[#0b1125] border-l border-l-[#e0e0e0] px-4 w-[75%] -ml-[21%]"
+      id="benefits-list"
+    >
+      <li class="flex flex-col space-y-2 benefit-item opacity-0">
+        <h4 class="text-[22px] font-semibold">Knowledge</h4>
+        <p>
+          Experienced experts that are passionate about digital marketing make
+          up our team. Our years of expertise and in-depth knowledge of market
+          trends enable us to keep on top of developments and provide effective
+          strategies.
+        </p>
+        <a class="text-primary-blue read-more-link" href=""> Read More </a>
+      </li>
+      <li class="flex flex-col space-y-2 benefit-item opacity-0">
+        <h4 class="text-[22px] font-semibold">Customization</h4>
+        <p>
+          Every business is different, and we recognize that. We customize our
+          strategy to your sector, target market, and unique business
+          objectives. Customized to optimize your success, our solutions are not
+          one-size-fits-all.
+        </p>
+        <a class="text-primary-blue read-more-link" href=""> Read More </a>
+      </li>
+      <li class="flex flex-col space-y-2 benefit-item opacity-0">
+        <h4 class="text-[22px] font-semibold">Result-Driven</h4>
+        <p>
+          The effect we have on your company is how we gauge our success. To
+          maximize our tactics, we establish specific goals, monitor key
+          performance indicators (KPIs), and conduct frequent data analysis. Our
+          goal is to provide measurable outcomes that spur income and expansion.
+        </p>
+        <a class="text-primary-blue read-more-link" href=""> Read More </a>
+      </li>
+      <li class="flex flex-col space-y-2 benefit-item opacity-0">
+        <h4 class="text-[22px] font-semibold">Collaboration</h4>
+        <p>
+          We value open and honest communication as well as close client
+          relationships. Since we regard yourselves as an extension of our team,
+          we will always appreciate your feedback. We guarantee that our plans
+          are in line with your goals by establishing a cooperative
+          relationship.
+        </p>
+        <a class="text-primary-blue read-more-link" href=""> Read More </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+  
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+  
+  // Wait for DOM content to be fully loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    // Split heading text for character animation
+    const headingText = new SplitType("#why-nixxon-heading", {
+      types: "chars",
+      tagName: "span"
+    });
+    
+    // Create timeline for animations
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#why-nixxon-heading",
+        start: "top 80%",
+        toggleActions: "play none none none"
+      }
+    });
+    
+    // Heading animation
+    tl.from(headingText.chars, {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      stagger: 0.02,
+      ease: "power2.out"
+    });
+    
+    // Illustration animation
+    tl.to("#nixxon-illustration", {
+      opacity: 1,
+      x: 0,
+      duration: 0.8,
+      ease: "power2.out"
+    }, "-=0.3");
+    
+    // Staggered list items animation
+    tl.to(".benefit-item", {
+      opacity: 1,
+      x: 0,
+      duration: 0.7,
+      stagger: 0.15,
+      ease: "power2.out"
+    }, "-=0.5");
+    
+    // Add hover animation for Read More links
+    const readMoreLinks = document.querySelectorAll(".read-more-link");
+    
+    readMoreLinks.forEach(link => {
+      link.addEventListener("mouseenter", () => {
+        gsap.to(link, {
+          x: 5,
+          duration: 0.3,
+          ease: "power1.out"
+        });
+      });
+      
+      link.addEventListener("mouseleave", () => {
+        gsap.to(link, {
+          x: 0,
+          duration: 0.3,
+          ease: "power1.out"
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Initial states for animations */
+  #nixxon-illustration {
+    transform: translateX(-20px);
+  }
+  
+  .benefit-item {
+    transform: translateX(20px);
+  }
+  
+  .read-more-link {
+    transition: color 0.2s ease;
+    display: inline-block;
+  }
+  
+  .read-more-link:hover {
+    color: #0056b3; /* Slightly darker blue on hover */
+  }
+</style>

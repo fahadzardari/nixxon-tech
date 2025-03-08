@@ -3,12 +3,21 @@ import GetStartedLayout from "../common/GetStartedLayout.astro";
 ---
 
 <GetStartedLayout>
-  <div class="app-max-width space-y-4 text-center px-12 text-white">
-    <h2 class="text-4xl font-medium text-center leading-12">
-      Let’s Present Your Brand Together With Our Branding Solutions That
+  <div
+    class="app-max-width space-y-4 text-center px-12 text-white"
+    id="get-started-container"
+  >
+    <h2
+      class="text-4xl font-medium text-center leading-12 opacity-0"
+      id="get-started-heading"
+    >
+      Let's Present Your Brand Together With Our Branding Solutions That
       Distinguish Your Brand From the Competition
     </h2>
-    <p class="text-center mt-5 text-md px-4">
+    <p
+      class="text-center mt-5 text-md px-4 opacity-0"
+      id="get-started-description"
+    >
       Your Logo is the most ESSENTIAL part of your whole brand, it defines who
       you are and make an impact on audience. Our professional logo designers
       make sure to project your business in a way that your brand get separated
@@ -17,11 +26,142 @@ import GetStartedLayout from "../common/GetStartedLayout.astro";
       designers bring your thoughts into reality and bring your ideas to life.
     </p>
     <button
+      id="get-started-button"
       class="mt-6 inline-block px-12 py-3 leading-5 border border-primary-blue rounded-full text-white text-lg transition
   shadow-md shadow-primary-blue/50 hover:shadow-xl hover:shadow-primary-blue/80
-  hover:scale-105 duration-300 animate-pulse"
+  hover:scale-105 duration-300 opacity-0"
     >
-      Have a Plan? Let’s Get Started
+      Have a Plan? Let's Get Started
     </button>
   </div>
 </GetStartedLayout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Initialize split text for heading
+    const headingText = new SplitType("#get-started-heading", {
+      types: "lines",
+      tagName: "span",
+    });
+
+    const descriptionText = new SplitType("#get-started-description", {
+      types: "lines",
+      tagName: "span",
+    });
+
+    // Create main timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#get-started-container",
+        start: "top 75%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Heading animation - line by line reveal
+    tl.from(headingText.lines, {
+      opacity: 0,
+      y: 30,
+      stagger: 0.15,
+      duration: 0.8,
+      ease: "power3.out",
+    });
+    tl.to("#get-started-heading", { opacity: 1, duration: 0 }, "<"); // Ensure parent is visible
+
+    // Description paragraph animation
+    tl.from(
+      descriptionText.lines,
+      {
+        opacity: 0,
+        y: 20,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.4"
+    );
+    tl.to("#get-started-description", { opacity: 1, duration: 0 }, "<");
+
+    // Button animation with bounce effect
+    tl.to(
+      "#get-started-button",
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+      },
+      "-=0.3"
+    );
+
+    // Add an attention-grabbing effect to the button after everything loaded
+    tl.to("#get-started-button", {
+      scale: 1.05,
+      duration: 0.5,
+      ease: "power1.inOut",
+      repeat: 1,
+      yoyo: true,
+      delay: 0.5,
+    });
+
+    // Replace default animate-pulse with custom pulsing glow
+    const button = document.getElementById("get-started-button");
+    if (button) {
+      button.classList.remove("animate-pulse");
+
+      // Create a subtle pulsing glow effect
+      gsap.to(button, {
+        boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
+        repeat: -1,
+        duration: 2,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+
+      // Add interactive hover effect
+      button.addEventListener("mouseenter", () => {
+        gsap.to(button, {
+          scale: 1.05,
+          boxShadow: "0 0 25px 8px rgba(57, 208, 255, 0.7)",
+          duration: 0.3,
+        });
+      });
+
+      button.addEventListener("mouseleave", () => {
+        gsap.to(button, {
+          scale: 1,
+          boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
+          duration: 0.3,
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Initial states for animations */
+  #get-started-heading {
+    transform: translateY(20px);
+  }
+
+  #get-started-description {
+    transform: translateY(20px);
+  }
+
+  #get-started-button {
+    transform: translateY(30px);
+  }
+
+  /* Line container styles for split text */
+  .line {
+    display: block;
+    overflow: hidden;
+  }
+</style>

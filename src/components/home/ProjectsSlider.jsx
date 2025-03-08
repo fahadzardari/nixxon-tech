@@ -1,11 +1,11 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y, Autoplay } from 'swiper/modules';
-import ProjectImage from '../../assets/home/projects/project1.svg'; 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, A11y, Autoplay } from "swiper/modules";
+import ProjectImage from "../../assets/home/projects/project1.svg";
 
 // Import Swiper styles (still needed for functionality)
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const ProjectsSlider = ({ projects = [] }) => {
   // Sample projects data if not provided as props
@@ -15,21 +15,21 @@ const ProjectsSlider = ({ projects = [] }) => {
       title: "E-Commerce Platform",
       description: "A full-stack e-commerce solution with payment integration",
       image: ProjectImage,
-      technologies: ["React", "Node.js", "MongoDB"]
+      technologies: ["React", "Node.js", "MongoDB"],
     },
     {
       id: 2,
       title: "Mobile Banking App",
       description: "Secure banking application with biometric authentication",
       image: "/images/projects/banking.jpg",
-      technologies: ["React Native", "Firebase", "Redux"]
+      technologies: ["React Native", "Firebase", "Redux"],
     },
     {
       id: 3,
       title: "AI Content Generator",
       description: "ML-powered tool for automated content creation",
       image: "/images/projects/ai-generator.jpg",
-      technologies: ["Python", "TensorFlow", "AWS"]
+      technologies: ["Python", "TensorFlow", "AWS"],
     },
   ];
 
@@ -37,7 +37,6 @@ const ProjectsSlider = ({ projects = [] }) => {
 
   return (
     <div className="w-full app-max-width mx-auto py-8 px-4">
-      
       <div className="relative">
         <Swiper
           modules={[Navigation, Pagination, A11y, Autoplay]}
@@ -78,9 +77,9 @@ const ProjectCard = ({ project }) => {
   return (
     <div className="">
       <div className="w-full">
-        <img 
-          src={ProjectImage} 
-          alt={project.title} 
+        <img
+          src={ProjectImage}
+          alt={project.title}
           className="w-full h-56 object-cover"
         />
       </div>
@@ -90,7 +89,6 @@ const ProjectCard = ({ project }) => {
       </div>
     </div>
   );
-}
-
+};
 
 export default ProjectsSlider;

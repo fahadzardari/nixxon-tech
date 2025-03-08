@@ -30,13 +30,16 @@ import GIFImage from "../../assets/home/about/gif.gif";
     <div class="w-1/2">
       <Image
         src={GIFImage}
-        alt={"About Us"}
+        alt={"GIF Image"}
         class={"w-full h-auto rounded-tr-[23px] rounded-bl-[23px] rounded-tl-[90px] rounded-br-[90px]"}
+        id={"gif-image"}
       />
     </div>
-    <div class="w-1/2 flex flex-col space-y-4">
+    <div id="right-column-about-us" class="w-1/2 flex flex-col space-y-4">
       <h4 class="text-lg">About Us</h4>
-      <h3 class="text-primary-blue text-4xl font-medium capitalize">Mission to elevate business growth</h3>
+      <h3 class="text-primary-blue text-4xl font-medium capitalize">
+        Mission to elevate business growth
+      </h3>
       <p class="text-[#2A2111] text-[16px]">
         NixxonTech is a premier Digital agency, offering superior business
         advancement solutions across diverse sectors. Our goal is to enhance
@@ -49,3 +52,145 @@ import GIFImage from "../../assets/home/about/gif.gif";
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  // Register plugins
+  gsap.registerPlugin(ScrollTrigger);
+
+  export function initAboutAnimations() {
+    // Main heading animation with SplitType instead of SplitText
+    const heading = document.querySelector("#about-us-heading");
+    if (heading) {
+      const splitHeading = new SplitType(heading, { types: "lines" });
+      gsap.from(splitHeading.lines, {
+        scrollTrigger: {
+          trigger: heading,
+          start: "top 80%",
+        },
+        opacity: 0,
+        y: 50,
+        stagger: 0.2,
+        duration: 0.8,
+      });
+
+      // Highlight blue text with different animation
+      gsap.from("#about-us-heading span", {
+        scrollTrigger: { trigger: heading },
+        opacity: 0,
+        y: 20,
+        delay: 0.6,
+        duration: 1,
+        ease: "back.out(1.7)",
+      });
+    }
+
+    // Paragraph fade-in
+    gsap.from(".app-max-width > p", {
+      scrollTrigger: {
+        trigger: ".app-max-width > p",
+        start: "top 85%",
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      delay: 0.2,
+    });
+
+    // Main image reveal with mask effect
+    const mainImage = document.querySelector('img[alt="About Us"]');
+    if (mainImage) {
+      // Create container for mask effect
+      gsap.set(mainImage, { autoAlpha: 1 });
+      gsap.from(mainImage, {
+        scrollTrigger: {
+          trigger: mainImage,
+          start: "top 75%",
+        },
+        scale: 1.05,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power2.out",
+      });
+    }
+
+    // Bottom section animations
+    const gifImage = document.querySelector("#gif-image");
+    if (gifImage) {
+      // GIF image reveal with shape animation
+      gsap.from(gifImage, {
+        scrollTrigger: {
+          trigger: gifImage,
+          start: "top 80%",
+        },
+        x: -50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+      });
+
+      // Add subtle floating animation after reveal
+      gsap.to(gifImage, {
+        scrollTrigger: {
+          trigger: gifImage,
+          start: "top 80%",
+        },
+        y: "10px",
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 1,
+      });
+    }
+
+    // Right column content staggered reveal
+    const rightColumn = document.querySelector("#right-column-about-us");
+    if (rightColumn) {
+      const elements = rightColumn.querySelectorAll("h4, h3, p, a");
+      gsap.from(elements, {
+        scrollTrigger: {
+          trigger: rightColumn,
+          start: "top 75%",
+        },
+        y: 30,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+
+      // Special animation for the "Read More" link
+      const readMoreLink = rightColumn.querySelector("a");
+      if (readMoreLink) {
+        // Create underline animation on hover
+        readMoreLink.addEventListener("mouseenter", () => {
+          gsap.to(readMoreLink, {
+            color: "#0056b3",
+            duration: 0.3,
+          });
+          gsap.to(readMoreLink.querySelector("span"), {
+            x: 5,
+            duration: 0.3,
+          });
+        });
+
+        readMoreLink.addEventListener("mouseleave", () => {
+          gsap.to(readMoreLink, {
+            color: "#1141D3",
+            duration: 0.3,
+          });
+          gsap.to(readMoreLink.querySelector("span"), {
+            x: 0,
+            duration: 0.3,
+          });
+        });
+      }
+    }
+  }
+
+  initAboutAnimations();
+</script>
