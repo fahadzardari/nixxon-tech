@@ -1,0 +1,181 @@
+---
+import Heading from "../common/Heading.astro";
+import Image from "astro/components/Image.astro";
+import ArtWhy from "../../assets/about-us/art-why.webp";
+---
+
+<section class="app-max-width py-16">
+  <Heading>
+    <h2 class="text-primary-blue text-4xl" id="why-nixxon-heading">
+      Why Work <span class="text-primary-blue text-pretty">With Us</span>
+    </h2>
+  </Heading>
+  <div class="relative flex space-x-4 mt-16 w-full">
+    <Image
+      src={ArtWhy}
+      alt="Leaning Art"
+      title="Guy Leaning"
+      class="hidden md:block z-0 left-0 w-1/3 opacity-0 h-fit my-auto"
+      id="nixxon-illustration"
+    />
+    <ul
+      class="list-none flex justify-between flex-col space-y-8 text-[#0b1125] md:border-l md:border-l-[#e0e0e0] md:px-4 md:w-[75%]"
+      id="benefits-list"
+    >
+      <li class="flex flex-col space-y-4 benefit-item opacity-0">
+        <h4 class="text-[22px] font-semibold">Expertise and Innovation</h4>
+        <p>
+          Our commitment to staying at the forefront of technology, coupled with
+          our team of highly experienced specialists and significant expertise,
+          allows us to bring fresh perspectives and innovative ideas to the
+          table.
+        </p>
+      </li>
+      <li class="flex flex-col space-y-4 benefit-item opacity-0">
+        <h4 class="text-[22px] font-semibold">
+          Tailored Solutions for Your Needs
+        </h4>
+        <p>
+          We take the time to get to know your problems, goals, and vision since
+          we understand how unique your business is. Because of the great degree
+          of customization that our approach permits, you can be sure that the
+          solutions we provide are specifically designed to satisfy your needs.
+        </p>
+      </li>
+      <li class="flex flex-col space-y-4 benefit-item opacity-0">
+        <h4 class="text-[22px] font-semibold">
+          User-Centric Design and Development
+        </h4>
+        <p>
+          Our developers and designers collaborate to produce simple,
+          approachable user experiences for a range of platforms. We place a
+          high value on usability and aesthetics in both online and mobile
+          applications to captivate and excite your users.
+        </p>
+      </li>
+      <li class="flex flex-col space-y-4 benefit-item opacity-0">
+        <h4 class="text-[22px] font-semibold">Reliability and Timeliness</h4>
+        <p>
+          We appreciate your trust and time. You can count on our unshakable
+          dedication to meeting deadlines and delivering projects on time, all
+          without sacrificing quality, when you work with us. Our history of
+          always exceeding and satisfying client expectations is a testimonial
+          to our abilities.
+        </p>
+      </li>
+      <li class="flex flex-col space-y-4 benefit-item opacity-0">
+        <h4 class="text-[22px] font-semibold">Long-Term Partnership</h4>
+        <p>
+          We work to build enduring relationships with our clients rather than
+          seeing them as just another transaction. We will be there to help you
+          grow as your company changes and to offer continuing advice and
+          solutions. Are you ready to go on a life-changing adventure? Reach out
+          to us right now, and together, we can develop digital solutions that
+          will propel your business forward.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Wait for DOM content to be fully loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    // Split heading text for character animation
+    const headingText = new SplitType("#why-nixxon-heading", {
+      types: "chars",
+      tagName: "span",
+    });
+
+    // Create timeline for animations
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#why-nixxon-heading",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Heading animation
+    tl.from(headingText.chars, {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      stagger: 0.02,
+      ease: "power2.out",
+    });
+
+    // Illustration animation
+    tl.to(
+      "#nixxon-illustration",
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+
+    // Staggered list items animation
+    tl.to(
+      ".benefit-item",
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    );
+
+    // Add hover animation for Read More links
+    const readMoreLinks = document.querySelectorAll(".read-more-link");
+
+    readMoreLinks.forEach((link) => {
+      link.addEventListener("mouseenter", () => {
+        gsap.to(link, {
+          x: 5,
+          duration: 0.3,
+          ease: "power1.out",
+        });
+      });
+
+      link.addEventListener("mouseleave", () => {
+        gsap.to(link, {
+          x: 0,
+          duration: 0.3,
+          ease: "power1.out",
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Initial states for animations */
+  #nixxon-illustration {
+    transform: translateX(-20px);
+  }
+
+  .benefit-item {
+    transform: translateX(20px);
+  }
+
+  .read-more-link {
+    transition: color 0.2s ease;
+    display: inline-block;
+  }
+
+  .read-more-link:hover {
+    color: #0056b3; /* Slightly darker blue on hover */
+  }
+</style>

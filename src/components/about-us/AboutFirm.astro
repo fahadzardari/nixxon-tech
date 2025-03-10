@@ -1,0 +1,374 @@
+---
+import Heading from "../common/Heading.astro";
+import ExtendedArt from "../../assets/about-us/extended-art.png";
+import { Image } from "astro:assets";
+---
+
+<section class="py-16 flex flex-col space-y-32">
+  <!-- First article with edge-to-edge image -->
+  <article class="relative flex justify-between items-center space-x-4">
+    <!-- Centered container for right boundary alignment -->
+    <div class="app-max-width flex justify-between items-center">
+      <!-- Left content with negative margin to extend to screen edge - MODIFIED -->
+      <div class="w-full ml-[calc(-1*(100vw-100%)/2)]">
+        <!-- Removed the pr-8 padding -->
+        <Image
+          src={ExtendedArt}
+          alt="Visual representation of Nixxon Tech's mission - Digital innovation and client success"
+          loading="lazy"
+          class="w-full"
+          id="firm-image"
+        />
+      </div>
+      <!-- Right content - MODIFIED -->
+      <div class="w-1/2 flex flex-col pl-8" id="firm-stats-first">
+        <!-- Added pl-8 to move content right -->
+        <span class="flex items-center font-medium section-tag">
+          <span
+            class="inline-block w-2.5 h-2.5 rounded-full bg-primary-blue mr-2"
+          ></span>
+          Firm Overview
+        </span>
+        <Heading classname="">
+          <h2 class="font-medium">
+            We Specialize in Transforming Your Idea or Business in the Current
+            Digital Era
+          </h2>
+        </Heading>
+        <p class="text-[#2A2111] text-[16px] my-12">
+          Our goal in the modern digital world is to make enterprises
+          possible.With the help of our innovative technologies and tailored
+          programs, your company will have all it needs to succeed and keep one
+          step ahead of the competition.
+        </p>
+        <button
+          class="w-fit inline-block px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-lg transition
+  shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80"
+          id="cta-button"
+        >
+          Let's Talk
+        </button>
+      </div>
+    </div>
+  </article>
+
+  <!-- Second article with standard app-max-width -->
+  <article
+    class="app-max-width flex justify-between items-center mt-24"
+    id="firm-experience"
+  >
+    <div class="w-1/2 flex flex-col space-y-8">
+      <div>
+        <h3 class="text-5xl">
+          <span class="years-count">8</span><span class="text-primary-blue"
+            >+</span
+          >
+        </h3>
+        <p class="text-2xl">Years of Experience</p>
+      </div>
+      <h4 class="text-4xl w-2/3">
+        We Run All Kinds of <span class="text-primary-blue">IT Services</span> That
+        Vow <span class="text-primary-blue">Your Success</span>
+      </h4>
+    </div>
+    <div class="w-1/2 flex flex-col space-y-12" id="firm-stats-second">
+      <h3 class="text-[26px]">
+        Accelerate <span class="text-primary-blue">Innovation</span> with world class
+        tech teams We'll match you to an entire <span class="text-primary-blue"
+          >Remote Technology</span
+        >
+      </h3>
+      <div class="grid grid-cols-2 text-[16px] gap-7">
+        <div
+          class="relative capitalize py-2 border-b border-[#E1E1E1] after:absolute after:left-0 after:bottom-[-1px] after:w-[30px] after:h-[1px] after:bg-primary-blue after:ml-0 stat-item"
+        >
+          <p>
+            <span class="text-primary-blue mr-2 stat-number">16+</span> Software
+            Development
+          </p>
+        </div>
+        <div
+          class="relative capitalize py-2 border-b border-[#E1E1E1] after:absolute after:left-0 after:bottom-[-1px] after:w-[30px] after:h-[1px] after:bg-primary-blue after:ml-0 stat-item"
+        >
+          <p>
+            <span class="text-primary-blue mr-2 stat-number">3+</span> Years Client
+            Engagement
+          </p>
+        </div>
+        <div
+          class="relative capitalize py-2 border-b border-[#E1E1E1] after:absolute after:left-0 after:bottom-[-1px] after:w-[30px] after:h-[1px] after:bg-primary-blue after:ml-0 stat-item"
+        >
+          <p>
+            <span class="text-primary-blue mr-2 stat-number">360+</span> Apps Developed
+          </p>
+        </div>
+        <div
+          class="relative capitalize py-2 border-b border-[#E1E1E1] after:absolute after:left-0 after:bottom-[-1px] after:w-[30px] after:h-[1px] after:bg-primary-blue after:ml-0 stat-item"
+        >
+          <p>
+            <span class="text-primary-blue mr-2 stat-number">520+</span> Web Projects
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // First article: Initialize split text only for this section
+    const overviewHeading = new SplitType("#firm-stats-first h2", {
+      types: "words",
+      tagName: "span",
+    });
+
+    // Second article: Initialize split text only for this section
+    const experienceHeading = new SplitType("#firm-experience h4", {
+      types: "words",
+      tagName: "span",
+    });
+
+    // FIRST ARTICLE ANIMATIONS - completely isolated
+    const firstSectionTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#firm-stats-first",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Image animation with fade and slide
+    firstSectionTl.from("#firm-image", {
+      opacity: 0,
+      x: -80,
+      duration: 1.2,
+      ease: "power3.out",
+    });
+
+    // Section tag animation
+    firstSectionTl.from(
+      "#firm-stats-first .section-tag", // More specific selector
+      {
+        opacity: 0,
+        x: 30,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+      },
+      "-=0.8"
+    );
+
+    // Heading animation word by word - only for first article
+    firstSectionTl.from(
+      overviewHeading.words,
+      {
+        opacity: 0,
+        y: 20,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    );
+
+    // Paragraph animation - only for first article
+    firstSectionTl.from(
+      "#firm-stats-first p",
+      {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+
+    // Button animation with bounce - only for first article
+    firstSectionTl.from(
+      "#firm-stats-first button",
+      {
+        opacity: 0,
+        y: 20,
+        scale: 0.9,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+      },
+      "-=0.5"
+    );
+
+    // SECOND ARTICLE ANIMATIONS - completely isolated
+    const secondSectionTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#firm-experience",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Experience years animation - only in second article
+    secondSectionTl.from("#firm-experience .years-count", {
+      textContent: 0,
+      duration: 1.5,
+      snap: { textContent: 1 },
+      ease: "power2.out",
+    });
+
+    // Years text animation - only in second article
+    secondSectionTl.from(
+      "#firm-experience .years-count + span",
+      {
+        scale: 0,
+        opacity: 0,
+        duration: 0.5,
+        ease: "back.out(1.7)",
+      },
+      "-=0.5"
+    );
+
+    secondSectionTl.from(
+      "#firm-experience h3 + p",
+      {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+
+    // Heading animation - only for second article
+    secondSectionTl.from(
+      experienceHeading.words,
+      {
+        opacity: 0,
+        y: 30,
+        stagger: 0.05,
+        duration: 0.7,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    );
+
+    // Second section subheading - explicitly targeting second article
+    secondSectionTl.from(
+      "#firm-stats-second h3",
+      {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.2"
+    );
+
+    // Stats items animation - only for second article
+    secondSectionTl.from(
+      "#firm-stats-second .stat-item",
+      {
+        opacity: 0,
+        x: 30,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "power3.out",
+      },
+      "-=0.4"
+    );
+
+    // Counter animations ONLY for second section stat numbers
+    document
+      .querySelectorAll("#firm-stats-second .stat-number")
+      .forEach((numElement) => {
+        const text = numElement.textContent || "";
+        const value = parseInt(text);
+
+        if (!isNaN(value)) {
+          const originalColor = window.getComputedStyle(numElement).color;
+
+          gsap.from(numElement, {
+            textContent: 0,
+            duration: 1.8,
+            snap: { textContent: 1 },
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: "#firm-stats-second", // Tied specifically to second section
+              start: "top 85%",
+            },
+            onStart: () => {
+              gsap.to(numElement, {
+                color: "#39D0FF",
+                fontWeight: "600",
+                duration: 0.3,
+              });
+            },
+            onComplete: () => {
+              gsap.fromTo(
+                numElement,
+                { scale: 1.1, color: "#39D0FF" },
+                {
+                  scale: 1,
+                  color: originalColor,
+                  duration: 0.5,
+                  ease: "elastic.out(1.2, 0.5)",
+                }
+              );
+            },
+          });
+        }
+      });
+
+    // Add hover animation for CTA button
+    const ctaButton = document.querySelector("#firm-stats-first button");
+    if (ctaButton) {
+      ctaButton.addEventListener("mouseenter", () => {
+        gsap.to(ctaButton, {
+          scale: 1.05,
+          boxShadow: "0 8px 20px rgba(57, 208, 255, 0.4)",
+          duration: 0.3,
+        });
+      });
+
+      ctaButton.addEventListener("mouseleave", () => {
+        gsap.to(ctaButton, {
+          scale: 1,
+          boxShadow: "0 4px 10px rgba(57, 208, 255, 0.3)",
+          duration: 0.3,
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Initial animation states and any other styling */
+  .stat-item {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Add hover effect to stats items */
+  .stat-item:hover::after {
+    width: 60px;
+    transition: width 0.3s ease;
+  }
+
+  /* Split text styling */
+  .word {
+    display: inline-block;
+    overflow: hidden;
+  }
+  /* Ensure button is visible by default */
+  #cta-button {
+    opacity: 1; /* Override any opacity settings */
+  }
+
+  /* Fix for animation interference */
+  button {
+    opacity: 1 !important; /* Force visibility */
+  }
+</style>

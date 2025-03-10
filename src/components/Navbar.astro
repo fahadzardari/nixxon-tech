@@ -3,13 +3,19 @@ import { Image } from "astro:assets";
 import Logo from "../assets/logo.webp";
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "About", href: "/about-us" },
   { label: "Services", href: "/services" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact", href: "/contact-us" },
 ];
+
+// Get current path for active link highlighting
+const currentPath = Astro.url.pathname;
 ---
 
-<header class="bg-transparent fixed w-screen z-50">
+<header
+  id="navbar"
+  class="bg-transparent fixed w-screen z-50 transition-all duration-300"
+>
   <div class="app-max-width px-4">
     <nav
       class="flex justify-between items-center h-16"
@@ -25,24 +31,33 @@ const navItems = [
       <!-- Desktop Menu -->
       <ul class="hidden md:flex space-x-8 list-none">
         {
-          navItems.map((item) => (
-            <li>
-              <a
-                href={item.href}
-                class="text-white hover:text-[#39D0FF] transition duration-300"
-                aria-current={item.href === "/" ? "page" : undefined}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))
+          navItems.map((item) => {
+            const isActive =
+              (item.href === "/" && currentPath === "/") ||
+              (item.href !== "/" && currentPath.startsWith(item.href));
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[
+                    "transition duration-300",
+                    "text-white hover:text-[#39D0FF]",
+                    { "text-[#39D0FF] font-medium nav-active": isActive },
+                  ]}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
 
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden text-gray-700 hover:text-blue-600"
+        class="md:hidden text-white hover:text-[#39D0FF]"
         aria-label="Toggle mobile menu"
         aria-expanded="false"
       >
@@ -90,27 +105,40 @@ const navItems = [
     </button>
     <ul class="list-none space-y-4">
       {
-        navItems.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              class="block py-2 text-gray-700 hover:text-blue-600 transition duration-300"
-              aria-current={item.href === "/" ? "page" : undefined}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))
+        navItems.map((item) => {
+          const isActive =
+            (item.href === "/" && currentPath === "/") ||
+            (item.href !== "/" && currentPath.startsWith(item.href));
+          return (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  "block py-2 transition duration-300",
+                  "text-gray-700 hover:text-[#39D0FF]",
+                  { "text-[#39D0FF] font-medium": isActive },
+                ]}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          );
+        })
       }
     </ul>
   </nav>
 </aside>
 
 <script>
+  import { gsap } from "gsap";
+
+  const navbar = document.getElementById("navbar");
   const mobileMenuButton = document.getElementById("mobile-menu-button");
   const mobileMenuClose = document.getElementById("mobile-menu-close");
   const mobileMenu = document.getElementById("mobile-menu");
 
+  // Toggle mobile menu function
   function toggleMenu(show: boolean) {
     if (!mobileMenu || !mobileMenuButton) return;
 
@@ -139,4 +167,57 @@ const navItems = [
       toggleMenu(false);
     }
   });
+
+  // Handle scroll-based navbar background
+  function handleScroll() {
+    const scrollY = window.scrollY;
+
+    if (navbar) {
+      if (scrollY > 50) {
+        // When scrolled, add background
+        if (!navbar.classList.contains("scrolled")) {
+          gsap.to(navbar, {
+            backgroundColor: "rgba(19, 24, 33, 0.85)",
+            backdropFilter: "blur(8px)",
+            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
+            duration: 0.3,
+            onComplete: () => {
+              navbar.classList.add("scrolled");
+            },
+          });
+        }
+      } else {
+        // When at top, remove background
+        if (navbar.classList.contains("scrolled")) {
+          gsap.to(navbar, {
+            backgroundColor: "transparent",
+            backdropFilter: "blur(0px)",
+            boxShadow: "none",
+            duration: 0.3,
+            onComplete: () => {
+              navbar.classList.remove("scrolled");
+            },
+          });
+        }
+      }
+    }
+  }
+
+  // Add scroll event listener
+  window.addEventListener("scroll", handleScroll);
+
+  // Run once on page load to set initial state
+  document.addEventListener("DOMContentLoaded", handleScroll);
 </script>
+
+<style>
+  /* Style for active navigation link */
+  .nav-active {
+    color: #39d0ff;
+  }
+
+  /* Additional styles for scrolled navbar if needed */
+  .scrolled {
+    backdrop-filter: blur(8px);
+  }
+</style>

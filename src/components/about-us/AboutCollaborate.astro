@@ -1,0 +1,222 @@
+---
+import Heading from "../common/Heading.astro";
+import CollaborateCard from "../home/CollaborateCard.astro";
+import ideaIcon from "../../assets/icons/home/idea.png";
+import rocketIcon from "../../assets/icons/home/rocket.png";
+import creationIcon from "../../assets/icons/home/creation.png";
+import innovationIcon from "../../assets/icons/home/innovation.png";
+---
+
+<section
+  class="app-max-width py-8 flex flex-col space-y-16 mb-16"
+  aria-labelledby="collaborate-heading"
+  id="collaborate-section"
+>
+  <div class="flex flex-col space-y-12">
+    <Heading>
+      <h2 class="text-4xl font-medium" id="collaborate-heading">
+        How We <span class="text-primary-blue">Collaborate</span> With You
+      </h2>
+    </Heading>
+    <h3
+      class="text-[#2A2111] capitalize opacity-0"
+      id="collaborate-description"
+    >
+      From brand identity to customer acquisition, we offer end-to-end marketing
+      solutions. Our services include:
+    </h3>
+    <ul
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 list-none"
+      id="cards-container"
+    >
+      <li class="card-item opacity-0">
+        <CollaborateCard
+          title="Open Communication"
+          description="We place a high priority on open and regular channels of communication to make sure that your opinions, suggestions, and worries are taken into consideration and integrated into our joint efforts."
+          icon={ideaIcon}
+        />
+      </li>
+      <li class="card-item opacity-0">
+        <CollaborateCard
+          title="Agile Iterations"
+          description="We can quickly adjust to evolving needs thanks to our iterative methodology, which produces incremental advancement and actively involves you in decision-making at every level."
+          icon={rocketIcon}
+        />
+      </li>
+      <li class="card-item opacity-0">
+        <CollaborateCard
+          title="Collaborative Workshops"
+          description="We lead lively, interactive sessions in which we engage closely with you to solve problems, come up with creative ideas, and coordinate on project objectives by utilizing our combined knowledge."
+          icon={creationIcon}
+        />
+      </li>
+      <li class="card-item opacity-0">
+        <CollaborateCard
+          title="Shared Success Measures"
+          description="Together, we define specific success measures that create a shared vision of progress and achievement. We then celebrate these milestones as we collaborate to achieve your goals."
+          icon={innovationIcon}
+        />
+      </li>
+    </ul>
+    <a
+      href="/how-we-work"
+      class="bg-primary-blue rounded-full px-8 py-2 w-fit text-white cursor-pointer no-underline inline-block opacity-0"
+      id="cta-button"
+    >
+      How We Work
+    </a>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Initialize split text for heading
+    const headingText = new SplitType("#collaborate-heading", {
+      types: "words",
+      tagName: "span",
+    });
+
+    // Create separate timeline for stats
+    const statsTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#stats-container",
+        start: "top 75%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Stats items animation
+    statsTimeline.to(".stats-item", {
+      opacity: 1,
+      y: 0,
+      stagger: 0.15,
+      duration: 0.8,
+      ease: "power2.out",
+    });
+
+    // Animate counter numbers
+    const counterElements = document.querySelectorAll(".counter");
+    counterElements.forEach((counter) => {
+      const targetValue = parseInt(counter.getAttribute("data-target"));
+
+      // Determine if we need to show decimals (for the 2.5K value)
+      let decimals = 0;
+      if (targetValue === 2500) {
+        counter.innerHTML = "0";
+        decimals = 1;
+      }
+
+      statsTimeline.to(
+        counter,
+        {
+          innerHTML: targetValue === 2500 ? "2.5" : targetValue,
+          duration: 2,
+          snap: { innerHTML: decimals === 1 ? 0.1 : 1 },
+          ease: "power2.out",
+        },
+        "-=0.5"
+      );
+    });
+
+    // Create content timeline
+    const contentTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#collaborate-heading",
+        start: "top 85%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Heading animation
+    contentTimeline.from(headingText.words, {
+      opacity: 0,
+      y: 20,
+      stagger: 0.1,
+      duration: 0.7,
+      ease: "power2.out",
+    });
+
+    // Description animation
+    contentTimeline.to(
+      "#collaborate-description",
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+
+    // Cards animation
+    contentTimeline.to(
+      ".card-item",
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    );
+
+    // CTA button animation
+    contentTimeline.to(
+      "#cta-button",
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+    // Button hover animation
+    const ctaButton = document.querySelector("#cta-button");
+    if (ctaButton) {
+      ctaButton.addEventListener("mouseenter", () => {
+        gsap.to(ctaButton, {
+          scale: 1.05,
+          duration: 0.3,
+          ease: "power4.out",
+        });
+      });
+
+      ctaButton.addEventListener("mouseleave", () => {
+        gsap.to(ctaButton, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power1.out",
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Initial states for animations */
+  .stats-item {
+    transform: translateY(20px);
+  }
+
+  #collaborate-description {
+    transform: translateY(20px);
+  }
+
+  .card-item {
+    transform: translateY(30px);
+  }
+
+  #cta-button {
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+</style>

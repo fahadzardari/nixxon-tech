@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/home/Hero.jsx"; // Make sure extension is .jsx
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import GetStartedHome from "../components/home/GetStartedHome.astro";
@@ -10,12 +9,13 @@ import FeaturedProjects from "../components/home/FeaturedProjects.astro";
 import AboutUs from "../components/home/AboutUs.astro";
 import Services from "../components/home/Services.astro";
 import WhyNixxon from "../components/home/WhyNixxon.astro";
+import Hero from "../components/home/Hero.astro";
 ---
 
 <Layout title="NixxonTech">
   <main class="min-h-screen w-screen md:w-auto">
     <Navbar />
-    <Hero client:load />
+    <Hero />
     <AboutUs />
     <Services />
     <WhyNixxon />

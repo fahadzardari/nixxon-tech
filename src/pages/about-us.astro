@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import AboutHero from "../components/about-us/AboutHero.astro";
+import OurMission from "../components/about-us/OurMission.astro";
+import AboutCollaborate from "../components/about-us/AboutCollaborate.astro";
+import AboutWhy from "../components/about-us/AboutWhy.astro";
+import AboutFirm from "../components/about-us/AboutFirm.astro";
+---
+
+<Layout title="About Us">
+  <main class="min-h-screen w-screen md:w-auto">
+    <Navbar />
+    <AboutHero />
+    <AboutFirm />
+    <OurMission />
+    <AboutWhy />
+    <AboutCollaborate />
+    <Footer />
+  </main>
+</Layout>
