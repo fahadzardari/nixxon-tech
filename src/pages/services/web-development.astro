@@ -1,0 +1,25 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import "../../styles/global.css";
+import AboutHero from "../../components/about-us/AboutHero.astro";
+import WebDevBenefits from "../../components/services/web-development/WebDevBenefits.astro";
+import WebDevTechStack from "../../components/services/web-development/WebDevTechStack.astro";
+import WebDevGetStarted from "../../components/services/web-development/WebDevGetStarted.astro";
+import WebDevServices from "../../components/services/web-development/WebDevServices.astro";
+import WebDevIntro from "../../components/services/web-development/WebDevIntro.astro";
+---
+
+<Layout title="Web Development">
+  <main class="min-h-screen w-screen md:w-auto">
+    <Navbar />
+    <AboutHero />
+    <WebDevIntro />
+    <WebDevServices />
+    <WebDevGetStarted />
+    <WebDevBenefits />
+    <WebDevTechStack />
+    <Footer />
+  </main>
+</Layout>

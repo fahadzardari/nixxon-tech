@@ -1,0 +1,105 @@
+---
+import Heading from "../../common/Heading.astro";
+import TechStackImage from "../../../assets/services/web-dev/tech-stack.png";
+import Image from "astro/components/Image.astro";
+import FigmaImage from "../../../assets/services/ui-ux-design/figma.png";
+import XDImage from "../../../assets/services/ui-ux-design/xd.png";
+import SketchImage from "../../../assets/services/ui-ux-design/sketch.png";
+import PhotoshopImage from "../../../assets/services/ui-ux-design/ps.png";
+import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
+---
+
+<section class="app-max-width py-16">
+  <div class="tech-stack-heading">
+    <Heading>
+      <h2 class="text-4xl" id="why-nixxon-heading">Technology Stack</h2>
+    </Heading>
+    <p class="text-[#2a2111] text-[16px] my-4">
+      The robust technology stack that our web app development team uses yields
+      dependable and efficient results. Our responsive web applications are made
+      with state-of-the-art tools like MongoDB, Node.js, and React.js. Because
+      we know HTML5, CSS3, and JavaScript inside and out, we can guarantee
+      flawless user experiences across a variety of platforms and software.
+    </p>
+  </div>
+
+  <div class="flex space-x-4 justify-between items-center tech-stack-container">
+    <Image
+      src={FigmaImage}
+      alt="Figma"
+      title="Figma"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+    <Image
+      src={XDImage}
+      alt="Adobe XD"
+      title="Adobe XD"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+    <Image
+      src={PhotoshopImage}
+      alt="Photoshop"
+      title="Photoshop"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+    <Image
+      src={IllustratorImage}
+      alt="Illustrator"
+      title="Illustrator"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+    <Image
+      src={SketchImage}
+      alt="Sketch"
+      title="Sketch"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Fade in the content on scroll
+    gsap.from(".tech-stack-heading", {
+      opacity: 0,
+      y: 20,
+      duration: 0.7,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".tech-stack-heading",
+        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
+        toggleActions: "play none none none"
+      }
+    });
+
+    // Staggered reveal for tech icons on scroll
+    gsap.from(".tech-icon", {
+      opacity: 0,
+      y: 15,
+      scale: 0.95,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: "back.out(1.2)",
+      scrollTrigger: {
+        trigger: ".tech-stack-container",
+        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
+        toggleActions: "play none none none"
+      }
+    });
+  });
+</script>

@@ -1,0 +1,125 @@
+---
+import Image from "astro/components/Image.astro";
+import IntroImage from "../../../assets/services/ui-ux-design/intro.png";
+import Heading from "../../common/Heading.astro";
+---
+
+<section
+  class="app-max-width flex justify-between items-center space-x-12"
+  id="web-dev-intro-section"
+>
+  <div class="ml-[calc(-1*(100vw-100%)/2)] w-full" id="intro-image-container">
+    <Image
+      src={IntroImage}
+      alt="Web Dev Intro"
+      title="Web Dev Intro"
+      class="w-full my-16"
+      id="web-dev-intro"
+      loading="lazy"
+    />
+  </div>
+  <div class="flex flex-col space-y-4 w-1/2" id="intro-content">
+    <Heading>
+      <h2 class="text-4xl" id="why-nixxon-heading">
+        How We Deliver Our UI/UX Design Services
+      </h2>
+    </Heading>
+    <p class="text-[16px] text-[#2a2111]" id="intro-paragraph">
+      UI/UX design services are offered by the skilled group of researchers and
+      designers at NixxonTech. Wireframing, prototyping, visual design, and user
+      research come first. By prioritizing accessibility and responsive design,
+      we ensure a smooth experience across all platforms. We test the website
+      for usability in order to identify and address any issues and produce a
+      better website than anticipated.
+    </p>
+    <button
+      class="w-fit inline-block px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-lg transition
+  shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80"
+      id="cta-button-ui-ux"
+    >
+      Let's Talk
+    </button>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Create a timeline that triggers when the section is in view
+  const introTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#web-dev-intro-section",
+      start: "top 70%",
+      toggleActions: "play none none none",
+    },
+  });
+
+  // Add animations to the timeline
+  introTl
+    // Image animation - slides in from left with slight opacity effect
+    .from("#web-dev-intro", {
+      x: -50,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+    })
+
+    // Heading animation - slides up and fades in
+    .from(
+      "#why-nixxon-heading",
+      {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.6"
+    ) // Start slightly before the image animation finishes
+
+    // Paragraph animation - fade in with slight upward movement
+    .from(
+      "#intro-paragraph",
+      {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    )
+
+    // Button animation - subtle pop effect
+    .from(
+      "#cta-button-ui-ux",
+      {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.6,
+        ease: "back.out(1.5)",
+      },
+      "-=0.4"
+    );
+
+  // Add hover animation for the button
+  const ctaButton = document.querySelector("#cta-button-ui-ux");
+  if (ctaButton) {
+    ctaButton.addEventListener("mouseenter", () => {
+      gsap.to("#cta-button-ui-ux", {
+        scale: 1.05,
+        duration: 0.3,
+        ease: "power1.out",
+      });
+    });
+
+    ctaButton.addEventListener("mouseleave", () => {
+      gsap.to("#cta-button-ui-ux", {
+        scale: 1,
+        duration: 0.3,
+        ease: "power1.out",
+      });
+    });
+  }
+</script>

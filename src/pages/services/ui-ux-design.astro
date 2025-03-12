@@ -1,0 +1,26 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import "../../styles/global.css";
+import AboutHero from "../../components/about-us/AboutHero.astro";
+import UIUXIntro from "../../components/services/ui-ux-design/UIUXIntro.astro";
+import UIUXServices from "../../components/services/ui-ux-design/UIUXServices.astro";
+import UIUXGetStarted from "../../components/services/ui-ux-design/UIUXGetStarted.astro";
+import UIUXBenefits from "../../components/services/ui-ux-design/UIUXBenefits.astro";
+import UIUXTechStack from "../../components/services/ui-ux-design/UIUXTechStack.astro";
+import UIUXHero from "../../components/services/ui-ux-design/UIUXHero.astro";
+---
+
+<Layout title="UI/UX Design">
+  <main class="min-h-screen w-screen md:w-auto">
+    <Navbar />
+    <AboutHero />
+    <UIUXIntro />
+    <UIUXServices />
+    <UIUXGetStarted />
+    <UIUXBenefits />
+    <UIUXTechStack />
+    <Footer />
+  </main>
+</Layout>

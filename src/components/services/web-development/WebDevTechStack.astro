@@ -1,0 +1,28 @@
+---
+import Heading from "../../common/Heading.astro";
+import TechStackImage from "../../../assets/services/web-dev/tech-stack.png";
+import Image from "astro/components/Image.astro";
+---
+
+<section class="app-max-width py-16">
+  <Heading>
+    <h2 class="text-4xl" id="why-nixxon-heading">
+      Our Technology Stack for Web App Development
+    </h2>
+  </Heading>
+  <p class="text-[#2a2111] text-[16px] my-16">
+    The robust technology stack that our web app development team uses yields
+    dependable and efficient results. Our responsive web applications are made
+    with state-of-the-art tools like MongoDB, Node.js, and React.js. Because we
+    know HTML5, CSS3, and JavaScript inside and out, we can guarantee flawless
+    user experiences across a variety of platforms and software.
+  </p>
+  <Image
+    src={TechStackImage}
+    alt="Tech Stack"
+    title="Tech Stack"
+    class="w-full my-16"
+    id="nixxon-illustration"
+    loading="lazy"
+  />
+</section>

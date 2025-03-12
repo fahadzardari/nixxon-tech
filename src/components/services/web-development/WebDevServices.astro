@@ -1,0 +1,139 @@
+---
+import Image from "astro/components/Image.astro";
+import Heading from "../../common/Heading.astro";
+import WebPortalImage from "../../../assets/services/web-dev/web-portal.png";
+import WebsitesImage from "../../../assets/services/web-dev/websites.png";
+import EcommerceImage from "../../../assets/services/web-dev/e-commerce.png";
+import CWAImage from "../../../assets/services/web-dev/cwa.png";
+import FrontendImage from "../../../assets/services/web-dev/frontend.png";
+import BackendImage from "../../../assets/services/web-dev/backend.png";
+const services = [
+  {
+    service: "Web Portals",
+    description:
+      "Our experts specialize in developing intuitive and feature-rich web portals providing smooth access to information and services.",
+    image: WebPortalImage,
+  },
+  {
+    service: "Websites",
+    description:
+      "With our visually appealing and highly functional websites, you will get maximum user engagements with an amazing browsing experience.",
+    image: WebsitesImage,
+  },
+  {
+    service: "E-Commerce",
+    description:
+      "We got end-to-end E-commerce solutions for you, including secure payment gateways, user-friendly shopping experiences and inventory management.",
+    image: EcommerceImage,
+  },
+  {
+    service: "Custom Web Apps",
+    description:
+      "Our custom web development applications cater to specific business needs ensuring unique functionalities and improved user engagement.",
+    image: CWAImage,
+  },
+  {
+    service: "Frontend Design & Development",
+    description:
+      "Our team of professionals excels in crafting captivating front-end designs with responsive and user-friendly interfaces.",
+    image: FrontendImage,
+  },
+  {
+    service: "Backend Web Development",
+    description:
+      "Get in touch with us for robust backend web development services, optimal performance, smooth integration and efficient data management.",
+    image: BackendImage,
+  },
+];
+---
+
+<section class="app-max-width py-16">
+  <Heading>
+    <h2 class="text-4xl heading-animation" id="web-dev-services">
+      Our Custom Web Development Services
+    </h2>
+  </Heading>
+  <p class="text-[#2a2111] text-[16px] my-16 description-animation">
+    Businesses may differentiate themselves from the competition online with a
+    distinctive online presence thanks to our bespoke website services. Our
+    staff has the know-how to provide custom solutions, whether it's designing a
+    web application, constructing a content management system, or developing a
+    unique e-commerce platform.
+  </p>
+  <article class="grid grid-cols-1 md:grid-cols-3 gap-4 services-container">
+    {
+      services.map((service, index) => {
+        return (
+          <div class="service-card flex flex-col h-[367px]" data-index={index}>
+            <div
+              class={`relative capitalize py-2 border-b border-[#E1E1E1] after:absolute after:left-0 after:bottom-[-1px] after:w-[30px] after:h-[1px] after:bg-primary-blue after:ml-0 service-border flex-grow`}
+            >
+              <h4 class="text-lg font-semibold my-4 service-title">
+                <span class="text-primary-blue service-number">
+                  0{index + 1}
+                </span>
+                {service.service}
+              </h4>
+              <p class="text-[#2a2111] text-sm service-description">
+                {service.description}
+              </p>
+            </div>
+            <div class="service-image-container overflow-hidden mt-auto">
+              <Image
+                src={service.image}
+                alt={service.service}
+                title={service.service}
+                class="w-full h-full mt-4 service-image object-cover "
+                id={service.service}
+                loading="lazy"
+              />
+            </div>
+          </div>
+        );
+      })
+    }
+  </article>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Main animation timeline
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#web-dev-services",
+      start: "top 80%",
+    },
+  });
+
+  tl.from("#web-dev-services", { y: 30, opacity: 0, duration: 0.7 })
+    .from(
+      ".text-\\[\\#2a2111\\].text-\\[16px\\]",
+      { y: 20, opacity: 0, duration: 0.7 },
+      "-=0.4"
+    )
+    .from(
+      ".service-card",
+      {
+        y: 50,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.1,
+      },
+      "-=0.2"
+    );
+
+  // Add hover effect for cards
+  document.querySelectorAll(".grid > div").forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      gsap.to(card, { y: -5, duration: 0.3 });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      gsap.to(card, { y: 0, duration: 0.3 });
+    });
+  });
+</script>
