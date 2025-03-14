@@ -1,0 +1,137 @@
+---
+import Image from "astro/components/Image.astro";
+import IntroImage from "../../../assets/services/game-development/game-dev-intro.png";
+import Heading from "../../common/Heading.astro";
+---
+
+<section
+  class="app-max-width flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-12"
+  id="video-animation-intro-section"
+>
+  <div
+    class="ml-[calc(-1*(100vw-140%)/2)] w-full md:w-3/5"
+    id="video-animation-image-container"
+  >
+    <Image
+      src={IntroImage}
+      alt="Video Animation Services Intro"
+      title="Video Animation Services Intro"
+      class="w-full my-16"
+      id="video-animation-intro"
+      loading="lazy"
+    />
+  </div>
+  <div
+    class="flex flex-col space-y-6 w-full md:w-2/5"
+    id="video-animation-intro-content"
+  >
+    <Heading>
+      <h2 class="text-4xl" id="video-animation-heading">
+        Where creativity, story telling, & cinematography come together
+      </h2>
+    </Heading>
+    <p
+      class="text-[16px] text-[#2a2111] opacity-100"
+      id="video-animation-paragraph"
+    >
+      Unleash the creative, narrative, and cinematographic potential with our
+      assistance in video animation. Watch the craftsmanship come to life as
+      your ideas are authentically and captivatingly brought to life, drawing
+      your audience into an unforgettable experience.
+    </p>
+    <button
+      class="w-fit inline-block px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-lg transition
+      shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80 !opacity-100"
+      id="video-animation-cta"
+    >
+      Let's Talk
+    </button>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Create a timeline that triggers when the section is in view
+  const introTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#video-animation-intro-section",
+      start: "top 70%",
+      toggleActions: "play none none none",
+    },
+  });
+
+  // Add animations to the timeline
+  introTl
+    // Image animation - slides in from left with slight opacity effect
+    .from("#video-animation-intro", {
+      x: -50,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+    })
+
+    // Heading animation - slides up and fades in
+    .from(
+      "#video-animation-heading",
+      {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.6"
+    ) // Start slightly before the image animation finishes
+
+    // Paragraph animation - fade in with slight upward movement
+    .fromTo(
+      "#video-animation-paragraph",
+      {
+        y: 20,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        clearProps: "all", // Important to clear properties after animation
+      },
+      "-=0.5"
+    )
+
+    // Button animation - subtle pop effect
+    .from(
+      "#video-animation-cta",
+      {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.6,
+        ease: "back.out(1.5)",
+      },
+      "-=0.4"
+    );
+
+  // Add hover animation for the button
+  const ctaButton = document.querySelector("#video-animation-cta");
+  if (ctaButton) {
+    ctaButton.addEventListener("mouseenter", () => {
+      gsap.to("#video-animation-cta", {
+        scale: 1.05,
+        duration: 0.3,
+        ease: "power1.out",
+      });
+    });
+
+    ctaButton.addEventListener("mouseleave", () => {
+      gsap.to("#video-animation-cta", {
+        scale: 1,
+        duration: 0.3,
+        ease: "power1.out",
+      });
+    });
+  }
+</script>
