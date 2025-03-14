@@ -1,64 +1,62 @@
 ---
 import Image from "astro/components/Image.astro";
 import Heading from "../../common/Heading.astro";
-// Note: You'll need to update these image paths with actual mobile app development images
-import MobileAppDevImage from "../../../assets/services/mobile-app-development/mobile-app-development.png";
-import UIUXDesignImage from "../../../assets/services/mobile-app-development/ui-ux-design.png";
-import ConsultingImage from "../../../assets/services/mobile-app-development/consulting.png";
-import PrototypingImage from "../../../assets/services/mobile-app-development/prototyping.png";
-import SupportMaintenanceImage from "../../../assets/services/mobile-app-development/support-maintenance.png";
-import CrossPlatformImage from "../../../assets/services/mobile-app-development/cross-platform.png";
+// Note: You'll need to update these image paths with actual game development images
+import Unity3DImage from "../../../assets/services/game-development/unity-3d.png";
+import UnrealEngineImage from "../../../assets/services/game-development/unreal-engine.png";
+import AugmentedRealityImage from "../../../assets/services/game-development/augmented-reality.png";
+import VirtualRealityImage from "../../../assets/services/game-development/virtual-reality.png";
+import CasualGamesImage from "../../../assets/services/game-development/casual-games.png";
+import CryEngineImage from "../../../assets/services/game-development/cry-engine.png";
 
 const services = [
   {
-    service: "Mobile app development",
+    service: "Unity 3D",
     description:
-      "We specialize in creating functional and creative mobile apps considering your specific needs.",
-    image: MobileAppDevImage,
+      "Make use of Unity 3D's capabilities to develop engaging and dynamic gaming environments that enthrall players.",
+    image: Unity3DImage,
   },
   {
-    service: "UI/UX app design",
+    service: "Unreal Engine",
     description:
-      "We have professional designers ready to craft aesthetically pleasing user interfaces to enhance user experience.",
-    image: UIUXDesignImage,
+      "Utilize Unreal Engine to unleash the full potential of game development, producing breathtaking graphics and captivating gameplay.",
+    image: UnrealEngineImage,
   },
   {
-    service: "Consulting",
+    service: "Augmented Reality",
     description:
-      "With strategic counseling and provision of industry-related insights, we value your decisions throughout the mobile app development process.",
-    image: ConsultingImage,
+      "Use our state-of-the-art augmented reality technologies to submerge players in a realm where imagination and reality collide.",
+    image: AugmentedRealityImage,
   },
   {
-    service: "Prototyping",
+    service: "Virtual Reality",
     description:
-      "Our prototyping services help you foresee the functioning of the app.",
-    image: PrototypingImage,
+      "Experience a whole new level of gaming with our virtual reality offerings, which take users to amazing virtual worlds.",
+    image: VirtualRealityImage,
   },
   {
-    service: "Support and maintenance",
+    service: "Casual Games",
     description:
-      "You will get ongoing maintenance and support that enables smooth functioning of the app.",
-    image: SupportMaintenanceImage,
+      "Entice and involve players with our engrossing and addictive casual games, which are ideal for on-the-go amusement.",
+    image: CasualGamesImage,
   },
   {
-    service: "Cross Platform",
+    service: "CryEngine",
     description:
-      "We can create mobile apps that function flawlessly across a variety of operating systems for expanding your audience and improving your productivity.",
-    image: CrossPlatformImage,
+      "Make use of CryEngine's amazing capabilities to enjoy gaming with unmatched visual accuracy and realism.",
+    image: CryEngineImage,
   },
 ];
 ---
 
 <section class="app-max-width py-16">
   <Heading>
-    <h2 class="text-4xl heading-animation" id="mobile-dev-services">
-      Mobile App Services That Set Us Apart
+    <h2 class="text-4xl heading-animation" id="game-dev-services">
+      Game Development Services That Set Us Apart
     </h2>
   </Heading>
   <p class="text-[#2a2111] text-[16px] my-4 description-animation">
-    Our mobile app development services blend creativity, excellence, and a
-    customer-focused mindset to produce aesthetically pleasing, incredibly
-    functional apps that encourage devoted users over time.
+    Our game development strategy is all about customers and their needs. We stay ahead of the curve by putting a strong emphasis on innovation and constant improvement, guaranteeing our clients get great results and experiences.
   </p>
   <article class="grid grid-cols-1 md:grid-cols-3 gap-4 services-container">
     {
@@ -84,7 +82,7 @@ const services = [
                 alt={service.service}
                 title={service.service}
                 class="w-full h-full mt-4 service-image object-cover"
-                id={`mobile-dev-${service.service.toLowerCase().replace(/\s+/g, "-")}`}
+                id={`game-dev-${service.service.toLowerCase().replace(/\s+/g, "-")}`}
                 loading="lazy"
               />
             </div>
@@ -104,12 +102,12 @@ const services = [
   // Main animation timeline
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: "#mobile-dev-services",
+      trigger: "#game-dev-services",
       start: "top 80%",
     },
   });
 
-  tl.from("#mobile-dev-services", { y: 30, opacity: 0, duration: 0.7 })
+  tl.from("#game-dev-services", { y: 30, opacity: 0, duration: 0.7 })
     .from(
       ".text-\\[\\#2a2111\\].text-\\[16px\\]",
       { y: 20, opacity: 0, duration: 0.7 },
