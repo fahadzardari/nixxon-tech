@@ -1,0 +1,26 @@
+---
+import Heading from "../../common/Heading.astro";
+import TechStackImage from "../../../assets/services/mobile-app-development/mobile-dev-tech-stack.png";
+import Image from "astro/components/Image.astro";
+---
+
+<section class="app-max-width py-16">
+  <Heading>
+    <h2 class="text-4xl" id="mobile-dev-tech-stack-heading">
+      Technology Stack
+    </h2>
+  </Heading>
+  <p class="text-[#2a2111] text-[16px] my-16">
+    With the help of our technology stack, which consists of Swift, Kotlin,
+    React Native, Node.js, and MongoDB, we are able to provide scalable,
+    dependable cross-platform mobile app solutions.
+  </p>
+  <Image
+    src={TechStackImage}
+    alt="Mobile Development Tech Stack"
+    title="Mobile Development Tech Stack"
+    class="w-full my-16"
+    id="mobile-dev-tech-stack-illustration"
+    loading="lazy"
+  />
+</section>

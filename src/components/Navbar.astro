@@ -4,15 +4,21 @@ import Logo from "../assets/logo.webp";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about-us" },
-  { 
-    label: "Services", 
-    href: "/services", 
+  {
+    label: "Services",
+    href: "/services",
     hasDropdown: true,
     dropdownItems: [
       { label: "Web Development", href: "/services/web-development" },
-      { label: "Mobile Development", href: "/services/mobile-development" },
+      // { label: "Mobile Development", href: "/services/mobile-development" },
       { label: "UI/UX Design", href: "/services/ui-ux-design" },
-    ]
+      { label: "Branding", href: "/services/branding" },
+      { label: "Video Animation", href: "/services/video-animation" },
+      {
+        label: "Mobile App Development",
+        href: "/services/mobile-app-development",
+      },
+    ],
   },
   { label: "Contact", href: "/contact-us" },
 ];
@@ -44,12 +50,12 @@ const currentPath = Astro.url.pathname;
             const isActive =
               (item.href === "/" && currentPath === "/") ||
               (item.href !== "/" && currentPath.startsWith(item.href));
-              
+
             if (item.hasDropdown) {
-              const hasActiveChild = item.dropdownItems?.some(child => 
+              const hasActiveChild = item.dropdownItems?.some((child) =>
                 currentPath.startsWith(child.href)
               );
-              
+
               return (
                 <li class="relative group">
                   <a
@@ -57,25 +63,42 @@ const currentPath = Astro.url.pathname;
                     class:list={[
                       "transition duration-300 flex items-center",
                       "text-white hover:text-[#39D0FF]",
-                      { "text-[#39D0FF] font-medium nav-active": isActive || hasActiveChild },
+                      {
+                        "text-[#39D0FF] font-medium nav-active":
+                          isActive || hasActiveChild,
+                      },
                     ]}
                     aria-current={isActive ? "page" : undefined}
                   >
                     {item.label}
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 ml-1"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      />
                     </svg>
                   </a>
                   <div class="dropdown-menu absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                     <div class="py-1">
-                      {item.dropdownItems?.map(dropdownItem => {
-                        const isDropdownItemActive = currentPath.startsWith(dropdownItem.href);
+                      {item.dropdownItems?.map((dropdownItem) => {
+                        const isDropdownItemActive = currentPath.startsWith(
+                          dropdownItem.href
+                        );
                         return (
                           <a
                             href={dropdownItem.href}
                             class:list={[
                               "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100",
-                              { "bg-gray-50 text-[#39D0FF]": isDropdownItemActive }
+                              {
+                                "bg-gray-50 text-[#39D0FF]":
+                                  isDropdownItemActive,
+                              },
                             ]}
                           >
                             {dropdownItem.label}
@@ -87,7 +110,7 @@ const currentPath = Astro.url.pathname;
                 </li>
               );
             }
-            
+
             return (
               <li>
                 <a
@@ -162,12 +185,12 @@ const currentPath = Astro.url.pathname;
           const isActive =
             (item.href === "/" && currentPath === "/") ||
             (item.href !== "/" && currentPath.startsWith(item.href));
-            
+
           if (item.hasDropdown) {
-            const hasActiveChild = item.dropdownItems?.some(child => 
+            const hasActiveChild = item.dropdownItems?.some((child) =>
               currentPath.startsWith(child.href)
             );
-            
+
             return (
               <li>
                 <div class="mobile-dropdown">
@@ -175,25 +198,42 @@ const currentPath = Astro.url.pathname;
                     class:list={[
                       "flex justify-between items-center w-full py-2 transition duration-300",
                       "text-gray-700 hover:text-[#39D0FF]",
-                      { "text-[#39D0FF] font-medium": isActive || hasActiveChild },
+                      {
+                        "text-[#39D0FF] font-medium":
+                          isActive || hasActiveChild,
+                      },
                     ]}
                     data-dropdown-toggle
                   >
                     {item.label}
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 dropdown-arrow transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 dropdown-arrow transition-transform duration-300"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      />
                     </svg>
                   </button>
                   <div class="mobile-dropdown-menu hidden pl-4 mt-2 space-y-2 overflow-hidden transition-all max-h-0">
-                    {item.dropdownItems?.map(dropdownItem => {
-                      const isDropdownItemActive = currentPath.startsWith(dropdownItem.href);
+                    {item.dropdownItems?.map((dropdownItem) => {
+                      const isDropdownItemActive = currentPath.startsWith(
+                        dropdownItem.href
+                      );
                       return (
                         <a
                           href={dropdownItem.href}
                           class:list={[
                             "block py-2 transition duration-300",
                             "text-gray-700 hover:text-[#39D0FF]",
-                            { "text-[#39D0FF] font-medium": isDropdownItemActive },
+                            {
+                              "text-[#39D0FF] font-medium":
+                                isDropdownItemActive,
+                            },
                           ]}
                         >
                           {dropdownItem.label}
@@ -205,7 +245,7 @@ const currentPath = Astro.url.pathname;
               </li>
             );
           }
-          
+
           return (
             <li>
               <a
@@ -264,31 +304,31 @@ const currentPath = Astro.url.pathname;
       toggleMenu(false);
     }
   });
-  
+
   // Handle mobile dropdowns
-  document.querySelectorAll('[data-dropdown-toggle]').forEach(button => {
-    button.addEventListener('click', () => {
+  document.querySelectorAll("[data-dropdown-toggle]").forEach((button) => {
+    button.addEventListener("click", () => {
       const dropdown = button.nextElementSibling;
-      const arrow = button.querySelector('.dropdown-arrow');
-      
-      if (dropdown.classList.contains('hidden')) {
+      const arrow = button.querySelector(".dropdown-arrow");
+
+      if (dropdown.classList.contains("hidden")) {
         // Open dropdown
-        dropdown.classList.remove('hidden');
-        gsap.to(dropdown, { 
-          maxHeight: dropdown.scrollHeight, 
-          duration: 0.3, 
-          ease: "power2.out" 
+        dropdown.classList.remove("hidden");
+        gsap.to(dropdown, {
+          maxHeight: dropdown.scrollHeight,
+          duration: 0.3,
+          ease: "power2.out",
         });
         gsap.to(arrow, { rotation: 180, duration: 0.3 });
       } else {
         // Close dropdown
-        gsap.to(dropdown, { 
-          maxHeight: 0, 
-          duration: 0.3, 
+        gsap.to(dropdown, {
+          maxHeight: 0,
+          duration: 0.3,
           ease: "power2.in",
           onComplete: () => {
-            dropdown.classList.add('hidden');
-          }
+            dropdown.classList.add("hidden");
+          },
         });
         gsap.to(arrow, { rotation: 0, duration: 0.3 });
       }
@@ -347,7 +387,7 @@ const currentPath = Astro.url.pathname;
   .scrolled {
     backdrop-filter: blur(8px);
   }
-  
+
   /* Styles for dropdown menu */
   .dropdown-menu {
     z-index: 20;

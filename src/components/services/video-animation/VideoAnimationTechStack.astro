@@ -1,0 +1,107 @@
+---
+import Heading from "../../common/Heading.astro";
+import Image from "astro/components/Image.astro";
+import AfterEffectsIcon from "../../../assets/services/video-animation/ae.png";
+import PremiereProIcon from "../../../assets/services/video-animation/pp.png";
+import BlanderIcon from "../../../assets/services/video-animation/blander.png";
+import MayaIcon from "../../../assets/services/video-animation/maya.png";
+import MaxIcon from "../../../assets/services/video-animation/max.png";
+---
+
+<section class="app-max-width py-16">
+  <div class="video-animation-tech-stack">
+    <Heading>
+      <h2 class="text-4xl" id="video-animation-tech-stack-heading">
+        Technology Stack
+      </h2>
+    </Heading>
+    <p class="text-[#2a2111] text-[16px] my-4">
+      Our business uses a state-of-the-art technology stack to provide superior
+      video animation services. We use cutting-edge rendering and animation
+      techniques along with industry-standard software and resources to produce
+      visually attractive and captivating animations that engage audiences.
+    </p>
+  </div>
+
+  <div
+    class="flex space-x-8 justify-between items-center video-animation-tech-stack-container"
+  >
+    <Image
+      src={AfterEffectsIcon}
+      alt="AfterEffects"
+      title="AfterEffects"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+    <Image
+      src={PremiereProIcon}
+      alt="PremierePro"
+      title="PremierePro"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+    <Image
+      src={BlanderIcon}
+      alt="Blander"
+      title="Blander"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+    <Image
+      src={MayaIcon}
+      alt="Maya"
+      title="Maya"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+    <Image
+      src={MaxIcon}
+      alt="Max"
+      title="Max"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Fade in the content on scroll
+    gsap.from(".video-animation-tech-stack", {
+      opacity: 0,
+      y: 20,
+      duration: 0.7,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".video-animation-tech-stack",
+        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Staggered reveal for tech icons on scroll
+    gsap.from(".tech-icon", {
+      opacity: 0,
+      y: 15,
+      scale: 0.95,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: "back.out(1.2)",
+      scrollTrigger: {
+        trigger: ".video-animation-tech-stack-container",
+        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
+        toggleActions: "play none none none",
+      },
+    });
+  });
+</script>

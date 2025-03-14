@@ -1,0 +1,26 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import "../../styles/global.css";
+import AboutHero from "../../components/about-us/AboutHero.astro";
+import BrandingIntro from "../../components/services/branding/BrandingIntro.astro";
+import BrandingServices from "../../components/services/branding/BrandingServices.astro";
+import BrandingGetStarted from "../../components/services/branding/BrandingGetStarted.astro";
+import BrandingBenefits from "../../components/services/branding/BrandingBenefits.astro";
+import BrandingTechStack from "../../components/services/branding/BrandingTechStack.astro";
+
+---
+
+<Layout title="Branding">
+  <main class="min-h-screen w-screen md:w-auto">
+    <Navbar />
+    <AboutHero />
+    <BrandingIntro />
+    <BrandingServices />
+    <BrandingGetStarted />
+    <BrandingBenefits />
+    <BrandingTechStack />
+    <Footer />
+  </main>
+</Layout>

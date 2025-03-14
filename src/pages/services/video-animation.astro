@@ -1,0 +1,25 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import "../../styles/global.css";
+import AboutHero from "../../components/about-us/AboutHero.astro";
+import VideoAnimationIntro from "../../components/services/video-animation/VideoAnimationIntro.astro";
+import VideoAnimationServices from "../../components/services/video-animation/VideoAnimationServices.astro";
+import VideoAnimationGetStarted from "../../components/services/video-animation/VideoAnimationGetStarted.astro";
+import VideoAnimationBenefits from "../../components/services/video-animation/VideoAnimationBenefits.astro";
+import VideoAnimationTechStack from "../../components/services/video-animation/VideoAnimationTechStack.astro";
+---
+
+<Layout title="Video Animation">
+  <main class="min-h-screen w-screen md:w-auto">
+    <Navbar />
+    <AboutHero />
+    <VideoAnimationIntro />
+    <VideoAnimationServices />
+    <VideoAnimationGetStarted />
+    <VideoAnimationBenefits />
+    <VideoAnimationTechStack />
+    <Footer />
+  </main>
+</Layout>

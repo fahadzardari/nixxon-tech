@@ -1,0 +1,97 @@
+---
+import Heading from "../../common/Heading.astro";
+import Image from "astro/components/Image.astro";
+import PhotoshopImage from "../../../assets/services/ui-ux-design/ps.png";
+import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
+import CoralDrawImage from "../../../assets/services/branding/coral-draw.png";
+import InDesignImage from "../../../assets/services/branding/indesign.png";
+---
+
+<section class="app-max-width py-16">
+  <div class="branding-tech-stack">
+    <Heading>
+      <h2 class="text-4xl" id="branding-tech-stack-heading">
+        Technology Stack
+      </h2>
+    </Heading>
+    <p class="text-[#2a2111] text-[16px] my-4">
+      Our group of professionals are expert at using cutting-edge technology to
+      navigate a dynamic digital landscape and provide innovative solutions that
+      boost business success.
+    </p>
+  </div>
+
+  <div
+    class="flex space-x-8 justify-between items-center branding-tech-stack-container"
+  >
+    <Image
+      src={PhotoshopImage}
+      alt="Photoshop"
+      title="Photoshop"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+    <Image
+      src={IllustratorImage}
+      alt="Illustrator"
+      title="Illustrator"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+    <Image
+      src={InDesignImage}
+      alt="InDesign"
+      title="InDesign"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+    <Image
+      src={CoralDrawImage}
+      alt="Coral Draw"
+      title="Coral Draw"
+      class="w-full tech-icon"
+      id="nixxon-illustration"
+      loading="lazy"
+    />
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Fade in the content on scroll
+    gsap.from(".branding-tech-stack", {
+      opacity: 0,
+      y: 20,
+      duration: 0.7,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".branding-tech-stack",
+        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Staggered reveal for tech icons on scroll
+    gsap.from(".tech-icon", {
+      opacity: 0,
+      y: 15,
+      scale: 0.95,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: "back.out(1.2)",
+      scrollTrigger: {
+        trigger: ".branding-tech-stack-container",
+        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
+        toggleActions: "play none none none",
+      },
+    });
+  });
+</script>

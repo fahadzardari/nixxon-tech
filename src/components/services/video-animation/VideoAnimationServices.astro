@@ -1,0 +1,142 @@
+---
+import Image from "astro/components/Image.astro";
+import Heading from "../../common/Heading.astro";
+// Note: You'll need to update these image paths with actual video animation images
+import Animation2DImage from "../../../assets/services/video-animation/2d-animation.png";
+import Animation3DImage from "../../../assets/services/video-animation/3d-animation.png";
+import ModelingImage from "../../../assets/services/video-animation/modeling-renders.png";
+import ExplainerImage from "../../../assets/services/video-animation/explainer-videos.png";
+import MotionGraphicsImage from "../../../assets/services/video-animation/motion-graphics.png";
+import CustomAnimationImage from "../../../assets/services/video-animation/custom-animation.png";
+
+const services = [
+  {
+    service: "2D Animation",
+    description:
+      "Our 2D animation uses expressive graphics and smooth motion to give people and scenes life.",
+    image: Animation2DImage,
+  },
+  {
+    service: "3D Animation",
+    description:
+      "Transport your audience to a world of spectacular graphics and astounding realism with our 3D animation.",
+    image: Animation3DImage,
+  },
+  {
+    service: "Modeling & Renders",
+    description:
+      "Your content is elevated by the strikingly realistic designs and surroundings that our modeling and rendering services produce.",
+    image: ModelingImage,
+  },
+  {
+    service: "Explainer Videos",
+    description:
+      "Use engrossing explainer videos to educate and captivate your audience by demystifying difficult concepts and ideas.",
+    image: ExplainerImage,
+  },
+  {
+    service: "Motion Graphics",
+    description:
+      "Use motion graphics to give your presentations and films lively, attention-grabbing aspects.",
+    image: MotionGraphicsImage,
+  },
+  {
+    service: "Custom Animation",
+    description:
+      "Discover the enchantment of personalized animation, created just for your message, brand, and distinct vision.",
+    image: CustomAnimationImage,
+  },
+];
+---
+
+<section class="app-max-width py-16">
+  <Heading>
+    <h2 class="text-4xl heading-animation" id="video-animation-services">
+      Video Animation Services That Set Us Apart
+    </h2>
+  </Heading>
+  <p class="text-[#2a2111] text-[16px] my-4 description-animation">
+    We pay great attention to every small detail and go above and beyond for our
+    clients in order to produce visually spectacular experiences that attract
+    viewers and leave a lasting impact. With the ideal balance of technical
+    know-how and creative inspiration, every project we work on with our
+    distinctive video animation services is of the highest caliber and
+    inventiveness.
+  </p>
+  <article class="grid grid-cols-1 md:grid-cols-3 gap-4 services-container">
+    {
+      services.map((service, index) => {
+        return (
+          <div class="service-card flex flex-col h-[367px]" data-index={index}>
+            <div
+              class={`relative capitalize py-2 border-b border-[#E1E1E1] after:absolute after:left-0 after:bottom-[-1px] after:w-[30px] after:h-[1px] after:bg-primary-blue after:ml-0 service-border flex-grow`}
+            >
+              <h4 class="text-lg font-semibold my-4 service-title">
+                <span class="text-primary-blue service-number">
+                  0{index + 1}
+                </span>
+                {service.service}
+              </h4>
+              <p class="text-[#2a2111] text-sm service-description">
+                {service.description}
+              </p>
+            </div>
+            <div class="service-image-container overflow-hidden mt-auto">
+              <Image
+                src={service.image}
+                alt={service.service}
+                title={service.service}
+                class="w-full h-full mt-4 service-image object-cover"
+                id={`video-animation-${service.service.toLowerCase().replace(/\s+/g, "-")}`}
+                loading="lazy"
+              />
+            </div>
+          </div>
+        );
+      })
+    }
+  </article>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Main animation timeline
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#video-animation-services",
+      start: "top 80%",
+    },
+  });
+
+  tl.from("#video-animation-services", { y: 30, opacity: 0, duration: 0.7 })
+    .from(
+      ".text-\\[\\#2a2111\\].text-\\[16px\\]",
+      { y: 20, opacity: 0, duration: 0.7 },
+      "-=0.4"
+    )
+    .from(
+      ".service-card",
+      {
+        y: 50,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.1,
+      },
+      "-=0.2"
+    );
+
+  // Add hover effect for cards
+  document.querySelectorAll(".grid > div").forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      gsap.to(card, { y: -5, duration: 0.3 });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      gsap.to(card, { y: 0, duration: 0.3 });
+    });
+  });
+</script>

@@ -1,0 +1,25 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import "../../styles/global.css";
+import AboutHero from "../../components/about-us/AboutHero.astro";
+import MobileDevIntro from "../../components/services/mobile-app-development/MobileDevIntro.astro";
+import MobileDevServices from "../../components/services/mobile-app-development/MobileDevServices.astro";
+import MobileDevGetStarted from "../../components/services/mobile-app-development/MobileDevGetStarted.astro";
+import MobileDevBenefits from "../../components/services/mobile-app-development/MobileDevBenefits.astro";
+import MobileDevTechStack from "../../components/services/mobile-app-development/MobileDevTechStack.astro";
+---
+
+<Layout title="Mobile App Development">
+  <main class="min-h-screen w-screen md:w-auto">
+    <Navbar />
+    <AboutHero />
+    <MobileDevIntro />
+    <MobileDevServices />
+    <MobileDevGetStarted />
+    <MobileDevBenefits />
+    <MobileDevTechStack />
+    <Footer />
+  </main>
+</Layout>
