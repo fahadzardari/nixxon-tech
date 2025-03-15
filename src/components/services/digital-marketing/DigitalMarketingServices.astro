@@ -1,0 +1,137 @@
+---
+import Image from "astro/components/Image.astro";
+import Heading from "../../common/Heading.astro";
+// Update these image paths with actual digital marketing service images
+import SeoImage from "../../../assets/services/digital-marketing/seo.png";
+import AdWordsImage from "../../../assets/services/digital-marketing/adwords.png";
+import SocialMediaImage from "../../../assets/services/digital-marketing/social-media.png";
+import ContentImage from "../../../assets/services/digital-marketing/content.png";
+import EmailImage from "../../../assets/services/digital-marketing/email.png";
+import AnalyticsImage from "../../../assets/services/digital-marketing/analytics.png";
+
+const services = [
+  {
+    service: "SEO Optimization",
+    description:
+      "We set ourselves apart in the market with SEO optimization, which also ensures that your website ranks higher in search engine results and draws in organic traffic for your company.",
+    image: SeoImage,
+  },
+  {
+    service: "Google AdWords Mastery",
+    description:
+      "Using our in-depth understanding of Google AdWords, we optimize your online advertising budget and design targeted programs that provide the best possible leads and conversions.",
+    image: AdWordsImage,
+  },
+  {
+    service: "Social Media Engagement",
+    description:
+      "Using social media channels to engage your audience, build strong relationships with potential customers, and create a strong online presence is something we are professionals at.",
+    image: SocialMediaImage,
+  },
+  {
+    service: "Compelling Content Creation",
+    description:
+      "Using an engaging content production approach, we draw in your audience and create relevant, intelligent content that builds customer trust and showcases your brand's competence.",
+    image: ContentImage,
+  },
+  {
+    service: "Effective Email Marketing",
+    description:
+      "We build relationships with our clients by delivering relevant and customized messages that motivate participation and allegiance through effective email marketing.",
+    image: EmailImage,
+  },
+  {
+    service: "Analytical Insight And Reporting",
+    description:
+      "You may enhance your marketing strategies, make smart business decisions, and track quantifiable results with our analytical knowledge and reporting.",
+    image: AnalyticsImage,
+  },
+];
+---
+
+<section class="app-max-width py-16">
+  <Heading>
+    <h2 class="text-4xl heading-animation" id="digital-marketing-services">
+      Business Strategy Services That Set Us Apart
+    </h2>
+  </Heading>
+  <p class="text-[#2a2111] text-[16px] my-4 description-animation">
+    Our business strategy is all about keeping up with the latest trends and updates. We make sure to facilitate our customers to the best of our abilities. At NixxonTech, the goal of our team is to provide the service that fulfills the desires of customers effectively.
+  </p>
+  <article class="grid grid-cols-1 md:grid-cols-3 gap-4 services-container">
+    {
+      services.map((service, index) => {
+        return (
+          <div class="service-card flex flex-col h-[367px]" data-index={index}>
+            <div
+              class={`relative capitalize py-2 border-b border-[#E1E1E1] after:absolute after:left-0 after:bottom-[-1px] after:w-[30px] after:h-[1px] after:bg-primary-blue after:ml-0 service-border flex-grow`}
+            >
+              <h4 class="text-lg font-semibold my-4 service-title">
+                <span class="text-primary-blue service-number">
+                  0{index + 1}
+                </span>
+                {service.service}
+              </h4>
+              <p class="text-[#2a2111] text-sm service-description">
+                {service.description}
+              </p>
+            </div>
+            <div class="service-image-container overflow-hidden mt-auto">
+              <Image
+                src={service.image}
+                alt={service.service}
+                title={service.service}
+                class="w-full h-full mt-4 service-image object-cover"
+                id={`digital-marketing-${service.service.toLowerCase().replace(/\s+/g, "-")}`}
+                loading="lazy"
+              />
+            </div>
+          </div>
+        );
+      })
+    }
+  </article>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Main animation timeline
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#digital-marketing-services",
+      start: "top 80%",
+    },
+  });
+
+  tl.from("#digital-marketing-services", { y: 30, opacity: 0, duration: 0.7 })
+    .from(
+      ".text-\\[\\#2a2111\\].text-\\[16px\\]",
+      { y: 20, opacity: 0, duration: 0.7 },
+      "-=0.4"
+    )
+    .from(
+      ".service-card",
+      {
+        y: 50,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.1,
+      },
+      "-=0.2"
+    );
+
+  // Add hover effect for cards
+  document.querySelectorAll(".grid > div").forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      gsap.to(card, { y: -5, duration: 0.3 });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      gsap.to(card, { y: 0, duration: 0.3 });
+    });
+  });
+</script>

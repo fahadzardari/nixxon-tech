@@ -11,15 +11,15 @@ const projects = [
 ---
 
 <section
-  class="app-max-width py-8 flex flex-col space-y-16"
+  class="py-8 flex flex-col space-y-16"
   aria-labelledby="featured-projects-heading"
 >
-  <div class="flex flex-col space-y-12">
+  <div class="flex flex-col space-y-12 app-max-width w-full">
     <Heading>
       <h2 id="featured-projects-heading" class="text-4xl font-medium">
         Featured Projects
       </h2>
     </Heading>
-    <ProjectsSlider client:load />
   </div>
+  <ProjectsSlider client:load />
 </section>

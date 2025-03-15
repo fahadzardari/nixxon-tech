@@ -1,0 +1,254 @@
+---
+import GetStartedLayout from "../../common/GetStartedLayout.astro";
+import OurMissionImage from "../../../assets/about-us/our-mission.svg";
+import Image from "astro/components/Image.astro";
+---
+
+<GetStartedLayout>
+  <article
+    class="app-max-width flex flex-col md:flex-row justify-between items-center lg:space-x-16 px-12 md:py-0 text-white"
+    id="digital-marketing-cta-container"
+    aria-labelledby="digital-marketing-cta-heading"
+  >
+    <div
+      class="w-full md:w-2/5 mb-8 md:mb-0 opacity-0"
+      id="digital-marketing-image-container"
+    >
+      <Image
+        src={OurMissionImage}
+        alt="Visual representation of Nixxon Tech's Digital Marketing services"
+        width="500"
+        height="400"
+        loading="lazy"
+        class="w-full"
+        id="digital-marketing-image"
+      />
+    </div>
+
+    <div
+      class="w-full md:w-3/5 flex flex-col space-y-4"
+      id="digital-marketing-cta-content"
+    >
+      <header>
+        <h2
+          class="text-3xl md:text-4xl font-medium leading-12 opacity-0"
+          id="digital-marketing-cta-heading"
+        >
+          A Full-Service Digital Marketing Agency
+        </h2>
+      </header>
+
+      <div
+        class="mt-5 text-sm md:text-[16px] opacity-0"
+        id="digital-marketing-cta-description"
+      >
+        <p>
+          Your complete solution for all online marketing requirements is a
+          full-service digital marketing agency. A wide array of services is
+          provided by them to improve your internet visibility and attain
+          quantifiable outcomes. Digital marketing channels like email
+          marketing, social media marketing, PPC advertising, SEO, content
+          production, and more are areas in which these agencies thrive. They
+          produce interest in your business and successfully raise awareness of
+          it by creating a cohesive and integrated approach.
+        </p>
+        <p class="mt-4">
+          Full-service digital marketing companies work together with their
+          clients to develop plans that are tailored to their target market and
+          business objectives. To develop effective digital marketing
+          strategies, they make use of technology, data, and creativity. These
+          businesses provide the resources and expertise required to achieve
+          objectives like more website traffic, better leads, increased
+          conversion rates, and increased brand visibility. They accomplish this
+          by assembling a team of extraordinarily talented specialists.
+        </p>
+      </div>
+
+      <a
+        href="/contact"
+        id="digital-marketing-cta-button"
+        class="mt-6 w-fit inline-block px-12 py-3 leading-5 border border-primary-blue rounded-full text-white text-lg transition
+        shadow-md shadow-primary-blue/50 hover:shadow-xl hover:shadow-primary-blue/80
+        hover:scale-105 duration-300 opacity-0"
+        aria-label="Contact us to discuss your Digital Marketing project"
+      >
+        Have a Plan? Let's Get Started
+      </a>
+    </div>
+  </article>
+</GetStartedLayout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Initialize split text for heading
+    const headingText = new SplitType("#digital-marketing-cta-heading", {
+      types: "chars",
+      tagName: "span",
+    });
+
+    // Create main timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#digital-marketing-cta-container",
+        start: "top 75%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Image animation - slide and fade in from left
+    tl.to("#digital-marketing-image-container", {
+      opacity: 1,
+      x: 0,
+      duration: 0.8,
+      ease: "power2.out",
+    });
+
+    // Add subtle floating animation to image after it appears
+    tl.to(
+      "#digital-marketing-image",
+      {
+        y: -10,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      },
+      "-=0.3"
+    );
+
+    // Heading animation - character by character reveal
+    tl.from(
+      headingText.chars,
+      {
+        opacity: 0,
+        y: 30,
+        stagger: 0.03,
+        duration: 0.5,
+        ease: "power3.out",
+      },
+      "-=1.5"
+    );
+    tl.to("#digital-marketing-cta-heading", { opacity: 1, duration: 0 }, "<"); // Ensure parent is visible
+
+    // Description paragraph animation
+    tl.to(
+      "#digital-marketing-cta-description",
+      {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+
+    // Animate each paragraph as a whole instead of splitting into lines
+    const paragraphs = document.querySelectorAll("#digital-marketing-cta-description p");
+    tl.from(
+      paragraphs,
+      {
+        opacity: 0,
+        y: 20,
+        stagger: 0.2, // Stagger between paragraphs
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+
+    // Button animation with bounce effect
+    tl.to(
+      "#digital-marketing-cta-button",
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+      },
+      "-=0.3"
+    );
+
+    // Add an attention-grabbing effect to the button after everything loaded
+    tl.to("#digital-marketing-cta-button", {
+      scale: 1.05,
+      duration: 0.5,
+      ease: "power1.inOut",
+      repeat: 1,
+      yoyo: true,
+      delay: 0.5,
+    });
+
+    // Replace default animate-pulse with custom pulsing glow
+    const button = document.getElementById("digital-marketing-cta-button");
+    if (button) {
+      // Create a subtle pulsing glow effect
+      gsap.to(button, {
+        boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
+        repeat: -1,
+        duration: 2,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 3, // Start after initial animations
+      });
+
+      // Add interactive hover effect
+      button.addEventListener("mouseenter", () => {
+        gsap.killTweensOf(button, "boxShadow"); // Kill ongoing animation
+        gsap.to(button, {
+          scale: 1.05,
+          boxShadow: "0 0 25px 8px rgba(57, 208, 255, 0.7)",
+          duration: 0.3,
+        });
+      });
+
+      button.addEventListener("mouseleave", () => {
+        gsap.to(button, {
+          scale: 1,
+          boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
+          duration: 0.3,
+          onComplete: () => {
+            // Restart the pulsing effect
+            gsap.to(button, {
+              boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
+              repeat: -1,
+              duration: 2,
+              yoyo: true,
+              ease: "sine.inOut",
+            });
+          },
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Initial states for animations */
+  #digital-marketing-image-container {
+    transform: translateX(-30px);
+  }
+
+  #digital-marketing-cta-heading {
+    transform: translateY(20px);
+  }
+
+  #digital-marketing-cta-description {
+    transform: translateY(20px);
+  }
+
+  #digital-marketing-cta-button {
+    transform: translateY(30px);
+  }
+
+  /* Line container styles for split text */
+  .line {
+    display: block;
+    overflow: hidden;
+  }
+</style>

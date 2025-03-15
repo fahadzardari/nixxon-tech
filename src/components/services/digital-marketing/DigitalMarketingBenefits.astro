@@ -1,0 +1,114 @@
+---
+import Heading from "../../common/Heading.astro";
+import Image from "astro/components/Image.astro";
+import DigitalMarketingImage from "../../../assets/services/digital-marketing/digital-marketing.png";
+---
+
+<section class="app-max-width py-16" id="digital-marketing-benefits-section">
+  <Heading>
+    <h2 class="text-4xl" id="digital-marketing-benefits-heading">
+      Email Marketing Initiatives
+    </h2>
+  </Heading>
+  <p class="text-base text-[#2a2111] my-4" id="digital-marketing-benefits-text">
+    Email marketing campaigns are essential for establishing and maintaining
+    relationships with customers. Businesses may successfully engage with their
+    audience and increase brand awareness, customer loyalty, and conversions by
+    sending tailored and targeted communications. Email marketing campaigns have
+    the ability to produce quantifiable outcomes and enhance the overall
+    performance of a comprehensive digital marketing strategy when they are
+    equipped with data-driven analysis, appealing content, and targeted
+    segmentation.
+  </p>
+  <Image
+    src={DigitalMarketingImage}
+    alt="Digital Marketing"
+    title="Digital Marketing"
+    class="w-full my-8 opacity-0"
+    id="digital-marketing-image"
+  />
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Wait for DOM content to be fully loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    // Split heading text for character animation
+    const headingText = new SplitType("#digital-marketing-benefits-heading", {
+      types: "chars",
+      tagName: "span",
+    });
+
+    // Create timeline for animations
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#digital-marketing-benefits-section",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Heading animation - subtle character reveal
+    tl.from(headingText.chars, {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      stagger: 0.02,
+      ease: "power2.out",
+    });
+
+    // Paragraph animation - simple fade up
+    tl.from("#digital-marketing-benefits-text", {
+      opacity: 0,
+      y: 15,
+      duration: 0.8,
+      ease: "power2.out",
+    }, "-=0.3");
+
+    // Image animation - fade in and slight slide from left
+    tl.to("#digital-marketing-image", {
+      opacity: 1,
+      x: 0,
+      duration: 0.8,
+      ease: "power2.out",
+    }, "-=0.5");
+
+    // Optional: Add a subtle scale effect to the image when in view
+    ScrollTrigger.create({
+      trigger: "#digital-marketing-image",
+      start: "top 80%",
+      onEnter: () => {
+        gsap.to("#digital-marketing-image", {
+          scale: 1.05,
+          duration: 1.5,
+          ease: "power1.inOut",
+          yoyo: true,
+          repeat: 1
+        });
+      },
+      once: true
+    });
+  });
+</script>
+
+<style>
+  /* Initial states for animations */
+  #digital-marketing-image {
+    transform: translateX(-10px);
+  }
+
+  /* Optional hover effect on the heading */
+  #digital-marketing-benefits-heading {
+    transition: text-shadow 0.3s ease;
+  }
+
+  #digital-marketing-benefits-heading:hover {
+    text-shadow: 0 0 8px rgba(0, 86, 179, 0.2);
+  }
+</style>

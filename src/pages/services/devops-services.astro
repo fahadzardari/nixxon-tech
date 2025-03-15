@@ -1,0 +1,23 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import "../../styles/global.css";
+import AboutHero from "../../components/about-us/AboutHero.astro";
+import DevOpsIntro from "../../components/services/devops-services/DevOpsIntro.astro";
+import DevOpsServices from "../../components/services/devops-services/DevOpsServices.astro";
+import DevOpsGetStarted from "../../components/services/devops-services/DevOpsGetStarted.astro";
+import DevOpsBenefits from "../../components/services/devops-services/DevOpsBenefits.astro";
+---
+
+<Layout title="DevOps Services">
+  <main class="min-h-screen w-screen md:w-auto">
+    <Navbar />
+    <AboutHero />
+    <DevOpsIntro />
+    <DevOpsServices />
+    <DevOpsGetStarted />
+    <DevOpsBenefits />
+    <Footer />
+  </main>
+</Layout>

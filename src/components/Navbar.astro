@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Logo from "../assets/logo.webp";
+import { label } from "framer-motion/client";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about-us" },
@@ -21,6 +22,14 @@ const navItems = [
       {
         label: "Game Development",
         href: "/services/game-development",
+      },
+      {
+        label: "Digital Marketing",
+        href: "/services/digital-marketing",
+      },
+      {
+        label: "DevOps Services",
+        href: "/services/devops-services",
       },
     ],
   },
@@ -43,7 +52,7 @@ const currentPath = Astro.url.pathname;
       <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="/">
-          <Image src={Logo} alt="Logo" class="h-8 w-auto" />
+          <Image src={Logo} alt="Logo" class="h-8 w-auto" loading={"eager"} />
         </a>
       </div>
 
@@ -104,6 +113,7 @@ const currentPath = Astro.url.pathname;
                                   isDropdownItemActive,
                               },
                             ]}
+                            aria-label="Dropdown item"
                           >
                             {dropdownItem.label}
                           </a>

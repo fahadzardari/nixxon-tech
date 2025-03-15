@@ -274,7 +274,6 @@ const services = [
           }
         });
 
-        // *** IMPROVED PANEL TRANSITION ***
         // Get current and new panels by their indices for reliable selection
         const currentPanel = document.getElementById(
           `panel-${currentActiveIndex}`
@@ -283,6 +282,10 @@ const services = [
 
         // Ensure we found both panels
         if (currentPanel && newPanel) {
+          console.log("Switching from", currentActiveIndex, "to", index);
+          console.log("Current panel:", currentPanel.innerHTML.slice(0, 50));
+          console.log("New panel:", newPanel.innerHTML.slice(0, 50));
+
           // Timeline for panel transition
           const panelTl = gsap.timeline();
 
@@ -293,12 +296,18 @@ const services = [
             duration: 0.3,
             ease: "power2.in",
             onComplete: () => {
-              // Hide current panel
+              // Hide current panel with important display property
+              currentPanel.style.display = 'none';
               currentPanel.classList.add("hidden");
+
               // Show new panel but still invisible (opacity 0)
               newPanel.classList.remove("hidden");
+              newPanel.style.display = 'flex';
               newPanel.style.opacity = 0;
               newPanel.style.transform = "translateY(20px)";
+              
+              console.log("After switch - current hidden:", currentPanel.classList.contains("hidden"));
+              console.log("After switch - new visible:", !newPanel.classList.contains("hidden"));
             },
           });
 

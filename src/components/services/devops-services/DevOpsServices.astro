@@ -1,0 +1,130 @@
+---
+import Image from "astro/components/Image.astro";
+import Heading from "../../common/Heading.astro";
+// You'll need to update these image paths with actual DevOps service images
+import AppCloudImage from "../../../assets/services/devops/app-cloud.png";
+import IntegrationImage from "../../../assets/services/devops/integration.png";
+import AutomationImage from "../../../assets/services/devops/automation.png";
+import InfrastructureImage from "../../../assets/services/devops/infrastructure.png";
+import ConsultingImage from "../../../assets/services/devops/consulting.png";
+
+const services = [
+  {
+    service: "Application and Cloud Management",
+    description:
+      "Crafting specialized portals that facilitate streamlined business processes and enhance user engagement.",
+    image: AppCloudImage,
+  },
+  {
+    service: "Integration and Delivery",
+    description:
+      "Designing and developing intuitive, visually appealing websites that bolster your brand's digital presence.",
+    image: IntegrationImage,
+  },
+  {
+    service: "Automation",
+    description:
+      "Building robust e-commerce platforms with all essential features to ensure a seamless shopping experience for your customers.",
+    image: AutomationImage,
+  },
+  {
+    service: "IT Infrastructure and Migration",
+    description:
+      "Offering bespoke applications that are tailored to meet specific business requirements and ensure optimal performance.",
+    image: InfrastructureImage,
+  },
+  {
+    service: "Consulting",
+    description:
+      "Creating responsive and user-friendly designs that captivate audiences and function flawlessly across devices.",
+    image: ConsultingImage,
+  },
+];
+---
+
+<section class="app-max-width py-16">
+  <Heading>
+    <h2 class="text-4xl heading-animation" id="devops-services">
+      DevOps Services That Set Us Apart
+    </h2>
+  </Heading>
+  <p class="text-[#2a2111] text-[16px] my-4 description-animation">
+    We offer a variety of DevOps services and solutions to help our clients optimize their software development processes, including:
+  </p>
+  <article class="grid grid-cols-1 md:grid-cols-3 gap-4 services-container">
+    {
+      services.map((service, index) => {
+        return (
+          <div class="service-card flex flex-col h-[367px]" data-index={index}>
+            <div
+              class={`relative capitalize py-2 border-b border-[#E1E1E1] after:absolute after:left-0 after:bottom-[-1px] after:w-[30px] after:h-[1px] after:bg-primary-blue after:ml-0 service-border flex-grow`}
+            >
+              <h4 class="text-lg font-semibold my-4 service-title">
+                <span class="text-primary-blue service-number">
+                  0{index + 1}
+                </span>
+                {service.service}
+              </h4>
+              <p class="text-[#2a2111] text-sm service-description">
+                {service.description}
+              </p>
+            </div>
+            <div class="service-image-container overflow-hidden mt-auto">
+              <Image
+                src={service.image}
+                alt={service.service}
+                title={service.service}
+                class="w-full h-full mt-4 service-image object-cover"
+                id={`devops-${service.service.toLowerCase().replace(/\s+/g, "-")}`}
+                loading="lazy"
+              />
+            </div>
+          </div>
+        );
+      })
+    }
+  </article>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Main animation timeline
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#devops-services",
+      start: "top 80%",
+    },
+  });
+
+  tl.from("#devops-services", { y: 30, opacity: 0, duration: 0.7 })
+    .from(
+      ".text-\\[\\#2a2111\\].text-\\[16px\\]",
+      { y: 20, opacity: 0, duration: 0.7 },
+      "-=0.4"
+    )
+    .from(
+      ".service-card",
+      {
+        y: 50,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.1,
+      },
+      "-=0.2"
+    );
+
+  // Add hover effect for cards
+  document.querySelectorAll(".grid > div").forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      gsap.to(card, { y: -5, duration: 0.3 });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      gsap.to(card, { y: 0, duration: 0.3 });
+    });
+  });
+</script>

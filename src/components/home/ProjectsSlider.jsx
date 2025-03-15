@@ -31,12 +31,19 @@ const ProjectsSlider = ({ projects = [] }) => {
       image: "/images/projects/ai-generator.jpg",
       technologies: ["Python", "TensorFlow", "AWS"],
     },
+    {
+      id: 4,
+      title: "AI Content Generator",
+      description: "ML-powered tool for automated content creation",
+      image: "/images/projects/ai-generator.jpg",
+      technologies: ["Python", "TensorFlow", "AWS"],
+    },
   ];
 
   const displayedProjects = projects.length > 0 ? projects : defaultProjects;
 
   return (
-    <div className="w-full app-max-width mx-auto py-8 px-4">
+    <div className="w-full mx-auto py-8 px-4">
       <div className="relative">
         <Swiper
           modules={[Navigation, Pagination, A11y, Autoplay]}
@@ -78,7 +85,7 @@ const ProjectCard = ({ project }) => {
     <div className="">
       <div className="w-full">
         <img
-          src={ProjectImage}
+          src={ProjectImage.src}
           alt={project.title}
           className="w-full h-56 object-cover"
         />

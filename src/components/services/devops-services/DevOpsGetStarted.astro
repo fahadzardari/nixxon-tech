@@ -1,0 +1,249 @@
+---
+import GetStartedLayout from "../../common/GetStartedLayout.astro";
+import OurMissionImage from "../../../assets/about-us/our-mission.svg";
+import Image from "astro/components/Image.astro";
+---
+
+<GetStartedLayout>
+  <article
+    class="app-max-width flex flex-col md:flex-row justify-between items-center lg:space-x-16 px-12 md:py-0 text-white"
+    id="devops-cta-container"
+    aria-labelledby="devops-cta-heading"
+  >
+    <div
+      class="w-full md:w-2/5 mb-8 md:mb-0 opacity-0"
+      id="devops-image-container"
+    >
+      <Image
+        src={OurMissionImage}
+        alt="Visual representation of Nixxon Tech's DevOps services"
+        width="500"
+        height="400"
+        loading="lazy"
+        class="w-full"
+        id="devops-image"
+      />
+    </div>
+
+    <div
+      class="w-full md:w-3/5 flex flex-col space-y-4"
+      id="devops-cta-content"
+    >
+      <header>
+        <h2
+          class="text-3xl md:text-4xl font-medium leading-12 opacity-0"
+          id="devops-cta-heading"
+        >
+          A Full-Service DevOps
+        </h2>
+      </header>
+
+      <div
+        class="mt-5 text-sm md:text-[16px] opacity-0"
+        id="devops-cta-description"
+      >
+        <p>
+          You can get tempting digital marketing services from NixxonTech, a
+          full-service digital marketing agency. As a top digital marketing
+          agency, we create novel concepts with extensive expertise to deliver
+          the right outcomes to our clients.
+        </p>
+        <p class="mt-4">
+          As professionals, NixxonTech takes care to utilize various social
+          media platforms to establish trusting and meaningful relationships
+          with our clients. Our decades of advertising experience enable us to
+          provide you with exceptional and quantifiable results that will
+          increase the appeal of your company, boost site traffic, improve
+          sales, and increase conversions. Because we are skilled at saving you
+          both time and money!
+        </p>
+      </div>
+
+      <a
+        href="/contact"
+        id="devops-cta-button"
+        class="mt-6 w-fit inline-block px-12 py-3 leading-5 border border-primary-blue rounded-full text-white text-lg transition
+        shadow-md shadow-primary-blue/50 hover:shadow-xl hover:shadow-primary-blue/80
+        hover:scale-105 duration-300 opacity-0"
+        aria-label="Contact us to discuss your DevOps project"
+      >
+        Have a Plan? Let's Get Started
+      </a>
+    </div>
+  </article>
+</GetStartedLayout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Initialize split text for heading
+    const headingText = new SplitType("#devops-cta-heading", {
+      types: "chars",
+      tagName: "span",
+    });
+
+    // Create main timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#devops-cta-container",
+        start: "top 75%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Image animation - slide and fade in from left
+    tl.to("#devops-image-container", {
+      opacity: 1,
+      x: 0,
+      duration: 0.8,
+      ease: "power2.out",
+    });
+
+    // Add subtle floating animation to image after it appears
+    tl.to(
+      "#devops-image",
+      {
+        y: -10,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      },
+      "-=0.3"
+    );
+
+    // Heading animation - character by character reveal
+    tl.from(
+      headingText.chars,
+      {
+        opacity: 0,
+        y: 30,
+        stagger: 0.03,
+        duration: 0.5,
+        ease: "power3.out",
+      },
+      "-=1.5"
+    );
+    tl.to("#devops-cta-heading", { opacity: 1, duration: 0 }, "<"); // Ensure parent is visible
+
+    // Description paragraph animation
+    tl.to(
+      "#devops-cta-description",
+      {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+
+    // Animate each paragraph as a whole instead of splitting into lines
+    const paragraphs = document.querySelectorAll("#devops-cta-description p");
+    tl.from(
+      paragraphs,
+      {
+        opacity: 0,
+        y: 20,
+        stagger: 0.2, // Stagger between paragraphs
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+
+    // Button animation with bounce effect
+    tl.to(
+      "#devops-cta-button",
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+      },
+      "-=0.3"
+    );
+
+    // Add an attention-grabbing effect to the button after everything loaded
+    tl.to("#devops-cta-button", {
+      scale: 1.05,
+      duration: 0.5,
+      ease: "power1.inOut",
+      repeat: 1,
+      yoyo: true,
+      delay: 0.5,
+    });
+
+    // Replace default animate-pulse with custom pulsing glow
+    const button = document.getElementById("devops-cta-button");
+    if (button) {
+      // Create a subtle pulsing glow effect
+      gsap.to(button, {
+        boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
+        repeat: -1,
+        duration: 2,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 3, // Start after initial animations
+      });
+
+      // Add interactive hover effect
+      button.addEventListener("mouseenter", () => {
+        gsap.killTweensOf(button, "boxShadow"); // Kill ongoing animation
+        gsap.to(button, {
+          scale: 1.05,
+          boxShadow: "0 0 25px 8px rgba(57, 208, 255, 0.7)",
+          duration: 0.3,
+        });
+      });
+
+      button.addEventListener("mouseleave", () => {
+        gsap.to(button, {
+          scale: 1,
+          boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
+          duration: 0.3,
+          onComplete: () => {
+            // Restart the pulsing effect
+            gsap.to(button, {
+              boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
+              repeat: -1,
+              duration: 2,
+              yoyo: true,
+              ease: "sine.inOut",
+            });
+          },
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Initial states for animations */
+  #devops-image-container {
+    transform: translateX(-30px);
+  }
+
+  #devops-cta-heading {
+    transform: translateY(20px);
+  }
+
+  #devops-cta-description {
+    transform: translateY(20px);
+  }
+
+  #devops-cta-button {
+    transform: translateY(30px);
+  }
+
+  /* Line container styles for split text */
+  .line {
+    display: block;
+    overflow: hidden;
+  }
+</style>

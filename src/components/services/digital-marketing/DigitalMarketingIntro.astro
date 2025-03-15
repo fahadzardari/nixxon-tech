@@ -1,0 +1,134 @@
+---
+import Image from "astro/components/Image.astro";
+import IntroImage from "../../../assets/services/digital-marketing/digital-marketing-intro.png";
+import Heading from "../../common/Heading.astro";
+---
+
+<section
+  class="app-max-width flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-12"
+  id="digital-marketing-intro-section"
+>
+  <div
+    class="ml-[calc(-1*(100vw-100%)/2)] w-full md:w-5/6"
+    id="digital-marketing-image-container"
+  >
+    <Image
+      src={IntroImage}
+      alt="Digital Marketing Services Intro"
+      title="Digital Marketing Services Intro"
+      class="w-full my-16"
+      id="digital-marketing-intro"
+      loading="lazy"
+    />
+  </div>
+  <div
+    class="flex flex-col space-y-6 w-full md:w-2/5"
+    id="digital-marketing-intro-content"
+  >
+    <Heading>
+      <h2 class="text-4xl" id="digital-marketing-heading">
+        GET AHEAD OF COMPETITION & LEAD THE CHARTS
+      </h2>
+    </Heading>
+    <p
+      class="text-[16px] text-[#2a2111] opacity-100"
+      id="digital-marketing-paragraph"
+    >
+      Unleash your company's potential with our tactical performance marketing solutions. Drive conversions, generate quality leads, and expand your customer base through targeted campaigns and data-driven strategies. Outperform the competition and achieve remarkable growth, profitability, and ROI with our tailored approach.
+    </p>
+    <button
+      class="w-fit inline-block px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-lg transition
+      shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80 !opacity-100"
+      id="digital-marketing-cta"
+    >
+      Let's Talk
+    </button>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Create a timeline that triggers when the section is in view
+  const introTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#digital-marketing-intro-section",
+      start: "top 70%",
+      toggleActions: "play none none none",
+    },
+  });
+
+  // Add animations to the timeline
+  introTl
+    // Image animation - slides in from left with slight opacity effect
+    .from("#digital-marketing-intro", {
+      x: -50,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+    })
+
+    // Heading animation - slides up and fades in
+    .from(
+      "#digital-marketing-heading",
+      {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.6"
+    ) // Start slightly before the image animation finishes
+
+    // Paragraph animation - fade in with slight upward movement
+    .fromTo(
+      "#digital-marketing-paragraph",
+      {
+        y: 20,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        clearProps: "all", // Important to clear properties after animation
+      },
+      "-=0.5"
+    )
+
+    // Button animation - subtle pop effect
+    .from(
+      "#digital-marketing-cta",
+      {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.6,
+        ease: "back.out(1.5)",
+      },
+      "-=0.4"
+    );
+
+  // Add hover animation for the button
+  const ctaButton = document.querySelector("#digital-marketing-cta");
+  if (ctaButton) {
+    ctaButton.addEventListener("mouseenter", () => {
+      gsap.to("#digital-marketing-cta", {
+        scale: 1.05,
+        duration: 0.3,
+        ease: "power1.out",
+      });
+    });
+
+    ctaButton.addEventListener("mouseleave", () => {
+      gsap.to("#digital-marketing-cta", {
+        scale: 1,
+        duration: 0.3,
+        ease: "power1.out",
+      });
+    });
+  }
+</script>
