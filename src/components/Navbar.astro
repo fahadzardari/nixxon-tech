@@ -57,7 +57,7 @@ const currentPath = Astro.url.pathname;
       </div>
 
       <!-- Desktop Menu -->
-      <ul class="hidden md:flex space-x-8 list-none">
+      <ul class="hidden md:flex md:items-center space-x-8 list-none">
         {
           navItems.map((item) => {
             const isActive =
@@ -71,10 +71,9 @@ const currentPath = Astro.url.pathname;
 
               return (
                 <li class="relative group">
-                  <a
-                    href={item.href}
+                  <span
                     class:list={[
-                      "transition duration-300 flex items-center",
+                      "transition duration-300 flex items-center text-sm font-semibold cursor-pointer",
                       "text-white hover:text-[#39D0FF]",
                       {
                         "text-[#39D0FF] font-medium nav-active":
@@ -86,7 +85,7 @@ const currentPath = Astro.url.pathname;
                     {item.label}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4 ml-1"
+                      class="h-[14px] w-[14px] ml-1"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -96,7 +95,7 @@ const currentPath = Astro.url.pathname;
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </span>
                   <div class="dropdown-menu absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                     <div class="py-1">
                       {item.dropdownItems?.map((dropdownItem) => {
@@ -130,7 +129,7 @@ const currentPath = Astro.url.pathname;
                 <a
                   href={item.href}
                   class:list={[
-                    "transition duration-300",
+                    "transition duration-300 text-sm font-semibold",
                     "text-white hover:text-[#39D0FF]",
                     { "text-[#39D0FF] font-medium nav-active": isActive },
                   ]}
