@@ -12,5 +12,8 @@ export default defineConfig({
   },
   site: 'https://nixxontech.com',
   output: 'static',
-  integrations: [react(), sitemap()]
+  integrations: [react(), sitemap()],
+  devToolbar: {
+    enabled: false
+  }
 });

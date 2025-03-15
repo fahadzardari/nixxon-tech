@@ -23,6 +23,11 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 .hero {
   background-image: url("../assets/bg.webp");
 }

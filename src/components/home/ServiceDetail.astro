@@ -1,17 +1,13 @@
 ---
-import { Image } from "astro:assets";
-import WebDev from "../../assets/home/services/web-dev.svg";
-const {
-  title = "Web Development",
-  description = "Creating user-friendly, quickly loaded websites is crucial to delivering a top-notch experience. A well-developed website makes sure that your design is applied correctly, that your content is accessible, and that it runs smoothly on many browsers and devices. It enables users to interact with your brand successfully, browse with ease, and locate pertinent information with ease.",
-  image = WebDev,
-  alt = "Service Image",
-  link = "/service",
-} = Astro.props;
+import Image from "astro/components/Image.astro";
+
+// Correct way to access the service object
+const { service } = Astro.props;
+const { title, description, image, link, alt } = service;
 ---
 
 <article class="flex flex-col space-y-4">
-  <Image src={image} alt={alt} class="w-full h-[300px] object-cover" />
+  <Image src={image} alt={alt || title} class="w-full h-[300px] object-cover" />
   <h4 class="text-primary-blue text-2xl font-medium">
     {title}
   </h4>

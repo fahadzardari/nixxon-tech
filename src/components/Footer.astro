@@ -13,8 +13,8 @@ import ContactForm from "./home/ContactForm.astro";
 <footer class="bg-[#000000] text-[#ffffff] pt-16">
   <div class="app-max-width flex flex-col">
     <ContactForm />
-    <section class="flex w-full justify-between font-medium py-16">
-      <div class="flex flex-col space-y-8 justify-between w-[40%]">
+    <section class="grid grid-cols-1 gap-y-4 md:gap-x-4 md:grid-cols-4 w-full font-medium py-16">
+      <div class="flex flex-col space-y-8 justify-between">
         <Image src={Logo} alt="Logo" class="w-[233px] h-[48px]" />
         <p class="font-semibold">
           NixxonTech is a creative agency with finest design, development and
@@ -63,7 +63,7 @@ import ContactForm from "./home/ContactForm.astro";
           </a>
         </div>
       </div>
-      <div class="flex flex-col  space-y-4 font-medium">
+      <div class="flex flex-col space-y-4 font-medium">
         <h5 class="text-2xl mb-4">Office</h5>
         <p>Troy St. Ste B, Dothan, AL 36303</p>
         <p class="flex items-center space-x-3">
@@ -75,7 +75,7 @@ import ContactForm from "./home/ContactForm.astro";
           <span>334-123-4567</span>
         </p>
       </div>
-      <nav class="flex flex-col  font-medium">
+      <nav class="flex flex-col font-medium">
         <h5 class="text-2xl mb-4">Menu</h5>
         <ul>
           <li>
@@ -95,23 +95,24 @@ import ContactForm from "./home/ContactForm.astro";
           </li>
         </ul>
       </nav>
-      <nav class="flex flex-col ">
-        <h5 class="text-2xl mb-4">Menu</h5>
+      <nav class="flex flex-col">
+        <h5 class="text-2xl mb-4">Services</h5>
+
         <ul>
           <li>
-            <a href="/about">Home</a>
+            <a href="/services/web-development">Web Development</a>
           </li>
           <li>
-            <a href="/about">About Us</a>
+            <a href="/services">Mobile App Development</a>
           </li>
           <li>
-            <a href="/services">Services</a>
+            <a href="/services">UI/UX Design</a>
           </li>
           <li>
-            <a href="/about">Portfolio</a>
+            <a href="/services">Digital Marketing</a>
           </li>
           <li>
-            <a href="/contact">Contact Us</a>
+            <a href="/services">Animation</a>
           </li>
         </ul>
       </nav>

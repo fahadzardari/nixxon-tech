@@ -1,10 +1,13 @@
 ---
 import ServiceDetail from "./ServiceDetail.astro";
+import WebDevImage from "../../assets/home/services/web-dev.svg";
+
 const services = [
   {
     title: "Web Development",
-    description: "We build websites that are fast, secure, and easy to manage.",
-    image: "/assets/home/services/web-dev.svg",
+    description:
+      "Creating user-friendly, quickly loaded websites is crucial to delivering a top-notch experience. A well-developed website makes sure that your design is applied correctly, that your content is accessible, and that it runs smoothly on many browsers and devices. It enables users to interact with your brand successfully, browse with ease, and locate pertinent information with ease.",
+    image: WebDevImage,
     alt: "Web Development",
     link: "/web-development",
   },
@@ -12,7 +15,7 @@ const services = [
     title: "Mobile Development",
     description:
       "We build mobile apps that are fast, secure, and easy to manage.",
-    image: "/assets/home/services/mobile-dev.svg",
+    image: WebDevImage,
     alt: "Mobile Development",
     link: "/mobile-development",
   },
@@ -20,7 +23,7 @@ const services = [
     title: "UI/UX Design",
     description:
       "We design user interfaces that are easy to use and visually appealing.",
-    image: "/assets/home/services/ui-ux.svg",
+    image: WebDevImage,
     alt: "UI/UX Design",
     link: "/ui-ux-design",
   },
@@ -28,7 +31,7 @@ const services = [
     title: "Digital Marketing",
     description:
       "We help you reach your target audience and grow your business.",
-    image: "/assets/home/services/digital-marketing.svg",
+    image: WebDevImage,
     alt: "Digital Marketing",
     link: "/digital-marketing",
   },
@@ -36,21 +39,21 @@ const services = [
     title: "SEO",
     description:
       "We help you rank higher on search engines and get more traffic.",
-    image: "/assets/home/services/seo.svg",
+    image: WebDevImage,
     alt: "SEO",
     link: "/seo",
   },
   {
     title: "Game Development",
     description: "We build games that are fun, engaging, and addictive.",
-    image: "/assets/home/services/game-dev.svg",
+    image: WebDevImage,
     alt: "Game Development",
     link: "/game-development",
   },
   {
     title: "Business Strategy",
     description: "We help you grow your business and reach your goals.",
-    image: "/assets/home/services/business-strategy.svg",
+    image: WebDevImage,
     alt: "Business Strategy",
     link: "/business-strategy",
   },
@@ -58,7 +61,7 @@ const services = [
     title: "DevOps",
     description:
       "We help you automate your development and deployment processes.",
-    image: "/assets/home/services/devops.svg",
+    image: WebDevImage,
     alt: "DevOps",
     link: "/devops",
   },
@@ -289,6 +292,12 @@ const services = [
           // Timeline for panel transition
           const panelTl = gsap.timeline();
 
+          // First, ensure new panel is ready but hidden
+          newPanel.classList.remove("hidden");
+          newPanel.style.display = "flex";
+          newPanel.style.opacity = 0;
+          newPanel.style.transform = "translateY(20px)";
+
           // Fade out current panel
           panelTl.to(currentPanel, {
             opacity: 0,
@@ -296,27 +305,29 @@ const services = [
             duration: 0.3,
             ease: "power2.in",
             onComplete: () => {
-              // Hide current panel with important display property
-              currentPanel.style.display = 'none';
+              // Hide current panel completely
+              currentPanel.style.display = "none";
               currentPanel.classList.add("hidden");
-
-              // Show new panel but still invisible (opacity 0)
-              newPanel.classList.remove("hidden");
-              newPanel.style.display = 'flex';
-              newPanel.style.opacity = 0;
-              newPanel.style.transform = "translateY(20px)";
-              
-              console.log("After switch - current hidden:", currentPanel.classList.contains("hidden"));
-              console.log("After switch - new visible:", !newPanel.classList.contains("hidden"));
             },
           });
 
-          // Fade in new panel after the previous animation completes
+          // Fade in new panel as a separate animation step
           panelTl.to(newPanel, {
             opacity: 1,
             y: 0,
             duration: 0.5,
             ease: "power2.out",
+            immediateRender: false, // Prevents GSAP from setting initial state too early
+          });
+
+          // Add more debugging
+          panelTl.eventCallback("onComplete", () => {
+            console.log(
+              "Animation complete - panel content:",
+              newPanel.textContent.substring(0, 30).trim()
+            );
+            console.log("Panel display style:", newPanel.style.display);
+            console.log("Panel opacity:", newPanel.style.opacity);
           });
         }
       });
