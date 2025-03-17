@@ -9,12 +9,12 @@ import PhotoshopImage from "../../../assets/services/ui-ux-design/ps.png";
 import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
 ---
 
-<section class="app-max-width py-16">
-  <div class="tech-stack-heading">
+<section class="app-max-width py-8 md:py-16" id="uiux-tech-stack-section">
+  <div class="tech-stack-heading mb-8 md:mb-12">
     <Heading>
-      <h2 class="text-4xl" id="why-nixxon-heading">Technology Stack</h2>
+      <h2 class="text-2xl md:text-4xl" id="why-nixxon-heading">Technology Stack</h2>
     </Heading>
-    <p class="text-[#2a2111] text-[16px] my-4">
+    <p class="text-[#2a2111] text-sm md:text-[16px] my-4">
       The robust technology stack that our web app development team uses yields
       dependable and efficient results. Our responsive web applications are made
       with state-of-the-art tools like MongoDB, Node.js, and React.js. Because
@@ -23,47 +23,57 @@ import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
     </p>
   </div>
 
-  <div class="flex space-x-4 justify-between items-center tech-stack-container">
-    <Image
-      src={FigmaImage}
-      alt="Figma"
-      title="Figma"
-      class="w-full tech-icon"
-      id="nixxon-illustration"
-      loading="lazy"
-    />
-    <Image
-      src={XDImage}
-      alt="Adobe XD"
-      title="Adobe XD"
-      class="w-full tech-icon"
-      id="nixxon-illustration"
-      loading="lazy"
-    />
-    <Image
-      src={PhotoshopImage}
-      alt="Photoshop"
-      title="Photoshop"
-      class="w-full tech-icon"
-      id="nixxon-illustration"
-      loading="lazy"
-    />
-    <Image
-      src={IllustratorImage}
-      alt="Illustrator"
-      title="Illustrator"
-      class="w-full tech-icon"
-      id="nixxon-illustration"
-      loading="lazy"
-    />
-    <Image
-      src={SketchImage}
-      alt="Sketch"
-      title="Sketch"
-      class="w-full tech-icon"
-      id="nixxon-illustration"
-      loading="lazy"
-    />
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 tech-stack-container">
+    <div class="flex justify-center items-center">
+      <Image
+        src={FigmaImage}
+        alt="Figma"
+        title="Figma"
+        class="tech-icon w-16 md:w-24 lg:w-28 h-auto"
+        id="figma-icon"
+        loading="lazy"
+      />
+    </div>
+    <div class="flex justify-center items-center">
+      <Image
+        src={XDImage}
+        alt="Adobe XD"
+        title="Adobe XD"
+        class="tech-icon w-16 md:w-24 lg:w-28 h-auto"
+        id="xd-icon"
+        loading="lazy"
+      />
+    </div>
+    <div class="flex justify-center items-center">
+      <Image
+        src={PhotoshopImage}
+        alt="Photoshop"
+        title="Photoshop"
+        class="tech-icon w-16 md:w-24 lg:w-28 h-auto"
+        id="photoshop-icon"
+        loading="lazy"
+      />
+    </div>
+    <div class="flex justify-center items-center">
+      <Image
+        src={IllustratorImage}
+        alt="Illustrator"
+        title="Illustrator"
+        class="tech-icon w-16 md:w-24 lg:w-28 h-auto"
+        id="illustrator-icon"
+        loading="lazy"
+      />
+    </div>
+    <div class="flex justify-center items-center col-span-2 md:col-span-1">
+      <Image
+        src={SketchImage}
+        alt="Sketch"
+        title="Sketch"
+        class="tech-icon w-16 md:w-24 lg:w-28 h-auto"
+        id="sketch-icon"
+        loading="lazy"
+      />
+    </div>
   </div>
 </section>
 
@@ -82,9 +92,9 @@ import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
       ease: "power2.out",
       scrollTrigger: {
         trigger: ".tech-stack-heading",
-        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
-        toggleActions: "play none none none"
-      }
+        start: "top 80%", 
+        toggleActions: "play none none reset",
+      },
     });
 
     // Staggered reveal for tech icons on scroll
@@ -97,9 +107,28 @@ import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
       ease: "back.out(1.2)",
       scrollTrigger: {
         trigger: ".tech-stack-container",
-        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
-        toggleActions: "play none none none"
-      }
+        start: "top 80%", 
+        toggleActions: "play none none reset",
+      },
+    });
+
+    // Add hover effect to tech icons
+    document.querySelectorAll(".tech-icon").forEach((icon) => {
+      icon.addEventListener("mouseenter", () => {
+        gsap.to(icon, {
+          scale: 1.1,
+          duration: 0.3,
+          ease: "power1.out",
+        });
+      });
+
+      icon.addEventListener("mouseleave", () => {
+        gsap.to(icon, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power1.out",
+        });
+      });
     });
   });
 </script>

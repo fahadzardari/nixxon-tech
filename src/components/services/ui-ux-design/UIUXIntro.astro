@@ -4,41 +4,54 @@ import IntroImage from "../../../assets/services/ui-ux-design/intro.png";
 import Heading from "../../common/Heading.astro";
 ---
 
-<section
-  class="app-max-width flex justify-between items-center space-x-12"
-  id="web-dev-intro-section"
->
-  <div class="ml-[calc(-1*(100vw-100%)/2)] w-full" id="intro-image-container">
-    <Image
-      src={IntroImage}
-      alt="Web Dev Intro"
-      title="Web Dev Intro"
-      class="w-full my-16"
-      id="web-dev-intro"
-      loading="lazy"
-    />
-  </div>
-  <div class="flex flex-col space-y-4 w-1/2" id="intro-content">
-    <Heading>
-      <h2 class="text-4xl" id="why-nixxon-heading">
-        How We Deliver Our UI/UX Design Services
-      </h2>
-    </Heading>
-    <p class="text-[16px] text-[#2a2111]" id="intro-paragraph">
-      UI/UX design services are offered by the skilled group of researchers and
-      designers at NixxonTech. Wireframing, prototyping, visual design, and user
-      research come first. By prioritizing accessibility and responsive design,
-      we ensure a smooth experience across all platforms. We test the website
-      for usability in order to identify and address any issues and produce a
-      better website than anticipated.
-    </p>
-    <button
-      class="w-fit inline-block px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-lg transition
-  shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80"
-      id="cta-button-ui-ux"
+<section class="py-8 md:py-16 relative" id="web-dev-intro-section">
+  <!-- Centered container for alignment -->
+  <div
+    class="app-max-width w-full flex flex-col lg:flex-row justify-between items-center"
+  >
+    <!-- Left content with negative margin to extend to screen edge -->
+    <div
+      class="w-full order-2 lg:order-1 md:ml-[calc(-1*(100vw-100%)/2)]"
+      id="intro-image-container"
     >
-      Let's Talk
-    </button>
+      <Image
+        src={IntroImage}
+        alt="UI/UX Design Intro"
+        title="UI/UX Design Intro"
+        class="w-full my-2 md:my-16"
+        id="web-dev-intro"
+        loading="lazy"
+      />
+    </div>
+    <!-- Right content -->
+    <div
+      class="w-full lg:w-1/2 flex flex-col space-y-4 py-8 md:py-0 lg:pl-8 order-1 lg:order-2"
+      id="intro-content"
+    >
+      <Heading>
+        <h2 class="text-3xl md:text-4xl" id="why-nixxon-heading">
+          How We Deliver Our UI/UX Design Services
+        </h2>
+      </Heading>
+      <p
+        class="text-base md:text-[16px] text-[#2a2111]"
+        id="intro-paragraph"
+      >
+        UI/UX design services are offered by the skilled group of researchers and
+        designers at NixxonTech. Wireframing, prototyping, visual design, and user
+        research come first. By prioritizing accessibility and responsive design,
+        we ensure a smooth experience across all platforms. We test the website
+        for usability in order to identify and address any issues and produce a
+        better website than anticipated.
+      </p>
+      <button
+        class="w-fit inline-block px-8 md:px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-base md:text-lg transition
+    shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80"
+        id="cta-button-ui-ux"
+      >
+        Let's Talk
+      </button>
+    </div>
   </div>
 </section>
 
@@ -48,20 +61,27 @@ import Heading from "../../common/Heading.astro";
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // Make sure button is visible by default
+  document.querySelector("#cta-button-ui-ux").style.opacity = "1";
+
   // Create a timeline that triggers when the section is in view
   const introTl = gsap.timeline({
     scrollTrigger: {
       trigger: "#web-dev-intro-section",
       start: "top 70%",
-      toggleActions: "play none none none",
+      toggleActions: "play none none reset", // Changed to reset on scroll out
     },
   });
 
-  // Add animations to the timeline
+  // Determine if desktop or mobile
+  const isDesktop = window.innerWidth >= 1024;
+
+  // Add animations to the timeline with responsive behavior
   introTl
-    // Image animation - slides in from left with slight opacity effect
+    // Image animation - slides in from left on desktop, up on mobile
     .from("#web-dev-intro", {
-      x: -50,
+      x: isDesktop ? -50 : 0,
+      y: isDesktop ? 0 : 30,
       opacity: 0,
       duration: 1,
       ease: "power2.out",
@@ -77,7 +97,7 @@ import Heading from "../../common/Heading.astro";
         ease: "power2.out",
       },
       "-=0.6"
-    ) // Start slightly before the image animation finishes
+    )
 
     // Paragraph animation - fade in with slight upward movement
     .from(
@@ -91,14 +111,19 @@ import Heading from "../../common/Heading.astro";
       "-=0.5"
     )
 
-    // Button animation - subtle pop effect
-    .from(
+    // Button animation - modified to ensure visibility
+    .fromTo(
       "#cta-button-ui-ux",
       {
         scale: 0.9,
         opacity: 0,
+      },
+      {
+        scale: 1,
+        opacity: 1,
         duration: 0.6,
         ease: "back.out(1.5)",
+        clearProps: "opacity,scale", // Important: clears properties after animation
       },
       "-=0.4"
     );
@@ -122,4 +147,9 @@ import Heading from "../../common/Heading.astro";
       });
     });
   }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
+  });
 </script>

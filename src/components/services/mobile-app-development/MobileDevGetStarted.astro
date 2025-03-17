@@ -47,7 +47,8 @@ import Image from "astro/components/Image.astro";
       <a
         href="/contact"
         id="mobile-dev-cta-button"
-        class="mt-6 w-fit inline-block px-12 py-3 leading-5 border border-primary-blue rounded-full text-white text-lg transition
+        class="mt-6 w-fit inline-block px-12 py-3 leading-5 border border-primary-blue rounded-full text-white 
+text-xs md:text-lg transition
         shadow-md shadow-primary-blue/50 hover:shadow-xl hover:shadow-primary-blue/80
         hover:scale-105 duration-300 opacity-0"
         aria-label="Contact us to discuss your mobile app development project"
@@ -69,7 +70,7 @@ import Image from "astro/components/Image.astro";
   document.addEventListener("DOMContentLoaded", () => {
     // Initialize split text for heading
     const headingText = new SplitType("#mobile-dev-cta-heading", {
-      types: "chars",
+      types: "words",
       tagName: "span",
     });
 
@@ -110,11 +111,11 @@ import Image from "astro/components/Image.astro";
 
     // Heading animation - character by character reveal
     tl.from(
-      headingText.chars,
+      headingText.words,
       {
         opacity: 0,
         y: 30,
-        stagger: 0.03,
+        stagger: 0.05,
         duration: 0.5,
         ease: "power3.out",
       },

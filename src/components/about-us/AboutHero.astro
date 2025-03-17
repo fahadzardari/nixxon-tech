@@ -4,28 +4,34 @@ import Art from "../../assets/about-us/art.svg";
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center px-4 md:px-16 min-h-screen w-full pt-16"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center px-4 md:px-16 min-h-screen w-full pt-16 overflow-hidden"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
   >
   </div>
 
-  <!-- Left Side Text -->
+  <!-- Container with relative positioning -->
   <div
-    class="app-max-width flex text-white items-center justify-between relative"
+    class="app-max-width relative md:h-[60vh] flex md:flex-row items-center w-full"
   >
-    <div id="hero-text" class="opacity-0">
-      <div class="relative z-10">
-        <h1 class="text-5xl font-bold capitalize">About NixxonTech</h1>
-        <p class="mt-4 text-md xl:text-xl opacity-80">
+    <!-- Left Side Text - Front Layer -->
+    <div
+      id="hero-text"
+      class="relative z-50 opacity-0 w-full md:w-1/2 text-white"
+    >
+      <div class="w-full relative">
+        <h1 class="text-4xl md:text-5xl font-bold capitalize">
+          About NixxonTech
+        </h1>
+        <p class="mt-4 text-sm md:text-md xl:text-xl opacity-80">
           Through the use of our digital age expertise, we help you bring your
           vision to life and offer your business impactful solutions.
         </p>
         <a
           href="/contact"
           id="hero-cta"
-          class="mt-6 inline-block px-8 py-3 border border-primary-blue rounded-full text-white text-lg transition
+          class="mt-6 inline-block px-8 py-3 border border-primary-blue rounded-full text-white text-sm md:text-lg transition
            shadow-md shadow-primary-blue/50 hover:shadow-xl hover:shadow-primary-blue/80
            hover:scale-105 duration-300"
         >
@@ -34,13 +40,17 @@ import Art from "../../assets/about-us/art.svg";
       </div>
     </div>
 
-    <!-- Right Side Image -->
+    <!-- Right Side Image - Absolute positioning to extend beyond container -->
     <div
       id="hero-image"
-      class="hidden md:block md:relative w-full z-0 opacity-0"
+      class="hidden md:block absolute right-[-10%] top-0 bottom-0 w-2/3 z-0 opacity-0"
     >
-      <div id="hero-image-container" class="w-full">
-        <img src={Art.src} alt="3D VR Person" class="w-full h-screen" />
+      <div id="hero-image-container" class="w-full h-full">
+        <img
+          src={Art.src}
+          alt="3D VR Person"
+          class="w-full h-full object-contain object-center-right"
+        />
       </div>
     </div>
   </div>
@@ -54,6 +64,25 @@ import Art from "../../assets/about-us/art.svg";
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Initialize based on screen size
+    const updateLayout = () => {
+      const isWideScreen = window.innerWidth >= 1536; // 2xl breakpoint
+      const isDesktop = window.innerWidth >= 1024; // lg breakpoint
+
+      // Adjust image position based on screen size - with safeguards for screen edge
+      if (document.querySelector("#hero-image")) {
+        document.querySelector("#hero-image").style.right = isWideScreen
+          ? "-20%"
+          : isDesktop
+            ? "-15%"
+            : "-10%";
+      }
+    };
+
+    // Run on load and resize
+    updateLayout();
+    window.addEventListener("resize", updateLayout);
+
     // Initial animations (equivalent to initial + animate in Framer)
     gsap.fromTo(
       "#hero-text",
@@ -190,3 +219,37 @@ import Art from "../../assets/about-us/art.svg";
     }
   });
 </script>
+
+<style>
+  /* Custom styles for extended image */
+  .object-center-right {
+    object-position: 60% center;
+  }
+
+  /* Add overflow hidden to main section to prevent horizontal scrollbar */
+  section {
+    overflow-x: hidden;
+  }
+
+  @media (min-width: 768px) {
+    #hero-image img {
+      max-width: none;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    #hero-image {
+      right: -15%; /* Reduced value to keep image visible */
+    }
+    .object-center-right {
+      object-position: 70% center;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    #hero-image {
+      right: -20%; /* Reduced value to keep image visible */
+    }
+  }
+</style>

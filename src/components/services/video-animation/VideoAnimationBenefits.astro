@@ -82,7 +82,7 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
   document.addEventListener("DOMContentLoaded", () => {
     // Split heading text for character animation
     const headingText = new SplitType("#video-animation-process-heading", {
-      types: "chars",
+      types: "words",
       tagName: "span",
     });
 
@@ -96,11 +96,11 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
     });
 
     // Heading animation
-    tl.from(headingText.chars, {
+    tl.from(headingText.words, {
       opacity: 0,
       y: 20,
       duration: 0.6,
-      stagger: 0.02,
+      stagger: 0.05,
       ease: "power2.out",
     });
 

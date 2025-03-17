@@ -11,53 +11,170 @@ import PinterestIcon from "../../assets/contact-us/pinterest.png";
 import YoutubeIcon from "../../assets/contact-us/youtube.png";
 ---
 
-<section class="flex items-center justify-between app-max-width py-16">
-  <div class="w-3/4 flex flex-col space-y-12">
+<section class="flex flex-col md:flex-row items-center md:justify-between app-max-width py-8 md:py-16 px-4 md:px-0 gap-8 md:gap-0" id="contact-info-section">
+  <div class="w-full md:w-3/4 flex flex-col space-y-8 md:space-y-12">
     <div>
-      <h2 class="text-primary-blue text-[38px] font-semibold">
+      <h2 class="text-primary-blue text-2xl md:text-[38px] font-semibold" id="contact-heading">
         Contact Information
       </h2>
-      <p class="text-lg">
+      <p class="text-base md:text-lg" id="contact-description">
         Fill up the form and Our Team will get back to you within 24 hours.
       </p>
     </div>
-    <div class="flex space-x-6 text-[18px] font-semibold">
-      <div>
-        <h3 class="text-primary-blue mb-4">Call Us At:</h3>
+    <div class="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0 text-base md:text-[18px] font-semibold" id="contact-details-container">
+      <div class="contact-detail-item">
+        <h3 class="text-primary-blue mb-2 md:mb-4">Call Us At:</h3>
         <p class="flex items-center space-x-2 font-medium">
-          <Image src={CallIcon} alt="Call Icon" class="w-6 inline-block" />
+          <Image src={CallIcon} alt="Call Icon" class="w-5 md:w-6 inline-block" />
           <a href="tel:+1234567890">+1 234 567 890</a>
         </p>
       </div>
-      <div>
-        <h3 class="text-primary-blue mb-4">Email Us At:</h3>
+      <div class="contact-detail-item">
+        <h3 class="text-primary-blue mb-2 md:mb-4">Email Us At:</h3>
         <p class="flex items-center space-x-2 font-medium">
-          <Image src={EmailIcon} alt="Email Icon" class="w-6 inline-block" />
-          <a href="mailto:info@nixxontect.com">info@nixxontech.com</a>
+          <Image src={EmailIcon} alt="Email Icon" class="w-5 md:w-6 inline-block" />
+          <a href="mailto:info@nixxontech.com">info@nixxontech.com</a>
         </p>
       </div>
-      <div>
-        <h3 class="text-primary-blue mb-4">Visit Us At:</h3>
+      <div class="contact-detail-item">
+        <h3 class="text-primary-blue mb-2 md:mb-4">Visit Us At:</h3>
         <p class="flex items-center space-x-2 font-medium">
           <Image
             src={LocationIcon}
             alt="Location Icon"
-            class="w-6 inline-block"
+            class="w-5 md:w-6 inline-block"
           />
           <span> Troy St. Ste B, Dothan, AL 36303 </span>
         </p>
       </div>
     </div>
     <div>
-      <p class="text-[18px] text-primary-blue font-semibold mb-4">Follow Us on:</p>
-      <div class="flex space-x-4">
-        <Image src={FacebookIcon} alt="Facebook" class="w-8" />
-        <Image src={InstagramIcon} alt="Instagram" class="w-8" />
-        <Image src={LinkedInIcon} alt="LinkedIn" class="w-8" />
-        <Image src={PinterestIcon} alt="Pinterest" class="w-8" />
-        <Image src={YoutubeIcon} alt="Youtube" class="w-8" />
+      <p class="text-base md:text-[18px] text-primary-blue font-semibold mb-2 md:mb-4" id="social-heading">Follow Us on:</p>
+      <div class="flex space-x-4" id="social-icons-container">
+        <Image src={FacebookIcon} alt="Facebook" class="w-6 md:w-8 social-icon" />
+        <Image src={InstagramIcon} alt="Instagram" class="w-6 md:w-8 social-icon" />
+        <Image src={LinkedInIcon} alt="LinkedIn" class="w-6 md:w-8 social-icon" />
+        <Image src={PinterestIcon} alt="Pinterest" class="w-6 md:w-8 social-icon" />
+        <Image src={YoutubeIcon} alt="Youtube" class="w-6 md:w-8 social-icon" />
       </div>
     </div>
   </div>
-  <Image src={Art} alt="Contact Us" class="w-96" />
+  <Image src={Art} alt="Contact Us" class="w-full max-w-[250px] md:max-w-none md:w-96" id="contact-illustration" />
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Determine if desktop or mobile
+  const isDesktop = window.innerWidth >= 768;
+
+  // Create a timeline that triggers when the section is in view
+  const contactTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#contact-info-section",
+      start: "top 75%",
+      toggleActions: "play none none reset",
+    },
+  });
+
+  // Add animations to the timeline with responsive behavior
+  contactTl
+    // Heading animation
+    .from("#contact-heading", {
+      x: isDesktop ? -50 : 0,
+      y: isDesktop ? 0 : 30,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+    })
+
+    // Description animation
+    .from(
+      "#contact-description",
+      {
+        opacity: 0,
+        y: 20,
+        duration: 0.7,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    )
+
+    // Contact details animation - staggered
+    .from(
+      ".contact-detail-item",
+      {
+        y: 30,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "power2.out",
+      },
+      "-=0.4"
+    )
+
+    // Social heading
+    .from(
+      "#social-heading",
+      {
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.2"
+    )
+
+    // Social icons animation - staggered
+    .from(
+      ".social-icon",
+      {
+        scale: 0,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "back.out(1.7)",
+      },
+      "-=0.3"
+    )
+
+    // Illustration animation
+    .from(
+      "#contact-illustration",
+      {
+        x: isDesktop ? 50 : 0,
+        y: isDesktop ? 0 : 30,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+      },
+      "-=1.2"
+    );
+
+  // Add hover animations for social icons
+  document.querySelectorAll(".social-icon").forEach((icon) => {
+    icon.addEventListener("mouseenter", () => {
+      gsap.to(icon, {
+        scale: 1.2,
+        duration: 0.3,
+        ease: "power1.out",
+      });
+    });
+
+    icon.addEventListener("mouseleave", () => {
+      gsap.to(icon, {
+        scale: 1,
+        duration: 0.3,
+        ease: "power1.out",
+      });
+    });
+  });
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
+  });
+</script>

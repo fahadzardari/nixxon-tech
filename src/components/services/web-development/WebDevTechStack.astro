@@ -4,25 +4,108 @@ import TechStackImage from "../../../assets/services/web-dev/tech-stack.png";
 import Image from "astro/components/Image.astro";
 ---
 
-<section class="app-max-width py-16">
+<section class="app-max-width py-16" id="tech-stack-section">
   <Heading>
-    <h2 class="text-4xl" id="why-nixxon-heading">
-      Our Technology Stack for Web App Development
+    <h2 class="text-2xl md:text-4xl" id="web-app-tech-stack">
+      Our Technology Stack for Web App Development
     </h2>
   </Heading>
-  <p class="text-[#2a2111] text-[16px] my-16">
+  <p
+    class="text-[#2a2111] text-sm md:text-[16px] my-4 md:my-8"
+    id="tech-stack-description"
+  >
     The robust technology stack that our web app development team uses yields
     dependable and efficient results. Our responsive web applications are made
     with state-of-the-art tools like MongoDB, Node.js, and React.js. Because we
     know HTML5, CSS3, and JavaScript inside and out, we can guarantee flawless
     user experiences across a variety of platforms and software.
   </p>
-  <Image
-    src={TechStackImage}
-    alt="Tech Stack"
-    title="Tech Stack"
-    class="w-full my-16"
-    id="nixxon-illustration"
-    loading="lazy"
-  />
+  <div id="tech-stack-image-container">
+    <Image
+      src={TechStackImage}
+      alt="Tech Stack"
+      title="Tech Stack"
+      class="w-full my-16"
+      id="tech-stack-image"
+      loading="lazy"
+    />
+  </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Create a timeline that triggers when the section is in view
+  const techStackTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#tech-stack-section",
+      start: "top 70%",
+      toggleActions: "play none none reset",
+    },
+  });
+
+  // Determine if desktop or mobile
+  const isDesktop = window.innerWidth >= 768;
+
+  // Add animations to the timeline
+  techStackTl
+    // Heading animation with slight slide from left
+    .from("#web-app-tech-stack", {
+      x: isDesktop ? -40 : -20,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out",
+    })
+
+    // Description paragraph animation with fade in and slide up
+    .from(
+      "#tech-stack-description",
+      {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.4"
+    )
+
+    // Tech stack image animation with scale and opacity
+    .from(
+      "#tech-stack-image",
+      {
+        scale: 0.9,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+
+  // Optional: Add a subtle hover effect on the tech stack image
+  const techStackImage = document.getElementById("tech-stack-image");
+  if (techStackImage) {
+    techStackImage.addEventListener("mouseenter", () => {
+      gsap.to("#tech-stack-image", {
+        scale: 1.02,
+        duration: 0.5,
+        ease: "power1.out",
+      });
+    });
+
+    techStackImage.addEventListener("mouseleave", () => {
+      gsap.to("#tech-stack-image", {
+        scale: 1,
+        duration: 0.5,
+        ease: "power1.out",
+      });
+    });
+  }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
+  });
+</script>

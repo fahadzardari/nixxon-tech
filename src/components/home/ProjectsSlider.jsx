@@ -13,28 +13,32 @@ const ProjectsSlider = ({ projects = [] }) => {
     {
       id: 1,
       title: "E-Commerce Platform",
-      description: "A full-stack e-commerce solution with payment integration",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.",
       image: ProjectImage,
       technologies: ["React", "Node.js", "MongoDB"],
     },
     {
       id: 2,
       title: "Mobile Banking App",
-      description: "Secure banking application with biometric authentication",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.",
       image: "/images/projects/banking.jpg",
       technologies: ["React Native", "Firebase", "Redux"],
     },
     {
       id: 3,
       title: "AI Content Generator",
-      description: "ML-powered tool for automated content creation",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.",
       image: "/images/projects/ai-generator.jpg",
       technologies: ["Python", "TensorFlow", "AWS"],
     },
     {
       id: 4,
       title: "AI Content Generator",
-      description: "ML-powered tool for automated content creation",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.",
       image: "/images/projects/ai-generator.jpg",
       technologies: ["Python", "TensorFlow", "AWS"],
     },
@@ -43,17 +47,16 @@ const ProjectsSlider = ({ projects = [] }) => {
   const displayedProjects = projects.length > 0 ? projects : defaultProjects;
 
   return (
-    <div className="w-full mx-auto py-8 px-4">
+    <div className="max-w-[80vw] lg:max-w-[1280px] mx-auto py-8 px-4 lg:px-4">
       <div className="relative">
         <Swiper
-          modules={[Navigation, Pagination, A11y, Autoplay]}
+          modules={[Navigation, A11y, Autoplay]}
           spaceBetween={30}
           slidesPerView={1}
-          navigation
-          pagination={{ clickable: true }}
+          // pagination={{ clickable: true }}
           loop={true}
           autoplay={{
-            delay: 5000,
+            delay: 3000,
             disableOnInteraction: false,
           }}
           breakpoints={{
@@ -67,7 +70,7 @@ const ProjectsSlider = ({ projects = [] }) => {
               slidesPerView: 3,
             },
           }}
-          className="pb-14" // Add padding bottom for pagination
+          // className="pb-14" // Add padding bottom for pagination
         >
           {displayedProjects.map((project) => (
             <SwiperSlide key={project.id}>
@@ -82,17 +85,24 @@ const ProjectsSlider = ({ projects = [] }) => {
 
 const ProjectCard = ({ project }) => {
   return (
-    <div className="">
+    <div className="h-[420px] flex flex-col bg-white overflow-hidden ">
       <div className="w-full">
         <img
           src={ProjectImage.src}
           alt={project.title}
-          className="w-full h-56 object-cover"
+          className="h-56 object-cover rounded-lg"
         />
       </div>
-      <div className="p-6 flex flex-col">
-        <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-        <p className="text-gray-600 mb-4 flex-grow">{project.description}</p>
+      <div className="flex flex-col flex-grow py-6">
+        <h3 className="text-2xl mb-2">{project.title}</h3>
+        <p className="text-gray-600 mb-4 text-sm line-clamp-3">
+          {project.description}
+        </p>
+        <div className="mt-auto flex items-center justify-between">
+          <button className="text-primary-blue underline hover:underline">
+            Read more
+          </button>
+        </div>
       </div>
     </div>
   );

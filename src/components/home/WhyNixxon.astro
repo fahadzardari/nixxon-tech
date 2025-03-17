@@ -79,7 +79,7 @@ import Image from "astro/components/Image.astro";
   document.addEventListener("DOMContentLoaded", () => {
     // Split heading text for character animation
     const headingText = new SplitType("#why-nixxon-heading", {
-      types: "chars",
+      types: "words",
       tagName: "span",
     });
 
@@ -93,11 +93,11 @@ import Image from "astro/components/Image.astro";
     });
 
     // Heading animation
-    tl.from(headingText.chars, {
+    tl.from(headingText.words, {
       opacity: 0,
       y: 20,
       duration: 0.6,
-      stagger: 0.02,
+      stagger: 0.05,
       ease: "power2.out",
     });
 

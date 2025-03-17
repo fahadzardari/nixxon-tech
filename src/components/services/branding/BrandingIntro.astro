@@ -4,49 +4,53 @@ import IntroImage from "../../../assets/services/branding/branding-intro.png";
 import Heading from "../../common/Heading.astro";
 ---
 
-<section
-  class="app-max-width flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-12"
-  id="branding-intro-section"
->
+<section class="py-8 md:py-16 relative" id="branding-intro-section">
+  <!-- Centered container for alignment -->
   <div
-    class="ml-[calc(-1*(100vw-100%)/2)] w-full md:w-4/5"
-    id="branding-image-container"
+    class="app-max-width w-full flex flex-col lg:flex-row justify-between items-center"
   >
-    <Image
-      src={IntroImage}
-      alt="Branding Services Intro"
-      title="Branding Services Intro"
-      class="w-full my-16"
-      id="branding-intro"
-      loading="lazy"
-    />
-  </div>
-  <div
-    class="flex flex-col space-y-6 w-full md:w-2/5"
-    id="branding-intro-content"
-  >
-    <Heading>
-      <h2 class="text-4xl" id="branding-heading">
-        Eye-catching identity design
-      </h2>
-    </Heading>
-    <p
-      class="text-[16px] text-[#2a2111] opacity-100"
-      id="branding-intro-paragraph"
+    <!-- Left content with negative margin to extend to screen edge -->
+    <div
+      class="w-full order-2 lg:order-1 md:ml-[calc(-1*(100vw-100%)/2)]"
+      id="branding-image-container"
     >
-      Our company is skilled in producing striking identity designs that
-      encapsulate the spirit of our clients' businesses and make an impact. We
-      create visually appealing and memorable brand identities that successfully
-      convey our clients' essential message and values thanks to our expert
-      graphic designers and painstaking attention to detail.
-    </p>
-    <button
-      class="w-fit inline-block px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-lg transition
-      shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80 !opacity-100"
-      id="cta-button-branding"
+      <Image
+        src={IntroImage}
+        alt="Branding Services Intro"
+        title="Branding Services Intro"
+        class="w-full my-2 md:my-16"
+        id="branding-intro"
+        loading="lazy"
+      />
+    </div>
+    <!-- Right content -->
+    <div
+      class="w-full lg:w-1/2 flex flex-col space-y-4 py-8 md:py-0 lg:pl-8 order-1 lg:order-2"
+      id="branding-intro-content"
     >
-      Let's Talk
-    </button>
+      <Heading>
+        <h2 class="text-3xl md:text-4xl" id="branding-heading">
+          Eye-catching identity design
+        </h2>
+      </Heading>
+      <p
+        class="text-base md:text-[16px] text-[#2a2111]"
+        id="branding-intro-paragraph"
+      >
+        Our company is skilled in producing striking identity designs that
+        encapsulate the spirit of our clients' businesses and make an impact. We
+        create visually appealing and memorable brand identities that successfully
+        convey our clients' essential message and values thanks to our expert
+        graphic designers and painstaking attention to detail.
+      </p>
+      <button
+        class="w-fit inline-block px-8 md:px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-base md:text-lg transition
+        shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80"
+        id="cta-button-branding"
+      >
+        Let's Talk
+      </button>
+    </div>
   </div>
 </section>
 
@@ -56,20 +60,27 @@ import Heading from "../../common/Heading.astro";
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // Make sure button is visible by default
+  document.querySelector("#cta-button-branding").style.opacity = "1";
+
   // Create a timeline that triggers when the section is in view
   const introTl = gsap.timeline({
     scrollTrigger: {
       trigger: "#branding-intro-section",
       start: "top 70%",
-      toggleActions: "play none none none",
+      toggleActions: "play none none reset", // Changed to reset on scroll out
     },
   });
 
-  // Add animations to the timeline
+  // Determine if desktop or mobile
+  const isDesktop = window.innerWidth >= 1024;
+
+  // Add animations to the timeline with responsive behavior
   introTl
-    // Image animation - slides in from left with slight opacity effect
+    // Image animation - slides in from left on desktop, up on mobile
     .from("#branding-intro", {
-      x: -50,
+      x: isDesktop ? -50 : 0,
+      y: isDesktop ? 0 : 30,
       opacity: 0,
       duration: 1,
       ease: "power2.out",
@@ -85,33 +96,33 @@ import Heading from "../../common/Heading.astro";
         ease: "power2.out",
       },
       "-=0.6"
-    ) // Start slightly before the image animation finishes
+    )
 
     // Paragraph animation - fade in with slight upward movement
-    .fromTo(
+    .from(
       "#branding-intro-paragraph",
       {
         y: 20,
         opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
         duration: 0.8,
         ease: "power2.out",
-        clearProps: "all", // Important to clear properties after animation
       },
       "-=0.5"
     )
 
-    // Button animation - subtle pop effect
-    .from(
+    // Button animation - modified to ensure visibility
+    .fromTo(
       "#cta-button-branding",
       {
         scale: 0.9,
         opacity: 0,
+      },
+      {
+        scale: 1,
+        opacity: 1,
         duration: 0.6,
         ease: "back.out(1.5)",
+        clearProps: "opacity,scale", // Important: clears properties after animation
       },
       "-=0.4"
     );
@@ -135,4 +146,9 @@ import Heading from "../../common/Heading.astro";
       });
     });
   }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
+  });
 </script>

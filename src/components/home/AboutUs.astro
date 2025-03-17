@@ -5,7 +5,7 @@ import AboutUsVideoImage from "../../assets/home/about/video.png";
 import GIFImage from "../../assets/home/about/gif.gif";
 ---
 
-<section class="app-max-width py-16">
+<section class="app-max-width py-16" id="about-section">
   <Heading>
     <h2 id="about-us-heading" class="text-4xl font-medium">
       Get Ahead of the Competition <br />
@@ -13,7 +13,7 @@ import GIFImage from "../../assets/home/about/gif.gif";
     </h2>
   </Heading>
 
-  <p class="my-4">
+  <p class="my-4" id="about-paragraph">
     Reach out beyond the crowd and leave a lasting impression with our
     assistance. You can boost revenue, bring in more customers, and fortify your
     brand with our tailored solutions. With confidence, your vision can be
@@ -24,10 +24,12 @@ import GIFImage from "../../assets/home/about/gif.gif";
     src={AboutUsVideoImage}
     alt={"About Us"}
     class={"w-full max-h-[640px] mx-auto my-8"}
+    id="main-about-image"
   />
 
   <div
     class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6 items-center justify-between mt-16"
+    id="about-bottom-section"
   >
     <div class="w-full md:w-1/2">
       <Image
@@ -37,7 +39,10 @@ import GIFImage from "../../assets/home/about/gif.gif";
         id={"gif-image"}
       />
     </div>
-    <div id="right-column-about-us" class="w-full md:w-1/2 flex flex-col space-y-4">
+    <div
+      id="right-column-about-us"
+      class="w-full md:w-1/2 flex flex-col space-y-4"
+    >
       <h4 class="text-lg">About Us</h4>
       <h3 class="text-primary-blue text-4xl font-medium capitalize">
         Mission to elevate business growth
@@ -63,25 +68,50 @@ import GIFImage from "../../assets/home/about/gif.gif";
   // Register plugins
   gsap.registerPlugin(ScrollTrigger);
 
-  export function initAboutAnimations() {
-    // Main heading animation with SplitType instead of SplitText
+  // Make sure elements are visible initially (prevents white space issue on mobile)
+  document.addEventListener("DOMContentLoaded", () => {
+    // Set initial visibility
+    gsap.set("#about-section *", { visibility: "visible", opacity: 1 });
+    
+    // Initialize animations after a slight delay to ensure proper rendering
+    setTimeout(initAboutAnimations, 100);
+    
+    // Force a refresh when page is fully loaded
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh(true);
+    });
+  });
+
+  function initAboutAnimations() {
+    // Detect mobile viewport
+    const isMobile = window.innerWidth < 768;
+    
+    // Mobile-specific trigger offsets
+    const mobileOffset = isMobile ? "90%" : "80%";
+
+    // Main heading animation
     const heading = document.querySelector("#about-us-heading");
     if (heading) {
       const splitHeading = new SplitType(heading, { types: "lines" });
       gsap.from(splitHeading.lines, {
         scrollTrigger: {
           trigger: heading,
-          start: "top 80%",
+          start: `top ${mobileOffset}`,
+          once: isMobile, // Mobile animation runs only once
         },
         opacity: 0,
-        y: 50,
+        y: 30, // Reduced movement on mobile
         stagger: 0.2,
         duration: 0.8,
       });
 
-      // Highlight blue text with different animation
+      // Highlight blue text
       gsap.from("#about-us-heading span", {
-        scrollTrigger: { trigger: heading },
+        scrollTrigger: { 
+          trigger: heading,
+          start: `top ${mobileOffset}`,
+          once: isMobile,
+        },
         opacity: 0,
         y: 20,
         delay: 0.6,
@@ -91,10 +121,11 @@ import GIFImage from "../../assets/home/about/gif.gif";
     }
 
     // Paragraph fade-in
-    gsap.from(".app-max-width > p", {
+    gsap.from("#about-paragraph", {
       scrollTrigger: {
-        trigger: ".app-max-width > p",
-        start: "top 85%",
+        trigger: "#about-paragraph",
+        start: `top ${mobileOffset}`,
+        once: isMobile,
       },
       opacity: 0,
       y: 30,
@@ -102,15 +133,14 @@ import GIFImage from "../../assets/home/about/gif.gif";
       delay: 0.2,
     });
 
-    // Main image reveal with mask effect
-    const mainImage = document.querySelector('img[alt="About Us"]');
+    // Main image reveal
+    const mainImage = document.querySelector("#main-about-image");
     if (mainImage) {
-      // Create container for mask effect
-      gsap.set(mainImage, { autoAlpha: 1 });
       gsap.from(mainImage, {
         scrollTrigger: {
           trigger: mainImage,
-          start: "top 75%",
+          start: `top ${mobileOffset}`,
+          once: isMobile,
         },
         scale: 1.05,
         opacity: 0,
@@ -122,31 +152,34 @@ import GIFImage from "../../assets/home/about/gif.gif";
     // Bottom section animations
     const gifImage = document.querySelector("#gif-image");
     if (gifImage) {
-      // GIF image reveal with shape animation
+      // GIF image reveal
       gsap.from(gifImage, {
         scrollTrigger: {
-          trigger: gifImage,
-          start: "top 80%",
+          trigger: "#about-bottom-section",
+          start: `top ${mobileOffset}`,
+          once: isMobile,
         },
-        x: -50,
+        x: isMobile ? -20 : -50, // Smaller movement on mobile
         opacity: 0,
         duration: 1,
         ease: "power3.out",
       });
 
-      // Add subtle floating animation after reveal
-      gsap.to(gifImage, {
-        scrollTrigger: {
-          trigger: gifImage,
-          start: "top 80%",
-        },
-        y: "10px",
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: 1,
-      });
+      // Add subtle floating animation - only on desktop
+      if (!isMobile) {
+        gsap.to(gifImage, {
+          scrollTrigger: {
+            trigger: gifImage,
+            start: `top ${mobileOffset}`,
+          },
+          y: "10px",
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 1,
+        });
+      }
     }
 
     // Right column content staggered reveal
@@ -156,7 +189,8 @@ import GIFImage from "../../assets/home/about/gif.gif";
       gsap.from(elements, {
         scrollTrigger: {
           trigger: rightColumn,
-          start: "top 75%",
+          start: `top ${mobileOffset}`,
+          once: isMobile,
         },
         y: 30,
         opacity: 0,
@@ -168,7 +202,6 @@ import GIFImage from "../../assets/home/about/gif.gif";
       // Special animation for the "Read More" link
       const readMoreLink = rightColumn.querySelector("a");
       if (readMoreLink) {
-        // Create underline animation on hover
         readMoreLink.addEventListener("mouseenter", () => {
           gsap.to(readMoreLink, {
             color: "#0056b3",
@@ -194,5 +227,8 @@ import GIFImage from "../../assets/home/about/gif.gif";
     }
   }
 
-  initAboutAnimations();
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
+  });
 </script>

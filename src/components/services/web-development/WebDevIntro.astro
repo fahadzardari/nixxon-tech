@@ -4,105 +4,152 @@ import IntroImage from "../../../assets/services/web-dev/intro.png";
 import Heading from "../../common/Heading.astro";
 ---
 
-<section class="app-max-width flex justify-between items-center space-x-12" id="web-dev-intro-section">
-  <div class="ml-[calc(-1*(100vw-100%)/2)] w-full" id="intro-image-container">
-    <Image
-      src={IntroImage}
-      alt="Web Dev Intro"
-      title="Web Dev Intro"
-      class="w-full my-16"
-      id="web-dev-intro"
-      loading="lazy"
-    />
-  </div>
-  <div class="flex flex-col space-y-4 w-1/2" id="intro-content">
-    <Heading>
-      <h2 class="text-4xl" id="why-nixxon-heading">Web Development Services</h2>
-    </Heading>
-    <p class="text-[16px] text-[#2a2111]" id="intro-paragraph">
-      At NixxonTech, you will get customized web development services ensuring
-      an impactful online presence of your company. Our skilled experts create
-      aesthetically pleasing websites featuring integration, user-friendly
-      design and performance optimization. We use industry best practices and
-      state-of-the-art technologies in our customized web development services
-      to fulfill the specific needs of every client.
-    </p>
-    <button
-      class="w-fit inline-block px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-lg transition
-  shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80"
-      id="cta-button"
+<section class="py-8 md:py-16 relative" id="web-dev-intro-section">
+  <!-- Centered container for alignment -->
+  <div
+    class="app-max-width w-full flex flex-col lg:flex-row justify-between items-center"
+  >
+    <!-- Left content with negative margin to extend to screen edge -->
+    <div
+      class="w-full order-2 lg:order-1 md:ml-[calc(-1*(100vw-100%)/2)]"
+      id="intro-image-container"
     >
-      Let's Talk
-    </button>
+      <Image
+        src={IntroImage}
+        alt="Web Dev Intro"
+        title="Web Dev Intro"
+        class="w-full my-2 md:my-16"
+        id="web-dev-intro"
+        loading="lazy"
+      />
+    </div>
+    <!-- Right content -->
+    <div
+      class="w-full lg:w-1/2 flex flex-col space-y-4 py-8 md:py-0 lg:pl-8 order-1 lg:order-2"
+      id="web-dev-intro-content"
+    >
+      <Heading>
+        <h2 class="text-3xl md:text-4xl" id="web-dev-why-heading">
+          Web Development Services
+        </h2>
+      </Heading>
+      <p
+        class="text-base md:text-[16px] text-[#2a2111]"
+        id="web-dev-intro-paragraph"
+      >
+        At NixxonTech, you will get customized web development services ensuring
+        an impactful online presence of your company. Our skilled experts create
+        aesthetically pleasing websites featuring integration, user-friendly
+        design and performance optimization. We use industry best practices and
+        state-of-the-art technologies in our customized web development services
+        to fulfill the specific needs of every client.
+      </p>
+      <button
+        class="w-fit inline-block px-8 md:px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-base md:text-lg transition
+    shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80"
+        id="web-dev-intro-cta-button"
+      >
+        Let's Talk
+      </button>
+    </div>
   </div>
 </section>
 
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  
+
   gsap.registerPlugin(ScrollTrigger);
-  
+
+  // Make sure button is visible by default
+  document.querySelector("#web-dev-intro-cta-button").style.opacity = "1";
+
   // Create a timeline that triggers when the section is in view
   const introTl = gsap.timeline({
     scrollTrigger: {
       trigger: "#web-dev-intro-section",
-      start: "top 70%", 
-      toggleActions: "play none none none"
-    }
+      start: "top 70%",
+      toggleActions: "play none none reset", // Changed to reset on scroll out
+    },
   });
-  
-  // Add animations to the timeline
+
+  // Determine if desktop or mobile
+  const isDesktop = window.innerWidth >= 1024;
+
+  // Add animations to the timeline with responsive behavior
   introTl
-    // Image animation - slides in from left with slight opacity effect
-    .from("#web-dev-intro", { 
-      x: -50, 
-      opacity: 0, 
-      duration: 1, 
-      ease: "power2.out" 
+    // Image animation - slides in from left on desktop, up on mobile
+    .from("#web-dev-intro", {
+      x: isDesktop ? -50 : 0,
+      y: isDesktop ? 0 : 30,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
     })
-    
+
     // Heading animation - slides up and fades in
-    .from("#why-nixxon-heading", { 
-      y: 30, 
-      opacity: 0, 
-      duration: 0.8, 
-      ease: "power2.out" 
-    }, "-=0.6") // Start slightly before the image animation finishes
-    
+    .from(
+      "#web-dev-why-heading",
+      {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.6"
+    )
+
     // Paragraph animation - fade in with slight upward movement
-    .from("#intro-paragraph", { 
-      y: 20, 
-      opacity: 0, 
-      duration: 0.8, 
-      ease: "power2.out" 
-    }, "-=0.5")
-    
-    // Button animation - subtle pop effect
-    .from("#cta-button", { 
-      scale: 0.9, 
-      opacity: 0, 
-      duration: 0.6, 
-      ease: "back.out(1.5)" 
-    }, "-=0.4");
-  
+    .from(
+      "#web-dev-intro-paragraph",
+      {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    )
+
+    // Button animation - modified to ensure visibility
+    .fromTo(
+      "#web-dev-intro-cta-button",
+      {
+        scale: 0.9,
+        opacity: 0,
+      },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.6,
+        ease: "back.out(1.5)",
+        clearProps: "opacity,scale", // Important: clears properties after animation
+      },
+      "-=0.4"
+    );
+
   // Add hover animation for the button
-  const ctaButton = document.querySelector("#cta-button");
+  const ctaButton = document.querySelector("#web-dev-intro-cta-button");
   if (ctaButton) {
     ctaButton.addEventListener("mouseenter", () => {
-      gsap.to("#cta-button", { 
-        scale: 1.05, 
-        duration: 0.3, 
-        ease: "power1.out" 
+      gsap.to("#web-dev-intro-cta-button", {
+        scale: 1.05,
+        duration: 0.3,
+        ease: "power1.out",
       });
     });
-    
+
     ctaButton.addEventListener("mouseleave", () => {
-      gsap.to("#cta-button", { 
-        scale: 1, 
-        duration: 0.3, 
-        ease: "power1.out" 
+      gsap.to("#web-dev-intro-cta-button", {
+        scale: 1,
+        duration: 0.3,
+        ease: "power1.out",
       });
     });
   }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
+  });
 </script>
