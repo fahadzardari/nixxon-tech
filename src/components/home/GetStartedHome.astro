@@ -4,7 +4,7 @@ import GetStartedLayout from "../common/GetStartedLayout.astro";
 
 <GetStartedLayout>
   <div
-    class="app-max-width space-y-4 text-center px-12 md:py-12 text-white"
+    class="app-max-width space-y-4 text-center px-12 md:py-16 text-white"
     id="get-started-container"
   >
     <h2
@@ -29,7 +29,7 @@ import GetStartedLayout from "../common/GetStartedLayout.astro";
       id="get-started-button"
       class="mt-6 inline-block px-12 py-3 leading-5 border border-primary-blue rounded-full text-white text-xs md:text-lg transition
   shadow-md shadow-primary-blue/50 hover:shadow-xl hover:shadow-primary-blue/80
-  hover:scale-105 duration-300 opacity-0"
+  hover:scale-105 duration-300"
     >
       Have a Plan? Let's Get Started
     </button>
@@ -90,16 +90,7 @@ import GetStartedLayout from "../common/GetStartedLayout.astro";
     tl.to("#get-started-description", { opacity: 1, duration: 0 }, "<");
 
     // Button animation with bounce effect
-    tl.to(
-      "#get-started-button",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "back.out(1.7)",
-      },
-      "-=0.3"
-    );
+
 
     // Add an attention-grabbing effect to the button after everything loaded
     tl.to("#get-started-button", {

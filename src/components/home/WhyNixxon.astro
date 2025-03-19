@@ -6,8 +6,8 @@ import Image from "astro/components/Image.astro";
 
 <section class="app-max-width py-16">
   <Heading>
-    <h2 class="text-primary-blue text-4xl" id="why-nixxon-heading">
-      Why Choose <span class="text-primary-blue text-pretty">Nixxon</span>
+    <h2 class="text-4xl" id="why-nixxon-heading">
+      Why Choose <span class="text-primary-blue text-pretty">NixxonTech</span>
     </h2>
   </Heading>
   <div class="relative flex mt-16 w-full">
@@ -83,7 +83,7 @@ import Image from "astro/components/Image.astro";
       tagName: "span",
     });
 
-    // Create timeline for animations
+    // Create timeline for heading and illustration
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#why-nixxon-heading",
@@ -113,18 +113,20 @@ import Image from "astro/components/Image.astro";
       "-=0.3"
     );
 
-    // Staggered list items animation
-    tl.to(
-      ".benefit-item",
-      {
+    // Individual scroll triggers for each benefit item
+    document.querySelectorAll(".benefit-item").forEach((item, index) => {
+      gsap.to(item, {
+        scrollTrigger: {
+          trigger: item,
+          start: "top 85%", // Adjust this value to control when animation starts
+          toggleActions: "play none none none",
+        },
         opacity: 1,
         x: 0,
         duration: 0.7,
-        stagger: 0.15,
         ease: "power2.out",
-      },
-      "-=0.5"
-    );
+      });
+    });
 
     // Add hover animation for Read More links
     const readMoreLinks = document.querySelectorAll(".read-more-link");
@@ -148,7 +150,6 @@ import Image from "astro/components/Image.astro";
     });
   });
 </script>
-
 <style>
   /* Initial states for animations */
   #nixxon-illustration {

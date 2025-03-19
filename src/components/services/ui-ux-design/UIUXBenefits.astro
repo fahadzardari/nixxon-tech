@@ -126,17 +126,20 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
     );
 
     // Staggered list items animation
-    tl.to(
-      ".benefit-item",
-      {
+    document.querySelectorAll(".benefit-item").forEach((item, index) => {
+      gsap.to(item, {
+        scrollTrigger: {
+          trigger: item,
+          start: "top 85%", // Adjust this value to control when animation starts
+          toggleActions: "play none none none",
+        },
         opacity: 1,
         x: 0,
         duration: 0.7,
-        stagger: 0.15,
         ease: "power2.out",
-      },
-      "-=0.5"
-    );
+      });
+    });
+
 
     // Add hover animation for Read More links
     const readMoreLinks = document.querySelectorAll(".read-more-link");
