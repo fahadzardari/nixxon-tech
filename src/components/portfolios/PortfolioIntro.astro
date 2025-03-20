@@ -1,0 +1,130 @@
+---
+import Image from "astro/components/Image.astro";
+import IntroImage from "../../assets/portfolios/intro.png";
+
+import Heading from "../common/Heading.astro";
+---
+
+<section class="py-8 md:py-16 relative" id="web-dev-intro-section">
+  <!-- Centered container for alignment -->
+  <div
+    class="app-max-width w-full flex flex-col lg:flex-row justify-between items-center"
+  >
+    <!-- Left content with negative margin to extend to screen edge -->
+    <div
+      class="w-full order-2 lg:order-1 md:ml-[calc(-1*(100vw-100%)/2)]"
+      id="intro-image-container"
+    >
+      <Image
+        src={IntroImage}
+        alt="Web Dev Intro"
+        title="Web Dev Intro"
+        class="w-full my-2 md:my-16"
+        id="web-dev-intro"
+        loading="lazy"
+      />
+    </div>
+    <!-- Right content -->
+    <div
+      class="w-full lg:w-1/2 flex flex-col space-y-4 py-8 md:py-0 lg:pl-8 order-1 lg:order-2"
+      id="web-dev-intro-content"
+    >
+      <Heading>
+        <h2 class="text-3xl md:text-4xl" id="web-dev-why-heading">
+          Logo Animation
+        </h2>
+      </Heading>
+      <p
+        class="text-base md:text-[16px] text-[#2a2111]"
+        id="web-dev-intro-paragraph"
+      >
+        Your brand identity gains a dynamic and enduring touch from logo
+        animation. Your logo attracts attention and leaves a lasting impact on
+        your audience by bringing it to life with motion and visual effects.
+        Whether it's a simple animation or a more complex sequence, our logo
+        animation services improve visual presence on several digital platforms,
+        communicate the essence of your business, and increase brand
+        recognition.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Make sure button is visible by default
+
+  // Create a timeline that triggers when the section is in view
+  const introTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#web-dev-intro-section",
+      start: "top 70%",
+      toggleActions: "play none none reset", // Changed to reset on scroll out
+    },
+  });
+
+  // Determine if desktop or mobile
+  const isDesktop = window.innerWidth >= 1024;
+
+  // Add animations to the timeline with responsive behavior
+  introTl
+    // Image animation - slides in from left on desktop, up on mobile
+    .from("#web-dev-intro", {
+      x: isDesktop ? -50 : 0,
+      y: isDesktop ? 0 : 30,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+    })
+
+    // Heading animation - slides up and fades in
+    .from(
+      "#web-dev-why-heading",
+      {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.6"
+    )
+
+    // Paragraph animation - fade in with slight upward movement
+    .from(
+      "#web-dev-intro-paragraph",
+      {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    )
+
+    // Button animation - modified to ensure visibility
+    .fromTo(
+      "#web-dev-intro-cta-button",
+      {
+        scale: 0.9,
+        opacity: 0,
+      },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.6,
+        ease: "back.out(1.5)",
+        clearProps: "opacity,scale", // Important: clears properties after animation
+      },
+      "-=0.4"
+    );
+
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
+  });
+</script>

@@ -4,7 +4,7 @@ import Art from "../../assets/about-us/art.svg";
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center px-4 md:px-16 min-h-screen w-full pt-16 overflow-hidden"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex justify-center px-4 md:px-16 min-h-screen lg:min-h-[810px] w-full pt-16"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
@@ -13,7 +13,7 @@ import Art from "../../assets/about-us/art.svg";
 
   <!-- Container with relative positioning -->
   <div
-    class="app-max-width relative md:h-[60vh] flex md:flex-row items-center w-full"
+    class="app-max-width relative md:h-[80vh] flex md:flex-row items-center w-full"
   >
     <!-- Left Side Text - Front Layer -->
     <div
@@ -43,13 +43,13 @@ import Art from "../../assets/about-us/art.svg";
     <!-- Right Side Image - Absolute positioning to extend beyond container -->
     <div
       id="hero-image"
-      class="hidden md:block absolute right-[-10%] top-0 bottom-0 w-2/3 z-0 opacity-0"
+      class="hidden lg:block absolute pt-8 w-1/2 right-0 top-0 bottom-0 z-0 opacity-0"
     >
       <div id="hero-image-container" class="w-full h-full">
         <img
           src={Art.src}
           alt="3D VR Person"
-          class="w-full h-full object-contain object-center-right"
+          class="w-full h-full max-h-[474px] object-contain"
         />
       </div>
     </div>
@@ -65,23 +65,23 @@ import Art from "../../assets/about-us/art.svg";
 
   document.addEventListener("DOMContentLoaded", () => {
     // Initialize based on screen size
-    const updateLayout = () => {
-      const isWideScreen = window.innerWidth >= 1536; // 2xl breakpoint
-      const isDesktop = window.innerWidth >= 1024; // lg breakpoint
+    // const updateLayout = () => {
+    //   const isWideScreen = window.innerWidth >= 1536; // 2xl breakpoint
+    //   const isDesktop = window.innerWidth >= 1024; // lg breakpoint
 
-      // Adjust image position based on screen size - with safeguards for screen edge
-      if (document.querySelector("#hero-image")) {
-        document.querySelector("#hero-image").style.right = isWideScreen
-          ? "-20%"
-          : isDesktop
-            ? "-15%"
-            : "-10%";
-      }
-    };
+    //   // Adjust image position based on screen size - with safeguards for screen edge
+    //   if (document.querySelector("#hero-image")) {
+    //     document.querySelector("#hero-image").style.right = isWideScreen
+    //       ? "-20%"
+    //       : isDesktop
+    //         ? "-15%"
+    //         : "-10%";
+    //   }
+    // };
 
-    // Run on load and resize
-    updateLayout();
-    window.addEventListener("resize", updateLayout);
+    // // Run on load and resize
+    // updateLayout();
+    // window.addEventListener("resize", updateLayout);
 
     // Initial animations (equivalent to initial + animate in Framer)
     gsap.fromTo(
@@ -231,25 +231,5 @@ import Art from "../../assets/about-us/art.svg";
     overflow-x: hidden;
   }
 
-  @media (min-width: 768px) {
-    #hero-image img {
-      max-width: none;
-      width: 100%;
-    }
-  }
 
-  @media (min-width: 1280px) {
-    #hero-image {
-      right: -15%; /* Reduced value to keep image visible */
-    }
-    .object-center-right {
-      object-position: 70% center;
-    }
-  }
-
-  @media (min-width: 1536px) {
-    #hero-image {
-      right: -20%; /* Reduced value to keep image visible */
-    }
-  }
 </style>

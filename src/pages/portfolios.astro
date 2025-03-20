@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import PortfolioHero from "../components/portfolios/PortfolioHero.astro";
+import LogoDesignSlider from "../components/portfolios/LogoDesignSlider.jsx";
+import TShirtDesignSlider from "../components/portfolios/TShirtDesignSlider.jsx";
+import WebsiteDesignSlider from "../components/portfolios/WebsiteDesignSlider.jsx";
+import PortfolioIntro from "../components/portfolios/PortfolioIntro.astro";
+import Video from "../assets/portfolios/video.png";
+---
+
+<Layout title="Portfolios">
+  <main class="min-h-screen w-screen md:w-auto">
+    <Navbar />
+    <PortfolioHero />
+    <LogoDesignSlider client:load />
+    <WebsiteDesignSlider client:load />
+    <TShirtDesignSlider client:load />
+    <PortfolioIntro />
+
+    <img src={Video.src} alt="video of " class="w-full object-cover my-20" />
+
+    <Footer />
+  </main>
+</Layout>

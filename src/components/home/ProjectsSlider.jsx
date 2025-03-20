@@ -47,7 +47,7 @@ const ProjectsSlider = ({ projects = [] }) => {
   const displayedProjects = projects.length > 0 ? projects : defaultProjects;
 
   return (
-    <div className="max-w-[80vw] lg:max-w-[1280px] mx-auto py-8 px-4 lg:px-4">
+    <div className="w-full mx-auto py-8 px-4 lg:px-4">
       <div className="relative">
         <Swiper
           modules={[Navigation, A11y, Autoplay]}
@@ -67,7 +67,10 @@ const ProjectsSlider = ({ projects = [] }) => {
               slidesPerView: 2,
             },
             1024: {
-              slidesPerView: 3,
+              slidesPerView: 4,
+            },
+            1280: {
+              slidesPerView: 5,
             },
           }}
           // className="pb-14" // Add padding bottom for pagination
