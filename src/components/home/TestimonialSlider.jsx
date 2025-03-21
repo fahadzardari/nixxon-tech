@@ -43,13 +43,45 @@ const TestimonialSlider = ({ testimonials = [] }) => {
       company: "Innovative Startup",
       avatar: Avatar2,
     },
+    {
+      id: 4,
+      quote:
+        "Professional, responsive, and incredibly talented. They transformed our digital presence and helped us reach new customers.",
+      name: "David Miller",
+      company: "Innovative Startup",
+      avatar: Avatar2,
+    },
+    {
+      id: 4,
+      quote:
+        "Professional, responsive, and incredibly talented. They transformed our digital presence and helped us reach new customers.",
+      name: "David Miller",
+      company: "Innovative Startup",
+      avatar: Avatar2,
+    },
+    {
+      id: 4,
+      quote:
+        "Professional, responsive, and incredibly talented. They transformed our digital presence and helped us reach new customers.",
+      name: "David Miller",
+      company: "Innovative Startup",
+      avatar: Avatar2,
+    },
+    {
+      id: 4,
+      quote:
+        "Professional, responsive, and incredibly talented. They transformed our digital presence and helped us reach new customers.",
+      name: "David Miller",
+      company: "Innovative Startup",
+      avatar: Avatar2,
+    },
   ];
 
   const displayedTestimonials =
     testimonials.length > 0 ? testimonials : defaultTestimonials;
 
   return (
-    <div className="max-w-[80vw] lg:max-w-[1280px] mx-auto py-8 px-4 lg:px-4">
+    <div className="w-full mx-auto py-8 px-4 lg:px-4">
       <div className="relative">
         <Swiper
           modules={[Navigation, A11y, Autoplay]}
@@ -68,7 +100,10 @@ const TestimonialSlider = ({ testimonials = [] }) => {
               slidesPerView: 2,
             },
             1024: {
-              slidesPerView: 3,
+              slidesPerView: 4,
+            },
+            1280: {
+              slidesPerView: 5,
             },
           }}
           className="px-2 sm:px-0"

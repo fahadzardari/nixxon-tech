@@ -4,7 +4,7 @@ import Art from "../../../assets/services/web-dev/art.png";
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex justify-center px-4 md:px-16 min-h-screen lg:min-h-[810px] w-full pt-16"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center px-4 md:px-16 min-h-screen lg:items-start lg:min-h-[810px] w-full pt-16"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
@@ -74,7 +74,7 @@ import Art from "../../../assets/services/web-dev/art.png";
           : isDesktop
             ? "65%"
             : "60%";
-        
+
         // Always set right to 0 to ensure alignment with viewport edge
         document.querySelector("#hero-image").style.right = "0";
       }
@@ -236,7 +236,7 @@ import Art from "../../../assets/services/web-dev/art.png";
     #hero-image {
       right: 0; /* Always align to the right edge of viewport */
     }
-    
+
     #hero-image img {
       max-width: none;
       width: 100%;
