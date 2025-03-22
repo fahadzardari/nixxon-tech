@@ -81,7 +81,7 @@ const TestimonialSlider = ({ testimonials = [] }) => {
     testimonials.length > 0 ? testimonials : defaultTestimonials;
 
   return (
-    <div className="w-full mx-auto py-8 px-4 lg:px-4">
+    <div className="app-max-width w-full mx-auto py-8 px-4 lg:px-4">
       <div className="relative">
         <Swiper
           modules={[Navigation, A11y, Autoplay]}
@@ -101,9 +101,6 @@ const TestimonialSlider = ({ testimonials = [] }) => {
             },
             1024: {
               slidesPerView: 4,
-            },
-            1280: {
-              slidesPerView: 5,
             },
           }}
           className="px-2 sm:px-0"

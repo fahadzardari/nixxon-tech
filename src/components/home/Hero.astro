@@ -5,7 +5,7 @@ import Image from "astro/components/Image.astro";
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center px-4 md:px-16 min-h-screen lg:items-start lg:min-h-[810px] w-full pt-16"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:items-start lg:min-h-[810px] w-full pt-16"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
@@ -48,13 +48,13 @@ import Image from "astro/components/Image.astro";
     <!-- Right Side Image (Back Layer) -->
     <div
       id="hero-image"
-      class="hidden lg:block absolute pt-8 xl:w-1/2 right-0 top-0 bottom-0 z-0 opacity-0"
+      class="hidden absolute right-0 pt-16 app-right-padding top-0 lg:block w-1/2 z-0 opacity-0"
     >
-      <div id="hero-image-container" class="w-full h-[80vh]">
+      <div id="hero-image-container" class="w-full">
         <Image
           src={Art}
           alt={"3D VR Person"}
-          class={"w-[622px] h-[594px] object-fit right-0 ml-auto"}
+          class={"object-fit right-0 ml-auto"}
           loading={"eager"}
         />
       </div>

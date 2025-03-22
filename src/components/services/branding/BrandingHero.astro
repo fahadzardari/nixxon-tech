@@ -1,31 +1,43 @@
 ---
-import Art from "../../assets/about-us/art.svg";
+import Art from "../../../assets/services/branding/art.png";
+import Image from "astro/components/Image.astro";
 ---
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center px-4 md:px-16 min-h-screen w-full pt-16"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center overflow-hidden min-h-screen lg:min-h-[810px] w-full pt-16"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
   >
   </div>
 
-  <!-- Left Side Text -->
+  <!-- Container with relative positioning -->
   <div
-    class="app-max-width flex text-white items-center justify-between relative"
+    class="app-max-width pr-12 relative md:h-[60vh] flex md:flex-row md:justify-between items-center w-full"
   >
-    <div id="hero-text" class="opacity-0">
-      <div class="relative z-10">
-        <h1 class="text-5xl font-bold capitalize">About NixxonTech</h1>
-        <p class="mt-4 text-md xl:text-xl opacity-80">
-          Through the use of our digital age expertise, we help you bring your
-          vision to life and offer your business impactful solutions.
+    <!-- Left Side Text - Front Layer -->
+    <div
+      id="hero-text"
+      class="relative z-50 opacity-0 w-full lg:w-1/2 text-white"
+    >
+      <div class="w-full relative">
+        <h1
+          class="text-4xl md:text-[48px] leading-[48px] lg:leading-[58px] font-semibold capitalize"
+        >
+          Branding
+        </h1>
+        <p class="mt-4 text-sm md:text-md xl:text-base opacity-80">
+          A wide range of services, including brand planning, are provided by
+          our skilled experts. Be it establishing a visual identity, creating a
+          logo, or crafting brand messaging, we are here to help. With our
+          innovative ideas, your company will stand out and build long-lasting
+          relationships with clients.
         </p>
         <a
           href="/contact"
           id="hero-cta"
-          class="mt-6 inline-block px-8 py-3 border border-primary-blue rounded-full text-white text-lg transition
+          class="mt-6 inline-block px-8 py-3 border border-primary-blue rounded-full text-white text-sm md:text-lg transition
            shadow-md shadow-primary-blue/50 hover:shadow-xl hover:shadow-primary-blue/80
            hover:scale-105 duration-300"
         >
@@ -34,13 +46,17 @@ import Art from "../../assets/about-us/art.svg";
       </div>
     </div>
 
-    <!-- Right Side Image -->
+    <!-- Right Side Image - Absolute positioning to extend beyond container -->
     <div
       id="hero-image"
-      class="hidden md:block md:relative w-full z-0 opacity-0"
+      class="hidden lg:block top-0 bottom-0 w-1/2 2xl:w-1/3 z-0 opacity-0"
     >
-      <div id="hero-image-container" class="w-full">
-        <img src={Art.src} alt="3D VR Person" class="w-full h-screen" />
+      <div id="hero-image-container" class="">
+        <Image
+          src={Art}
+          alt="3D VR Person"
+          class=""
+        />
       </div>
     </div>
   </div>
@@ -190,3 +206,26 @@ import Art from "../../assets/about-us/art.svg";
     }
   });
 </script>
+
+<style>
+  /* Custom styles for extended image */
+  .object-center-right {
+    object-position: 40% center;
+  }
+
+  /* Add overflow hidden to main section to prevent horizontal scrollbar */
+  section {
+    overflow-x: hidden;
+  }
+
+  @media (min-width: 768px) {
+    #hero-image {
+      right: 0; /* Always align to the right edge of viewport */
+    }
+
+    #hero-image img {
+      max-width: none;
+      width: 100%;
+    }
+  }
+</style>
