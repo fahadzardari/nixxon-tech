@@ -8,10 +8,10 @@ const { title, description, image, link, alt } = service;
 
 <article class="flex flex-col space-y-4">
   <Image src={image} alt={alt || title} class="w-full h-[300px] object-cover" />
-  <h4 class="text-primary-blue text-2xl font-medium">
+  <h4 class="text-primary-blue font-medium text-xl  canvas:text-2xl 3xl:text-3xl">
     {title}
   </h4>
-  <p class="text-[#2A2111] mb-8">
+  <p class="text-[#2A2111] mb-8 text-xs lg:text-sm canvas:text-base 3xl:text-xl">
     {description}
   </p>
   <a

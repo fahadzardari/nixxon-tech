@@ -7,13 +7,16 @@ import GIFImage from "../../assets/home/about/gif.gif";
 
 <section class="app-max-width py-16" id="about-section">
   <Heading>
-    <h2 id="about-us-heading" class="text-4xl font-medium">
+    <h2 id="about-us-heading" class="font-medium">
       Get Ahead of the Competition <br />
-      <span class="text-primary-blue neon-glow">and Lead the Charts</span>
+      <span class="text-primary-blue">and Lead the Charts</span>
     </h2>
   </Heading>
 
-  <p class="my-4" id="about-paragraph">
+  <p
+    class="my-4 text-xs lg:text-sm canvas:text-base 2xl:text-lg"
+    id="about-paragraph"
+  >
     Reach out beyond the crowd and leave a lasting impression with our
     assistance. You can boost revenue, bring in more customers, and fortify your
     brand with our tailored solutions. With confidence, your vision can be
@@ -43,17 +46,24 @@ import GIFImage from "../../assets/home/about/gif.gif";
       id="right-column-about-us"
       class="w-full md:w-1/2 flex flex-col space-y-4"
     >
-      <h4 class="text-lg">About Us</h4>
-      <h3 class="text-primary-blue text-4xl font-medium capitalize">
+      <h4 class="text-base canvas:text-lg 2xl:text-xl">About Us</h4>
+      <h3
+        class="text-primary-blue text-2xl lg:text-3xl canvas:text-4xl 2xl:text-5xl font-medium capitalize"
+      >
         Mission to elevate business growth
       </h3>
-      <p class="text-[#2A2111] text-[16px]">
+      <p
+        class="text-[#2A2111] text-xs lg:text-sm canvas:text-base 2xl:text-lg 3xl:text-xl"
+      >
         NixxonTech is a premier Digital agency, offering superior business
         advancement solutions across diverse sectors. Our goal is to enhance
         progress, innovation, and outcomes, driven by a mission to elevate
         business growth.
       </p>
-      <a href="#" class="text-primary-blue">
+      <a
+        href="#"
+        class="text-xs lg:text-sm canvas:text-base 2xl:text-lg text-primary-blue"
+      >
         Read More <span>&rarr;</span>
       </a>
     </div>
@@ -63,167 +73,329 @@ import GIFImage from "../../assets/home/about/gif.gif";
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import SplitType from "split-type";
 
   // Register plugins
   gsap.registerPlugin(ScrollTrigger);
 
-  // Make sure elements are visible initially (prevents white space issue on mobile)
   document.addEventListener("DOMContentLoaded", () => {
-    // Set initial visibility
-    gsap.set("#about-section *", { visibility: "visible", opacity: 1 });
-    
-    // Initialize animations after a slight delay to ensure proper rendering
-    setTimeout(initAboutAnimations, 100);
-    
-    // Force a refresh when page is fully loaded
+    // Important: Don't set anything to opacity 0 initially to avoid text disappearing
+    // if there's a JavaScript error
+
+    // Initialize animations
+    setTimeout(() => {
+      initSafeAnimations();
+      // Initialize text splitting
+      splitAndAnimateText();
+    }, 100);
+
+    // Refresh ScrollTrigger when page is fully loaded
     window.addEventListener("load", () => {
       ScrollTrigger.refresh(true);
     });
   });
 
-  function initAboutAnimations() {
-    // Detect mobile viewport
-    const isMobile = window.innerWidth < 768;
-    
-    // Mobile-specific trigger offsets
-    const mobileOffset = isMobile ? "90%" : "80%";
-
-    // Main heading animation
+  function splitAndAnimateText() {
+    // Split heading text
     const heading = document.querySelector("#about-us-heading");
     if (heading) {
-      const splitHeading = new SplitType(heading, { types: "lines" });
-      gsap.from(splitHeading.lines, {
-        scrollTrigger: {
-          trigger: heading,
-          start: `top ${mobileOffset}`,
-          once: isMobile, // Mobile animation runs only once
-        },
-        opacity: 0,
-        y: 30, // Reduced movement on mobile
-        stagger: 0.2,
-        duration: 0.8,
-      });
+      // Save original text content
+      const originalHeadingContent = heading.innerHTML;
 
-      // Highlight blue text
-      gsap.from("#about-us-heading span", {
-        scrollTrigger: { 
-          trigger: heading,
-          start: `top ${mobileOffset}`,
-          once: isMobile,
-        },
-        opacity: 0,
-        y: 20,
-        delay: 0.6,
-        duration: 1,
-        ease: "back.out(1.7)",
-      });
+      try {
+        // Add responsive margin function
+        const getResponsiveMargin = () => {
+          // Use viewport width to determine margin
+          const vw = Math.max(
+            document.documentElement.clientWidth || 0,
+            window.innerWidth || 0
+          );
+          if (vw < 640) {
+            return "0.35rem"; // Increased margin on mobile
+          } else if (vw < 1024) {
+            return "0.45rem"; // Increased margin on tablets
+          } else {
+            return "0.55rem"; // Increased margin on desktops
+          }
+        };
+
+        const responsiveMargin = getResponsiveMargin();
+
+        // Get text content without HTML tags for the main part
+        const mainPart = heading.childNodes[0].textContent.trim();
+        const spanPart = heading.querySelector("span").outerHTML;
+
+        // Split main part into words - normalize whitespace first
+        const words = mainPart.replace(/\s+/g, " ").split(" ");
+        let newContent = "";
+
+        // Create wrapped words with responsive margins - FIXED: properly apply margin style
+        words.forEach((word, index) => {
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; margin-right: ${responsiveMargin}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(40px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        // Replace line break properly
+        newContent = newContent.replace(/\s+$/, "") + "<br>";
+
+        // Add span part with split words and responsive margins
+        const blueWords = heading
+          .querySelector("span")
+          .textContent.replace(/\s+/g, " ")
+          .split(" ");
+        let blueContent = '<span class="text-primary-blue">';
+
+        blueWords.forEach((word, index) => {
+          // FIXED: Apply margin to all but last word
+          const isLastWord = index === blueWords.length - 1;
+          blueContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(40px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        blueContent += "</span>";
+        heading.innerHTML = newContent + blueContent;
+
+        // Create smoother staggered animation for heading words
+        const headingWords = heading.querySelectorAll(".word-inner");
+        gsap.to(headingWords, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            end: "top 65%", // Shorter scroll distance for smoother reveal
+            scrub: 0.6, // Smoother scrub value
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.04, // More natural stagger timing
+          ease: "power2.inOut", // Smoother easing curve
+        });
+
+        // FIXED: Update margins on resize with proper style setting
+        window.addEventListener("resize", () => {
+          const newMargin = getResponsiveMargin();
+          const wordSpans = heading.querySelectorAll(".split-word");
+
+          wordSpans.forEach((span, index) => {
+            // Don't apply margin to the last span in each section
+            const isLastWordInMainSection = index === words.length - 1;
+            const isLastWordInBlueSection =
+              index >= words.length &&
+              index === words.length + blueWords.length - 1;
+
+            if (!isLastWordInMainSection && !isLastWordInBlueSection) {
+              // Set the style property directly with the value
+              span.style.marginRight = newMargin;
+            }
+          });
+        });
+      } catch (error) {
+        console.error("Heading split error:", error);
+        heading.innerHTML = originalHeadingContent;
+      }
     }
 
-    // Paragraph fade-in
-    gsap.from("#about-paragraph", {
-      scrollTrigger: {
-        trigger: "#about-paragraph",
-        start: `top ${mobileOffset}`,
-        once: isMobile,
-      },
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      delay: 0.2,
+    // Split paragraph text
+    const paragraph = document.querySelector("#about-paragraph");
+    if (paragraph) {
+      // Save original text
+      const originalContent = paragraph.textContent;
+
+      try {
+        // Normalize whitespace by replacing all whitespace sequences (including line breaks) with a single space
+        const normalizedText = originalContent.replace(/\s+/g, " ").trim();
+
+        // Split text into words
+        const words = normalizedText.split(" ");
+        let newContent = "";
+
+        // Create wrapped words with more subtle initial positioning
+        words.forEach((word, index) => {
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; margin-right:4px;">
+            <span class="word-inner" style="display:inline-block; transform:translateY(25px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        paragraph.innerHTML = newContent;
+
+        // Create gentler scroll-linked animation with easier-to-read timing
+        const paragraphWords = paragraph.querySelectorAll(".word-inner");
+
+        gsap.to(paragraphWords, {
+          scrollTrigger: {
+            trigger: paragraph,
+            start: "top 90%",
+            end: "center 75%", // Shorter scroll distance for smoother appearance
+            scrub: 0.7, // Smoother scrubbing
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.015, // More natural word flow
+          ease: "power1.inOut", // Smoother easing for text reveal
+        });
+      } catch (error) {
+        console.error("Paragraph split error:", error);
+        paragraph.textContent = originalContent;
+      }
+    }
+
+    // Also split and animate the "About Us" content in the bottom section
+    const rightColumnElements = document.querySelectorAll(
+      "#right-column-about-us h4, #right-column-about-us h3, #right-column-about-us p"
+    );
+
+    rightColumnElements.forEach((element, elementIndex) => {
+      const originalContent = element.innerHTML;
+
+      try {
+        // Normalize whitespace
+        const normalizedText = element.textContent.replace(/\s+/g, " ").trim();
+
+        // Split text into words
+        const words = normalizedText.split(" ");
+        let newContent = "";
+
+        // Create wrapped words with lighter initial displacement
+        words.forEach((word) => {
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; margin-right:4px;">
+            <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        element.innerHTML = newContent;
+
+        // Smoother, more elegant animation for each element's words
+        const elementWords = element.querySelectorAll(".word-inner");
+
+        gsap.to(elementWords, {
+          scrollTrigger: {
+            trigger: element,
+            start: "top 85%",
+            end: "top 70%", // Tighter end point
+            scrub: 0.8, // Smoother scrubbing
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.02, // Subtle stagger
+          ease: "power2.out", // Gentler ease out
+          delay: elementIndex * 0.1, // Sequential revealing of elements
+        });
+      } catch (error) {
+        console.error("Element split error:", error);
+        element.innerHTML = originalContent;
+      }
     });
 
-    // Main image reveal
-    const mainImage = document.querySelector("#main-about-image");
-    if (mainImage) {
-      gsap.from(mainImage, {
+    // Add a subtle pulse animation to the Read More link to draw attention
+    const readMoreLink = document.querySelector("#right-column-about-us a");
+    if (readMoreLink) {
+      gsap.from(readMoreLink, {
         scrollTrigger: {
-          trigger: mainImage,
-          start: `top ${mobileOffset}`,
-          once: isMobile,
+          trigger: readMoreLink,
+          start: "top 85%",
         },
-        scale: 1.05,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power2.out",
-      });
-    }
-
-    // Bottom section animations
-    const gifImage = document.querySelector("#gif-image");
-    if (gifImage) {
-      // GIF image reveal
-      gsap.from(gifImage, {
-        scrollTrigger: {
-          trigger: "#about-bottom-section",
-          start: `top ${mobileOffset}`,
-          once: isMobile,
-        },
-        x: isMobile ? -20 : -50, // Smaller movement on mobile
-        opacity: 0,
+        scale: 0.95,
+        opacity: 0.7,
         duration: 1,
-        ease: "power3.out",
+        ease: "elastic.out(1, 0.3)",
+        delay: 1,
       });
-
-      // Add subtle floating animation - only on desktop
-      if (!isMobile) {
-        gsap.to(gifImage, {
-          scrollTrigger: {
-            trigger: gifImage,
-            start: `top ${mobileOffset}`,
-          },
-          y: "10px",
-          duration: 2,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: 1,
-        });
-      }
     }
+  }
 
-    // Right column content staggered reveal
-    const rightColumn = document.querySelector("#right-column-about-us");
-    if (rightColumn) {
-      const elements = rightColumn.querySelectorAll("h4, h3, p, a");
-      gsap.from(elements, {
+  function initSafeAnimations() {
+    // Detect mobile viewport
+    const isMobile = window.innerWidth < 768;
+
+    // We'll keep the main image and GIF animations, but remove the heading and paragraph
+    // animations as we're handling them differently now
+
+    // ===== MAIN IMAGE ANIMATION =====
+    gsap.from("#main-about-image", {
+      scrollTrigger: {
+        trigger: "#main-about-image",
+        start: "top 90%",
+        end: "center 60%",
+        scrub: true,
+      },
+      scale: 1.05,
+      opacity: 0,
+      filter: "blur(3px)",
+      duration: 1.2,
+      ease: "power2.out",
+    });
+
+    // Add subtle parallax to main image
+    gsap.to("#main-about-image", {
+      scrollTrigger: {
+        trigger: "#main-about-image",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+      y: "-5%",
+      ease: "none",
+    });
+
+    // ===== BOTTOM SECTION ANIMATIONS =====
+
+    // GIF image animation
+    gsap.from("#gif-image", {
+      scrollTrigger: {
+        trigger: "#about-bottom-section",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: 0.8,
+      },
+      x: isMobile ? -30 : -50,
+      opacity: 0,
+      scale: 0.95,
+      duration: 1,
+      ease: "power2.out",
+    });
+
+    // Enhanced Read More link
+    const readMoreLink = document.querySelector("#right-column-about-us a");
+    if (readMoreLink) {
+      const arrow = readMoreLink.querySelector("span");
+
+      // Add subtle attention effect
+      gsap.to(readMoreLink, {
         scrollTrigger: {
-          trigger: rightColumn,
-          start: `top ${mobileOffset}`,
-          once: isMobile,
+          trigger: readMoreLink,
+          start: "top 85%",
         },
-        y: 30,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "power2.out",
+        color: "#0056b3",
+        repeat: 2,
+        yoyo: true,
+        duration: 0.5,
+        delay: 1.5,
       });
 
-      // Special animation for the "Read More" link
-      const readMoreLink = rightColumn.querySelector("a");
-      if (readMoreLink) {
-        readMoreLink.addEventListener("mouseenter", () => {
-          gsap.to(readMoreLink, {
-            color: "#0056b3",
-            duration: 0.3,
-          });
-          gsap.to(readMoreLink.querySelector("span"), {
-            x: 5,
-            duration: 0.3,
-          });
+      // Hover effects
+      readMoreLink.addEventListener("mouseenter", () => {
+        gsap.to(readMoreLink, {
+          color: "#0056b3",
+          duration: 0.3,
         });
+        gsap.to(arrow, {
+          x: 8,
+          duration: 0.3,
+          ease: "power1.out",
+        });
+      });
 
-        readMoreLink.addEventListener("mouseleave", () => {
-          gsap.to(readMoreLink, {
-            color: "#1141D3",
-            duration: 0.3,
-          });
-          gsap.to(readMoreLink.querySelector("span"), {
-            x: 0,
-            duration: 0.3,
-          });
+      readMoreLink.addEventListener("mouseleave", () => {
+        gsap.to(readMoreLink, {
+          color: "#1141D3",
+          duration: 0.3,
         });
-      }
+        gsap.to(arrow, {
+          x: 0,
+          duration: 0.3,
+          ease: "power1.in",
+        });
+      });
     }
   }
 

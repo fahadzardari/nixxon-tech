@@ -6,64 +6,80 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
 
 <section class="app-max-width py-16">
   <Heading>
-    <h2 class="text-4xl" id="game-dev-process-heading">
+    <h2 class="font-medium" id="game-dev-process-heading">
       Our Game Development Process
     </h2>
   </Heading>
-  <div class="relative flex space-x-4 mt-16 w-full">
+  <p class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 game-dev-description-animation">
+    Our comprehensive game development approach combines creativity with technical expertise
+    to deliver immersive gaming experiences across multiple platforms.
+  </p>
+  <div class="relative flex space-x-4 mt-8 md:mt-16 w-full">
     <Image
       src={ArtWhy}
       alt="Leaning Art"
       title="Guy Leaning"
       class="hidden md:block z-0 left-0 w-1/3 opacity-0 h-fit my-auto"
-      id="guy-leaning-art"
+      id="nixxon-illustration"
     />
     <ul
-      class="list-none flex justify-between flex-col space-y-6 text-[#0b1125] md:border-l md:border-l-[#e0e0e0] md:px-4 md:w-[75%]"
-      id="game-dev-process-list"
+      class="list-none flex justify-between flex-col space-y-4 md:space-y-8 text-[#0b1125] md:border-l md:border-l-[#e0e0e0] md:px-4 md:w-[75%]"
+      id="benefits-list"
     >
-      <li class="flex flex-col space-y-4 benefit-item opacity-0">
-        <h4 class="text-[22px] font-semibold">Plan</h4>
-        <p>
+      <li class="flex flex-col space-y-2 md:space-y-4 benefit-item opacity-0">
+        <h4 class="text-base md:text-lg lg:text-xl canvas:text-[22px] 2xl:text-3xl font-semibold">
+          Plan
+        </h4>
+        <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg 3xl:text-xl">
           Before we begin development, we carefully plan out every facet of the
           game, such as the goals, gameplay, and general aesthetic.
         </p>
       </li>
-      <li class="flex flex-col space-y-4 benefit-item opacity-0">
-        <h4 class="text-[22px] font-semibold">Concept Art, Asset Production</h4>
-        <p>
+      <li class="flex flex-col space-y-2 md:space-y-4 benefit-item opacity-0">
+        <h4 class="text-base md:text-lg lg:text-xl canvas:text-[22px] 2xl:text-3xl font-semibold">
+          Concept Art, Asset Production
+        </h4>
+        <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg 3xl:text-xl">
           Concept art and asset production are the following stages, where the
           game's vision is brought to life with gorgeous graphics, character
           designs, and locations.
         </p>
       </li>
-      <li class="flex flex-col space-y-4 benefit-item opacity-0">
-        <h4 class="text-[22px] font-semibold">Game Development</h4>
-        <p>
+      <li class="flex flex-col space-y-2 md:space-y-4 benefit-item opacity-0">
+        <h4 class="text-base md:text-lg lg:text-xl canvas:text-[22px] 2xl:text-3xl font-semibold">
+          Game Development
+        </h4>
+        <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg 3xl:text-xl">
           Our talented development team codes and combines the features,
           gameplay mechanisms, and user interfaces while the game is being
           developed.
         </p>
       </li>
-      <li class="flex flex-col space-y-4 benefit-item opacity-0">
-        <h4 class="text-[22px] font-semibold">Test</h4>
-        <p>
+      <li class="flex flex-col space-y-2 md:space-y-4 benefit-item opacity-0">
+        <h4 class="text-base md:text-lg lg:text-xl canvas:text-[22px] 2xl:text-3xl font-semibold">
+          Test
+        </h4>
+        <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg 3xl:text-xl">
           By finding and fixing any bugs or flaws, extensive testing guarantees
           that the game runs smoothly and offers a flawless and seamless gaming
           experience.
         </p>
       </li>
-      <li class="flex flex-col space-y-4 benefit-item opacity-0">
-        <h4 class="text-[22px] font-semibold">Launch</h4>
-        <p>
+      <li class="flex flex-col space-y-2 md:space-y-4 benefit-item opacity-0">
+        <h4 class="text-base md:text-lg lg:text-xl canvas:text-[22px] 2xl:text-3xl font-semibold">
+          Launch
+        </h4>
+        <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg 3xl:text-xl">
           We go into the exciting launch phase, where the game is made available
           to eager players on numerous platforms, following a period of intense
           tuning and testing.
         </p>
       </li>
-      <li class="flex flex-col space-y-4 benefit-item opacity-0">
-        <h4 class="text-[22px] font-semibold">Maintenance</h4>
-        <p>
+      <li class="flex flex-col space-y-2 md:space-y-4 benefit-item opacity-0">
+        <h4 class="text-base md:text-lg lg:text-xl canvas:text-[22px] 2xl:text-3xl font-semibold">
+          Maintenance
+        </h4>
+        <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg 3xl:text-xl">
           We are determined to provide the game with frequent updates, bug
           fixes, and improvements so that users can find it engaging and
           pleasurable even after it has been released.
@@ -76,91 +92,295 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import SplitType from "split-type";
 
   // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
 
   // Wait for DOM content to be fully loaded
   document.addEventListener("DOMContentLoaded", () => {
-    // Split heading text for character animation
-    const headingText = new SplitType("#game-dev-process-heading", {
-      types: "words",
-      tagName: "span",
-    });
+    // Initialize animations with a slight delay to ensure DOM is ready
+    setTimeout(() => {
+      initAnimations();
+      splitAndAnimateText();
+    }, 100);
 
-    // Create timeline for animations
-    const tl = gsap.timeline({
+    // Refresh ScrollTrigger when page is fully loaded
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh(true);
+    });
+  });
+
+  // Function to split and animate text incrementally (matching AboutWhy)
+  function splitAndAnimateText() {
+    // Add responsive margin function
+    const getResponsiveMargin = () => {
+      // Use viewport width to determine margin
+      const vw = Math.max(
+        document.documentElement.clientWidth || 0,
+        window.innerWidth || 0
+      );
+
+      if (vw < 640) {
+        return "0.35rem"; // Margin on mobile
+      } else if (vw < 1024) {
+        return "0.45rem"; // Margin on tablets
+      } else {
+        return "0.55rem"; // Margin on desktops
+      }
+    };
+
+    // Split heading text
+    const heading = document.querySelector("#game-dev-process-heading");
+    if (heading) {
+      // Save original content
+      const originalContent = heading.innerHTML;
+
+      try {
+        // Extract the text
+        const headingText = heading.textContent.trim();
+        const responsiveMargin = getResponsiveMargin();
+
+        // Process heading
+        const words = headingText.split(" ");
+        let newContent = "";
+
+        // Create wrapped words with responsive margins
+        words.forEach((word, index) => {
+          const isLastWord = index === words.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        heading.innerHTML = newContent;
+        heading.style.opacity = 1;
+
+        // Animate heading words
+        const headingWords = heading.querySelectorAll(".word-inner");
+        gsap.to(headingWords, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            end: "top 65%",
+            scrub: 0.6,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.04,
+          ease: "power2.inOut",
+        });
+
+        // Update margins on resize
+        window.addEventListener("resize", () => {
+          const newMargin = getResponsiveMargin();
+          const wordSpans = heading.querySelectorAll(".split-word");
+
+          wordSpans.forEach((span, index) => {
+            if (index < words.length - 1) {
+              span.style.marginRight = newMargin;
+            }
+          });
+        });
+      } catch (error) {
+        console.error("Heading split error:", error);
+        heading.innerHTML = originalContent;
+      }
+    }
+
+    // Animate description paragraph
+    const description = document.querySelector(".game-dev-description-animation");
+    if (description) {
+      const originalContent = description.textContent;
+
+      try {
+        // Responsive margin for paragraph
+        const responsiveMargin = window.innerWidth < 768 ? "0.1em" : "0.2em";
+
+        // Normalize and split text
+        const normalizedText = description.textContent.replace(/\s+/g, " ").trim();
+        const words = normalizedText.split(" ");
+        let newContent = "";
+
+        // Create wrapped words with responsive margins
+        words.forEach((word, index) => {
+          const isLastWord = index === words.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        description.innerHTML = newContent;
+
+        // Animate paragraph words
+        const paragraphWords = description.querySelectorAll(".word-inner");
+        gsap.to(paragraphWords, {
+          scrollTrigger: {
+            trigger: description,
+            start: "top 90%",
+            end: "center 75%",
+            scrub: 0.7,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.015,
+          ease: "power1.inOut",
+        });
+      } catch (error) {
+        console.error("Description split error:", error);
+        description.textContent = originalContent;
+      }
+    }
+
+    // Split and animate benefits section
+    const benefitItems = document.querySelectorAll(".benefit-item");
+
+    benefitItems.forEach((item, itemIndex) => {
+      // Process heading
+      const itemHeading = item.querySelector("h4");
+      if (itemHeading) {
+        const originalHeadingContent = itemHeading.textContent;
+
+        try {
+          // Responsive margin for headings
+          const responsiveMargin = window.innerWidth < 768 ? "0.15em" : "0.3em";
+
+          // Split heading into words
+          const words = itemHeading.textContent
+            .replace(/\s+/g, " ")
+            .trim()
+            .split(" ");
+          let newContent = "";
+
+          // Create wrapped words with responsive margins
+          words.forEach((word, index) => {
+            const isLastWord = index === words.length - 1;
+            newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+              <span class="word-inner" style="display:inline-block; transform:translateY(25px); opacity:0;">${word}</span>
+            </span>`;
+          });
+
+          itemHeading.innerHTML = newContent;
+
+          // Animate heading words
+          const headingWords = itemHeading.querySelectorAll(".word-inner");
+          gsap.to(headingWords, {
+            scrollTrigger: {
+              trigger: item,
+              start: "top 85%",
+              end: "top 75%",
+              scrub: 0.6,
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.03,
+            ease: "power2.out",
+          });
+        } catch (error) {
+          console.error("Benefit heading split error:", error);
+          itemHeading.textContent = originalHeadingContent;
+        }
+      }
+
+      // Process paragraph
+      const paragraph = item.querySelector("p");
+      if (paragraph) {
+        const originalContent = paragraph.textContent;
+
+        try {
+          // Responsive margin for paragraph text
+          const responsiveMargin = window.innerWidth < 768 ? "0.1em" : "0.2em";
+
+          // Normalize and split text
+          const normalizedText = paragraph.textContent
+            .replace(/\s+/g, " ")
+            .trim();
+          const words = normalizedText.split(" ");
+          let newContent = "";
+
+          // Create wrapped words with responsive margins
+          words.forEach((word, index) => {
+            const isLastWord = index === words.length - 1;
+            newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+              <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+            </span>`;
+          });
+
+          paragraph.innerHTML = newContent;
+
+          // Animate paragraph words with gentler timing
+          const paragraphWords = paragraph.querySelectorAll(".word-inner");
+          gsap.to(paragraphWords, {
+            scrollTrigger: {
+              trigger: paragraph,
+              start: "top 90%",
+              end: "center 75%",
+              scrub: 0.7,
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.015,
+            ease: "power1.inOut",
+          });
+        } catch (error) {
+          console.error("Paragraph split error:", error);
+          paragraph.textContent = originalContent;
+        }
+      }
+    });
+  }
+
+  function initAnimations() {
+    // Staggered entrance for benefit items
+    gsap.to(".benefit-item", {
       scrollTrigger: {
-        trigger: "#game-dev-process-heading",
-        start: "top 80%",
-        toggleActions: "play none none none",
+        trigger: "#benefits-list",
+        start: "top 85%",
+        end: "bottom 60%",
+        scrub: 0.8,
       },
-    });
-
-    // Heading animation
-    tl.from(headingText.words, {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      stagger: 0.05,
+      opacity: 1,
+      x: 0,
+      stagger: 0.1,
+      duration: 0.7,
       ease: "power2.out",
     });
 
     // Illustration animation
-    tl.to(
-      "#guy-leaning-art",
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        ease: "power2.out",
+    gsap.to("#nixxon-illustration", {
+      scrollTrigger: {
+        trigger: "#nixxon-illustration",
+        start: "top 85%",
+        end: "center 70%",
+        scrub: 0.6,
       },
-      "-=0.3"
-    );
-
-    // Staggered list items animation
-    document.querySelectorAll(".benefit-item").forEach((item, index) => {
-      gsap.to(item, {
-        scrollTrigger: {
-          trigger: item,
-          start: "top 85%", // Adjust this value to control when animation starts
-          toggleActions: "play none none none",
-        },
-        opacity: 1,
-        x: 0,
-        duration: 0.7,
-        ease: "power2.out",
-      });
+      opacity: 1,
+      x: 0,
+      duration: 0.8,
+      ease: "power2.inOut",
     });
 
-
-    // Add hover animation for Read More links
-    const readMoreLinks = document.querySelectorAll(".read-more-link");
-
-    readMoreLinks.forEach((link) => {
-      link.addEventListener("mouseenter", () => {
-        gsap.to(link, {
-          x: 5,
-          duration: 0.3,
-          ease: "power1.out",
-        });
-      });
-
-      link.addEventListener("mouseleave", () => {
-        gsap.to(link, {
-          x: 0,
-          duration: 0.3,
-          ease: "power1.out",
-        });
-      });
+    // Add subtle parallax to illustration for depth
+    gsap.to("#nixxon-illustration", {
+      scrollTrigger: {
+        trigger: "#nixxon-illustration",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+      y: "-5%",
+      ease: "none",
     });
+  }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
   });
 </script>
 
 <style>
   /* Initial states for animations */
-  #guy-leaning-art {
+  #nixxon-illustration {
     transform: translateX(-20px);
   }
 
@@ -168,12 +388,5 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
     transform: translateX(20px);
   }
 
-  .read-more-link {
-    transition: color 0.2s ease;
-    display: inline-block;
-  }
-
-  .read-more-link:hover {
-    color: #0056b3; /* Slightly darker blue on hover */
-  }
+ 
 </style>

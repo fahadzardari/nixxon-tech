@@ -19,44 +19,45 @@ import innovationIcon from "../../assets/icons/home/innovation.png";
     <article
       class="flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end md:text-right px-4 py-2 border-b md:border-b-0 md:border-r border-black stats-item opacity-0"
     >
-      <h2 class="font-medium text-3xl md:text-5xl">
+      <h2 class="font-medium text-2xl sm:text-3xl canvas:text-5xl">
         <span class="counter" data-target="2500">0</span>K
       </h2>
-      <p class="text-md uppercase">Projects</p>
+      <p class="text-xs lg:text-sm canvas:text-base uppercase">Projects</p>
     </article>
     <article
       class="flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end md:text-right px-4 py-2 border-b md:border-b-0 md:border-r border-black stats-item opacity-0"
     >
-      <h2 class="font-medium text-3xl md:text-5xl">
+      <h2 class="font-medium text-2xl lg:text-3xl canvas:text-5xl">
         <span class="counter" data-target="725">0</span>
       </h2>
-      <p class="text-md uppercase">Clients</p>
+      <p class="text-xs lg:text-sm canvas:text-base uppercase">Clients</p>
     </article>
     <article
       class="flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end md:text-right px-4 py-2 border-b md:border-b-0 md:border-r border-black stats-item opacity-0"
     >
-      <h2 class="font-medium text-3xl md:text-5xl">
+      <h2 class="font-medium text-2xl lg:text-3xl canvas:text-5xl">
         <span class="counter" data-target="32">0</span>
       </h2>
-      <p class="text-md uppercase">Countries</p>
+      <p class="text-xs lg:text-sm canvas:text-base uppercase">Countries</p>
     </article>
     <article
       class="flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end md:text-right px-4 py-2 stats-item opacity-0"
     >
-      <h2 class="font-medium text-3xl md:text-5xl">
+      <h2 class="font-medium text-2xl lg:text-3xl canvas:text-5xl">
         <span class="counter" data-target="24">0</span>
       </h2>
-      <p class="text-md uppercase">Creatives</p>
+      <p class="text-xs lg:text-sm canvas:text-base uppercase">Creatives</p>
     </article>
   </div>
-  <div class="flex flex-col space-y-12">
+  <div class="flex flex-col">
     <Heading>
-      <h2 class="text-4xl font-medium" id="collaborate-heading">
-        How We <span class="text-primary-blue neon-glow">Collaborate</span> With You
+      <h2 class="font-medium" id="collaborate-heading">
+        How We <span class="text-primary-blue neon-glow">Collaborate</span> With
+        You
       </h2>
     </Heading>
     <h3
-      class="text-[#2A2111] capitalize opacity-0"
+      class="mb-12 text-xs md:text-sm canvas:text-base 2xl:text-lg text-[#2A2111] capitalize"
       id="collaborate-description"
     >
       From brand identity to customer acquisition, we offer end-to-end marketing
@@ -97,7 +98,7 @@ import innovationIcon from "../../assets/icons/home/innovation.png";
     </ul>
     <a
       href="/how-we-work"
-      class="bg-primary-blue rounded-full px-8 py-2 w-fit text-white cursor-pointer no-underline inline-block opacity-0"
+      class="bg-primary-blue mt-14 rounded-full px-4 py-1 md:px-8 md:py-2 w-fit text-white cursor-pointer no-underline inline-block opacity-0"
       id="cta-button"
     >
       How We Work
@@ -108,33 +109,205 @@ import innovationIcon from "../../assets/icons/home/innovation.png";
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import SplitType from "split-type";
 
   // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Initialize split text for heading
-    const headingText = new SplitType("#collaborate-heading", {
-      types: "words",
-      tagName: "span",
-    });
+    setTimeout(() => {
+      initStatsAnimation();
+      initContentAnimations();
+      splitAndAnimateText();
+    }, 100);
 
-    // Create separate timeline for stats
-    const statsTimeline = gsap.timeline({
+    // Refresh ScrollTrigger when page is fully loaded
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh(true);
+    });
+  });
+
+  // Function to split and animate text incrementally (matching other components)
+  function splitAndAnimateText() {
+    // Add responsive margin function (same as other components)
+    const getResponsiveMargin = () => {
+      // Use viewport width to determine margin
+      const vw = Math.max(
+        document.documentElement.clientWidth || 0,
+        window.innerWidth || 0
+      );
+
+      if (vw < 640) {
+        return "0.35rem"; // Margin on mobile
+      } else if (vw < 1024) {
+        return "0.45rem"; // Margin on tablets
+      } else {
+        return "0.55rem"; // Margin on desktops
+      }
+    };
+
+    // Split heading text
+    const heading = document.querySelector("#collaborate-heading");
+    if (heading) {
+      const originalContent = heading.innerHTML;
+
+      try {
+        // Extract the main text and the span with "Collaborate"
+        const mainText = "How We";
+        const spanContent = "Collaborate";
+        const afterText = "With You";
+
+        const responsiveMargin = getResponsiveMargin();
+
+        // Process main part of the heading
+        const mainWords = mainText.split(" ");
+        let newContent = "";
+
+        // Create wrapped words for main part
+        mainWords.forEach((word, index) => {
+          const isLastWord = index === mainWords.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        // Create wrapped words for span part
+        let newSpanContent = `<span class="text-primary-blue neon-glow">`;
+        const spanWords = spanContent.split(" ");
+
+        spanWords.forEach((word) => {
+          newSpanContent += `<span class="split-word" style="display:inline-block; overflow:hidden;">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        newSpanContent += "</span>";
+
+        // Process "With You" part
+        const afterWords = afterText.split(" ");
+        let afterContent = "";
+
+        afterWords.forEach((word, index) => {
+          const isLastWord = index === afterWords.length - 1;
+          afterContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        // Assemble heading with proper spacing
+        heading.innerHTML =
+          newContent +
+          `<span style="display:inline-block; width:${responsiveMargin}; min-width:${responsiveMargin};"></span>` +
+          newSpanContent +
+          `<span style="display:inline-block; width:${responsiveMargin}; min-width:${responsiveMargin};"></span>` +
+          afterContent;
+
+        // Ensure heading is visible
+        heading.style.opacity = 1;
+
+        // Animate heading words with smooth scroll-linked animation
+        const headingWords = heading.querySelectorAll(".word-inner");
+        gsap.to(headingWords, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            end: "top 65%",
+            scrub: 0.6,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.04,
+          ease: "power2.inOut",
+        });
+
+        // Update margins on resize
+        window.addEventListener("resize", () => {
+          const newMargin = getResponsiveMargin();
+
+          // Update spacers between sections
+          const spacerSpans = heading.querySelectorAll("span[style*='width']");
+          spacerSpans.forEach((span) => {
+            span.style.width = newMargin;
+            span.style.minWidth = newMargin;
+          });
+
+          // Update word margins
+          const wordSpans = heading.querySelectorAll(".split-word");
+          const totalWords =
+            mainWords.length + spanWords.length + afterWords.length;
+
+          wordSpans.forEach((span, index) => {
+            const isLastInSection =
+              index === mainWords.length - 1 ||
+              index === mainWords.length + spanWords.length - 1 ||
+              index === totalWords - 1;
+
+            if (!isLastInSection) {
+              span.style.marginRight = newMargin;
+            }
+          });
+        });
+      } catch (error) {
+        console.error("Heading split error:", error);
+        heading.innerHTML = originalContent;
+        heading.style.opacity = 1;
+      }
+    }
+
+    // Split description text
+    const description = document.querySelector("#collaborate-description");
+    if (description) {
+      const originalContent = description.textContent;
+
+      try {
+        const normalizedText = description.textContent
+          .replace(/\s+/g, " ")
+          .trim();
+        const words = normalizedText.split(" ");
+        let newContent = "";
+
+        // Create wrapped words with subtle initial transformation
+        words.forEach((word, index) => {
+          const isLastWord = index === words.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? "margin-right: 4px;" : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        description.innerHTML = newContent;
+
+        // Animate description words with scroll-linked animation
+        const descriptionWords = description.querySelectorAll(".word-inner");
+        gsap.to(descriptionWords, {
+          scrollTrigger: {
+            trigger: description,
+            start: "top 90%",
+            end: "bottom 70%",
+            scrub: 0.7,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.01,
+          ease: "power1.inOut",
+        });
+      } catch (error) {
+        console.error("Description split error:", error);
+        description.textContent = originalContent;
+      }
+    }
+  }
+
+  function initStatsAnimation() {
+    // Stats items animation with smoother scroll-linked timing
+    gsap.to(".stats-item", {
       scrollTrigger: {
         trigger: "#stats-container",
-        start: "top 75%",
-        toggleActions: "play none none none",
+        start: "top 85%",
+        end: "bottom 70%",
+        scrub: 0.8,
       },
-    });
-
-    // Stats items animation
-    statsTimeline.to(".stats-item", {
       opacity: 1,
       y: 0,
-      stagger: 0.15,
-      duration: 0.8,
+      stagger: 0.1,
       ease: "power2.out",
     });
 
@@ -143,98 +316,88 @@ import innovationIcon from "../../assets/icons/home/innovation.png";
     counterElements.forEach((counter) => {
       const targetValue = parseInt(counter.getAttribute("data-target"));
 
-      // Determine if we need to show decimals (for the 2.5K value)
-      let decimals = 0;
-      if (targetValue === 2500) {
-        counter.innerHTML = "0";
-        decimals = 1;
-      }
-
-      statsTimeline.to(
-        counter,
-        {
-          innerHTML: targetValue === 2500 ? "2.5" : targetValue,
-          duration: 2,
-          snap: { innerHTML: decimals === 1 ? 0.1 : 1 },
-          ease: "power2.out",
-        },
-        "-=0.5"
-      );
-    });
-
-    // Create content timeline
-    const contentTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#collaborate-heading",
+      // Create counter animation that starts when element becomes visible
+      ScrollTrigger.create({
+        trigger: counter,
         start: "top 85%",
-        toggleActions: "play none none none",
-      },
-    });
+        onEnter: () => {
+          // Determine if we need to show decimals (for the 2.5K value)
+          let value = { val: 0 };
+          let decimals = targetValue === 2500 ? 1 : 0;
 
-    // Heading animation
-    contentTimeline.from(headingText.words, {
-      opacity: 0,
-      y: 20,
+          gsap.to(value, {
+            val: targetValue === 2500 ? 2.5 : targetValue,
+            duration: 2.5,
+            ease: "power2.out",
+            onUpdate: function () {
+              counter.innerHTML = value.val.toFixed(decimals);
+            },
+          });
+        },
+        once: true,
+      });
+    });
+  }
+
+  function initContentAnimations() {
+    // Cards animation with staggered scroll-linked reveals
+    gsap.to(".card-item", {
+      scrollTrigger: {
+        trigger: "#cards-container",
+        start: "top 85%",
+        end: "center 70%",
+        scrub: 0.8,
+      },
+      opacity: 1,
+      y: 0,
       stagger: 0.1,
-      duration: 0.7,
       ease: "power2.out",
     });
 
-    // Description animation
-    contentTimeline.to(
-      "#collaborate-description",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.3"
-    );
-
-    // Cards animation
-    contentTimeline.to(
-      ".card-item",
-      {
-        opacity: 1,
-        y: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.5"
-    );
-
     // CTA button animation
-    contentTimeline.to(
-      "#cta-button",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.3"
-    );
-    // Button hover animation
     const ctaButton = document.querySelector("#cta-button");
     if (ctaButton) {
+      // Initial animation
+      ScrollTrigger.create({
+        trigger: ctaButton,
+        start: "top 90%",
+        onEnter: () => {
+          gsap.to(ctaButton, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "back.out(1.2)",
+          });
+        },
+        once: true,
+      });
+
+      // Button hover animation
       ctaButton.addEventListener("mouseenter", () => {
         gsap.to(ctaButton, {
           scale: 1.05,
+          backgroundColor: "#0074e0",
+          boxShadow: "0 4px 12px rgba(57, 208, 255, 0.4)",
           duration: 0.3,
-          ease: "power4.out",
+          ease: "power2.out",
         });
       });
 
       ctaButton.addEventListener("mouseleave", () => {
         gsap.to(ctaButton, {
           scale: 1,
+          backgroundColor: "#39d0ff",
+          boxShadow: "none",
           duration: 0.3,
-          ease: "power1.out",
+          ease: "power2.in",
         });
       });
     }
+  }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
   });
 </script>
 
@@ -254,6 +417,8 @@ import innovationIcon from "../../assets/icons/home/innovation.png";
 
   #cta-button {
     transform: translateY(20px);
-    transition: transform 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
   }
 </style>

@@ -4,18 +4,18 @@ import GetStartedLayout from "../common/GetStartedLayout.astro";
 
 <GetStartedLayout>
   <div
-    class="max-w-[1005px] space-y-4 text-center px-12 md:px-0 py-8 md:py-16 text-white"
+    class="app-max-width space-y-4 text-center px-12 md:px-0 py-8 md:py-16 text-white"
     id="get-started-container"
   >
     <h2
-      class="text-xl md:text-[38px] font-medium text-center md:leading-[48px] opacity-0"
+      class="text-xl md:text-2xl lg:text-3xl canvas:text-[38px] 2xl:text-5xl font-medium leading-[120%] text-center md:max-w-[80dvw] xl:w-[70dvw] mx-auto opacity-0"
       id="get-started-heading"
     >
       Let's Present Your Brand Together With Our Branding Solutions That
       Distinguish Your Brand From the Competition
     </h2>
     <p
-      class="text-center mt-10 text-xs md:text-base px-4"
+      class="text-center mt-6 text-[10px] md:text-xs xl:text-sm canvas:text-base px-8 md:max-w-[80dvw] xl:w-[70dvw] mx-auto"
       id="get-started-description"
     >
       Your Logo is the most ESSENTIAL part of your whole brand, it defines who
@@ -27,7 +27,7 @@ import GetStartedLayout from "../common/GetStartedLayout.astro";
     </p>
     <button
       id="get-started-button"
-      class="mt-6 inline-block px-12 py-3 leading-5 border border-primary-blue rounded-full text-white text-xs md:text-lg transition
+      class="mt-10 inline-block px-4 py-1 lg:px-12 lg:py-3 leading-5 border border-primary-blue rounded-full text-white text-xs md:text-base transition
   shadow-md shadow-primary-blue/50 hover:shadow-xl hover:shadow-primary-blue/80
   hover:scale-105 duration-300"
     >
@@ -39,72 +39,159 @@ import GetStartedLayout from "../common/GetStartedLayout.astro";
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import SplitType from "split-type";
 
   // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Initialize split text for heading
-    const headingText = new SplitType("#get-started-heading", {
-      types: "lines",
-      tagName: "span",
+    // Initialize animations with a slight delay to ensure DOM is ready
+    setTimeout(() => {
+      initGetStartedAnimations();
+      splitAndAnimateText();
+    }, 100);
+
+    // Refresh ScrollTrigger when page is fully loaded
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh(true);
     });
+  });
 
-    const descriptionText = new SplitType("#get-started-description", {
-      types: "lines",
-      tagName: "span",
-    });
+  // Function to split and animate text incrementally (matching other components)
+  function splitAndAnimateText() {
+    // Add responsive margin function (same as other components)
+    const getResponsiveMargin = () => {
+      // Use viewport width to determine margin
+      const vw = Math.max(
+        document.documentElement.clientWidth || 0,
+        window.innerWidth || 0
+      );
 
-    // Create main timeline
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#get-started-container",
-        start: "top 75%",
-        toggleActions: "play none none none",
-      },
-    });
+      if (vw < 640) {
+        return "0.35rem"; // Increased margin on mobile
+      } else if (vw < 1024) {
+        return "0.45rem"; // Increased margin on tablets
+      } else {
+        return "0.55rem"; // Increased margin on desktops
+      }
+    };
 
-    // Heading animation - line by line reveal
-    tl.from(headingText.lines, {
-      opacity: 0,
-      y: 30,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "power3.out",
-    });
-    tl.to("#get-started-heading", { opacity: 1, duration: 0 }, "<"); // Ensure parent is visible
+    // Split heading text
+    const heading = document.querySelector("#get-started-heading");
+    if (heading) {
+      const originalContent = heading.textContent;
 
-    // Description paragraph animation
-    tl.from(
-      descriptionText.lines,
-      {
-        opacity: 0,
-        y: 20,
-        stagger: 0.1,
-        duration: 0.6,
-        ease: "power2.out",
-      },
-      "-=0.4"
-    );
-    tl.to("#get-started-description", { opacity: 1, duration: 0 }, "<");
+      try {
+        const normalizedText = heading.textContent.replace(/\s+/g, " ").trim();
+        const words = normalizedText.split(" ");
+        let newContent = "";
 
+        // Create wrapped words with subtle initial transformation
+        words.forEach((word, index) => {
+          const isLastWord = index === words.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${getResponsiveMargin()}` : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        heading.innerHTML = newContent;
+        heading.style.opacity = 1;
+
+        // Animate heading words
+        const headingWords = heading.querySelectorAll(".word-inner");
+        gsap.to(headingWords, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 80%",
+            end: "top 60%",
+            scrub: 0.6,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.03,
+          ease: "power2.inOut",
+        });
+
+        // Update margins on resize
+        window.addEventListener("resize", () => {
+          const newMargin = getResponsiveMargin();
+          const wordSpans = heading.querySelectorAll(".split-word");
+
+          wordSpans.forEach((span, index) => {
+            if (index < words.length - 1) {
+              span.style.marginRight = newMargin;
+            }
+          });
+        });
+      } catch (error) {
+        console.error("Heading split error:", error);
+        heading.textContent = originalContent;
+      }
+    }
+
+    // Split description text
+    const description = document.querySelector("#get-started-description");
+    if (description) {
+      const originalContent = description.textContent;
+
+      try {
+        const normalizedText = description.textContent
+          .replace(/\s+/g, " ")
+          .trim();
+        const words = normalizedText.split(" ");
+        let newContent = "";
+
+        // Create wrapped words with subtle initial transformation
+        words.forEach((word, index) => {
+          const isLastWord = index === words.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? "margin-right: 3px;" : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        description.innerHTML = newContent;
+
+        // Animate description words
+        const descriptionWords = description.querySelectorAll(".word-inner");
+        gsap.to(descriptionWords, {
+          scrollTrigger: {
+            trigger: description,
+            start: "top 90%",
+            end: "bottom 70%",
+            scrub: 0.7,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.01, // Faster stagger for smoother paragraph flow
+          ease: "power1.inOut",
+        });
+      } catch (error) {
+        console.error("Description split error:", error);
+        description.textContent = originalContent;
+      }
+    }
+  }
+
+  function initGetStartedAnimations() {
     // Button animation with bounce effect
-
-    // Add an attention-grabbing effect to the button after everything loaded
-    tl.to("#get-started-button", {
-      scale: 1.05,
-      duration: 0.5,
-      ease: "power1.inOut",
-      repeat: 1,
-      yoyo: true,
-      delay: 0.5,
-    });
-
-    // Replace default animate-pulse with custom pulsing glow
     const button = document.getElementById("get-started-button");
     if (button) {
-      button.classList.remove("animate-pulse");
+      // Initial entrance animation
+      gsap.fromTo(
+        button,
+        { y: 30, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: button,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "back.out(1.5)",
+          delay: 0.5,
+        }
+      );
 
       // Create a subtle pulsing glow effect
       gsap.to(button, {
@@ -113,6 +200,7 @@ import GetStartedLayout from "../common/GetStartedLayout.astro";
         duration: 2,
         yoyo: true,
         ease: "sine.inOut",
+        delay: 1, // Start after entrance animation
       });
 
       // Add interactive hover effect
@@ -132,6 +220,11 @@ import GetStartedLayout from "../common/GetStartedLayout.astro";
         });
       });
     }
+  }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
   });
 </script>
 
@@ -147,11 +240,5 @@ import GetStartedLayout from "../common/GetStartedLayout.astro";
 
   #get-started-button {
     transform: translateY(30px);
-  }
-
-  /* Line container styles for split text */
-  .line {
-    display: block;
-    overflow: hidden;
   }
 </style>

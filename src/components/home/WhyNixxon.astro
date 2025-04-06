@@ -6,70 +6,86 @@ import Image from "astro/components/Image.astro";
 
 <section class="app-max-width py-16">
   <Heading>
-    <h2 class="text-4xl" id="why-nixxon-heading">
+    <h2 class="font-medium" id="why-nixxon-heading">
       Why Choose <span class="text-primary-blue text-pretty">NixxonTech</span>
     </h2>
   </Heading>
-  <div class="relative flex mt-16 w-full">
+  <div class="relative flex mt-8 md:mt-16 w-full">
     <Image
       src={LeaningArt}
       alt="Leaning Art"
       title="Guy Leaning"
-      class="hidden md:block z-0 left-0 w-1/2 opacity-0"
+      class="hidden lg:block z-0 left-0 w-1/2 opacity-0"
       id="nixxon-illustration"
     />
     <ul
-      class="list-none flex justify-between flex-col space-y-4 text-[#0b1125] md:border-l md:border-l-[#e0e0e0] md:px-4 md:w-[75%] md:-ml-[21%]"
+      class="list-none flex justify-between flex-col space-y-2 md:space-y-4 text-[#0b1125] lg:border-l lg:border-l-[#e0e0e0] lg:px-4 lg:w-[75%] lg:-ml-[21%]"
       id="benefits-list"
     >
-      <li class="flex flex-col space-y-2 benefit-item opacity-0">
-        <h4 class="text-[22px] font-semibold">Knowledge</h4>
-        <p>
+      <li class="flex flex-col space-y-1 md:space-y-2 benefit-item opacity-0">
+        <h4
+          class="text-base md:text-lg lg:text-xl canvas:text-[22px] 2xl:text-3xl font-semibold"
+        >
+          Knowledge
+        </h4>
+        <p class="text-xs md:text-sm xl:text-base 2xl:text-lg 3xl:text-xl">
           Experienced experts that are passionate about digital marketing make
           up our team. Our years of expertise and in-depth knowledge of market
           trends enable us to keep on top of developments and provide effective
           strategies.
         </p>
-      <a href="#" class="text-primary-blue read-more-link">
-        Read More <span>&rarr;</span>
-      </a>
+        <a href="#" class="text-primary-blue read-more-link">
+          Read More <span>&rarr;</span>
+        </a>
       </li>
       <li class="flex flex-col space-y-2 benefit-item opacity-0">
-        <h4 class="text-[22px] font-semibold">Customization</h4>
-        <p>
+        <h4
+          class="text-base md:text-lg lg:text-xl canvas:text-[22px] 2xl:text-3xl font-semibold"
+        >
+          Customization
+        </h4>
+        <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg 3xl:text-xl">
           Every business is different, and we recognize that. We customize our
           strategy to your sector, target market, and unique business
           objectives. Customized to optimize your success, our solutions are not
           one-size-fits-all.
         </p>
-      <a href="#" class="text-primary-blue read-more-link">
-        Read More <span>&rarr;</span>
-      </a>
+        <a href="#" class="text-primary-blue read-more-link">
+          Read More <span>&rarr;</span>
+        </a>
       </li>
       <li class="flex flex-col space-y-2 benefit-item opacity-0">
-        <h4 class="text-[22px] font-semibold">Result-Driven</h4>
-        <p>
+        <h4
+          class="text-base md:text-lg lg:text-xl canvas:text-[22px] 2xl:text-3xl font-semibold"
+        >
+          Result-Driven
+        </h4>
+        <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg 3xl:text-xl">
           The effect we have on your company is how we gauge our success. To
           maximize our tactics, we establish specific goals, monitor key
           performance indicators (KPIs), and conduct frequent data analysis. Our
           goal is to provide measurable outcomes that spur income and expansion.
         </p>
-      <a href="#" class="text-primary-blue read-more-link">
-        Read More <span>&rarr;</span>
-      </a>
+        <a href="#" class="text-primary-blue read-more-link">
+          Read More <span>&rarr;</span>
+        </a>
       </li>
       <li class="flex flex-col space-y-2 benefit-item opacity-0">
-        <h4 class="text-[22px] font-semibold">Collaboration</h4>
-        <p>
+        <h4
+          class="text-base md:text-lg lg:text-xl canvas:text-[22px] 2xl:text-3xl font-semibold"
+        >
+          Collaboration
+        </h4>
+        <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg 3xl:text-xl">
           We value open and honest communication as well as close client
           relationships. Since we regard yourselves as an extension of our team,
           we will always appreciate your feedback. We guarantee that our plans
           are in line with your goals by establishing a cooperative
           relationship.
         </p>
-      <a href="#" class="text-primary-blue read-more-link">
-        Read More <span>&rarr;</span>
-      </a>
+        <a href="#" class="text-primary-blue read-more-link">
+          Read More <span>&rarr;</span>
+        </a>
       </li>
     </ul>
   </div>
@@ -78,86 +94,320 @@ import Image from "astro/components/Image.astro";
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import SplitType from "split-type";
 
   // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
 
   // Wait for DOM content to be fully loaded
   document.addEventListener("DOMContentLoaded", () => {
-    // Split heading text for character animation
-    const headingText = new SplitType("#why-nixxon-heading", {
-      types: "words",
-      tagName: "span",
-    });
+    // Initialize animations with a slight delay to ensure DOM is ready
+    setTimeout(() => {
+      initNixxonAnimations();
+      splitAndAnimateText();
+    }, 100);
 
-    // Create timeline for heading and illustration
-    const tl = gsap.timeline({
+    // Refresh ScrollTrigger when page is fully loaded
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh(true);
+    });
+  });
+
+  // Function to split and animate text incrementally (matching AboutUs and Services)
+  function splitAndAnimateText() {
+    // Split heading text
+    const heading = document.querySelector("#why-nixxon-heading");
+    if (heading) {
+      // Save original content
+      const originalContent = heading.innerHTML;
+
+      try {
+        // Extract the main text and the span with "NixxonTech"
+        const mainPart = "Why Choose"; // Removed trailing space
+        const spanContent = "NixxonTech";
+
+        // Create responsive margin style that adapts to screen size - UPDATED to match other components
+        const getResponsiveMargin = () => {
+          // Use viewport width to determine margin
+          const vw = Math.max(
+            document.documentElement.clientWidth || 0,
+            window.innerWidth || 0
+          );
+
+          if (vw < 640) {
+            return "0.35rem"; // Increased margin on mobile
+          } else if (vw < 1024) {
+            return "0.45rem"; // Increased margin on tablets
+          } else {
+            return "0.55rem"; // Increased margin on desktops
+          }
+        };
+
+        const responsiveMargin = getResponsiveMargin();
+
+        // Process main part of the heading
+        const mainWords = mainPart.split(" ");
+        let newContent = "";
+
+        // Create wrapped words for main part with responsive margins - FIXED: properly apply margin style
+        mainWords.forEach((word, index) => {
+          const isLastWord = index === mainWords.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        // Create wrapped words for span part with responsive margins
+        let newSpanContent = '<span class="text-primary-blue text-pretty">';
+        const spanWords = spanContent.split(" ");
+
+        spanWords.forEach((word) => {
+          newSpanContent += `<span class="split-word" style="display:inline-block; overflow:hidden;">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        newSpanContent += "</span>";
+
+        // FIXED: Replace the heading content with better spacer element
+        heading.innerHTML =
+          newContent +
+          `<span style="display:inline-block; width:${responsiveMargin}; min-width:${responsiveMargin};"></span>` +
+          newSpanContent;
+
+        // Animate the heading words with consistent timing
+        const headingWords = heading.querySelectorAll(".word-inner");
+        gsap.to(headingWords, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            end: "top 65%",
+            scrub: 0.6,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.04,
+          ease: "power2.inOut",
+        });
+
+        // FIXED: Update margins on resize with proper style setting
+        window.addEventListener("resize", () => {
+          const newMargin = getResponsiveMargin();
+
+          // Update spacer between sections
+          const spacerSpan = heading.querySelector("span[style*='width']");
+          if (spacerSpan) {
+            spacerSpan.style.width = newMargin;
+            spacerSpan.style.minWidth = newMargin;
+          }
+
+          // Update all split words
+          const wordSpans = heading.querySelectorAll(".split-word");
+
+          wordSpans.forEach((span, index) => {
+            // Don't apply margin to the last word in "Why Choose"
+            if (index < mainWords.length - 1) {
+              span.style.marginRight = newMargin;
+            }
+          });
+        });
+      } catch (error) {
+        console.error("Heading split error:", error);
+        heading.innerHTML = originalContent;
+      }
+    }
+
+    // Split and animate benefit items text
+    const benefitItems = document.querySelectorAll(".benefit-item");
+
+    benefitItems.forEach((item, itemIndex) => {
+      // Process heading
+      const itemHeading = item.querySelector("h4");
+      if (itemHeading) {
+        const originalHeadingContent = itemHeading.textContent;
+
+        try {
+          // Responsive margin based on viewport
+          const responsiveMargin = window.innerWidth < 768 ? "0.15em" : "0.3em";
+
+          // Split heading into words
+          const words = itemHeading.textContent
+            .replace(/\s+/g, " ")
+            .trim()
+            .split(" ");
+          let newContent = "";
+
+          // Create wrapped words with responsive margins
+          words.forEach((word) => {
+            newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; margin-right:${responsiveMargin};">
+              <span class="word-inner" style="display:inline-block; transform:translateY(25px); opacity:0;">${word}</span>
+            </span> `;
+          });
+
+          itemHeading.innerHTML = newContent;
+
+          // Animate heading words
+          const headingWords = itemHeading.querySelectorAll(".word-inner");
+          gsap.to(headingWords, {
+            scrollTrigger: {
+              trigger: item,
+              start: "top 85%",
+              end: "top 75%",
+              scrub: 0.6,
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.03,
+            ease: "power2.out",
+          });
+        } catch (error) {
+          console.error("Benefit heading split error:", error);
+          itemHeading.textContent = originalHeadingContent;
+        }
+      }
+
+      // Process paragraph
+      const paragraph = item.querySelector("p");
+      if (paragraph) {
+        const originalContent = paragraph.textContent;
+
+        try {
+          // Responsive margin for paragraph text
+          const responsiveMargin = window.innerWidth < 768 ? "0.1em" : "0.2em";
+
+          // Normalize and split text
+          const normalizedText = paragraph.textContent
+            .replace(/\s+/g, " ")
+            .trim();
+          const words = normalizedText.split(" ");
+          let newContent = "";
+
+          // Create wrapped words with responsive margins
+          words.forEach((word) => {
+            newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; margin-right:${responsiveMargin};">
+              <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+            </span>`;
+          });
+
+          paragraph.innerHTML = newContent;
+
+          // Animate paragraph words with gentler timing
+          const paragraphWords = paragraph.querySelectorAll(".word-inner");
+          gsap.to(paragraphWords, {
+            scrollTrigger: {
+              trigger: paragraph,
+              start: "top 90%",
+              end: "center 75%",
+              scrub: 0.7,
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.015,
+            ease: "power1.inOut",
+          });
+        } catch (error) {
+          console.error("Paragraph split error:", error);
+          paragraph.textContent = originalContent;
+        }
+      }
+
+      // Add subtle entrance animation for Read More links
+      const readMoreLink = item.querySelector(".read-more-link");
+      if (readMoreLink) {
+        const arrow = readMoreLink.querySelector("span");
+
+        gsap.from(readMoreLink, {
+          scrollTrigger: {
+            trigger: readMoreLink,
+            start: "top 90%",
+          },
+          y: 10,
+          opacity: 0,
+          duration: 0.5,
+          delay: 0.3 + itemIndex * 0.1,
+          ease: "power2.out",
+        });
+
+        // Add hover effects consistent with AboutUs section
+        readMoreLink.addEventListener("mouseenter", () => {
+          gsap.to(readMoreLink, {
+            color: "#0056b3",
+            duration: 0.3,
+          });
+          if (arrow) {
+            gsap.to(arrow, {
+              x: 8,
+              duration: 0.3,
+              ease: "power1.out",
+            });
+          }
+        });
+
+        readMoreLink.addEventListener("mouseleave", () => {
+          gsap.to(readMoreLink, {
+            color: "#1141D3",
+            duration: 0.3,
+          });
+          if (arrow) {
+            gsap.to(arrow, {
+              x: 0,
+              duration: 0.3,
+              ease: "power1.in",
+            });
+          }
+        });
+      }
+    });
+  }
+
+  function initNixxonAnimations() {
+    // Make benefit items visible as we scroll with a staggered entrance
+    gsap.to(".benefit-item", {
       scrollTrigger: {
-        trigger: "#why-nixxon-heading",
-        start: "top 80%",
-        toggleActions: "play none none none",
+        trigger: "#benefits-list",
+        start: "top 85%",
+        end: "bottom 60%",
+        scrub: 0.8,
       },
-    });
-
-    // Heading animation
-    tl.from(headingText.words, {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      stagger: 0.05,
+      opacity: 1,
+      x: 0,
+      stagger: 0.1,
+      duration: 0.7,
       ease: "power2.out",
     });
 
-    // Illustration animation
-    tl.to(
-      "#nixxon-illustration",
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        ease: "power2.out",
+    // Illustration animation - smoother entrance
+    gsap.to("#nixxon-illustration", {
+      scrollTrigger: {
+        trigger: "#nixxon-illustration",
+        start: "top 85%",
+        end: "center 70%",
+        scrub: 0.6,
       },
-      "-=0.3"
-    );
-
-    // Individual scroll triggers for each benefit item
-    document.querySelectorAll(".benefit-item").forEach((item, index) => {
-      gsap.to(item, {
-        scrollTrigger: {
-          trigger: item,
-          start: "top 85%", // Adjust this value to control when animation starts
-          toggleActions: "play none none none",
-        },
-        opacity: 1,
-        x: 0,
-        duration: 0.7,
-        ease: "power2.out",
-      });
+      opacity: 1,
+      x: 0,
+      duration: 0.8,
+      ease: "power2.inOut",
     });
 
-    // Add hover animation for Read More links
-    const readMoreLinks = document.querySelectorAll(".read-more-link");
-
-    readMoreLinks.forEach((link) => {
-      link.addEventListener("mouseenter", () => {
-        gsap.to(link, {
-          x: 5,
-          duration: 0.3,
-          ease: "power1.out",
-        });
-      });
-
-      link.addEventListener("mouseleave", () => {
-        gsap.to(link, {
-          x: 0,
-          duration: 0.3,
-          ease: "power1.out",
-        });
-      });
+    // Add subtle parallax to illustration for depth
+    gsap.to("#nixxon-illustration", {
+      scrollTrigger: {
+        trigger: "#nixxon-illustration",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+      y: "-5%",
+      ease: "none",
     });
+  }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
   });
 </script>
+
 <style>
   /* Initial states for animations */
   #nixxon-illustration {

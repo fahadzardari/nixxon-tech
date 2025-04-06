@@ -8,10 +8,16 @@ const {
 } = Astro.props;
 ---
 
-<article class="flex flex-col space-y-4">
-  <div class="flex flex-row space-x-2">
-    <Image src={icon} alt="Collaborate Icon" class="w-6 h-6" />
-    <h2 class="text-lg font-400">{title}</h2>
+<article class="flex flex-col space-y-2 md:space-y-4">
+  <div class="flex flex-row items-center space-x-4 md:space-x-2">
+    <Image src={icon} alt="Collaborate Icon" class="aspect-square w-5 lg:w-6" />
+    <h2 class="text-xs md:text-sm lg:text-base canvas:text-lg font-400">
+      {title}
+    </h2>
   </div>
-  <p class="text-[13px] text-[#2A2111]">{description}</p>
+  <p
+    class="text-[10px] md:text-xs canvas:text-[13px] 2xl:text-sm text-[#2A2111]"
+  >
+    {description}
+  </p>
 </article>

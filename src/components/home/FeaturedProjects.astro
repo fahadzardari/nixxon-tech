@@ -12,13 +12,176 @@ const projects = [
 <section
   class="py-8 flex flex-col space-y-16"
   aria-labelledby="featured-projects-heading"
+  id="featured-projects-section"
 >
   <div class="flex flex-col space-y-12 app-max-width w-full">
     <Heading>
-      <h2 id="featured-projects-heading" class="text-4xl font-medium">
+      <h2 id="featured-projects-heading" class="font-medium">
         Featured Projects
       </h2>
     </Heading>
   </div>
-  <ProjectsSlider client:load />
+  <div id="projects-slider-container">
+    <ProjectsSlider client:load />
+  </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Initialize animations with a slight delay to ensure DOM is ready
+    setTimeout(() => {
+      splitAndAnimateText();
+      initSliderAnimation();
+    }, 100);
+
+    // Refresh ScrollTrigger when page is fully loaded
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh(true);
+    });
+  });
+
+  // Function to split and animate text incrementally (matching other components)
+  function splitAndAnimateText() {
+    // Add responsive margin function (same as other components)
+    const getResponsiveMargin = () => {
+      // Use viewport width to determine margin
+      const vw = Math.max(
+        document.documentElement.clientWidth || 0,
+        window.innerWidth || 0
+      );
+
+      if (vw < 640) {
+        return "0.35rem"; // Margin on mobile
+      } else if (vw < 1024) {
+        return "0.45rem"; // Margin on tablets
+      } else {
+        return "0.55rem"; // Margin on desktops
+      }
+    };
+
+    // Split heading text
+    const heading = document.querySelector("#featured-projects-heading");
+    if (heading) {
+      const originalContent = heading.textContent;
+      
+      try {
+        const normalizedText = heading.textContent.replace(/\s+/g, ' ').trim();
+        const words = normalizedText.split(" ");
+        let newContent = "";
+        
+        // Create wrapped words with subtle initial transformation
+        words.forEach((word, index) => {
+          const isLastWord = index === words.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${getResponsiveMargin()}` : ''}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+        
+        heading.innerHTML = newContent;
+        heading.style.opacity = 1;
+        
+        // Animate heading words
+        const headingWords = heading.querySelectorAll(".word-inner");
+        gsap.to(headingWords, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            end: "top 65%",
+            scrub: 0.6,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.04,
+          ease: "power2.inOut",
+        });
+        
+        // Update margins on resize
+        window.addEventListener("resize", () => {
+          const newMargin = getResponsiveMargin();
+          const wordSpans = heading.querySelectorAll(".split-word");
+          
+          wordSpans.forEach((span, index) => {
+            if (index < words.length - 1) {
+              span.style.marginRight = newMargin;
+            }
+          });
+        });
+      } catch (error) {
+        console.error("Heading split error:", error);
+        heading.textContent = originalContent;
+      }
+    }
+  }
+
+  function initSliderAnimation() {
+    // Add entrance animation for the projects slider
+    const sliderContainer = document.getElementById("projects-slider-container");
+    if (sliderContainer) {
+      // Create a separate timeline for cleaner animation
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sliderContainer,
+          start: "top 80%",
+          toggleActions: "play none none reset" // Reset on scroll up for repeatability
+        }
+      });
+      
+      // Add the entrance animation to the timeline
+      tl.fromTo(
+        sliderContainer,
+        {
+          y: 40,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          clearProps: "all" // Clear ALL props to prevent any leftover transforms
+        }
+      );
+    }
+
+    // Create a separate instance for parallax to avoid conflicts
+    const featuredProjectsSection = document.getElementById("featured-projects-section");
+    if (featuredProjectsSection && sliderContainer) {
+      // Create a parallax effect that doesn't modify the actual slider position
+      ScrollTrigger.create({
+        trigger: featuredProjectsSection,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+        onUpdate: (self) => {
+          // Apply a subtle visual parallax without changing the actual layout position
+          const progress = self.progress;
+          const yOffset = -2 * progress; // Subtle parallax
+          
+          // Apply as visual transform only, not affecting layout
+          gsap.set(sliderContainer, {
+            backgroundPositionY: `${yOffset}%`,
+            force3D: true // Hardware acceleration
+          });
+        }
+      });
+    }
+  }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
+  });
+</script>
+
+<style>
+  /* Optimize for animations */
+  #projects-slider-container {
+    will-change: transform;
+  }
+</style>

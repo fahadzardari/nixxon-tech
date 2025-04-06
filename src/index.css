@@ -12,6 +12,13 @@
 
 @theme {
   --color-primary-blue: #39d0ff;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-canvas: 1440px;
+  --breakpoint-2xl: 1536px;
+  --breakpoint-3xl: 1920px;
 }
 
 * {
@@ -102,7 +109,7 @@ body {
 }
 
 .hero {
-  background-image: url("../assets/bg.webp");
+  background-image: url("./assets/bg.webp");
 }
 
 .hero-text {
@@ -112,7 +119,7 @@ body {
 }
 
 .hero-portfolio {
-  background-image: url("../assets/portfolios/hero.png");
+  background-image: url("./assets/portfolios/hero.png");
 }
 
 @keyframes fadeUp {
@@ -173,8 +180,8 @@ body {
   }
 }
 
-.neon-glow {
+/* .neon-glow {
   color: #39d0ff;
   text-shadow: 0 0 5px #39d0ff, 0 0 25px rgba(57, 208, 255, 0.8);
   animation: neon-flicker 1.5s infinite alternate;
-}
+} */

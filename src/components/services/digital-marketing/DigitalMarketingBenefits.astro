@@ -6,109 +6,249 @@ import DigitalMarketingImage from "../../../assets/services/digital-marketing/di
 
 <section class="app-max-width py-16" id="digital-marketing-benefits-section">
   <Heading>
-    <h2 class="text-4xl" id="digital-marketing-benefits-heading">
+    <h2 class="font-medium" id="digital-marketing-benefits-heading">
       Email Marketing Initiatives
     </h2>
   </Heading>
-  <p class="text-base text-[#2a2111] my-4" id="digital-marketing-benefits-text">
+  <p class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 description-animation">
     Email marketing campaigns are essential for establishing and maintaining
-    relationships with customers. Businesses may successfully engage with their
+    relationships with customers. Businesses may effectively engage with their
     audience and increase brand awareness, customer loyalty, and conversions by
-    sending tailored and targeted communications. Email marketing campaigns have
-    the ability to produce quantifiable outcomes and enhance the overall
-    performance of a comprehensive digital marketing strategy when they are
-    equipped with data-driven analysis, appealing content, and targeted
-    segmentation.
+    sending tailored and targeted communications.
   </p>
-  <Image
-    src={DigitalMarketingImage}
-    alt="Digital Marketing"
-    title="Digital Marketing"
-    class="w-full my-8 opacity-0"
-    id="digital-marketing-image"
-  />
+  <div class="mt-8 md:mt-12 image-container">
+    <Image
+      src={DigitalMarketingImage}
+      alt="Digital Marketing"
+      title="Digital Marketing"
+      class="w-full opacity-0 transform-gpu"
+      id="digital-marketing-image"
+    />
+  </div>
+  <p class="text-[#2a2111] text-[16px] my-6 secondary-description-animation">
+    Email marketing campaigns have the ability to produce quantifiable outcomes and enhance 
+    the overall performance of a comprehensive digital marketing strategy when they are
+    equipped with data-driven analysis, appealing content, and targeted segmentation.
+  </p>
 </section>
 
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import SplitType from "split-type";
 
   // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
 
   // Wait for DOM content to be fully loaded
   document.addEventListener("DOMContentLoaded", () => {
-    // Split heading text for character animation
-    const headingText = new SplitType("#digital-marketing-benefits-heading", {
-      types: "words",
-      tagName: "span",
+    // Initialize animations with a slight delay to ensure DOM is ready
+    setTimeout(() => {
+      initAnimations();
+      splitAndAnimateText();
+    }, 100);
+
+    // Refresh ScrollTrigger when page is fully loaded
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh(true);
     });
+  });
 
-    // Create timeline for animations
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#digital-marketing-benefits-section",
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-    });
+  // Function to split and animate text incrementally
+  function splitAndAnimateText() {
+    // Add responsive margin function
+    const getResponsiveMargin = () => {
+      // Use viewport width to determine margin
+      const vw = Math.max(
+        document.documentElement.clientWidth || 0,
+        window.innerWidth || 0
+      );
 
-    // Heading animation - subtle character reveal
-    tl.from(headingText.words, {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      stagger: 0.05,
-      ease: "power2.out",
-    });
+      if (vw < 640) {
+        return "0.35rem"; // Margin on mobile
+      } else if (vw < 1024) {
+        return "0.45rem"; // Margin on tablets
+      } else {
+        return "0.55rem"; // Margin on desktops
+      }
+    };
 
-    // Paragraph animation - simple fade up
-    tl.from("#digital-marketing-benefits-text", {
-      opacity: 0,
-      y: 15,
-      duration: 0.8,
-      ease: "power2.out",
-    }, "-=0.3");
+    // Split heading text
+    const heading = document.querySelector("#digital-marketing-benefits-heading");
+    if (heading) {
+      // Save original content
+      const originalContent = heading.innerHTML;
 
-    // Image animation - fade in and slight slide from left
-    tl.to("#digital-marketing-image", {
-      opacity: 1,
-      x: 0,
-      duration: 0.8,
-      ease: "power2.out",
-    }, "-=0.5");
+      try {
+        // Extract the text
+        const headingText = heading.textContent.trim();
+        const responsiveMargin = getResponsiveMargin();
 
-    // Optional: Add a subtle scale effect to the image when in view
-    ScrollTrigger.create({
-      trigger: "#digital-marketing-image",
-      start: "top 80%",
-      onEnter: () => {
-        gsap.to("#digital-marketing-image", {
-          scale: 1.05,
-          duration: 1.5,
-          ease: "power1.inOut",
-          yoyo: true,
-          repeat: 1
+        // Process heading
+        const words = headingText.split(" ");
+        let newContent = "";
+
+        // Create wrapped words with responsive margins
+        words.forEach((word, index) => {
+          const isLastWord = index === words.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
         });
-      },
-      once: true
+
+        heading.innerHTML = newContent;
+        heading.style.opacity = 1;
+
+        // Animate heading words
+        const headingWords = heading.querySelectorAll(".word-inner");
+        gsap.to(headingWords, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            end: "top 65%",
+            scrub: 0.6,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.04,
+          ease: "power2.inOut",
+        });
+
+        // Update margins on resize
+        window.addEventListener("resize", () => {
+          const newMargin = getResponsiveMargin();
+          const wordSpans = heading.querySelectorAll(".split-word");
+
+          wordSpans.forEach((span, index) => {
+            if (index < words.length - 1) {
+              span.style.marginRight = newMargin;
+            }
+          });
+        });
+      } catch (error) {
+        console.error("Heading split error:", error);
+        heading.innerHTML = originalContent;
+      }
+    }
+
+    // Animate description paragraphs
+    const descriptions = document.querySelectorAll(".description-animation, .secondary-description-animation");
+    
+    descriptions.forEach((description, index) => {
+      if (description) {
+        const originalContent = description.textContent;
+
+        try {
+          // Responsive margin for paragraph
+          const responsiveMargin = window.innerWidth < 768 ? "0.1em" : "0.2em";
+
+          // Normalize and split text
+          const normalizedText = description.textContent.replace(/\s+/g, " ").trim();
+          const words = normalizedText.split(" ");
+          let newContent = "";
+
+          // Create wrapped words with responsive margins
+          words.forEach((word, wordIndex) => {
+            const isLastWord = wordIndex === words.length - 1;
+            newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+              <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+            </span>`;
+          });
+
+          description.innerHTML = newContent;
+
+          // Animate paragraph words with staggered timing based on paragraph index
+          const paragraphWords = description.querySelectorAll(".word-inner");
+          gsap.to(paragraphWords, {
+            scrollTrigger: {
+              trigger: description,
+              start: "top 90%",
+              end: "center 75%",
+              scrub: 0.7,
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.015,
+            delay: index * 0.2, // Stagger between paragraphs
+            ease: "power1.inOut",
+          });
+        } catch (error) {
+          console.error("Description split error:", error);
+          description.textContent = originalContent;
+        }
+      }
     });
+  }
+
+  function initAnimations() {
+    // Image animation - smooth reveal with slight scale
+    gsap.to("#digital-marketing-image", {
+      scrollTrigger: {
+        trigger: ".image-container",
+        start: "top 85%",
+        end: "center 60%",
+        scrub: 0.6,
+      },
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.2,
+      ease: "power2.out",
+    });
+
+    // Add subtle hover effect to image
+    const marketingImage = document.querySelector("#digital-marketing-image");
+    if (marketingImage) {
+      marketingImage.addEventListener("mouseenter", () => {
+        gsap.to(marketingImage, {
+          scale: 1.02,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+      });
+      
+      marketingImage.addEventListener("mouseleave", () => {
+        gsap.to(marketingImage, {
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+      });
+    }
+  }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
   });
 </script>
 
 <style>
   /* Initial states for animations */
   #digital-marketing-image {
-    transform: translateX(-10px);
+    transform: translateY(20px) scale(0.98);
   }
 
-  /* Optional hover effect on the heading */
-  #digital-marketing-benefits-heading {
-    transition: text-shadow 0.3s ease;
+  
+  /* Subtle hover effect on the whole section */
+  #digital-marketing-benefits-section {
+    transition: box-shadow 0.3s ease;
+    border-radius: 4px;
+  }
+  
+  #digital-marketing-benefits-section:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Responsive image container */
+  .image-container {
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  #digital-marketing-benefits-heading:hover {
-    text-shadow: 0 0 8px rgba(0, 86, 179, 0.2);
+  @media (min-width: 1536px) {
+    .image-container {
+      border-radius: 8px;
+    }
   }
 </style>

@@ -44,11 +44,11 @@ const services = [
 
 <section class="app-max-width py-16">
   <Heading>
-    <h2 class="text-4xl heading-animation" id="devops-services">
+    <h2 class="text-xl md:text-2xl lg:text-3xl canvas:text-[38px] 2xl:text-[42px] 3xl:text-[46px] font-medium" id="devops-services-heading">
       DevOps Services That Set Us Apart
     </h2>
   </Heading>
-  <p class="text-[#2a2111] text-[16px] my-4 description-animation">
+  <p class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 description-animation">
     We offer a variety of DevOps services and solutions to help our clients optimize their software development processes, including:
   </p>
   <article class="grid grid-cols-1 md:grid-cols-3 gap-4 services-container">
@@ -59,13 +59,13 @@ const services = [
             <div
               class={`relative capitalize py-2 border-b border-[#E1E1E1] after:absolute after:left-0 after:bottom-[-1px] after:w-[30px] after:h-[1px] after:bg-primary-blue after:ml-0 service-border flex-grow`}
             >
-              <h4 class="text-lg font-semibold my-4 service-title">
+              <h4 class="text-base md:text-lg canvas:text-[22px] 2xl:text-xl font-semibold my-4 service-title">
                 <span class="text-primary-blue service-number">
                   0{index + 1}
                 </span>
                 {service.service}
               </h4>
-              <p class="text-[#2a2111] text-sm service-description">
+              <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg text-[#2a2111] service-description">
                 {service.description}
               </p>
             </div>
@@ -92,39 +92,296 @@ const services = [
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Main animation timeline
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#devops-services",
-      start: "top 80%",
-    },
+  // Wait for DOM content to be fully loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    // Initialize animations with a slight delay to ensure DOM is ready
+    setTimeout(() => {
+      initAnimations();
+      splitAndAnimateText();
+    }, 100);
+
+    // Refresh ScrollTrigger when page is fully loaded
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh(true);
+    });
   });
 
-  tl.from("#devops-services", { y: 30, opacity: 0, duration: 0.7 })
-    .from(
-      ".text-\\[\\#2a2111\\].text-\\[16px\\]",
-      { y: 20, opacity: 0, duration: 0.7 },
-      "-=0.4"
-    )
-    .from(
-      ".service-card",
-      {
-        y: 50,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.1,
+  // Function to split and animate text incrementally
+  function splitAndAnimateText() {
+    // Add responsive margin function
+    const getResponsiveMargin = () => {
+      // Use viewport width to determine margin
+      const vw = Math.max(
+        document.documentElement.clientWidth || 0,
+        window.innerWidth || 0
+      );
+
+      if (vw < 640) {
+        return "0.35rem"; // Margin on mobile
+      } else if (vw < 1024) {
+        return "0.45rem"; // Margin on tablets
+      } else {
+        return "0.55rem"; // Margin on desktops
+      }
+    };
+
+    // Split heading text
+    const heading = document.querySelector("#devops-services-heading");
+    if (heading) {
+      // Save original content
+      const originalContent = heading.innerHTML;
+      
+      try {
+        // Extract the text
+        const text = heading.textContent.trim();
+        const words = text.split(" ");
+        const responsiveMargin = getResponsiveMargin();
+        let newContent = "";
+
+        // Create wrapped words with responsive margins
+        words.forEach((word, index) => {
+          const isLastWord = index === words.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ''}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        heading.innerHTML = newContent;
+        heading.style.opacity = 1;
+        
+        // Animate heading words
+        const headingWords = heading.querySelectorAll(".word-inner");
+        gsap.to(headingWords, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            end: "top 65%",
+            scrub: 0.6,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.04,
+          ease: "power2.inOut",
+        });
+        
+        // Update margins on resize
+        window.addEventListener("resize", () => {
+          const newMargin = getResponsiveMargin();
+          
+          // Update all split words
+          const wordSpans = heading.querySelectorAll(".split-word");
+          
+          wordSpans.forEach((span, index) => {
+            // Don't apply margin to the last word
+            if (index < words.length - 1) {
+              span.style.marginRight = newMargin;
+            }
+          });
+        });
+      } catch (error) {
+        console.error("Heading split error:", error);
+        heading.innerHTML = originalContent;
+      }
+    }
+
+    // Split and animate description paragraph
+    const description = document.querySelector(".description-animation");
+    if (description) {
+      const originalContent = description.textContent;
+      
+      try {
+        // Split text into words
+        const words = description.textContent.replace(/\s+/g, " ").trim().split(" ");
+        const responsiveMargin = getResponsiveMargin();
+        let newContent = "";
+        
+        // Create wrapped words with responsive margins
+        words.forEach((word, index) => {
+          const isLastWord = index === words.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ''}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+          </span>`;
+        });
+        
+        description.innerHTML = newContent;
+        
+        // Animate description words
+        const paragraphWords = description.querySelectorAll(".word-inner");
+        gsap.to(paragraphWords, {
+          scrollTrigger: {
+            trigger: description,
+            start: "top 85%",
+            end: "bottom 65%",
+            scrub: 0.7,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.015,
+          ease: "power1.inOut",
+        });
+      } catch (error) {
+        console.error("Description split error:", error);
+        description.textContent = originalContent;
+      }
+    }
+
+    // Split and animate service card titles and descriptions
+    document.querySelectorAll(".service-card").forEach((card, cardIndex) => {
+      // Process title
+      const title = card.querySelector(".service-title");
+      if (title) {
+        const numberSpan = title.querySelector(".service-number");
+        const numberText = numberSpan ? numberSpan.textContent : "";
+        const titleText = title.textContent.replace(numberText, "").trim();
+        
+        try {
+          // Keep the number span as is
+          const newContent = numberSpan.outerHTML + 
+            `<span class="title-text" style="display:inline-block; transform:translateY(15px); opacity:0;">${titleText}</span>`;
+          
+          title.innerHTML = newContent;
+          
+          // Animate title
+          const titleSpan = title.querySelector(".title-text");
+          gsap.to(titleSpan, {
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              end: "top 70%",
+              scrub: 0.5,
+            },
+            y: 0,
+            opacity: 1,
+            ease: "power2.out",
+          });
+        } catch (error) {
+          console.error("Title split error:", error);
+        }
+      }
+      
+      // Process description
+      const description = card.querySelector(".service-description");
+      if (description) {
+        const originalContent = description.textContent;
+        
+        try {
+          description.innerHTML = `<span class="desc-text" style="display:block; transform:translateY(15px); opacity:0;">${originalContent}</span>`;
+          
+          // Animate description
+          const descSpan = description.querySelector(".desc-text");
+          gsap.to(descSpan, {
+            scrollTrigger: {
+              trigger: card,
+              start: "top 80%",
+              end: "top 65%",
+              scrub: 0.5,
+            },
+            y: 0,
+            opacity: 1,
+            ease: "power1.out",
+            delay: 0.1,
+          });
+        } catch (error) {
+          console.error("Description animation error:", error);
+          description.textContent = originalContent;
+        }
+      }
+    });
+  }
+
+  function initAnimations() {
+    // Staggered entrance for service cards
+    gsap.to(".service-card", {
+      scrollTrigger: {
+        trigger: ".services-container",
+        start: "top 85%",
+        end: "center 70%",
+        scrub: 0.8,
       },
-      "-=0.2"
-    );
-
-  // Add hover effect for cards
-  document.querySelectorAll(".grid > div").forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      gsap.to(card, { y: -5, duration: 0.3 });
+      opacity: 1,
+      y: 0,
+      stagger: 0.1,
+      duration: 0.7,
+      ease: "power2.out",
     });
 
-    card.addEventListener("mouseleave", () => {
-      gsap.to(card, { y: 0, duration: 0.3 });
+    // Animate service images
+    gsap.utils.toArray(".service-image").forEach(image => {
+      gsap.to(image, {
+        scrollTrigger: {
+          trigger: image,
+          start: "top 90%",
+          end: "bottom 70%",
+          scrub: 0.6,
+        },
+        scale: 1.05,
+        duration: 0.8,
+        ease: "power1.inOut",
+      });
     });
+
+    // Enhanced hover effects
+    document.querySelectorAll(".service-card").forEach(card => {
+      card.addEventListener("mouseenter", () => {
+        gsap.to(card, { 
+          y: -8, 
+          boxShadow: "0 10px 25px rgba(0,0,0,0.08)", 
+          duration: 0.3 
+        });
+        
+        const image = card.querySelector(".service-image");
+        if (image) {
+          gsap.to(image, { scale: 1.1, duration: 0.4 });
+        }
+        
+        const border = card.querySelector(".service-border");
+        if (border) {
+          gsap.to(border.querySelector("::after"), { width: "50px", duration: 0.3 });
+        }
+      });
+
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, { 
+          y: 0, 
+          boxShadow: "0 0 0 rgba(0,0,0,0)", 
+          duration: 0.3, 
+          clearProps: "boxShadow" 
+        });
+        
+        const image = card.querySelector(".service-image");
+        if (image) {
+          gsap.to(image, { scale: 1.05, duration: 0.4 });
+        }
+        
+        const border = card.querySelector(".service-border");
+        if (border) {
+          gsap.to(border.querySelector("::after"), { width: "30px", duration: 0.3 });
+        }
+      });
+    });
+  }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
   });
 </script>
+
+<style>
+  /* Initial states for animations */
+  .service-card {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+ 
+
+  .service-image {
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+  }
+  
+  #devops-services-heading {
+    opacity: 0; /* Will be set to 1 after text splitting */
+  }
+</style>

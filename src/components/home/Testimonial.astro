@@ -12,13 +12,235 @@ const projects = [
 <section
   class="py-8 flex flex-col space-y-16"
   aria-labelledby="testimonials-heading"
+  id="testimonials-section"
 >
   <div class="flex flex-col space-y-12 app-max-width w-full">
     <Heading>
-      <h2 id="testimonials-heading" class="text-4xl font-medium">
+      <h2 id="testimonials-heading" class="font-medium">
         What Our <span class="text-primary-blue neon-glow">Clients</span> Say
       </h2>
     </Heading>
   </div>
-  <TestimonialSlider client:load />
+  <div id="testimonial-slider-container">
+    <TestimonialSlider client:load />
+  </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Initialize animations with a slight delay to ensure DOM is ready
+    setTimeout(() => {
+      splitAndAnimateText();
+      initSliderAnimation();
+    }, 100);
+
+    // Refresh ScrollTrigger when page is fully loaded
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh(true);
+    });
+  });
+
+  // Function to split and animate text incrementally (matching other components)
+  function splitAndAnimateText() {
+    // Add responsive margin function (same as other components)
+    const getResponsiveMargin = () => {
+      // Use viewport width to determine margin
+      const vw = Math.max(
+        document.documentElement.clientWidth || 0,
+        window.innerWidth || 0
+      );
+
+      if (vw < 640) {
+        return "0.35rem"; // Margin on mobile
+      } else if (vw < 1024) {
+        return "0.45rem"; // Margin on tablets
+      } else {
+        return "0.55rem"; // Margin on desktops
+      }
+    };
+
+    // Split heading text
+    const heading = document.querySelector("#testimonials-heading");
+    if (heading) {
+      const originalContent = heading.innerHTML;
+
+      try {
+        // Extract the main text and the span with "Clients"
+        const mainText = "What Our";
+        const spanContent = "Clients";
+        const afterText = "Say";
+
+        const responsiveMargin = getResponsiveMargin();
+
+        // Process main part of the heading
+        const mainWords = mainText.split(" ");
+        let newContent = "";
+
+        // Create wrapped words for main part
+        mainWords.forEach((word, index) => {
+          const isLastWord = index === mainWords.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        // Create wrapped words for span part
+        let newSpanContent = `<span class="text-primary-blue neon-glow">`;
+        const spanWords = spanContent.split(" ");
+
+        spanWords.forEach((word) => {
+          newSpanContent += `<span class="split-word" style="display:inline-block; overflow:hidden;">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        newSpanContent += "</span>";
+
+        // Process "Say" part
+        const afterWords = afterText.split(" ");
+        let afterContent = "";
+
+        afterWords.forEach((word, index) => {
+          const isLastWord = index === afterWords.length - 1;
+          afterContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        // Assemble heading with proper spacing
+        heading.innerHTML =
+          newContent +
+          `<span style="display:inline-block; width:${responsiveMargin}; min-width:${responsiveMargin};"></span>` +
+          newSpanContent +
+          `<span style="display:inline-block; width:${responsiveMargin}; min-width:${responsiveMargin};"></span>` +
+          afterContent;
+
+        // Ensure heading is visible
+        heading.style.opacity = 1;
+
+        // Animate heading words with smooth scroll-linked animation
+        const headingWords = heading.querySelectorAll(".word-inner");
+        gsap.to(headingWords, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            end: "top 65%",
+            scrub: 0.6,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.04,
+          ease: "power2.inOut",
+        });
+
+        // Update margins on resize
+        window.addEventListener("resize", () => {
+          const newMargin = getResponsiveMargin();
+
+          // Update spacers between sections
+          const spacerSpans = heading.querySelectorAll("span[style*='width']");
+          spacerSpans.forEach((span) => {
+            span.style.width = newMargin;
+            span.style.minWidth = newMargin;
+          });
+
+          // Update word margins
+          const wordSpans = heading.querySelectorAll(".split-word");
+          const totalWords =
+            mainWords.length + spanWords.length + afterWords.length;
+
+          wordSpans.forEach((span, index) => {
+            const isLastInSection =
+              index === mainWords.length - 1 ||
+              index === mainWords.length + spanWords.length - 1 ||
+              index === totalWords - 1;
+
+            if (!isLastInSection) {
+              span.style.marginRight = newMargin;
+            }
+          });
+        });
+      } catch (error) {
+        console.error("Heading split error:", error);
+        heading.innerHTML = originalContent;
+        heading.style.opacity = 1;
+      }
+    }
+  }
+
+  function initSliderAnimation() {
+    // Add entrance animation for the testimonial slider
+    const sliderContainer = document.getElementById(
+      "testimonial-slider-container"
+    );
+    if (sliderContainer) {
+      // Create a separate timeline for cleaner animation
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sliderContainer,
+          start: "top 80%",
+          toggleActions: "play none none reset" // Reset on scroll up for repeatability
+        }
+      });
+      
+      // Add the entrance animation to the timeline
+      tl.fromTo(
+        sliderContainer,
+        {
+          y: 40,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          clearProps: "all" // Clear ALL props to prevent any leftover transforms
+        }
+      );
+    }
+
+    // Create a separate instance for parallax to avoid conflicts
+    // Use a proxy element for the parallax effect to avoid affecting the actual container
+    const testimonialSection = document.getElementById("testimonials-section");
+    if (testimonialSection) {
+      // Create a parallax effect that doesn't modify the actual slider position
+      ScrollTrigger.create({
+        trigger: testimonialSection,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+        onUpdate: (self) => {
+          // Apply a subtle visual parallax without changing the actual layout position
+          const progress = self.progress;
+          const yOffset = -2 * progress; // Reduced from -3% to -2%
+          
+          // Apply as visual transform only, not affecting layout
+          gsap.set(sliderContainer, {
+            backgroundPositionY: `${yOffset}%`,
+            force3D: true // Hardware acceleration
+          });
+        }
+      });
+    }
+  }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
+  });
+</script>
+
+<style>
+  /* Remove the commented out transform to avoid conflict with GSAP */
+  #testimonial-slider-container {
+    /* No initial transform needed */
+    will-change: transform; /* Optimize for animations */
+  }
+</style>

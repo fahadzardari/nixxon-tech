@@ -73,7 +73,10 @@ const services = [
   class="app-max-width py-16"
   aria-labelledby="services-heading"
 >
-  <h2 id="services-heading" class="text-4xl font-medium mb-16 opacity-0">
+  <h2
+    id="services-heading"
+    class="text-xl md:text-2xl lg:text-3xl canvas:text-[38px] 2xl:text-[42px] 3xl:text-[46px] font-medium mb-8 md:mb-16 opacity-0"
+  >
     Your Full Service
     <span class="text-primary-blue neon-glow">Digital Partner</span>
   </h2>
@@ -102,7 +105,7 @@ const services = [
                 class:list={[
                   "service-tab",
                   "text-sm",
-                  "md:text-xl",
+                  "md:text-base lg:text-lg canvas:text-2xl",
                   "cursor-pointer",
                   "font-medium",
                   "py-2",
@@ -195,65 +198,243 @@ const services = [
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import SplitType from "split-type";
 
   // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Initialize split text for heading
-    const headingText = new SplitType("#services-heading", {
-      types: "words",
-      tagName: "span",
-    });
+    // Initialize text splitting and animations
+    setTimeout(() => {
+      initServicesAnimations();
+      splitAndAnimateText();
+    }, 100);
 
-    // Create main timeline for initial animations
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#services",
-        start: "top 75%",
-        toggleActions: "play none none none",
-      },
+    // Refresh ScrollTrigger when page is fully loaded
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh(true);
     });
+  });
 
-    // Heading animation
-    tl.from(headingText.words, {
-      opacity: 0,
-      y: 30,
-      stagger: 0.1,
-      duration: 0.7,
-      ease: "power2.out",
-    });
-    tl.to("#services-heading", { opacity: 1, y: 0, duration: 0 }, "<");
+  function splitAndAnimateText() {
+    // Split heading text
+    const heading = document.querySelector("#services-heading");
+    if (heading) {
+      // Save original content
+      const originalContent = heading.innerHTML;
 
-    // Tabs animation - staggered entrance
-    tl.to(
-      ".service-tab-item",
-      {
-        opacity: 1,
-        x: 0,
-        stagger: 0.075,
-        duration: 0.6,
-        ease: "power2.out",
-      },
-      "-=0.3"
+      try {
+        // Add responsive margin function
+        const getResponsiveMargin = () => {
+          // Use viewport width to determine margin
+          const vw = Math.max(
+            document.documentElement.clientWidth || 0,
+            window.innerWidth || 0
+          );
+
+          if (vw < 640) {
+            return "0.35rem"; // Increased margin on mobile
+          } else if (vw < 1024) {
+            return "0.45rem"; // Increased margin on tablets
+          } else {
+            return "0.55rem"; // Increased margin on desktops
+          }
+        };
+
+        const responsiveMargin = getResponsiveMargin();
+        
+        // Use a more reliable approach to get the exact text content
+        // Store original text for restoration
+        const mainText = "Your Full Service";
+        const spanContent = "Digital Partner";
+
+        // Process main part of the heading - normalize whitespace to prevent duplication
+        const words = mainText.split(" ");
+        let newContent = "";
+
+        // FIXED: Create wrapped words with responsive margins - apply margin directly
+        words.forEach((word, index) => {
+          const isLastWord = index === words.length - 1;
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ''}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        // Create wrapped words for span part with responsive margins
+        let newSpanContent = '<span class="text-primary-blue neon-glow">';
+        const spanWords = spanContent.split(" ");
+        
+        spanWords.forEach((word, index) => {
+          const isLastWord = index === spanWords.length - 1;
+          newSpanContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ''}">
+            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        newSpanContent += "</span>";
+
+        // FIXED: Replace the heading content with correctly spaced content - use fixed margin
+        heading.innerHTML = newContent + 
+          `<span style="display:inline-block; width:${responsiveMargin}; min-width:${responsiveMargin};"></span>` + 
+          newSpanContent;
+        heading.style.opacity = 1;
+        
+        // FIXED: Update margins on resize with proper style setting
+        window.addEventListener("resize", () => {
+          const newMargin = getResponsiveMargin();
+          
+          // Update spacer between sections
+          const spacerSpan = heading.querySelector("span[style*='width']");
+          if (spacerSpan) {
+            spacerSpan.style.width = newMargin;
+            spacerSpan.style.minWidth = newMargin;
+          }
+          
+          // Update all split words
+          const wordSpans = heading.querySelectorAll(".split-word");
+          const mainWordsCount = words.length;
+          const spanWordsCount = spanWords.length;
+          
+          wordSpans.forEach((span, index) => {
+            // Don't apply margin to the last word in each section
+            if ((index < mainWordsCount - 1) || 
+                (index >= mainWordsCount && index < mainWordsCount + spanWordsCount - 1)) {
+              span.style.marginRight = newMargin;
+            }
+          });
+        });
+
+        // Animate the heading words
+        const headingWords = heading.querySelectorAll(".word-inner");
+        gsap.to(headingWords, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            end: "top 65%",
+            scrub: 0.6,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.04,
+          ease: "power2.inOut",
+        });
+      } catch (error) {
+        console.error("Services heading split error:", error);
+        // Restore original content if something goes wrong
+        heading.innerHTML = originalContent;
+        // Fallback animation
+        gsap.to(heading, { opacity: 1, y: 0, duration: 0.8 });
+      }
+    }
+
+    // Split and animate service descriptions in the active panel
+    const animateActivePanel = () => {
+      const activePanel = document.querySelector(
+        "[role='tabpanel']:not(.hidden)"
+      );
+      if (!activePanel) return;
+
+      // Find the description paragraph in the active panel
+      const description = activePanel.querySelector("p");
+      if (!description || description.querySelector(".split-word")) return;
+
+      const originalContent = description.textContent;
+
+      try {
+        // Normalize and split description
+        const normalizedText = description.textContent
+          .replace(/\s+/g, " ")
+          .trim();
+        const words = normalizedText.split(" ");
+        let newContent = "";
+
+        // Create wrapped words with subtle initial transformation
+        words.forEach((word) => {
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; margin-right:6px;">
+            <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+          </span>`;
+        });
+
+        description.innerHTML = newContent;
+
+        // Animate the words
+        const descriptionWords = description.querySelectorAll(".word-inner");
+        gsap.to(descriptionWords, {
+          scrollTrigger: {
+            trigger: description,
+            start: "top 90%",
+            end: "center 75%",
+            scrub: 0.7,
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.015,
+          ease: "power1.inOut",
+        });
+      } catch (error) {
+        console.error("Description split error:", error);
+        description.textContent = originalContent;
+      }
+    };
+
+    // Process active panel on initial load
+    animateActivePanel();
+
+    // Setup observer to detect panel changes for tab system
+    const panelsContainer = document.getElementById(
+      "service-details-container"
     );
+    if (panelsContainer) {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === "attributes" || mutation.type === "childList") {
+            // When DOM changes, check if we need to animate a newly active panel
+            animateActivePanel();
+          }
+        });
+      });
 
-    // First panel animation
-    tl.to(
-      "[role='tabpanel']:not(.hidden)",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.3"
-    );
+      observer.observe(panelsContainer, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        attributeFilter: ["class", "style"],
+      });
+    }
+  }
 
-    // Get all service tabs
+  function initServicesAnimations() {
+    // Get all service tabs and panels
     const tabs = document.querySelectorAll("[role='tab']");
     const panels = document.querySelectorAll("[role='tabpanel']");
+
+    // Staggered entrance for tabs (consistent with AboutUs animations)
+    gsap.to(".service-tab-item", {
+      scrollTrigger: {
+        trigger: ".service-tabs-nav",
+        start: "top 85%",
+        end: "bottom 70%",
+        scrub: 0.7,
+      },
+      opacity: 1,
+      x: 0,
+      stagger: 0.08,
+      duration: 0.6,
+      ease: "power2.out",
+    });
+
+    // First panel animation
+    gsap.to("[role='tabpanel']:not(.hidden)", {
+      scrollTrigger: {
+        trigger: "#service-details-container",
+        start: "top 85%",
+        end: "bottom 75%",
+        scrub: 0.8,
+      },
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.out",
+    });
 
     // Add click event listeners to tabs with animations
     tabs.forEach((tab) => {
@@ -306,11 +487,7 @@ const services = [
 
         // Ensure we found both panels
         if (currentPanel && newPanel) {
-          console.log("Switching from", currentActiveIndex, "to", index);
-          console.log("Current panel:", currentPanel.innerHTML.slice(0, 50));
-          console.log("New panel:", newPanel.innerHTML.slice(0, 50));
-
-          // Timeline for panel transition
+          // Timeline for panel transition with improved smoothness
           const panelTl = gsap.timeline();
 
           // First, ensure new panel is ready but hidden
@@ -319,12 +496,12 @@ const services = [
           newPanel.style.opacity = 0;
           newPanel.style.transform = "translateY(20px)";
 
-          // Fade out current panel
+          // Fade out current panel with smoother easing
           panelTl.to(currentPanel, {
             opacity: 0,
-            y: 10,
-            duration: 0.3,
-            ease: "power2.in",
+            y: -10,
+            duration: 0.4,
+            ease: "power1.inOut",
             onComplete: () => {
               // Hide current panel completely
               currentPanel.style.display = "none";
@@ -332,23 +509,16 @@ const services = [
             },
           });
 
-          // Fade in new panel as a separate animation step
+          // Fade in new panel with smoother animation
           panelTl.to(newPanel, {
             opacity: 1,
             y: 0,
             duration: 0.5,
             ease: "power2.out",
-            immediateRender: false, // Prevents GSAP from setting initial state too early
-          });
-
-          // Add more debugging
-          panelTl.eventCallback("onComplete", () => {
-            console.log(
-              "Animation complete - panel content:",
-              newPanel.textContent.substring(0, 30).trim()
-            );
-            console.log("Panel display style:", newPanel.style.display);
-            console.log("Panel opacity:", newPanel.style.opacity);
+            onComplete: () => {
+              // Only animate the panel content, not the heading again
+              animateActivePanel();
+            },
           });
         }
       });
@@ -390,5 +560,10 @@ const services = [
         tab.style.color = "#1e1e1e";
       }
     });
+  }
+
+  // Update animations on resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
   });
 </script>

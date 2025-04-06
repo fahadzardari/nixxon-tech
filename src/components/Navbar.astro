@@ -47,7 +47,7 @@ const currentPath = Astro.url.pathname;
 >
   <div class="app-max-width">
     <nav
-      class="flex justify-between items-center h-16"
+      class="flex justify-between items-center h-16 2xl:h-20 "
       aria-label="Main navigation"
     >
       <!-- Logo -->
@@ -74,7 +74,7 @@ const currentPath = Astro.url.pathname;
                 <li class="relative group">
                   <span
                     class:list={[
-                      "transition duration-300 flex items-center text-sm  cursor-pointer",
+                      "transition duration-300 flex items-center lg:text-sm 2xl:text-base cursor-pointer",
                       "text-white hover:text-[#39D0FF]",
                       {
                         "text-[#39D0FF]  nav-active":
@@ -107,7 +107,7 @@ const currentPath = Astro.url.pathname;
                           <a
                             href={dropdownItem.href}
                             class:list={[
-                              "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100",
+                              "block px-4 py-2 lg:text-sm 2xl:text-base text-gray-700 hover:bg-gray-100",
                               {
                                 "bg-gray-50 text-[#39D0FF]":
                                   isDropdownItemActive,
@@ -130,7 +130,7 @@ const currentPath = Astro.url.pathname;
                 <a
                   href={item.href}
                   class:list={[
-                    "transition duration-300 text-sm",
+                    "transition duration-300 lg:text-sm 2xl:text-base",
                     "text-white hover:text-[#39D0FF]",
                     { "text-[#39D0FF]  nav-active": isActive },
                   ]}
