@@ -12,7 +12,7 @@ import innovationIcon from "../../assets/icons/home/innovation.png";
   aria-labelledby="collaborate-heading"
   id="collaborate-section"
 >
-  <div class="flex flex-col space-y-12">
+  <div class="flex flex-col space-y-6">
     <Heading>
       <h2 class="font-medium" id="collaborate-heading">
         How We <span class="text-primary-blue neon-glow">Collaborate</span> With
@@ -20,7 +20,7 @@ import innovationIcon from "../../assets/icons/home/innovation.png";
       </h2>
     </Heading>
     <h3
-      class="text-[#2A2111] capitalize opacity-0"
+      class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg opacity-0"
       id="collaborate-description"
     >
       From brand identity to customer acquisition, we offer end-to-end marketing
@@ -74,150 +74,214 @@ import innovationIcon from "../../assets/icons/home/innovation.png";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import SplitType from "split-type";
 
-  // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function initCollaborateAnimations() {
+    // Reset any existing ScrollTriggers for this section
+    ScrollTrigger.getAll().forEach((st) => {
+      if (
+        st.vars.trigger &&
+        typeof st.vars.trigger === "string" &&
+        (st.vars.trigger.includes("collaborate") ||
+          st.vars.trigger.includes("card-item"))
+      ) {
+        st.kill();
+      }
+    });
+
     // Initialize split text for heading
-    const headingText = new SplitType("#collaborate-heading", {
-      types: "words",
-      tagName: "span",
+    let headingText;
+    try {
+      headingText = new SplitType("#collaborate-heading", {
+        types: "words",
+        tagName: "span",
+      });
+    } catch (error) {
+      console.error("Error initializing SplitType:", error);
+    }
+
+    // Set initial states for animations
+    if (headingText && headingText.words) {
+      gsap.set(headingText.words, {
+        opacity: 0,
+        y: 20,
+      });
+    } else {
+      gsap.set("#collaborate-heading", {
+        opacity: 0,
+        y: 20,
+      });
+    }
+
+    gsap.set("#collaborate-description", {
+      opacity: 0,
+      y: 30,
     });
 
-    // Create separate timeline for stats
-    const statsTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#stats-container",
-        start: "top 75%",
-        toggleActions: "play none none none",
-      },
+    gsap.set(".card-item", {
+      opacity: 0,
+      y: 40,
+      stagger: 0.1,
     });
 
-    // Stats items animation
-    statsTimeline.to(".stats-item", {
+    gsap.set("#cta-button", {
+      opacity: 0,
+      y: 30,
+    });
+
+    // Heading animation - scroll based with scrubbing
+    if (headingText && headingText.words) {
+      gsap.to(headingText.words, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.05,
+        duration: 0.7,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#collaborate-heading",
+          start: "top 85%",
+          end: "top 65%",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+      });
+    } else {
+      gsap.to("#collaborate-heading", {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#collaborate-heading",
+          start: "top 85%",
+          end: "top 65%",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+      });
+    }
+
+    // Description animation - scroll based with scrubbing
+    gsap.to("#collaborate-description", {
       opacity: 1,
       y: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "power2.out",
-    });
-
-    // Animate counter numbers
-    const counterElements = document.querySelectorAll(".counter");
-    counterElements.forEach((counter) => {
-      const targetValue = parseInt(counter.getAttribute("data-target"));
-
-      // Determine if we need to show decimals (for the 2.5K value)
-      let decimals = 0;
-      if (targetValue === 2500) {
-        counter.innerHTML = "0";
-        decimals = 1;
-      }
-
-      statsTimeline.to(
-        counter,
-        {
-          innerHTML: targetValue === 2500 ? "2.5" : targetValue,
-          duration: 2,
-          snap: { innerHTML: decimals === 1 ? 0.1 : 1 },
-          ease: "power2.out",
-        },
-        "-=0.5"
-      );
-    });
-
-    // Create content timeline
-    const contentTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#collaborate-heading",
-        start: "top 85%",
-        toggleActions: "play none none none",
-      },
-    });
-
-    // Heading animation
-    contentTimeline.from(headingText.words, {
-      opacity: 0,
-      y: 20,
-      stagger: 0.1,
       duration: 0.7,
       ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#collaborate-description",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      },
     });
 
-    // Description animation
-    contentTimeline.to(
-      "#collaborate-description",
-      {
+    // Cards animation - scroll based with staggered effect
+    const cardItems = document.querySelectorAll(".card-item");
+    cardItems.forEach((item, index) => {
+      gsap.to(item, {
         opacity: 1,
         y: 0,
-        duration: 0.8,
+        duration: 0.6,
         ease: "power2.out",
-      },
-      "-=0.3"
-    );
+        scrollTrigger: {
+          trigger: "#cards-container",
+          start: "top 80%",
+          end: "top 50%",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+        delay: index * 0.05, // Creates staggered effect with scrub
+      });
+    });
 
-    // Cards animation
-    contentTimeline.to(
-      ".card-item",
-      {
-        opacity: 1,
-        y: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "power2.out",
+    // CTA button animation - scroll based with scrubbing
+    gsap.to("#cta-button", {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "back.out(1.2)",
+      scrollTrigger: {
+        trigger: "#cta-button",
+        start: "top 90%",
+        end: "top 70%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
       },
-      "-=0.5"
-    );
+    });
 
-    // CTA button animation
-    contentTimeline.to(
-      "#cta-button",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.3"
-    );
-    // Button hover animation
+    // Enhanced hover effect for button
     const ctaButton = document.querySelector("#cta-button");
     if (ctaButton) {
       ctaButton.addEventListener("mouseenter", () => {
         gsap.to(ctaButton, {
           scale: 1.05,
+          boxShadow: "0 8px 20px rgba(57, 208, 255, 0.4)",
           duration: 0.3,
-          ease: "power4.out",
         });
       });
 
       ctaButton.addEventListener("mouseleave", () => {
         gsap.to(ctaButton, {
           scale: 1,
+          boxShadow: "0 4px 10px rgba(57, 208, 255, 0.3)",
           duration: 0.3,
-          ease: "power1.out",
         });
       });
     }
+  }
+
+  // Initialize on load
+  document.addEventListener("DOMContentLoaded", initCollaborateAnimations);
+
+  // Refresh on page transitions for Astro
+  document.addEventListener("astro:page-load", initCollaborateAnimations);
+
+  // Immediate initialization for cases where DOMContentLoaded already fired
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    setTimeout(initCollaborateAnimations, 100);
+  }
+
+  // Update animations on resize with debouncing
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initCollaborateAnimations();
+    }, 250);
   });
 </script>
 
 <style>
   /* Initial states for animations */
-  .stats-item {
-    transform: translateY(20px);
+  .card-item {
+    transform: translateY(30px);
+    opacity: 0;
   }
 
   #collaborate-description {
     transform: translateY(20px);
-  }
-
-  .card-item {
-    transform: translateY(30px);
+    opacity: 0;
   }
 
   #cta-button {
     transform: translateY(20px);
-    transition: transform 0.3s ease;
+    opacity: 0;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  /* Smooth transition base for better scrolling */
+  #collaborate-section * {
+    transition: transform 0.05s linear; /* Very subtle base transition for smoother scrubbing */
+  }
+
+  /* Ensure blue text remains visible */
+  .text-primary-blue {
+    color: #39d0ff !important;
   }
 </style>

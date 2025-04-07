@@ -4,23 +4,161 @@ import TechStackImage from "../../../assets/services/mobile-app-development/mobi
 import Image from "astro/components/Image.astro";
 ---
 
-<section class="app-max-width py-16">
-  <Heading>
-    <h2 class="text-4xl" id="mobile-dev-tech-stack-heading">
-      Technology Stack
-    </h2>
-  </Heading>
-  <p class="text-[#2a2111] text-[16px] my-16">
-    With the help of our technology stack, which consists of Swift, Kotlin,
-    React Native, Node.js, and MongoDB, we are able to provide scalable,
-    dependable cross-platform mobile app solutions.
-  </p>
-  <Image
-    src={TechStackImage}
-    alt="Mobile Development Tech Stack"
-    title="Mobile Development Tech Stack"
-    class="w-full my-16"
-    id="mobile-dev-tech-stack-illustration"
-    loading="lazy"
-  />
+<section class="app-max-width py-16" id="mobile-dev-tech-stack-section">
+  <div class="mobile-dev-tech-stack">
+    <Heading>
+      <h2 class="font-medium tech-animate-element" id="mobile-dev-tech-stack-heading">
+        Technology Stack
+      </h2>
+    </Heading>
+    <p
+      class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 tech-animate-element"
+      id="mobile-dev-tech-stack-description"
+    >
+      With the help of our technology stack, which consists of Swift, Kotlin,
+      React Native, Node.js, and MongoDB, we are able to provide scalable,
+      dependable cross-platform mobile app solutions.
+    </p>
+  </div>
+  <div class="tech-image-container">
+    <Image
+      src={TechStackImage}
+      alt="Mobile Development Tech Stack"
+      title="Mobile Development Tech Stack"
+      class="w-full my-16 tech-animate-element"
+      id="mobile-dev-tech-stack-illustration"
+      loading="lazy"
+    />
+  </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initTechStackAnimations() {
+    // Reset any existing ScrollTriggers for this section
+    ScrollTrigger.getAll().forEach(st => {
+      if (st.vars.trigger && typeof st.vars.trigger === 'string' && 
+         (st.vars.trigger.includes('mobile-dev-tech'))) {
+        st.kill();
+      }
+    });
+
+    // Set initial states for animations
+    gsap.set('#mobile-dev-tech-stack-heading', { 
+      opacity: 0, 
+      y: 30 
+    });
+    
+    gsap.set('#mobile-dev-tech-stack-description', { 
+      opacity: 0, 
+      y: 20 
+    });
+    
+    gsap.set('#mobile-dev-tech-stack-illustration', {
+      opacity: 0,
+      y: 40,
+      scale: 0.98
+    });
+
+    // Heading animation with scroll-based trigger
+    gsap.to('#mobile-dev-tech-stack-heading', {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#mobile-dev-tech-stack-heading",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
+
+    // Description paragraph animation
+    gsap.to('#mobile-dev-tech-stack-description', {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#mobile-dev-tech-stack-description",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
+
+    // Illustration animation
+    gsap.to('#mobile-dev-tech-stack-illustration', {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ".tech-image-container",
+        start: "top 80%",
+        end: "top 50%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
+
+    // Add subtle float animation to the illustration
+    gsap.to('#mobile-dev-tech-stack-illustration', {
+      y: -10,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: 0.5
+    });
+  }
+
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', initTechStackAnimations);
+
+  // Refresh on page transitions for Astro
+  document.addEventListener('astro:page-load', initTechStackAnimations);
+
+  // Immediate initialization for cases where DOMContentLoaded already fired
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(initTechStackAnimations, 100);
+  }
+
+  // Update animations on resize with debouncing
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initTechStackAnimations();
+    }, 250);
+  });
+</script>
+
+<style>
+  /* Initial states for animations */
+  .tech-animate-element {
+    opacity: 0;
+  }
+  
+  /* Smooth transition base */
+  #mobile-dev-tech-stack-section * {
+    transition: transform 0.05s linear; /* Very subtle transition for smoother scrubbing */
+  }
+  
+  /* Enhanced image hover effect */
+  #mobile-dev-tech-stack-illustration {
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  
+  #mobile-dev-tech-stack-illustration:hover {
+    filter: drop-shadow(0 0 15px rgba(30, 79, 172, 0.3));
+  }
+</style>

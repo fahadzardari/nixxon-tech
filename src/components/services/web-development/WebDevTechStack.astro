@@ -4,15 +4,15 @@ import TechStackImage from "../../../assets/services/web-dev/tech-stack.png";
 import Image from "astro/components/Image.astro";
 ---
 
-<section class="app-max-width py-16" id="tech-stack-section">
+<section class="app-max-width py-16" id="web-dev-tech-stack-section">
     <div class="tech-stack-heading mb-8 md:mb-12">
     <Heading>
-      <h2 class="font-medium web-dev-techstack-description-animation" id="web-app-tech-stack">
+      <h2 class="font-medium tech-animate-element" id="web-app-tech-stack">
         Our Technology Stack for Web App Development
       </h2>
     </Heading>
-    <p class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 my-4 web-dev-techstack-description-animation" 
-       id="tech-stack-description">
+    <p class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 tech-animate-element" 
+       id="web-tech-stack-description">
       The robust technology stack that our web app development team uses yields
       dependable and efficient results. Our responsive web applications are made
       with state-of-the-art tools like MongoDB, Node.js, and React.js. Because we
@@ -25,7 +25,7 @@ import Image from "astro/components/Image.astro";
       src={TechStackImage}
       alt="Tech Stack"
       title="Tech Stack"
-      class="w-full opacity-0 transform-gpu tech-icon"
+      class="w-full tech-animate-element tech-icon"
       id="tech-stack-image"
       loading="lazy"
     />
@@ -36,216 +36,157 @@ import Image from "astro/components/Image.astro";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
 
-  // Wait for DOM content to be fully loaded
-  document.addEventListener("DOMContentLoaded", () => {
-    // Initialize animations with a slight delay to ensure DOM is ready
-    setTimeout(() => {
-      initTextAnimations();
-      initImageAnimations();
-    }, 100);
-
-    // Refresh ScrollTrigger when page is fully loaded
-    window.addEventListener("load", () => {
-      ScrollTrigger.refresh(true);
-    });
-  });
-
-  // Function to initialize text animations
-  function initTextAnimations() {
-    // Split heading text for animation - pass both selectors
-    splitAndAnimateText("#web-app-tech-stack", ".web-dev-techstack-description-animation");
-  }
-
-  // Split and animate text - similar to UIUXTechStack component
-  function splitAndAnimateText(headingSelector, descriptionSelector) {
-    // Add responsive margin function
-    const getResponsiveMargin = () => {
-      const vw = Math.max(
-        document.documentElement.clientWidth || 0,
-        window.innerWidth || 0
-      );
-
-      if (vw < 640) return "0.35rem";
-      else if (vw < 1024) return "0.45rem";
-      else return "0.55rem";
-    };
-
-    // Animate heading
-    const heading = document.querySelector(headingSelector);
-    if (heading) {
-      const originalContent = heading.innerHTML;
-
-      try {
-        const headingText = heading.textContent.trim();
-        const responsiveMargin = getResponsiveMargin();
-        const words = headingText.split(" ");
-        let newContent = "";
-
-        words.forEach((word, index) => {
-          const isLastWord = index === words.length - 1;
-          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
-            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
-          </span>`;
-        });
-
-        heading.innerHTML = newContent;
-        heading.style.opacity = 1;
-
-        // Animate heading words
-        const headingWords = heading.querySelectorAll(".word-inner");
-        gsap.to(headingWords, {
-          scrollTrigger: {
-            trigger: heading,
-            start: "top 85%",
-            end: "top 65%",
-            scrub: 0.6,
-          },
-          y: 0,
-          opacity: 1,
-          stagger: 0.04,
-          ease: "power2.inOut",
-        });
-      } catch (error) {
-        console.error("Heading split error:", error);
-        heading.innerHTML = originalContent;
-      }
-    }
-
-    // Animate description
-    const descriptions = document.querySelectorAll(descriptionSelector);
-    descriptions.forEach(description => {
-      if (description) {
-        const originalContent = description.textContent;
-
-        try {
-          const responsiveMargin = window.innerWidth < 768 ? "0.1em" : "0.2em";
-          const normalizedText = description.textContent.replace(/\s+/g, " ").trim();
-          const words = normalizedText.split(" ");
-          let newContent = "";
-
-          words.forEach((word, index) => {
-            const isLastWord = index === words.length - 1;
-            newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
-              <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
-            </span>`;
-          });
-
-          description.innerHTML = newContent;
-
-          // Animate paragraph words
-          const paragraphWords = description.querySelectorAll(".word-inner");
-          gsap.to(paragraphWords, {
-            scrollTrigger: {
-              trigger: description,
-              start: "top 90%",
-              end: "center 75%",
-              scrub: 0.7,
-            },
-            y: 0,
-            opacity: 1,
-            stagger: 0.015,
-            ease: "power1.inOut",
-          });
-        } catch (error) {
-          console.error("Description split error:", error);
-          description.textContent = originalContent;
-        }
+  function initTechStackAnimations() {
+    // Reset any existing ScrollTriggers for this section
+    ScrollTrigger.getAll().forEach(st => {
+      if (st.vars.trigger && typeof st.vars.trigger === 'string' && 
+         (st.vars.trigger.includes('web-dev-tech') || st.vars.trigger.includes('tech-stack'))) {
+        st.kill();
       }
     });
-  }
 
-  // Function to initialize tech stack image animations
-  function initImageAnimations() {
-    const techStackImage = document.querySelector("#tech-stack-image");
+    // Set initial states for animations
+    gsap.set('#web-app-tech-stack', { 
+      opacity: 0, 
+      y: 30 
+    });
     
-    if (techStackImage) {
-      // Set initial state
-      gsap.set(techStackImage, {
-        opacity: 0,
-        y: 30,
-        scale: 0.95,
-      });
-      
-      // Create animation for the image
-      gsap.to(techStackImage, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        ease: "back.out(1.4)",
-        scrollTrigger: {
-          trigger: "#tech-stack-image-container",
-          start: "top 85%",
-          end: "bottom 70%",
-          toggleActions: "play none none none",
-        },
-      });
-      
-      // Add improved hover effect
-      const imageContainer = techStackImage.closest(".tech-icon-wrapper");
-      
-      // Only add hover if device supports it
-      if (window.matchMedia("(hover: hover)").matches) {
-        imageContainer.addEventListener("mouseenter", () => {
-          gsap.to(techStackImage, {
-            scale: 1.03,
-            duration: 0.5,
-            ease: "power2.out",
-            clearProps: "",
-          });
-        });
+    gsap.set('#web-tech-stack-description', { 
+      opacity: 0, 
+      y: 20 
+    });
+    
+    gsap.set('#tech-stack-image', {
+      opacity: 0,
+      y: 30,
+      scale: 0.95
+    });
 
-        imageContainer.addEventListener("mouseleave", () => {
-          gsap.to(techStackImage, {
-            scale: 1,
-            duration: 0.5,
-            ease: "power2.inOut",
-          });
-        });
+    // Heading animation with scroll-based trigger
+    gsap.to('#web-app-tech-stack', {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#web-app-tech-stack",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
       }
+    });
+
+    // Description paragraph animation
+    gsap.to('#web-tech-stack-description', {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#web-tech-stack-description",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
+
+    // Image animation
+    gsap.to('#tech-stack-image', {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#tech-stack-image-container",
+        start: "top 80%",
+        end: "top 50%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
+
+    // Add hover effect to tech stack image
+    const techStackImage = document.querySelector("#tech-stack-image");
+    if (techStackImage) {
+      techStackImage.addEventListener("mouseenter", () => {
+        gsap.to('#tech-stack-image', {
+          scale: 1.03,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      });
       
-      // Add subtle parallax effect on scroll
-      gsap.to("#tech-stack-image", {
-        y: "-3%",
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#tech-stack-section",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.5,
-        },
+      techStackImage.addEventListener("mouseleave", () => {
+        gsap.to('#tech-stack-image', {
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        });
       });
     }
+
+    // Add subtle parallax effect on scroll
+    gsap.to('#tech-stack-image', {
+      y: '-3%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#web-dev-tech-stack-section',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 0.5
+      }
+    });
   }
 
-  // Update animations on resize
-  window.addEventListener("resize", () => {
-    ScrollTrigger.refresh(true);
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', initTechStackAnimations);
+
+  // Refresh on page transitions for Astro
+  document.addEventListener('astro:page-load', initTechStackAnimations);
+
+  // Immediate initialization for cases where DOMContentLoaded already fired
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(initTechStackAnimations, 100);
+  }
+
+  // Update animations on resize with debouncing
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initTechStackAnimations();
+    }, 250);
   });
 </script>
 
 <style>
-  /* Initial states and transitions */
+  /* Initial states for animations */
+  .tech-animate-element {
+    opacity: 0;
+  }
+  
+  /* Smooth transition base */
+  #web-dev-tech-stack-section * {
+    transition: transform 0.05s linear; /* Very subtle transition for smoother scrubbing */
+  }
+  
+  /* Enhanced image interaction */
   #tech-stack-image-container {
     overflow: hidden;
     transform: translateY(0);
     transition: transform 0.3s ease-out;
     border-radius: 4px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
   }
   
   .tech-icon {
     transform-origin: center center;
     will-change: transform, opacity;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0));
-    transition: filter 0.3s ease;
-  }
-  
-  .tech-icon-wrapper:hover .tech-icon {
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
   }
   
   /* Responsive styling */
@@ -254,9 +195,4 @@ import Image from "astro/components/Image.astro";
       border-radius: 8px;
     }
   }
-  
-  /* .web-dev-techstack-description-animation {
-    transform: translateY(20px);
-    opacity: 0;
-  } */  
 </style>

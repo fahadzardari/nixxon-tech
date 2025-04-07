@@ -25,7 +25,7 @@ import DigitalMarketingImage from "../../../assets/services/digital-marketing/di
       id="digital-marketing-image"
     />
   </div>
-  <p class="text-[#2a2111] text-[16px] my-6 secondary-description-animation">
+  <p class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 secondary-description-animation">
     Email marketing campaigns have the ability to produce quantifiable outcomes and enhance 
     the overall performance of a comprehensive digital marketing strategy when they are
     equipped with data-driven analysis, appealing content, and targeted segmentation.
@@ -52,6 +52,27 @@ import DigitalMarketingImage from "../../../assets/services/digital-marketing/di
       ScrollTrigger.refresh(true);
     });
   });
+
+  // Helper function to get responsive paragraph margins based on screen size
+  function getResponsiveParagraphMargin() {
+    const vw = Math.max(
+      document.documentElement.clientWidth || 0,
+      window.innerWidth || 0
+    );
+    
+    // Increased margins at each breakpoint for better readability
+    if (vw < 480) {
+      return "0.32em"; // Extra margin for very small mobile screens
+    } else if (vw < 640) {
+      return "0.28em"; // More spacing for small mobile screens
+    } else if (vw < 768) {
+      return "0.24em"; // Medium spacing for larger mobile screens
+    } else if (vw < 1024) {
+      return "0.22em"; // Spacing for tablets
+    } else {
+      return "0.2em";  // Original spacing for desktop
+    }
+  }
 
   // Function to split and animate text incrementally
   function splitAndAnimateText() {
@@ -138,8 +159,8 @@ import DigitalMarketingImage from "../../../assets/services/digital-marketing/di
         const originalContent = description.textContent;
 
         try {
-          // Responsive margin for paragraph
-          const responsiveMargin = window.innerWidth < 768 ? "0.1em" : "0.2em";
+          // Responsive margin for paragraph - IMPROVED SPACING
+          const responsiveMargin = getResponsiveParagraphMargin();
 
           // Normalize and split text
           const normalizedText = description.textContent.replace(/\s+/g, " ").trim();
@@ -150,7 +171,7 @@ import DigitalMarketingImage from "../../../assets/services/digital-marketing/di
           words.forEach((word, wordIndex) => {
             const isLastWord = wordIndex === words.length - 1;
             newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
-              <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+              <span class="word-inner paragraph-word" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
             </span>`;
           });
 
@@ -176,6 +197,16 @@ import DigitalMarketingImage from "../../../assets/services/digital-marketing/di
           description.textContent = originalContent;
         }
       }
+    });
+  }
+
+  // Update paragraph word spacing on resize
+  function updateParagraphSpacing() {
+    const newMargin = getResponsiveParagraphMargin();
+    const splitWords = document.querySelectorAll(".description-animation .split-word, .secondary-description-animation .split-word");
+    
+    splitWords.forEach(word => {
+      word.style.marginRight = newMargin;
     });
   }
 
@@ -219,6 +250,7 @@ import DigitalMarketingImage from "../../../assets/services/digital-marketing/di
   // Update animations on resize
   window.addEventListener("resize", () => {
     ScrollTrigger.refresh();
+    updateParagraphSpacing();
   });
 </script>
 
@@ -249,6 +281,26 @@ import DigitalMarketingImage from "../../../assets/services/digital-marketing/di
   @media (min-width: 1536px) {
     .image-container {
       border-radius: 8px;
+    }
+  }
+
+  /* Additional spacing for paragraphs on smaller screens */
+  @media (max-width: 768px) {
+    .description-animation, .secondary-description-animation {
+      line-height: 1.6; /* Increased line height for better readability */
+      letter-spacing: 0.01em; /* Slight letter spacing */
+    }
+    
+    .paragraph-word {
+      padding: 0.02em 0; /* Add vertical padding to words */
+    }
+  }
+  
+  /* Extra spacing for very small screens */
+  @media (max-width: 480px) {
+    .description-animation, .secondary-description-animation {
+      line-height: 1.7;
+      letter-spacing: 0.015em;
     }
   }
 </style>

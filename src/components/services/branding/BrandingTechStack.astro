@@ -7,14 +7,20 @@ import CoralDrawImage from "../../../assets/services/branding/coral-draw.png";
 import InDesignImage from "../../../assets/services/branding/indesign.png";
 ---
 
-<section class="app-max-width py-16">
+<section class="app-max-width py-16" id="tech-stack-section">
   <div class="branding-tech-stack">
     <Heading>
-      <h2 class="font-medium text-4xl" id="branding-tech-stack-heading">
+      <h2
+        class="font-medium tech-animate-element"
+        id="branding-tech-stack-heading"
+      >
         Technology Stack
       </h2>
     </Heading>
-    <p class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4">
+    <p
+      class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 tech-animate-element"
+      id="tech-stack-description"
+    >
       Our group of professionals are expert at using cutting-edge technology to
       navigate a dynamic digital landscape and provide innovative solutions that
       boost business success.
@@ -28,32 +34,32 @@ import InDesignImage from "../../../assets/services/branding/indesign.png";
       src={PhotoshopImage}
       alt="Photoshop"
       title="Photoshop"
-      class="w-full tech-icon"
-      id="nixxon-illustration"
+      class="w-[80px] md:w-auto tech-icon tech-animate-element"
+      id="tech-icon-ps"
       loading="lazy"
     />
     <Image
       src={IllustratorImage}
       alt="Illustrator"
       title="Illustrator"
-      class="w-full tech-icon"
-      id="nixxon-illustration"
+      class="w-[80px] md:w-auto tech-icon tech-animate-element"
+      id="tech-icon-ai"
       loading="lazy"
     />
     <Image
       src={InDesignImage}
       alt="InDesign"
       title="InDesign"
-      class="w-full tech-icon"
-      id="nixxon-illustration"
+      class="w-[80px] md:w-auto tech-icon tech-animate-element"
+      id="tech-icon-id"
       loading="lazy"
     />
     <Image
       src={CoralDrawImage}
       alt="Coral Draw"
       title="Coral Draw"
-      class="w-full tech-icon"
-      id="nixxon-illustration"
+      class="w-[80px] md:w-auto tech-icon tech-animate-element"
+      id="tech-icon-cd"
       loading="lazy"
     />
   </div>
@@ -61,37 +67,178 @@ import InDesignImage from "../../../assets/services/branding/indesign.png";
 
 <script>
   import { gsap } from "gsap";
-  import ScrollTrigger from "gsap/ScrollTrigger";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
   gsap.registerPlugin(ScrollTrigger);
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // Fade in the content on scroll
-    gsap.from(".branding-tech-stack", {
+  function initTechStackAnimations() {
+    // Reset any existing ScrollTriggers for this section
+    ScrollTrigger.getAll().forEach((st) => {
+      if (
+        st.vars.trigger &&
+        typeof st.vars.trigger === "string" &&
+        (st.vars.trigger.includes("tech-stack") ||
+          st.vars.trigger.includes("tech-icon"))
+      ) {
+        st.kill();
+      }
+    });
+
+    // Set initial states for animations
+    gsap.set("#branding-tech-stack-heading", {
+      opacity: 0,
+      y: 30,
+    });
+
+    gsap.set("#tech-stack-description", {
       opacity: 0,
       y: 20,
-      duration: 0.7,
-      ease: "power2.out",
+    });
+
+    // Set initial states for tech icons with slight staggered initial positions
+    gsap.set(".tech-icon", {
+      opacity: 0,
+      y: 15,
+      scale: 0.92,
+    });
+
+    // Heading animation with scroll-based trigger
+    gsap.to("#branding-tech-stack-heading", {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.inOut",
       scrollTrigger: {
-        trigger: ".branding-tech-stack",
-        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
-        toggleActions: "play none none none",
+        trigger: "#branding-tech-stack-heading",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
       },
     });
 
-    // Staggered reveal for tech icons on scroll
-    gsap.from(".tech-icon", {
-      opacity: 0,
-      y: 15,
-      scale: 0.95,
-      duration: 0.5,
-      stagger: 0.1,
-      ease: "back.out(1.2)",
+    // Description paragraph animation
+    gsap.to("#tech-stack-description", {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power2.inOut",
       scrollTrigger: {
-        trigger: ".branding-tech-stack-container",
-        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
-        toggleActions: "play none none none",
+        trigger: "#tech-stack-description",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
       },
     });
+
+    // Create a sequence for tech icons that applies staggered animations
+    // but still works with scroll triggers
+    const techIcons = [
+      "#tech-icon-ps",
+      "#tech-icon-ai",
+      "#tech-icon-id",
+      "#tech-icon-cd",
+    ];
+
+    techIcons.forEach((icon, index) => {
+      gsap.to(icon, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.5,
+        ease: "back.out(1.2)",
+        scrollTrigger: {
+          trigger: ".branding-tech-stack-container",
+          start: "top 80%",
+          end: "top 60%",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+        delay: index * 0.05, // This creates the staggered effect even with scrub
+      });
+
+      // Add a subtle hover effect to each tech icon
+      const iconElement = document.querySelector(icon);
+      if (iconElement) {
+        iconElement.addEventListener("mouseenter", () => {
+          gsap.to(icon, {
+            scale: 1.07,
+            duration: 0.3,
+            ease: "back.out(1.5)",
+            yoyo: true,
+          });
+        });
+
+        iconElement.addEventListener("mouseleave", () => {
+          gsap.to(icon, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        });
+      }
+    });
+
+    // Create floating animation effect for all tech icons
+    // This creates a subtle wave-like movement
+    techIcons.forEach((icon, index) => {
+      // Create a repeating floating animation that varies by icon position
+      gsap.to(icon, {
+        y: -5 + (index % 2) * 10, // Alternating up/down for wave effect
+        duration: 2 + index * 0.3, // Slightly different durations
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: index * 0.2, // Staggered start times
+      });
+    });
+  }
+
+  // Initialize on load
+  document.addEventListener("DOMContentLoaded", initTechStackAnimations);
+
+  // Refresh on page transitions for Astro
+  document.addEventListener("astro:page-load", initTechStackAnimations);
+
+  // Immediate initialization for cases where DOMContentLoaded already fired
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    setTimeout(initTechStackAnimations, 100);
+  }
+
+  // Update animations on resize with debouncing
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initTechStackAnimations();
+    }, 250);
   });
 </script>
+
+<style>
+  /* Initial states for animations */
+  .tech-animate-element {
+    opacity: 0;
+  }
+
+  /* Smooth transition base */
+  #tech-stack-section * {
+    transition: transform 0.05s linear; /* Very subtle base transition for smoother scrubbing */
+  }
+
+  /* Enhanced tech icon interaction */
+  .tech-icon {
+    cursor: pointer;
+    transition:
+      transform 0.3s ease,
+      filter 0.3s ease;
+  }
+
+  .tech-icon:hover {
+    filter: drop-shadow(0 0 8px rgba(30, 79, 172, 0.4));
+  }
+</style>

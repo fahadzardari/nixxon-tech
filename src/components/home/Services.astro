@@ -105,13 +105,13 @@ const services = [
                 class:list={[
                   "service-tab",
                   "text-sm",
-                  "md:text-base lg:text-lg canvas:text-2xl",
+                  "md:text-base lg:text-base xl:text-lg canvas:text-2xl",
                   "cursor-pointer",
                   "font-medium",
                   "py-2",
                   "md:py-4",
                   "px-4",
-                  "md:px-16",
+                  "lg:px-8 xl:px-16",
                   "w-full",
                   "text-center",
                   "md:text-left",
@@ -241,7 +241,7 @@ const services = [
         };
 
         const responsiveMargin = getResponsiveMargin();
-        
+
         // Use a more reliable approach to get the exact text content
         // Store original text for restoration
         const mainText = "Your Full Service";
@@ -254,7 +254,7 @@ const services = [
         // FIXED: Create wrapped words with responsive margins - apply margin directly
         words.forEach((word, index) => {
           const isLastWord = index === words.length - 1;
-          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ''}">
+          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
             <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
           </span>`;
         });
@@ -262,10 +262,10 @@ const services = [
         // Create wrapped words for span part with responsive margins
         let newSpanContent = '<span class="text-primary-blue neon-glow">';
         const spanWords = spanContent.split(" ");
-        
+
         spanWords.forEach((word, index) => {
           const isLastWord = index === spanWords.length - 1;
-          newSpanContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ''}">
+          newSpanContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
             <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
           </span>`;
         });
@@ -273,31 +273,35 @@ const services = [
         newSpanContent += "</span>";
 
         // FIXED: Replace the heading content with correctly spaced content - use fixed margin
-        heading.innerHTML = newContent + 
-          `<span style="display:inline-block; width:${responsiveMargin}; min-width:${responsiveMargin};"></span>` + 
+        heading.innerHTML =
+          newContent +
+          `<span style="display:inline-block; width:${responsiveMargin}; min-width:${responsiveMargin};"></span>` +
           newSpanContent;
         heading.style.opacity = 1;
-        
+
         // FIXED: Update margins on resize with proper style setting
         window.addEventListener("resize", () => {
           const newMargin = getResponsiveMargin();
-          
+
           // Update spacer between sections
           const spacerSpan = heading.querySelector("span[style*='width']");
           if (spacerSpan) {
             spacerSpan.style.width = newMargin;
             spacerSpan.style.minWidth = newMargin;
           }
-          
+
           // Update all split words
           const wordSpans = heading.querySelectorAll(".split-word");
           const mainWordsCount = words.length;
           const spanWordsCount = spanWords.length;
-          
+
           wordSpans.forEach((span, index) => {
             // Don't apply margin to the last word in each section
-            if ((index < mainWordsCount - 1) || 
-                (index >= mainWordsCount && index < mainWordsCount + spanWordsCount - 1)) {
+            if (
+              index < mainWordsCount - 1 ||
+              (index >= mainWordsCount &&
+                index < mainWordsCount + spanWordsCount - 1)
+            ) {
               span.style.marginRight = newMargin;
             }
           });

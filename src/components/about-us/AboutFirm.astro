@@ -11,10 +11,10 @@ import { Image } from "astro:assets";
   >
     <!-- Centered container for right boundary alignment -->
     <div
-      class="app-max-width w-full flex flex-col lg:flex-row justify-between items-center"
+      class="p-0 lg:pr-[7dvw] w-full flex flex-col lg:flex-row justify-between items-center"
     >
       <!-- Left content with negative margin to extend to screen edge - RESPONSIVE -->
-      <div class="w-full order-2 lg:order-1 ml-[calc(-1*(100vw-100%)/2)]">
+      <div class="w-full order-2 lg:order-1 md:ml-[calc(-1*(100vw-100%)/2)]">
         <Image
           src={ExtendedArt}
           alt="Visual representation of Nixxon Tech's mission - Digital innovation and client success"
@@ -25,7 +25,7 @@ import { Image } from "astro:assets";
       </div>
       <!-- Right content - RESPONSIVE -->
       <div
-        class="w-full lg:w-1/2 flex flex-col px-4 py-8 md:py-0 md:pl-8 order-1 lg:order-2"
+        class="w-full px-4 md:px-0 lg:w-1/2 lg:min-w-[500px] canvas:min-w-[600px] flex flex-col py-8 md:py-0 md:pl-8 order-1 lg:order-2"
         id="firm-stats-first"
       >
         <span class="flex items-center font-medium section-tag">
@@ -35,12 +35,14 @@ import { Image } from "astro:assets";
           Firm Overview
         </span>
         <Heading classname="">
-          <h2 class="font-medium text-2xl md:text-3xl">
+          <h2 class="font-medium">
             We Specialize in Transforming Your Idea or Business in the Current
             Digital Era
           </h2>
         </Heading>
-        <p class="text-[#2A2111] text-base my-4 lg:my-6">
+        <p
+          class="text-xs md:text-sm canvas:text-base 2xl:text-lg text-[#2a2111] my-4 lg:my-6"
+        >
           Our goal in the modern digital world is to make enterprises possible.
           With the help of our innovative technologies and tailored programs,
           your company will have all it needs to succeed and keep one step ahead
@@ -73,20 +75,26 @@ import { Image } from "astro:assets";
         </h3>
         <p class="text-xl md:text-2xl">Years of Experience</p>
       </div>
-      <h4 class="text-3xl md:text-4xl w-full md:w-2/3">
-        We Run All Kinds of <span class="text-primary-blue neon-glow"
+      <h4
+        class="font-medium w-full text-2xl lg:text-3xl canvas:text-[38px] 2xl:text-[42px] 3xl:text-[46px] md:w-2/3 text-black"
+        id="experience-heading"
+      >
+        We Run All Kinds of <span class="text-primary-blue"
           >IT Services</span
-        > That Vow <span class="text-primary-blue neon-glow">Your Success</span>
+        > That Vow <span class="text-primary-blue">Your Success</span>
       </h4>
     </div>
     <div
       class="w-full md:w-1/2 flex flex-col space-y-8 md:space-y-12"
       id="firm-stats-second"
     >
-      <h3 class="text-2xl md:text-[26px]">
-        Accelerate <span class="text-primary-blue neon-glow">Innovation</span> with
+      <h3
+        class="text-xl xl:text-2xl canvas:text-3xl 2xl:text-[38px] 3xl:text-[42px]"
+        id="innovation-heading"
+      >
+        Accelerate <span class="text-primary-blue">Innovation</span> with
         world class tech teams We'll match you to an entire <span
-          class="text-primary-blue neon-glow">Remote Technology</span
+          class="text-primary-blue">Remote Technology</span
         >
       </h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 text-[16px] gap-5 md:gap-7">
@@ -132,243 +140,432 @@ import { Image } from "astro:assets";
 
   gsap.registerPlugin(ScrollTrigger);
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function initFirmAnimations() {
+    // Reset any existing ScrollTriggers for this section
+    ScrollTrigger.getAll().forEach((st) => {
+      if (
+        st.vars.trigger &&
+        typeof st.vars.trigger === "string" &&
+        (st.vars.trigger.includes("firm-") ||
+          st.vars.trigger.includes("-stats-"))
+      ) {
+        st.kill();
+      }
+    });
+
     // Initialize split text only on larger screens to prevent mobile layout issues
     const isDesktop = window.innerWidth >= 768;
-
-    // First article: Initialize split text only for this section
     let overviewHeading = null;
     let experienceHeading = null;
 
-    if (isDesktop) {
-      overviewHeading = new SplitType("#firm-stats-first h2", {
-        types: "words",
-        tagName: "span",
-      });
+    try {
+      if (isDesktop) {
+        overviewHeading = new SplitType("#firm-stats-first h2", {
+          types: "words",
+          tagName: "span",
+        });
 
-      // Second article: Initialize split text only for this section
-      experienceHeading = new SplitType("#firm-experience h4", {
-        types: "words",
-        tagName: "span",
-      });
+        experienceHeading = new SplitType("#experience-heading", {
+          types: "words",
+          tagName: "span",
+        });
+      }
+    } catch (error) {
+      console.error("Error initializing SplitType:", error);
     }
 
-    // FIRST ARTICLE ANIMATIONS - completely isolated
-    const firstSectionTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#firm-stats-first",
-        start: "top 90%",
-        toggleActions: "play none none none",
-      },
-    });
-
-    // Image animation with fade and slide
-    firstSectionTl.from("#firm-image", {
+    // Set initial states for FIRST article animations
+    gsap.set("#firm-image", {
       opacity: 0,
       x: isDesktop ? -80 : 0,
       y: isDesktop ? 0 : 30,
-      duration: 1.2,
-      ease: "power3.out",
     });
 
-    // Section tag animation
-    firstSectionTl.from(
-      "#firm-stats-first .section-tag",
-      {
-        opacity: 0,
-        x: 30,
-        duration: 0.8,
-        ease: "back.out(1.7)",
-      },
-      "-=0.8"
-    );
+    gsap.set("#firm-stats-first .section-tag", {
+      opacity: 0,
+      x: 30,
+    });
 
-    // Heading animation - handle differently for mobile vs desktop
-    if (isDesktop && overviewHeading) {
-      firstSectionTl.from(
-        overviewHeading.words,
-        {
-          opacity: 0,
-          y: 20,
-          stagger: 0.1,
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        "-=0.5"
-      );
-    } else {
-      firstSectionTl.from(
-        "#firm-stats-first h2",
-        {
-          opacity: 0,
-          y: 20,
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        "-=0.5"
-      );
-    }
-
-    // Paragraph animation - only for first article
-    firstSectionTl.from(
-      "#firm-stats-first p",
-      {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.3"
-    );
-
-    // Button animation with bounce - only for first article
-    firstSectionTl.from(
-      "#firm-stats-first button",
-      {
+    if (isDesktop && overviewHeading && overviewHeading.words) {
+      gsap.set(overviewHeading.words, {
         opacity: 0,
         y: 20,
-        scale: 0.9,
-        duration: 0.8,
-        ease: "back.out(1.7)",
+      });
+    } else {
+      gsap.set("#firm-stats-first h2", {
+        opacity: 0,
+        y: 20,
+      });
+    }
+
+    gsap.set("#firm-stats-first p", {
+      opacity: 0,
+      y: 30,
+    });
+
+    gsap.set("#firm-stats-first button", {
+      opacity: 0,
+      y: 20,
+      scale: 0.9,
+    });
+
+    // FIRST ARTICLE: Scroll-triggered animations that work in both directions
+    gsap.to("#firm-image", {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#firm-image",
+        start: "top 85%",
+        end: "top 60%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
       },
-      "-=0.5"
+    });
+
+    gsap.to("#firm-stats-first .section-tag", {
+      opacity: 1,
+      x: 0,
+      duration: 0.6,
+      ease: "back.out(1.7)",
+      scrollTrigger: {
+        trigger: "#firm-stats-first",
+        start: "top 85%",
+        end: "top 70%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    if (isDesktop && overviewHeading && overviewHeading.words) {
+      gsap.to(overviewHeading.words, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.05,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#firm-stats-first h2",
+          start: "top 85%",
+          end: "top 65%",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+      });
+    } else {
+      gsap.to("#firm-stats-first h2", {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#firm-stats-first h2",
+          start: "top 85%",
+          end: "top 65%",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+      });
+    }
+
+    gsap.to("#firm-stats-first p", {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#firm-stats-first p",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    gsap.to("#firm-stats-first button", {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.6,
+      ease: "back.out(1.7)",
+      scrollTrigger: {
+        trigger: "#firm-stats-first button",
+        start: "top 90%",
+        end: "top 75%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    // Set initial states for SECOND article animations
+    gsap.set("#firm-experience .years-count", {
+      textContent: "0",
+      opacity: 1, // Ensure the element is visible
+    });
+
+    gsap.set("#firm-experience .years-count + span", {
+      scale: 0.5,
+      opacity: 1, // Make sure it's visible
+    });
+
+    gsap.set("#firm-experience h3 + p", {
+      opacity: 0,
+      y: 20,
+    });
+
+    // Make all heading text visible immediately with no opacity transition
+    document.querySelectorAll('h3, h4, .text-primary-blue').forEach(element => {
+      element.style.opacity = '1';
+      element.style.visibility = 'visible';
+    });
+    
+    // Make both headings visible explicitly with direct DOM manipulation
+    document.getElementById('experience-heading').style.opacity = '1';
+    document.getElementById('innovation-heading').style.opacity = '1';
+
+    // Set styles directly for all blue text spans
+    document.querySelectorAll('.text-primary-blue').forEach(element => {
+      element.style.color = '#39D0FF';
+      element.style.opacity = '1';
+      // Remove any text-shadow that might have been applied
+      element.style.textShadow = 'none';
+    });
+
+    // Simple one-time animation for the innovation heading
+    gsap.fromTo('#innovation-heading', 
+      { y: 30, opacity: 0 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8,
+        delay: 0.3,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '#innovation-heading',
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      }
     );
 
-    // SECOND ARTICLE ANIMATIONS - completely isolated
-    const secondSectionTl = gsap.timeline({
+    // Make sure the h4 and its spans are visible and properly styled
+    gsap.set("#experience-heading", {
+      opacity: 1,
+      y: 30,
+      color: "#000000",
+    });
+
+    // Set styles for the colored spans specifically
+    gsap.set("#experience-heading .text-primary-blue", {
+      color: "#39D0FF",
+      textShadow: "none",
+      opacity: 1,
+    });
+
+    // Animate the heading with its spans
+    gsap.to("#experience-heading", {
+      y: 0,
+      duration: 0.8,
+      ease: "power2.out",
       scrollTrigger: {
-        trigger: "#firm-experience",
-        start: "top 90%",
+        trigger: "#experience-heading",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: false, // Remove scrub for smoother animation
         toggleActions: "play none none none",
       },
     });
 
-    // Experience years animation - only in second article
-    secondSectionTl.from("#firm-experience .years-count", {
-      textContent: 0,
-      duration: 1.5,
-      snap: { textContent: 1 },
-      ease: "power2.out",
+    // Remove any remaining neon-glow styling and classes
+    document.querySelectorAll('.neon-glow').forEach(element => {
+      element.classList.remove('neon-glow');
+      element.style.textShadow = 'none';
     });
 
-    // Years text animation - only in second article
-    secondSectionTl.from(
-      "#firm-experience .years-count + span",
-      {
-        scale: 0,
-        opacity: 0,
-        duration: 0.5,
-        ease: "back.out(1.7)",
-      },
-      "-=0.5"
+    gsap.set("#firm-stats-second h3", {
+      opacity: 0,
+      y: 30,
+    });
+
+    gsap.set("#firm-stats-second .stat-item", {
+      opacity: 0,
+      x: 30,
+    });
+
+    // SECOND ARTICLE: Scroll-triggered animations with reverse capability
+    // Years counter animation - plays once and stays at final value
+    const yearsCountElement = document.querySelector(
+      "#firm-experience .years-count"
     );
+    if (yearsCountElement) {
+      let finalYears = parseInt(yearsCountElement.textContent) || 8;
 
-    secondSectionTl.from(
-      "#firm-experience h3 + p",
-      {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.3"
-    );
-
-    // Heading animation - handle differently for mobile vs desktop
-    if (isDesktop && experienceHeading) {
-      secondSectionTl.from(
-        experienceHeading.words,
-        {
-          opacity: 0,
-          y: 30,
-          stagger: 0.05,
-          duration: 0.7,
-          ease: "power2.out",
-        },
-        "-=0.5"
-      );
-    } else {
-      secondSectionTl.from(
-        "#firm-experience h4",
-        {
-          opacity: 0,
-          y: 30,
-          duration: 0.7,
-          ease: "power2.out",
-        },
-        "-=0.5"
-      );
-    }
-
-    // Second section subheading - explicitly targeting second article
-    secondSectionTl.from(
-      "#firm-stats-second h3",
-      {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.2"
-    );
-
-    // Stats items animation - only for second article
-    secondSectionTl.from(
-      "#firm-stats-second .stat-item",
-      {
-        opacity: 0,
-        x: 30,
-        stagger: 0.1,
-        duration: 0.6,
-        ease: "power3.out",
-      },
-      "-=0.4"
-    );
-
-    // Counter animations ONLY for second section stat numbers
-    document
-      .querySelectorAll("#firm-stats-second .stat-number")
-      .forEach((numElement) => {
-        const text = numElement.textContent || "";
-        const value = parseInt(text);
-
-        if (!isNaN(value)) {
-          const originalColor = window.getComputedStyle(numElement).color;
-
-          gsap.from(numElement, {
-            textContent: 0,
-            duration: 1.8,
-            snap: { textContent: 1 },
-            stagger: 0.1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: "#firm-stats-second",
-              start: "top 85%",
-            },
-            onStart: () => {
-              gsap.to(numElement, {
-                color: "#39D0FF",
-                fontWeight: "600",
-                duration: 0.3,
-              });
-            },
-            onComplete: () => {
-              gsap.fromTo(
-                numElement,
-                { scale: 1.1, color: "#39D0FF" },
-                {
-                  scale: 1,
-                  color: originalColor,
-                  duration: 0.5,
-                  ease: "elastic.out(1.2, 0.5)",
-                }
-              );
-            },
-          });
-        }
+      // Set initial state but ensure text is visible
+      gsap.set(yearsCountElement, {
+        textContent: "0",
+        opacity: 1, // Ensure the element is visible
       });
 
-    // Add hover animation for CTA button
+      // Plus sign becomes visible immediately but starts at smaller scale
+      gsap.set("#firm-experience .years-count + span", {
+        opacity: 1, // Make sure it's visible
+        scale: 0.5,
+      });
+
+      ScrollTrigger.create({
+        trigger: "#firm-experience",
+        start: "top 85%",
+        onEnter: () => {
+          // Animate the counter from 0 to final value once
+          gsap.to(
+            { value: 0 },
+            {
+              value: finalYears,
+              duration: 1.5,
+              ease: "power2.out",
+              onUpdate: function () {
+                yearsCountElement.textContent = Math.round(
+                  this.targets()[0].value
+                );
+              },
+              onComplete: () => {
+                // Ensure the exact final value is set
+                yearsCountElement.textContent = finalYears;
+
+                // Animate the plus sign once the counter completes
+                gsap.to("#firm-experience .years-count + span", {
+                  scale: 1,
+                  duration: 0.5,
+                  ease: "back.out(1.7)",
+                });
+              },
+            }
+          );
+
+          // Animate "Years of Experience" text to be visible
+          gsap.to("#firm-experience h3 + p", {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power2.out",
+          });
+        },
+      });
+    }
+
+    gsap.to("#firm-experience h3 + p", {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#firm-experience h3 + p",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    // Stats items staggered animation
+    const statItems = document.querySelectorAll(
+      "#firm-stats-second .stat-item"
+    );
+    statItems.forEach((item, index) => {
+      gsap.to(item, {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#firm-stats-second",
+          start: "top 80%",
+          end: "top 60%",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+        delay: index * 0.05, // Creates staggered effect with scrub
+      });
+    });
+
+    // Animate stat numbers with one-time counter animations - FIXED VERSION
+    document
+      .querySelectorAll("#firm-stats-second .stat-number")
+      .forEach((numElement, index) => {
+        const text = numElement.textContent || "";
+        let finalValue = parseInt(text);
+
+        if (isNaN(finalValue)) finalValue = 0;
+
+        // Ensure all text elements start visible but with "0+"
+        gsap.set(numElement, {
+          textContent: "0+",
+          opacity: 1, // Make sure the element is visible from the start
+          color: "#39D0FF", // Maintain the blue color
+        });
+
+        // Make the surrounding text visible immediately
+        const parentElement = numElement.closest(".stat-item");
+        if (parentElement) {
+          const textNodes = parentElement.childNodes;
+          textNodes.forEach((node) => {
+            if (
+              node.nodeType === 3 ||
+              (node.nodeType === 1 && node.tagName !== "SPAN")
+            ) {
+              gsap.set(node, { opacity: 1 });
+            }
+          });
+        }
+
+        ScrollTrigger.create({
+          trigger: numElement.closest(".stat-item"),
+          start: "top 85%",
+          onEnter: () => {
+            // Only animate if we have a valid number
+            if (finalValue > 0) {
+              // Animate from 0 to final value once
+              gsap.to(
+                { value: 0 },
+                {
+                  value: finalValue,
+                  duration: 1.5,
+                  delay: index * 0.2, // Stagger start times
+                  ease: "power2.out",
+                  onUpdate: function () {
+                    numElement.textContent =
+                      Math.round(this.targets()[0].value) + "+";
+                  },
+                  onComplete: () => {
+                    // Ensure the exact final value is set
+                    numElement.textContent = finalValue + "+";
+
+                    // Add emphasis animation when counter finishes
+                    gsap.to(numElement, {
+                      scale: 1.1,
+                      duration: 0.3,
+                      ease: "back.out(2)",
+                      yoyo: true,
+                      repeat: 1,
+                    });
+                  },
+                }
+              );
+            }
+          },
+        });
+      });
+
+    // Ensure all text in stat items is visible
+    document
+      .querySelectorAll("#firm-stats-second .stat-item p")
+      .forEach((element) => {
+        gsap.set(element, { opacity: 1 });
+      });
+
+    // Enhanced hover effect for button
     const ctaButton = document.querySelector("#firm-stats-first button");
     if (ctaButton) {
       ctaButton.addEventListener("mouseenter", () => {
@@ -388,10 +585,45 @@ import { Image } from "astro:assets";
       });
     }
 
-    // Update animations on resize
-    window.addEventListener("resize", () => {
-      ScrollTrigger.refresh();
+    // Hover effect for stat items
+    statItems.forEach((item) => {
+      item.addEventListener("mouseenter", () => {
+        gsap.to(item.querySelector("::after"), {
+          width: "60px",
+          duration: 0.3,
+        });
+      });
+
+      item.addEventListener("mouseleave", () => {
+        gsap.to(item.querySelector("::after"), {
+          width: "30px",
+          duration: 0.3,
+        });
+      });
     });
+  }
+
+  // Initialize on load
+  document.addEventListener("DOMContentLoaded", initFirmAnimations);
+
+  // Refresh on page transitions for Astro
+  document.addEventListener("astro:page-load", initFirmAnimations);
+
+  // Immediate initialization for cases where DOMContentLoaded already fired
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    setTimeout(initFirmAnimations, 100);
+  }
+
+  // Update animations on resize with debouncing
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initFirmAnimations();
+    }, 250);
   });
 </script>
 
@@ -424,5 +656,44 @@ import { Image } from "astro:assets";
   /* Fix for animation interference */
   button {
     opacity: 1 !important; /* Force visibility */
+  }
+
+  /* Smooth transition base for better scrolling */
+  section * {
+    transition: transform 0.05s linear; /* Very subtle base transition for smoother scrubbing */
+  }
+
+  /* Ensure text visibility */
+  #experience-heading,
+  #innovation-heading {
+    opacity: 1 !important;
+    color: #000000 !important;
+    line-height: 1.5;
+    font-weight: 500;
+    position: relative;
+    visibility: visible !important;
+  }
+
+  /* Simpler blue text styling without glow */
+  .text-primary-blue {
+    color: #39D0FF !important;
+    text-shadow: none !important; /* Override any glow */
+    opacity: 1 !important;
+  }
+
+  /* Remove neon glow effect */
+  .neon-glow {
+    text-shadow: none !important;
+  }
+
+  /* Fix for text animation interference */
+  .word {
+    display: inline-block;
+    overflow: visible !important;
+    opacity: 1 !important;
+  }
+
+  .word .word-inner {
+    opacity: 1 !important;
   }
 </style>

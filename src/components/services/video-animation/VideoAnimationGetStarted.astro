@@ -7,51 +7,49 @@ import Image from "astro/components/Image.astro";
 <GetStartedLayout>
   <article
     class="app-max-width flex flex-col md:flex-row justify-between items-center lg:space-x-16 px-12 md:py-4 text-white"
-    id="video-animation-cta-container"
-    aria-labelledby="video-animation-cta-heading"
+    id="mission-container"
+    aria-labelledby="mission-heading"
   >
     <div
       class="w-full md:w-2/5 mb-8 md:mb-0 opacity-0"
-      id="video-animation-image-container"
+      id="mission-image-container"
     >
       <Image
         src={OurMissionImage}
-        alt="Visual representation of Nixxon Tech's video animation services"
-        width="500"
-        height="400"
+        alt="Visual representation of Nixxon Tech's mission - Digital innovation and client success"
         loading="lazy"
-        class="w-full"
-        id="video-animation-image"
+        class="mx-auto md:w-full"
+        id="mission-image"
       />
     </div>
 
-    <div class="w-full md:w-3/5 flex flex-col space-y-4" id="video-animation-cta-content">
-      <header>
-        <h2
-          class="text-3xl md:text-4xl font-medium leading-12 opacity-0"
-          id="video-animation-cta-heading"
-        >
-          Create A Wonderful Video Animation To Turn The Visitor Into A Retained Customer
-        </h2>
-      </header>
-
-      <div
-        class="mt-5 text-sm md:text-[16px] opacity-0"
-        id="video-animation-cta-description"
+    <div
+      class="md:ml-[11.5dvw] w-full md:w-3/5 flex flex-col space-y-3 md:space-y-5"
+      id="mission-content"
+    >
+      <h2
+        class="text-center md:text-left text-3xl lg:text-3xl canvas:text-[38px] 2xl:text-[44px] 3xl:text-[50px] font-medium opacity-0"
+        id="mission-heading"
       >
-        <p>
-          Utilize engaging video content to persuade visitors to become loyal customers. To strengthen your brand and increase consumer loyalty, our skilled team produces fascinating storytelling, fluid animation, and eye-catching tales. Give us the freedom to use our imagination to produce an animated film that will win over viewers into loyal, lifetime advocates of your business.
+        Create A Wonderful Website To Turn The Visitor Into A Retained Customer
+      </h2>
+
+      <div class="opacity-0 mt-5" id="mission-description">
+        <p
+          class="text-center md:text-left text-xs md:text-sm canvas:text-base 2xl:text-lg"
+        >
+        Utilize engaging video content to persuade visitors to become loyal customers. To strengthen your brand and increase consumer loyalty, our skilled team produces fascinating storytelling, fluid animation, and eye-catching tales. Give us the freedom to use our imagination to produce an animated film that will win over viewers into loyal, lifetime advocates of your business.
         </p>
       </div>
 
       <a
         href="/contact"
-        id="video-animation-cta-button"
-        class="mt-6 w-fit inline-block px-12 py-3 leading-5 border border-primary-blue rounded-full text-white 
-text-xs md:text-lg transition
+        id="mission-cta"
+        class="mt-6 w-fit mx-auto md:mx-0 inline-block px-4 md:px-8 py-1 md:py-2 lg:px-12 lg:py-3 leading-5 border border-primary-blue rounded-full text-white
+text-xs md:text-sm xl:text-base canvas:text-lg transition
         shadow-md shadow-primary-blue/50 hover:shadow-xl hover:shadow-primary-blue/80
-        hover:scale-105 duration-300 opacity-0"
-        aria-label="Contact us to discuss your video animation project"
+        hover:scale-105 duration-300"
+        aria-label="Contact us to discuss your project"
       >
         Have a Plan? Let's Get Started
       </a>
@@ -64,126 +62,186 @@ text-xs md:text-lg transition
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import SplitType from "split-type";
 
-  // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // Initialize split text for heading
-    const headingText = new SplitType("#video-animation-cta-heading", {
-      types: "words",
-      tagName: "span",
+  function initGetStartedAnimations() {
+    // Reset any existing ScrollTriggers for this section
+    ScrollTrigger.getAll().forEach((st) => {
+      if (
+        st.vars.trigger &&
+        typeof st.vars.trigger === "string" &&
+        st.vars.trigger.includes("mission")
+      ) {
+        st.kill();
+      }
     });
 
-    const descriptionText = new SplitType("#video-animation-cta-description p", {
-      types: "lines",
-      tagName: "span",
+    // Initialize split text elements
+    let headingText, descriptionText;
+    try {
+      headingText = new SplitType("#mission-heading", {
+        types: "words",
+        tagName: "span",
+      });
+
+      descriptionText = new SplitType("#mission-description p", {
+        types: "lines",
+        tagName: "span",
+      });
+    } catch (error) {
+      console.error("Error initializing SplitType:", error);
+    }
+
+    // Set initial states
+    gsap.set("#mission-image-container", {
+      opacity: 0,
+      x: -30,
     });
 
-    // Create main timeline
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#video-animation-cta-container",
-        start: "top 75%",
-        toggleActions: "play none none none",
-      },
+    gsap.set("#mission-heading", {
+      opacity: 0,
     });
 
-    // Image animation - slide and fade in from left
-    tl.to("#video-animation-image-container", {
+    gsap.set("#mission-description", {
+      opacity: 0,
+    });
+
+    // Set initial state for button but ensure it's not completely invisible
+    gsap.set("#mission-cta", {
+      opacity: 0.01,
+      y: 30,
+    });
+
+    // Image animation - scroll based
+    gsap.to("#mission-image-container", {
       opacity: 1,
       x: 0,
       duration: 0.8,
-      ease: "power2.out",
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#mission-container",
+        start: "top 80%",
+        end: "top 50%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      },
     });
 
-    // Add subtle floating animation to image after it appears
-    tl.to(
-      "#video-animation-image",
-      {
-        y: -10,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      },
-      "-=0.3"
-    );
+    // Floating animation for the image (independent of scroll)
+    const floatingAnimation = gsap.to("#mission-image", {
+      y: -10,
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      paused: true,
+    });
 
-    // Heading animation - character by character reveal
-    tl.from(
-      headingText.words,
-      {
+    // Start floating animation only when image is visible
+    ScrollTrigger.create({
+      trigger: "#mission-image-container",
+      start: "top 75%",
+      onEnter: () => floatingAnimation.play(),
+      onLeave: () => floatingAnimation.pause(),
+      onEnterBack: () => floatingAnimation.play(),
+      onLeaveBack: () => floatingAnimation.pause(),
+    });
+
+    // Heading animation with words - scroll based
+    if (headingText && headingText.words) {
+      gsap.to("#mission-heading", {
+        opacity: 1,
+        duration: 0.3,
+        scrollTrigger: {
+          trigger: "#mission-heading",
+          start: "top 85%",
+          end: "top 65%",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+      // Words appear sequentially with scroll
+      gsap.from(headingText.words, {
         opacity: 0,
         y: 30,
         stagger: 0.05,
         duration: 0.5,
         ease: "power3.out",
-      },
-      "-=1.5"
-    );
-    tl.to("#video-animation-cta-heading", { opacity: 1, duration: 0 }, "<"); // Ensure parent is visible
+        scrollTrigger: {
+          trigger: "#mission-heading",
+          start: "top 85%",
+          end: "top 60%",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+      });
+    }
 
-    // Description paragraph animation
-    tl.to(
-      "#video-animation-cta-description",
-      {
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.out",
+    // Description paragraph animation - scroll based
+    gsap.to("#mission-description", {
+      opacity: 1,
+      duration: 0.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#mission-description",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
       },
-      "-=0.3"
-    );
+    });
 
-    tl.from(
-      descriptionText.lines,
-      {
+    // Individual lines animation (if split text worked)
+    if (descriptionText && descriptionText.lines) {
+      gsap.from(descriptionText.lines, {
         opacity: 0,
         y: 20,
         stagger: 0.1,
         duration: 0.6,
         ease: "power2.out",
-      },
-      "-=0.3"
-    );
+        scrollTrigger: {
+          trigger: "#mission-description",
+          start: "top 85%",
+          end: "top 60%",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+      });
+    }
 
-    // Button animation with bounce effect
-    tl.to(
-      "#video-animation-cta-button",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "back.out(1.7)",
+    // Button animation with improved trigger and fallback
+    gsap.to("#mission-cta", {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "back.out(1.7)",
+      scrollTrigger: {
+        trigger: "#mission-cta",
+        start: "top 95%",
+        end: "top 75%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
       },
-      "-=0.3"
-    );
-
-    // Add an attention-grabbing effect to the button after everything loaded
-    tl.to("#video-animation-cta-button", {
-      scale: 1.05,
-      duration: 0.5,
-      ease: "power1.inOut",
-      repeat: 1,
-      yoyo: true,
-      delay: 0.5,
     });
 
-    // Replace default animate-pulse with custom pulsing glow
-    const button = document.getElementById("video-animation-cta-button");
-    if (button) {
-      // Create a subtle pulsing glow effect
-      gsap.to(button, {
-        boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
-        repeat: -1,
-        duration: 2,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: 3, // Start after initial animations
-      });
+    // Fallback to ensure button becomes visible
+    setTimeout(() => {
+      const button = document.getElementById("mission-cta");
+      if (button && getComputedStyle(button).opacity < 0.5) {
+        gsap.to("#mission-cta", {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+        });
+      }
+    }, 1500);
 
-      // Add interactive hover effect
+    // Enhanced hover effects for button
+    const button = document.getElementById("mission-cta");
+    if (button) {
+      // Add new hover effect
       button.addEventListener("mouseenter", () => {
-        gsap.killTweensOf(button, "boxShadow"); // Kill ongoing animation
         gsap.to(button, {
           scale: 1.05,
           boxShadow: "0 0 25px 8px rgba(57, 208, 255, 0.7)",
@@ -194,45 +252,97 @@ text-xs md:text-lg transition
       button.addEventListener("mouseleave", () => {
         gsap.to(button, {
           scale: 1,
-          boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
+          boxShadow: "0 0 15px 3px rgba(57, 208, 255, 0.4)",
           duration: 0.3,
-          onComplete: () => {
-            // Restart the pulsing effect
-            gsap.to(button, {
-              boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
-              repeat: -1,
-              duration: 2,
-              yoyo: true,
-              ease: "sine.inOut",
-            });
-          },
         });
       });
+
+      // Create soft glow effect that stays while visible
+      ScrollTrigger.create({
+        trigger: button,
+        start: "top 85%",
+        onEnter: () => {
+          // Make button immediately visible on enter
+          gsap.to(button, { opacity: 1, duration: 0.3 });
+
+          const glowTl = gsap.timeline({ repeat: -1 });
+          glowTl.to(button, {
+            boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
+            duration: 2,
+            ease: "sine.inOut",
+          });
+          glowTl.to(button, {
+            boxShadow: "0 0 10px 2px rgba(57, 208, 255, 0.3)",
+            duration: 2,
+            ease: "sine.inOut",
+          });
+        },
+      });
     }
+  }
+
+  // Initialize on load
+  document.addEventListener("DOMContentLoaded", initGetStartedAnimations);
+
+  // Refresh on page transitions for Astro
+  document.addEventListener("astro:page-load", initGetStartedAnimations);
+
+  // Immediate initialization for cases where DOMContentLoaded already fired
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    setTimeout(initGetStartedAnimations, 100);
+  }
+
+  // Update animations on resize with debouncing
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initGetStartedAnimations();
+    }, 250);
   });
 </script>
 
 <style>
   /* Initial states for animations */
-  #video-animation-image-container {
+  #mission-image-container {
     transform: translateX(-30px);
   }
 
-  #video-animation-cta-heading {
+  #mission-heading {
     transform: translateY(20px);
   }
 
-  #video-animation-cta-description {
+  #mission-description {
     transform: translateY(20px);
   }
 
-  #video-animation-cta-button {
+  #mission-cta {
     transform: translateY(30px);
+    /* Ensure button is visible in case JS fails to load or is disabled */
+    opacity: 1;
+    animation: fadeIn 1.5s ease-out 1s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   /* Line container styles for split text */
   .line {
     display: block;
     overflow: hidden;
+  }
+
+  /* Smooth transition base for better scrolling */
+  #mission-container * {
+    transition: transform 0.05s linear; /* Very subtle base transition for smoother scrubbing */
   }
 </style>

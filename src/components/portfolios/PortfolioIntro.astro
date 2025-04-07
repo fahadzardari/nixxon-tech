@@ -5,38 +5,38 @@ import IntroImage from "../../assets/portfolios/intro.png";
 import Heading from "../common/Heading.astro";
 ---
 
-<section class="py-8 md:py-16 relative" id="web-dev-intro-section">
+<section class="py-8 md:py-16 relative" id="portfolio-intro-section">
   <!-- Centered container for alignment -->
   <div
-    class="app-max-width w-full flex flex-col lg:flex-row justify-between items-center"
+    class="p-0 lg:pr-[7dvw] w-full flex flex-col lg:flex-row justify-between items-center"
   >
     <!-- Left content with negative margin to extend to screen edge -->
     <div
       class="w-full order-2 lg:order-1 md:ml-[calc(-1*(100vw-100%)/2)]"
-      id="intro-image-container"
+      id="portfolio-image-container"
     >
       <Image
         src={IntroImage}
-        alt="Web Dev Intro"
-        title="Web Dev Intro"
-        class="w-full my-2 md:my-16"
-        id="web-dev-intro"
+        alt="Portfolio Intro"
+        title="Portfolio Intro"
+        class="w-full my-2 md:my-16 intro-animate-element"
+        id="portfolio-intro-image"
         loading="lazy"
       />
     </div>
     <!-- Right content -->
     <div
-      class="w-full lg:w-1/2 flex flex-col space-y-4 py-8 md:py-0 lg:pl-8 order-1 lg:order-2"
-      id="web-dev-intro-content"
+      class="w-full px-4 lg:px-0 lg:w-[65%] lg:min-w-[470px] canvas:min-w-[632px] flex flex-col space-y-4 py-8 md:py-0 lg:pl-8 order-1 lg:order-2"
+      id="portfolio-intro-content"
     >
       <Heading>
-        <h2 class="text-3xl md:text-4xl" id="web-dev-why-heading">
+        <h2 class="font-medium intro-animate-element" id="portfolio-heading">
           Logo Animation
         </h2>
       </Heading>
       <p
-        class="text-base md:text-[16px] text-[#2a2111]"
-        id="web-dev-intro-paragraph"
+        class="text-xs md:text-sm canvas:text-base 2xl:text-lg text-[#2a2111] intro-animate-element"
+        id="portfolio-paragraph"
       >
         Your brand identity gains a dynamic and enduring touch from logo
         animation. Your logo attracts attention and leaves a lasting impact on
@@ -56,75 +56,103 @@ import Heading from "../common/Heading.astro";
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Make sure button is visible by default
+  function initIntroAnimations() {
+    // Reset any existing ScrollTriggers for this section
+    ScrollTrigger.getAll().forEach(st => {
+      if (st.vars.trigger && typeof st.vars.trigger === 'string' && st.vars.trigger.includes('portfolio-intro')) {
+        st.kill();
+      }
+    });
 
-  // Create a timeline that triggers when the section is in view
-  const introTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#web-dev-intro-section",
-      start: "top 70%",
-      toggleActions: "play none none reset", // Changed to reset on scroll out
-    },
-  });
+    // Set initial states for animations
+    gsap.set('#portfolio-intro-image', { 
+      opacity: 0, 
+      x: window.innerWidth >= 1024 ? -50 : 0,
+      y: window.innerWidth >= 1024 ? 0 : 30 
+    });
+    
+    gsap.set('#portfolio-heading', { 
+      opacity: 0, 
+      y: 30 
+    });
+    
+    gsap.set('#portfolio-paragraph', { 
+      opacity: 0, 
+      y: 20 
+    });
 
-  // Determine if desktop or mobile
-  const isDesktop = window.innerWidth >= 1024;
+    // Create scroll-triggered animations that work in both directions
+    // Image animation
+    gsap.to('#portfolio-intro-image', {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#portfolio-image-container",
+        start: "top 85%",
+        end: "top 60%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
 
-  // Add animations to the timeline with responsive behavior
-  introTl
-    // Image animation - slides in from left on desktop, up on mobile
-    .from("#web-dev-intro", {
-      x: isDesktop ? -50 : 0,
-      y: isDesktop ? 0 : 30,
-      opacity: 0,
-      duration: 1,
-      ease: "power2.out",
-    })
+    // Heading animation
+    gsap.to('#portfolio-heading', {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#portfolio-heading",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
 
-    // Heading animation - slides up and fades in
-    .from(
-      "#web-dev-why-heading",
-      {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.6"
-    )
+    // Paragraph animation with staggered effect
+    gsap.to('#portfolio-paragraph', {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#portfolio-paragraph",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
+  }
 
-    // Paragraph animation - fade in with slight upward movement
-    .from(
-      "#web-dev-intro-paragraph",
-      {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.5"
-    )
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', initIntroAnimations);
 
-    // Button animation - modified to ensure visibility
-    .fromTo(
-      "#web-dev-intro-cta-button",
-      {
-        scale: 0.9,
-        opacity: 0,
-      },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.6,
-        ease: "back.out(1.5)",
-        clearProps: "opacity,scale", // Important: clears properties after animation
-      },
-      "-=0.4"
-    );
+  // Refresh on page transitions for Astro
+  document.addEventListener('astro:page-load', initIntroAnimations);
 
-
-  // Update animations on resize
-  window.addEventListener("resize", () => {
-    ScrollTrigger.refresh();
+  // Update animations on resize with debouncing
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initIntroAnimations();
+    }, 250);
   });
 </script>
+
+<style>
+  /* Initial states for animations */
+  .intro-animate-element {
+    opacity: 0;
+  }
+  
+  /* Smooth transition base */
+  #portfolio-intro-section * {
+    transition: transform 0.05s linear; /* Very subtle base transition for smoother scrubbing */
+  }
+</style>

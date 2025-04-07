@@ -49,40 +49,40 @@ const services = [
 ];
 ---
 
-<section class="app-max-width py-16">
+<section class="app-max-width py-16" id="gamedev-services-section">
   <Heading>
     <h2 class="text-xl md:text-2xl lg:text-3xl canvas:text-[38px] 2xl:text-[42px] 3xl:text-[46px] font-medium" id="gamedev-services-heading">
       Game Development Services That Set Us Apart
     </h2>
   </Heading>
-  <p class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 description-animation">
+  <p class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 gamedev-description-animation">
     Our game development strategy is all about customers and their needs. We stay ahead of the curve by putting a strong emphasis on innovation and constant improvement, guaranteeing our clients get great results and experiences.
   </p>
-  <article class="grid grid-cols-1 md:grid-cols-3 gap-4 services-container">
+  <article class="grid grid-cols-1 md:grid-cols-3 gap-4 gamedev-services-container">
     {
       services.map((service, index) => {
         return (
-          <div class="service-card flex flex-col h-[367px]" data-index={index}>
+          <div class="gamedev-service-card flex flex-col h-[310px] md:h-[430px]" data-index={index}>
             <div
-              class={`relative capitalize py-2 border-b border-[#E1E1E1] after:absolute after:left-0 after:bottom-[-1px] after:w-[30px] after:h-[1px] after:bg-primary-blue after:ml-0 service-border flex-grow`}
+              class={`relative capitalize py-2 border-b border-[#E1E1E1] after:absolute after:left-0 after:bottom-[-1px] after:w-[30px] after:h-[1px] after:bg-primary-blue after:ml-0 gamedev-service-border flex-grow`}
             >
-              <h4 class="text-base md:text-lg canvas:text-[22px] 2xl:text-xl font-semibold my-4 service-title">
-                <span class="text-primary-blue service-number">
+              <h4 class="text-base md:text-lg canvas:text-[22px] 2xl:text-xl font-semibold my-2 md:my-4 gamedev-service-title">
+                <span class="text-primary-blue gamedev-service-number">
                   0{index + 1}
                 </span>
                 {service.service}
               </h4>
-              <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg text-[#2a2111] service-description">
+              <p class="text-xs md:text-sm canvas:text-base 2xl:text-lg text-[#2a2111] gamedev-service-description">
                 {service.description}
               </p>
             </div>
-            <div class="service-image-container overflow-hidden mt-auto">
+            <div class="gamedev-service-image-container overflow-hidden mt-auto">
               <Image
                 src={service.image}
                 alt={service.service}
                 title={service.service}
-                class="w-full h-full mt-4 service-image object-cover"
-                id={`game-dev-${service.service.toLowerCase().replace(/\s+/g, "-")}`}
+                class="w-full h-full mt-2 md:mt-4 gamedev-service-image object-cover"
+                id={`gamedev-${service.service.toLowerCase().replace(/\s+/g, "-")}`}
                 loading="lazy"
               />
             </div>
@@ -99,32 +99,157 @@ const services = [
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Wait for DOM content to be fully loaded
-  document.addEventListener("DOMContentLoaded", () => {
-    // Initialize animations with a slight delay to ensure DOM is ready
-    setTimeout(() => {
-      initAnimations();
-      splitAndAnimateText();
-    }, 100);
-
-    // Refresh ScrollTrigger when page is fully loaded
-    window.addEventListener("load", () => {
-      ScrollTrigger.refresh(true);
+  // Function to initialize animations
+  function initGameDevAnimations() {
+    // Split and animate heading text
+    splitAndAnimateGameDevText();
+    
+    // Staggered animation for service cards with better timing
+    gsap.set(".gamedev-service-card", { 
+      opacity: 0, 
+      y: 40 
     });
-  });
+    
+    // Create separate triggers for each card for individual animations
+    document.querySelectorAll(".gamedev-service-card").forEach((card, index) => {
+      gsap.to(card, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "back.out(1.4)",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        }
+      });
+      
+      // Animate service border line with slight delay
+      const border = card.querySelector(".gamedev-service-border");
+      if (border) {
+        gsap.from(border.querySelector("::after"), {
+          width: 0,
+          duration: 0.6,
+          delay: 0.2,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          }
+        });
+      }
 
-  // Function to split and animate text incrementally
-  function splitAndAnimateText() {
-    // Add responsive margin function
+      // Subtle animation for service numbers with progressive delay
+      const number = card.querySelector(".gamedev-service-number");
+      if (number) {
+        gsap.from(number, {
+          x: -10,
+          opacity: 0,
+          duration: 0.5,
+          delay: 0.3,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          }
+        });
+      }
+      
+      // Service images with slightly bouncy entrance
+      const image = card.querySelector(".gamedev-service-image");
+      if (image) {
+        gsap.from(image, {
+          scale: 0.85,
+          opacity: 0,
+          duration: 0.7,
+          delay: 0.4,
+          ease: "back.out(1.2)",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          }
+        });
+      }
+    });
+
+    // Enhanced hover effect for cards with smoother transitions
+    document.querySelectorAll(".gamedev-service-card").forEach((card) => {
+      card.addEventListener("mouseenter", () => {
+        gsap.to(card, { 
+          y: -8, 
+          duration: 0.5, 
+          ease: "power3.out",
+          boxShadow: "0 12px 24px rgba(0,0,0,0.1)"
+        });
+        
+        // Enhanced scale effect on image hover with color adjustment
+        const image = card.querySelector(".gamedev-service-image");
+        if (image) {
+          gsap.to(image, { 
+            scale: 1.05, 
+            duration: 0.6,
+            ease: "power2.out",
+            filter: "brightness(1.03)" 
+          });
+        }
+        
+        // Subtle animation for service title on hover
+        const title = card.querySelector(".gamedev-service-title");
+        if (title) {
+          gsap.to(title, {
+            color: "#1e4fac", // A shade of blue that matches your primary-blue
+            duration: 0.3,
+            ease: "power1.inOut"
+          });
+        }
+      });
+
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, { 
+          y: 0, 
+          duration: 0.5, 
+          ease: "power3.inOut",
+          boxShadow: "0 0 0 rgba(0,0,0,0)" 
+        });
+        
+        // Reset image scale and filter on mouse leave
+        const image = card.querySelector(".gamedev-service-image");
+        if (image) {
+          gsap.to(image, { 
+            scale: 1, 
+            duration: 0.6,
+            ease: "power2.inOut",
+            filter: "brightness(1)" 
+          });
+        }
+        
+        // Reset title color on mouse leave
+        const title = card.querySelector(".gamedev-service-title");
+        if (title) {
+          gsap.to(title, {
+            color: "",
+            duration: 0.3,
+            ease: "power1.inOut"
+          });
+        }
+      });
+    });
+  }
+
+  // Function to split and animate text
+  function splitAndAnimateGameDevText() {
+    // Add responsive margin function with better spacing for mobile
     const getResponsiveMargin = () => {
-      // Use viewport width to determine margin
       const vw = Math.max(
         document.documentElement.clientWidth || 0,
         window.innerWidth || 0
       );
 
       if (vw < 640) {
-        return "0.35rem"; // Margin on mobile
+        return "0.45rem"; // Increased spacing for mobile
       } else if (vw < 1024) {
         return "0.45rem"; // Margin on tablets
       } else {
@@ -137,27 +262,29 @@ const services = [
     if (heading) {
       // Save original content
       const originalContent = heading.innerHTML;
-      
+
       try {
         // Extract the text
-        const text = heading.textContent.trim();
-        const words = text.split(" ");
+        const headingText = heading.textContent.trim();
         const responsiveMargin = getResponsiveMargin();
+
+        // Process heading
+        const words = headingText.split(" ");
         let newContent = "";
 
-        // Create wrapped words with responsive margins
+        // Create wrapped words with responsive margins and guaranteed spacing
         words.forEach((word, index) => {
           const isLastWord = index === words.length - 1;
-          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ''}">
-            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
+          newContent += `<span class="gamedev-split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin} !important;` : ""}">
+            <span class="gamedev-word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
           </span>`;
         });
 
         heading.innerHTML = newContent;
         heading.style.opacity = 1;
-        
+
         // Animate heading words
-        const headingWords = heading.querySelectorAll(".word-inner");
+        const headingWords = heading.querySelectorAll(".gamedev-word-inner");
         gsap.to(headingWords, {
           scrollTrigger: {
             trigger: heading,
@@ -170,55 +297,43 @@ const services = [
           stagger: 0.04,
           ease: "power2.inOut",
         });
-        
-        // Update margins on resize
-        window.addEventListener("resize", () => {
-          const newMargin = getResponsiveMargin();
-          
-          // Update all split words
-          const wordSpans = heading.querySelectorAll(".split-word");
-          
-          wordSpans.forEach((span, index) => {
-            // Don't apply margin to the last word
-            if (index < words.length - 1) {
-              span.style.marginRight = newMargin;
-            }
-          });
-        });
       } catch (error) {
-        console.error("Heading split error:", error);
+        console.error("GameDev heading split error:", error);
         heading.innerHTML = originalContent;
       }
     }
 
-    // Split and animate description paragraph
-    const description = document.querySelector(".description-animation");
+    // Animate description paragraph with improved spacing
+    const description = document.querySelector(".gamedev-description-animation");
     if (description) {
       const originalContent = description.textContent;
-      
+
       try {
-        // Split text into words
-        const words = description.textContent.replace(/\s+/g, " ").trim().split(" ");
-        const responsiveMargin = getResponsiveMargin();
+        // Better responsive margin for paragraph text
+        const responsiveMargin = window.innerWidth < 768 ? "0.35em" : "0.3em"; // Increased for mobile
+
+        // Normalize and split text
+        const normalizedText = description.textContent.replace(/\s+/g, " ").trim();
+        const words = normalizedText.split(" ");
         let newContent = "";
-        
-        // Create wrapped words with responsive margins
+
+        // Create wrapped words with responsive margins and guaranteed spacing
         words.forEach((word, index) => {
           const isLastWord = index === words.length - 1;
-          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ''}">
-            <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+          newContent += `<span class="gamedev-split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin} !important;` : ""}">
+            <span class="gamedev-word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
           </span>`;
         });
-        
+
         description.innerHTML = newContent;
-        
-        // Animate description words
-        const paragraphWords = description.querySelectorAll(".word-inner");
+
+        // Animate paragraph words
+        const paragraphWords = description.querySelectorAll(".gamedev-word-inner");
         gsap.to(paragraphWords, {
           scrollTrigger: {
             trigger: description,
-            start: "top 85%",
-            end: "bottom 65%",
+            start: "top 90%",
+            end: "center 75%",
             scrub: 0.7,
           },
           y: 0,
@@ -227,168 +342,133 @@ const services = [
           ease: "power1.inOut",
         });
       } catch (error) {
-        console.error("Description split error:", error);
+        console.error("GameDev description split error:", error);
         description.textContent = originalContent;
       }
     }
 
-    // Split and animate service card titles and descriptions
-    document.querySelectorAll(".service-card").forEach((card, cardIndex) => {
-      // Process title
-      const title = card.querySelector(".service-title");
+    // Split and animate service descriptions
+    document.querySelectorAll(".gamedev-service-card").forEach((card, cardIndex) => {
+      // Process title text
+      const title = card.querySelector(".gamedev-service-title");
       if (title) {
-        const numberSpan = title.querySelector(".service-number");
-        const numberText = numberSpan ? numberSpan.textContent : "";
-        const titleText = title.textContent.replace(numberText, "").trim();
+        // Keep the original number span
+        const numberSpan = title.querySelector(".gamedev-service-number");
+        const numberHTML = numberSpan ? numberSpan.outerHTML : '';
         
-        try {
-          // Keep the number span as is
-          const newContent = numberSpan.outerHTML + 
-            `<span class="title-text" style="display:inline-block; transform:translateY(15px); opacity:0;">${titleText}</span>`;
-          
-          title.innerHTML = newContent;
-          
-          // Animate title
-          const titleSpan = title.querySelector(".title-text");
-          gsap.to(titleSpan, {
-            scrollTrigger: {
-              trigger: card,
-              start: "top 85%",
-              end: "top 70%",
-              scrub: 0.5,
-            },
-            y: 0,
-            opacity: 1,
-            ease: "power2.out",
-          });
-        } catch (error) {
-          console.error("Title split error:", error);
+        // Get the text content without the number
+        let titleText = title.textContent.trim();
+        if (numberSpan) {
+          titleText = titleText.replace(numberSpan.textContent.trim(), '').trim();
         }
+        
+        // Create wrapped title
+        title.innerHTML = `${numberHTML} <span class="gamedev-title-text">${titleText}</span>`;
+
+        gsap.from(title.querySelector(".gamedev-title-text"), {
+          x: -15,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          }
+        });
       }
       
-      // Process description
-      const description = card.querySelector(".service-description");
+      // For service description paragraphs, use simpler animation without word splitting
+      const description = card.querySelector(".gamedev-service-description");
       if (description) {
         const originalContent = description.textContent;
         
         try {
-          description.innerHTML = `<span class="desc-text" style="display:block; transform:translateY(15px); opacity:0;">${originalContent}</span>`;
+          // Simple fade animation without word splitting for better readability on mobile
+          description.style.opacity = "0";
+          description.style.transform = "translateY(15px)";
           
-          // Animate description
-          const descSpan = description.querySelector(".desc-text");
-          gsap.to(descSpan, {
-            scrollTrigger: {
-              trigger: card,
-              start: "top 80%",
-              end: "top 65%",
-              scrub: 0.5,
-            },
+          // Ensure normal word spacing in paragraphs
+          description.style.wordSpacing = "normal";
+          description.style.letterSpacing = "normal";
+          
+          gsap.to(description, {
             y: 0,
             opacity: 1,
-            ease: "power1.out",
-            delay: 0.1,
+            duration: 0.7,
+            delay: 0.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 78%",
+              toggleActions: "play none none reverse",
+            }
           });
         } catch (error) {
-          console.error("Description animation error:", error);
+          console.error("GameDev service description animation error:", error);
           description.textContent = originalContent;
         }
       }
     });
   }
 
-  function initAnimations() {
-    // Staggered entrance for service cards
-    gsap.to(".service-card", {
-      scrollTrigger: {
-        trigger: ".services-container",
-        start: "top 85%",
-        end: "center 70%",
-        scrub: 0.8,
-      },
-      opacity: 1,
-      y: 0,
-      stagger: 0.1,
-      duration: 0.7,
-      ease: "power2.out",
-    });
+  // Initialize animations when DOM is loaded
+  document.addEventListener('DOMContentLoaded', initGameDevAnimations);
 
-    // Animate service images
-    gsap.utils.toArray(".service-image").forEach(image => {
-      gsap.to(image, {
-        scrollTrigger: {
-          trigger: image,
-          start: "top 90%",
-          end: "bottom 70%",
-          scrub: 0.6,
-        },
-        scale: 1.05,
-        duration: 0.8,
-        ease: "power1.inOut",
-      });
-    });
+  // Refresh ScrollTrigger when the page is resized
+  window.addEventListener('resize', () => {
+    ScrollTrigger.refresh(true);
+  });
 
-    // Enhanced hover effects
-    document.querySelectorAll(".service-card").forEach(card => {
-      card.addEventListener("mouseenter", () => {
-        gsap.to(card, { 
-          y: -8, 
-          boxShadow: "0 10px 25px rgba(0,0,0,0.08)", 
-          duration: 0.3 
-        });
-        
-        const image = card.querySelector(".service-image");
-        if (image) {
-          gsap.to(image, { scale: 1.1, duration: 0.4 });
-        }
-        
-        const border = card.querySelector(".service-border");
-        if (border) {
-          gsap.to(border.querySelector("::after"), { width: "50px", duration: 0.3 });
-        }
-      });
-
-      card.addEventListener("mouseleave", () => {
-        gsap.to(card, { 
-          y: 0, 
-          boxShadow: "0 0 0 rgba(0,0,0,0)", 
-          duration: 0.3, 
-          clearProps: "boxShadow" 
-        });
-        
-        const image = card.querySelector(".service-image");
-        if (image) {
-          gsap.to(image, { scale: 1.05, duration: 0.4 });
-        }
-        
-        const border = card.querySelector(".service-border");
-        if (border) {
-          gsap.to(border.querySelector("::after"), { width: "30px", duration: 0.3 });
-        }
-      });
-    });
-  }
-
-  // Update animations on resize
-  window.addEventListener("resize", () => {
-    ScrollTrigger.refresh();
+  // Make sure animations work correctly with client-side navigation
+  document.addEventListener('astro:page-load', () => {
+    initGameDevAnimations();
   });
 </script>
 
 <style>
   /* Initial states for animations */
-  .service-card {
-    transform: translateY(30px);
+  .gamedev-service-card {
     opacity: 0;
+    transform: translateY(40px);
+    transition: box-shadow 0.3s ease;
   }
-
- 
-
-  .service-image {
-    transform: scale(1);
-    transition: transform 0.4s ease-in-out;
+  
+  #gamedev-services-section {
+    overflow-x: hidden; /* Prevent horizontal scrolling from animations */
+  }
+  
+  .gamedev-service-image {
+    transition: transform 0.5s ease, filter 0.5s ease;
   }
   
   #gamedev-services-heading {
     opacity: 0; /* Will be set to 1 after text splitting */
+  }
+  
+  /* Updated styling with better spacing for mobile devices */
+  .gamedev-split-word {
+    margin-right: 0.45rem !important; /* Force space between words */
+    white-space: normal;
+    display: inline-block !important; /* Ensure words display properly */
+  }
+
+  @media (max-width: 640px) {
+    .gamedev-service-description,
+    .gamedev-description-animation,
+    .gamedev-service-title {
+      word-spacing: normal !important; /* Better spacing on mobile */
+      letter-spacing: normal !important;
+    }
+
+    .gamedev-split-word {
+      margin-right: 0.45rem !important; /* Increased spacing for mobile */
+    }
+  }
+
+  /* Make sure there's proper spacing between words in animations */
+  #gamedev-services-heading span,
+  .gamedev-description-animation span {
+    display: inline-block !important;
   }
 </style>

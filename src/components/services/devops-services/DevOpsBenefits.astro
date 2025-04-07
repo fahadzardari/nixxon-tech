@@ -107,6 +107,27 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
     });
   });
 
+  // Helper function to get responsive paragraph margins based on screen size
+  function getResponsiveParagraphMargin() {
+    const vw = Math.max(
+      document.documentElement.clientWidth || 0,
+      window.innerWidth || 0
+    );
+    
+    // Increased margins at each breakpoint for better readability
+    if (vw < 480) {
+      return "0.32em"; // Extra margin for very small mobile screens
+    } else if (vw < 640) {
+      return "0.28em"; // More spacing for small mobile screens
+    } else if (vw < 768) {
+      return "0.24em"; // Medium spacing for larger mobile screens
+    } else if (vw < 1024) {
+      return "0.22em"; // Spacing for tablets
+    } else {
+      return "0.2em";  // Original spacing for desktop
+    }
+  }
+
   // Function to split and animate text incrementally (matching AboutWhy)
   function splitAndAnimateText() {
     // Add responsive margin function
@@ -190,8 +211,8 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
       const originalContent = description.textContent;
 
       try {
-        // Responsive margin for paragraph
-        const responsiveMargin = window.innerWidth < 768 ? "0.1em" : "0.2em";
+        // Use responsive margin for paragraph - IMPROVED SPACING
+        const responsiveMargin = getResponsiveParagraphMargin();
 
         // Normalize and split text
         const normalizedText = description.textContent.replace(/\s+/g, " ").trim();
@@ -202,7 +223,7 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
         words.forEach((word, index) => {
           const isLastWord = index === words.length - 1;
           newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
-            <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+            <span class="word-inner paragraph-word" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
           </span>`;
         });
 
@@ -284,8 +305,8 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
         const originalContent = paragraph.textContent;
 
         try {
-          // Responsive margin for paragraph text
-          const responsiveMargin = window.innerWidth < 768 ? "0.1em" : "0.2em";
+          // Use responsive margin for better spacing
+          const responsiveMargin = getResponsiveParagraphMargin();
 
           // Normalize and split text
           const normalizedText = paragraph.textContent
@@ -298,7 +319,7 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
           words.forEach((word, index) => {
             const isLastWord = index === words.length - 1;
             newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
-              <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+              <span class="word-inner paragraph-word" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
             </span>`;
           });
 
@@ -369,9 +390,20 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
     });
   }
 
+  // Update paragraph word spacing on resize
+  function updateParagraphSpacing() {
+    const newMargin = getResponsiveParagraphMargin();
+    const splitWords = document.querySelectorAll(".benefit-item p .split-word, .devops-benefits-description-animation .split-word");
+    
+    splitWords.forEach(word => {
+      word.style.marginRight = newMargin;
+    });
+  }
+
   // Update animations on resize
   window.addEventListener("resize", () => {
     ScrollTrigger.refresh();
+    updateParagraphSpacing();
   });
 </script>
 
@@ -385,5 +417,23 @@ import ArtWhy from "../../../assets/about-us/art-why.webp";
     transform: translateX(20px);
   }
 
-
+  /* Additional spacing for paragraphs on smaller screens */
+  @media (max-width: 768px) {
+    .benefit-item p, .devops-benefits-description-animation {
+      line-height: 1.6; /* Increased line height for better readability */
+      letter-spacing: 0.01em; /* Slight letter spacing */
+    }
+    
+    .paragraph-word {
+      padding: 0.02em 0; /* Add vertical padding to words */
+    }
+  }
+  
+  /* Extra spacing for very small screens */
+  @media (max-width: 480px) {
+    .benefit-item p, .devops-benefits-description-animation {
+      line-height: 1.7;
+      letter-spacing: 0.015em;
+    }
+  }
 </style>

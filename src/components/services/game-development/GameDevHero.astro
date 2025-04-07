@@ -5,7 +5,7 @@ import Image from "astro/components/Image.astro";
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:min-h-[810px] w-full pt-16"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:min-h-[810px] w-full pt-16 overflow-y-hidden"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
@@ -14,7 +14,7 @@ import Image from "astro/components/Image.astro";
 
   <!-- Container with relative positioning -->
   <div
-    class="app-max-width relative md:h-[60vh] flex md:flex-row items-center w-full"
+    class="app-max-width relative lg:h-[60vh] 2xl:h-[70vh] flex md:flex-row items-center w-full"
   >
     <!-- Left Side Text - Front Layer -->
     <div
@@ -23,16 +23,18 @@ import Image from "astro/components/Image.astro";
     >
       <div class="w-full relative">
         <h1
-          class="text-4xl md:text-[48px] leading-[48px] lg:leading-[58px] font-semibold capitalize"
+          class="text-2xl md:text-4xl xl:text-4xl canvas:text-5xl 2xl:text-[54px] 3xl:text-6xl font-semibold capitalize"
         >
-          Top Notch Inventive Game Development Solutions
+          Custom Mobile App Development
         </h1>
-        <p class="mt-4 text-sm md:text-md xl:text-base opacity-80">
-          Improve the quality of your game creating experience with our
-          top-notch services and knowledgeable development staff. Crafting
-          captivating experiences for a variety of platforms is how we think
-          ideas come to life. With our unmatched experience in game production,
-          you can boost the engagement and enjoyment of your website.
+        <p
+          class="text-base lg:text-base xl:text-lg canvas:text-xl 3xl:text-2xl mt-4 opacity-80"
+        >
+          We develop intuitive iOS and Android mobile apps to support business
+          expansion. We value the user feedback so by utilizing it and the
+          newest technology efficiently, our talented developers design apps
+          that provide an incredible user experience. Our services are designed
+          to help businesses with their digital projects.
         </p>
         <a
           href="/contact"
@@ -49,9 +51,12 @@ import Image from "astro/components/Image.astro";
     <!-- Right Side Image - Absolute positioning to extend beyond container -->
     <div
       id="hero-image"
-      class="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 z-0 opacity-0"
+      class="hidden lg:block absolute right-0 top-0 bottom-0 w-[45%] xl:w-1/2 z-0 opacity-0"
     >
-      <div id="hero-image-container" class="h-full w-full right-0 float-right">
+      <div
+        id="hero-image-container"
+        class="min-h-[380px] xl:min-h-[460px] canvas:min-h-[519px] 3xl:min-h-[550px] h-full w-full right-0 float-right"
+      >
         <Image src={Art} alt="3D VR Person" class="h-full object-contain" />
       </div>
     </div>

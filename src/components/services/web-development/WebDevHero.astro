@@ -5,7 +5,7 @@ import Image from "astro/components/Image.astro";
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:min-h-[810px] w-full pt-16"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:min-h-[810px] w-full pt-16 overflow-y-hidden"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
@@ -14,7 +14,7 @@ import Image from "astro/components/Image.astro";
 
   <!-- Container with relative positioning -->
   <div
-    class="app-left-padding relative md:h-[60vh] flex md:flex-row items-center w-full"
+    class="app-left-padding relative lg:h-[80vh] flex md:flex-row items-center w-full"
   >
     <!-- Left Side Text - Front Layer -->
     <div
@@ -23,7 +23,7 @@ import Image from "astro/components/Image.astro";
     >
       <div class="w-full relative">
         <h1
-          class="text-4xl md:text-[48px] leading-[48px] lg:leading-[58px] font-semibold capitalize"
+          class="text-2xl md:text-4xl xl:text-4xl canvas:text-5xl 2xl:text-[54px] 3xl:text-6xl font-semibold capitalize"
         >
           Grow Your Business Potentially Through Our Advanced Website
           Development Solution.
@@ -43,11 +43,11 @@ import Image from "astro/components/Image.astro";
     <!-- Right Side Image - Absolute positioning to extend beyond container -->
     <div
       id="hero-image"
-      class="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 xl:w-2/3 z-0 opacity-0"
+      class="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 canvas:w-2/3 z-0 opacity-0"
     >
       <div
         id="hero-image-container"
-        class="h-full lg:max-w-[795px] 2xl:max-w-full right-0 float-right flex justify-end"
+        class="h-full lg:min-w-[580px] canvas:min-w-[795px] canvas:max-w-[795px] 2xl:max-w-[840px] 3xl:max-w-[1000px] right-0 float-right flex justify-end"
       >
         <Image
           src={Art}

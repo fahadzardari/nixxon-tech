@@ -185,10 +185,10 @@ const projects = [
         scrollTrigger: {
           trigger: sliderContainer,
           start: "top 80%",
-          toggleActions: "play none none reset" // Reset on scroll up for repeatability
-        }
+          toggleActions: "play none none reset", // Reset on scroll up for repeatability
+        },
       });
-      
+
       // Add the entrance animation to the timeline
       tl.fromTo(
         sliderContainer,
@@ -201,7 +201,7 @@ const projects = [
           opacity: 1,
           duration: 0.8,
           ease: "power2.out",
-          clearProps: "all" // Clear ALL props to prevent any leftover transforms
+          clearProps: "all", // Clear ALL props to prevent any leftover transforms
         }
       );
     }
@@ -220,13 +220,13 @@ const projects = [
           // Apply a subtle visual parallax without changing the actual layout position
           const progress = self.progress;
           const yOffset = -2 * progress; // Reduced from -3% to -2%
-          
+
           // Apply as visual transform only, not affecting layout
           gsap.set(sliderContainer, {
             backgroundPositionY: `${yOffset}%`,
-            force3D: true // Hardware acceleration
+            force3D: true, // Hardware acceleration
           });
-        }
+        },
       });
     }
   }

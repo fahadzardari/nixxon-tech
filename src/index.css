@@ -27,75 +27,30 @@
 
 /* Default Mobile Styles */
 .app-max-width {
-  padding-inline: 1rem;
-}
-
-.app-left-padding {
-  padding-left: 1rem;
+  padding-inline: 4.5dvw;
+  margin: 0 auto;
 }
 
 .app-right-padding {
-  padding-right: 1rem;
+  padding-right: 4.5dvw;
+}
+.app-left-padding {
+  padding-left: 4.5dvw;
 }
 
-/* Tablet */
-@media screen and (min-width: 768px) {
-  .app-max-width {
-    padding-inline: 2rem;
-  }
 
-  .app-left-padding {
-    padding-left: 2rem;
-  }
 
-  .app-right-padding {
-    padding-right: 2rem;
-  }
-}
-
-/* Small Laptop */
 @media screen and (min-width: 1024px) {
   .app-max-width {
-    padding-inline: 4rem;
-  }
-
-  .app-left-padding {
-    padding-left: 4rem;
-  }
-
-  .app-right-padding {
-    padding-right: 4rem;
-  }
-}
-
-/* Large Laptop */
-@media screen and (min-width: 1280px) {
-  .app-max-width {
-    padding-inline: 6rem;
-  }
-
-  .app-left-padding {
-    padding-left: 6rem;
-  }
-
-  .app-right-padding {
-    padding-right: 6rem;
-  }
-}
-
-/* Extra Large Screens */
-@media screen and (min-width: 1560px) {
-  .app-max-width {
+    padding-inline: 10.4dvw;
     margin: 0 auto;
-    padding-inline: 8rem;
-  }
-
-  .app-left-padding {
-    padding-left: 8rem;
   }
 
   .app-right-padding {
-    padding-right: 8rem;
+    padding-right: 10.4dvw;
+  }
+  .app-left-padding {
+    padding-left: 10.4dvw;
   }
 }
 

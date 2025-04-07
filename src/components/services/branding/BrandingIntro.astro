@@ -7,7 +7,7 @@ import Heading from "../../common/Heading.astro";
 <section class="py-8 md:py-16 relative" id="branding-intro-section">
   <!-- Centered container for alignment -->
   <div
-    class="app-max-width w-full flex flex-col lg:flex-row justify-between items-center"
+    class="p-0 lg:pr-[7dvw] w-full flex flex-col lg:flex-row justify-between items-center"
   >
     <!-- Left content with negative margin to extend to screen edge -->
     <div
@@ -18,34 +18,34 @@ import Heading from "../../common/Heading.astro";
         src={IntroImage}
         alt="Branding Services Intro"
         title="Branding Services Intro"
-        class="w-full my-2 md:my-16"
+        class="w-full my-2 md:my-16 intro-animate-element"
         id="branding-intro"
         loading="lazy"
       />
     </div>
     <!-- Right content -->
     <div
-      class="w-full lg:w-1/2 flex flex-col space-y-4 py-8 md:py-0 lg:pl-8 order-1 lg:order-2"
+      class="w-full px-4 lg:px-0 lg:w-[65%] lg:min-w-[470px] canvas:min-w-[632px] flex flex-col space-y-4 py-8 md:py-0 lg:pl-8 order-1 lg:order-2"
       id="branding-intro-content"
     >
       <Heading>
-        <h2 class="text-3xl md:text-4xl" id="branding-heading">
+        <h2 class="font-medium intro-animate-element" id="branding-heading">
           Eye-catching identity design
         </h2>
       </Heading>
       <p
-        class="text-base md:text-[16px] text-[#2a2111]"
+        class="text-xs md:text-sm canvas:text-base 2xl:text-lg text-[#2a2111] intro-animate-element"
         id="branding-intro-paragraph"
       >
         Our company is skilled in producing striking identity designs that
         encapsulate the spirit of our clients' businesses and make an impact. We
-        create visually appealing and memorable brand identities that successfully
-        convey our clients' essential message and values thanks to our expert
-        graphic designers and painstaking attention to detail.
+        create visually appealing and memorable brand identities that
+        successfully convey our clients' essential message and values thanks to
+        our expert graphic designers and painstaking attention to detail.
       </p>
       <button
         class="w-fit inline-block px-8 md:px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-base md:text-lg transition
-        shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80"
+        shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80 intro-animate-element"
         id="cta-button-branding"
       >
         Let's Talk
@@ -60,95 +60,156 @@ import Heading from "../../common/Heading.astro";
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Make sure button is visible by default
-  document.querySelector("#cta-button-branding").style.opacity = "1";
+  function initIntroAnimations() {
+    // Reset any existing ScrollTriggers for this section
+    ScrollTrigger.getAll().forEach((st) => {
+      if (
+        st.vars.trigger &&
+        typeof st.vars.trigger === "string" &&
+        st.vars.trigger.includes("branding-intro")
+      ) {
+        st.kill();
+      }
+    });
 
-  // Create a timeline that triggers when the section is in view
-  const introTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#branding-intro-section",
-      start: "top 70%",
-      toggleActions: "play none none reset", // Changed to reset on scroll out
-    },
-  });
-
-  // Determine if desktop or mobile
-  const isDesktop = window.innerWidth >= 1024;
-
-  // Add animations to the timeline with responsive behavior
-  introTl
-    // Image animation - slides in from left on desktop, up on mobile
-    .from("#branding-intro", {
-      x: isDesktop ? -50 : 0,
-      y: isDesktop ? 0 : 30,
+    // Set initial states for animations
+    gsap.set("#branding-intro", {
       opacity: 0,
-      duration: 1,
-      ease: "power2.out",
-    })
-
-    // Heading animation - slides up and fades in
-    .from(
-      "#branding-heading",
-      {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.6"
-    )
-
-    // Paragraph animation - fade in with slight upward movement
-    .from(
-      "#branding-intro-paragraph",
-      {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.5"
-    )
-
-    // Button animation - modified to ensure visibility
-    .fromTo(
-      "#cta-button-branding",
-      {
-        scale: 0.9,
-        opacity: 0,
-      },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.6,
-        ease: "back.out(1.5)",
-        clearProps: "opacity,scale", // Important: clears properties after animation
-      },
-      "-=0.4"
-    );
-
-  // Add hover animation for the button
-  const ctaButton = document.querySelector("#cta-button-branding");
-  if (ctaButton) {
-    ctaButton.addEventListener("mouseenter", () => {
-      gsap.to("#cta-button-branding", {
-        scale: 1.05,
-        duration: 0.3,
-        ease: "power1.out",
-      });
+      x: window.innerWidth >= 1024 ? -50 : 0,
+      y: window.innerWidth >= 1024 ? 0 : 30,
     });
 
-    ctaButton.addEventListener("mouseleave", () => {
-      gsap.to("#cta-button-branding", {
-        scale: 1,
-        duration: 0.3,
-        ease: "power1.out",
-      });
+    gsap.set("#branding-heading", {
+      opacity: 0,
+      y: 30,
     });
+
+    gsap.set("#branding-intro-paragraph", {
+      opacity: 0,
+      y: 20,
+    });
+
+    gsap.set("#cta-button-branding", {
+      opacity: 0,
+      scale: 0.9,
+    });
+
+    // Create scroll-triggered animations that work in both directions
+    // Image animation
+    gsap.to("#branding-intro", {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#branding-image-container",
+        start: "top 85%",
+        end: "top 60%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    // Heading animation
+    gsap.to("#branding-heading", {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#branding-heading",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    // Paragraph animation with staggered effect
+    gsap.to("#branding-intro-paragraph", {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#branding-intro-paragraph",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    // Button animation with spring effect
+    gsap.to("#cta-button-branding", {
+      opacity: 1,
+      scale: 1,
+      duration: 0.6,
+      ease: "back.out(1.7)",
+      scrollTrigger: {
+        trigger: "#cta-button-branding",
+        start: "top 90%",
+        end: "top 75%",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    // Enhanced hover effect for button
+    const ctaButton = document.querySelector("#cta-button-branding");
+    if (ctaButton) {
+      ctaButton.addEventListener("mouseenter", () => {
+        gsap.to("#cta-button-branding", {
+          scale: 1.05,
+          duration: 0.3,
+          ease: "power2.out",
+          boxShadow: "0 10px 25px rgba(30, 79, 172, 0.4)",
+        });
+      });
+
+      ctaButton.addEventListener("mouseleave", () => {
+        gsap.to("#cta-button-branding", {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out",
+          boxShadow: "0 6px 15px rgba(30, 79, 172, 0.3)",
+        });
+      });
+    }
   }
 
-  // Update animations on resize
+  // Initialize on load
+  document.addEventListener("DOMContentLoaded", initIntroAnimations);
+
+  // Refresh on page transitions for Astro
+  document.addEventListener("astro:page-load", initIntroAnimations);
+
+  // Update animations on resize with debouncing
+  let resizeTimer;
   window.addEventListener("resize", () => {
-    ScrollTrigger.refresh();
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initIntroAnimations();
+    }, 250);
   });
 </script>
+
+<style>
+  /* Initial states for animations */
+  .intro-animate-element {
+    opacity: 0;
+  }
+
+  /* Smooth transition base */
+  #branding-intro-section * {
+    transition: transform 0.05s linear; /* Very subtle base transition for smoother scrubbing */
+  }
+
+  /* Enhanced button styles for better interaction */
+  #cta-button-branding {
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+</style>

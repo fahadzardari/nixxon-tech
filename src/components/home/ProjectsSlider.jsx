@@ -114,16 +114,18 @@ const ProjectCard = ({ project }) => {
         <img
           src={ProjectImage.src}
           alt={project.title}
-          className="h-56 object-cover rounded-lg"
+          className=" h-56 object-cover rounded-lg"
         />
       </div>
-      <div className="flex flex-col flex-grow py-6">
-        <h3 className="text-2xl mb-2">{project.title}</h3>
-        <p className="text-gray-600 mb-4 text-sm line-clamp-3">
+      <div className="flex flex-col flex-grow py-10 md:py-6">
+        <h3 className="text-lg md:text-xl canvas:text-2xl mb-2">
+          {project.title}
+        </h3>
+        <p className="text-gray-600 mb-2 lg:mb-4 text-[10px] md:text-xs canvas:text-sm 2xl:text-base line-clamp-3">
           {project.description}
         </p>
         <div className="mt-auto flex items-center justify-between">
-          <button className="text-primary-blue underline hover:underline">
+          <button className="text-primary-blue text-xs md:text-sm canvas:text-base underline hover:underline">
             Read more
           </button>
         </div>

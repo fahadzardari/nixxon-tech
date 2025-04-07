@@ -5,7 +5,7 @@ import Image from "astro/components/Image.astro";
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:min-h-[810px] w-full pt-16"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:min-h-[810px] w-full pt-16 overflow-y-hidden"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
@@ -14,7 +14,7 @@ import Image from "astro/components/Image.astro";
 
   <!-- Container with relative positioning -->
   <div
-    class="app-max-width relative md:h-[60vh] flex md:flex-row items-center w-full"
+    class="app-max-width relative lg:h-[80vh] flex md:flex-row items-center w-full"
   >
     <!-- Left Side Text - Front Layer -->
     <div
@@ -23,11 +23,13 @@ import Image from "astro/components/Image.astro";
     >
       <div class="w-full relative">
         <h1
-          class="text-4xl md:text-[48px] leading-[48px] lg:leading-[58px] font-semibold capitalize"
+          class="text-2xl md:text-4xl xl:text-4xl canvas:text-5xl 2xl:text-[54px] 3xl:text-6xl font-semibold capitalize"
         >
           Custom Mobile App Development
         </h1>
-        <p class="mt-4 text-sm md:text-md xl:text-base opacity-80">
+        <p
+          class="text-base lg:text-lg canvas:text-xl 3xl:text-2xl mt-4 opacity-80"
+        >
           We develop intuitive iOS and Android mobile apps to support business
           expansion. We value the user feedback so by utilizing it and the
           newest technology efficiently, our talented developers design apps
@@ -51,12 +53,11 @@ import Image from "astro/components/Image.astro";
       id="hero-image"
       class="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 z-0 opacity-0"
     >
-      <div id="hero-image-container" class="h-full w-full right-0 float-right">
-        <Image
-          src={Art}
-          alt="3D VR Person"
-          class="h-full object-contain"
-        />
+      <div
+        id="hero-image-container"
+        class="canvas:min-h-[601px] h-full w-full right-0 float-right"
+      >
+        <Image src={Art} alt="3D VR Person" class="h-full object-contain" />
       </div>
     </div>
   </div>

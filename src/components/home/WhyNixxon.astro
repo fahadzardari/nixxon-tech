@@ -271,8 +271,8 @@ import Image from "astro/components/Image.astro";
         const originalContent = paragraph.textContent;
 
         try {
-          // Responsive margin for paragraph text
-          const responsiveMargin = window.innerWidth < 768 ? "0.1em" : "0.2em";
+          // Responsive margin for paragraph text - INCREASED for better readability on small screens
+          const responsiveMargin = getResponsiveParagraphMargin();
 
           // Normalize and split text
           const normalizedText = paragraph.textContent
@@ -284,7 +284,7 @@ import Image from "astro/components/Image.astro";
           // Create wrapped words with responsive margins
           words.forEach((word) => {
             newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; margin-right:${responsiveMargin};">
-              <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+              <span class="word-inner paragraph-word" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
             </span>`;
           });
 
@@ -359,6 +359,37 @@ import Image from "astro/components/Image.astro";
     });
   }
 
+  // Helper function to get responsive paragraph margins based on screen size
+  function getResponsiveParagraphMargin() {
+    const vw = Math.max(
+      document.documentElement.clientWidth || 0,
+      window.innerWidth || 0
+    );
+    
+    // Increased margins at each breakpoint for better readability
+    if (vw < 480) {
+      return "0.32em"; // Extra margin for very small mobile screens
+    } else if (vw < 640) {
+      return "0.28em"; // More spacing for small mobile screens
+    } else if (vw < 768) {
+      return "0.24em"; // Medium spacing for larger mobile screens
+    } else if (vw < 1024) {
+      return "0.22em"; // Spacing for tablets
+    } else {
+      return "0.2em";  // Original spacing for desktop
+    }
+  }
+
+  // Update paragraph word spacing on resize
+  function updateParagraphSpacing() {
+    const newMargin = getResponsiveParagraphMargin();
+    const splitWords = document.querySelectorAll(".benefit-item p .split-word");
+    
+    splitWords.forEach(word => {
+      word.style.marginRight = newMargin;
+    });
+  }
+
   function initNixxonAnimations() {
     // Make benefit items visible as we scroll with a staggered entrance
     gsap.to(".benefit-item", {
@@ -402,9 +433,10 @@ import Image from "astro/components/Image.astro";
     });
   }
 
-  // Update animations on resize
+  // Update animations on resize with better paragraph spacing
   window.addEventListener("resize", () => {
     ScrollTrigger.refresh();
+    updateParagraphSpacing();
   });
 </script>
 
@@ -425,5 +457,25 @@ import Image from "astro/components/Image.astro";
 
   .read-more-link:hover {
     color: #0056b3; /* Slightly darker blue on hover */
+  }
+
+  /* Additional spacing for paragraphs on smaller screens */
+  @media (max-width: 768px) {
+    .benefit-item p {
+      line-height: 1.6; /* Increased line height for better readability */
+      letter-spacing: 0.01em; /* Slight letter spacing */
+    }
+    
+    .paragraph-word {
+      padding: 0.02em 0; /* Add vertical padding to words */
+    }
+  }
+  
+  /* Extra spacing for very small screens */
+  @media (max-width: 480px) {
+    .benefit-item p {
+      line-height: 1.7;
+      letter-spacing: 0.015em;
+    }
   }
 </style>

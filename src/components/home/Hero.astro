@@ -5,29 +5,31 @@ import Image from "astro/components/Image.astro";
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:items-start lg:min-h-[810px] w-full pt-16"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:items-start lg:min-h-[720px] canvas:min-h-[810px] w-full pt-16"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
   >
   </div>
   <div
-    class="app-max-width relative md:h-[80vh] flex items-center lg:items-end w-full"
+    class="app-max-width relative md:h-[80dvh] canvas:h-[85dvh] lg:pb-8 xl:pb-16 canvas:pb-12 2xl:pb-16 3xl:pb-20 flex items-center lg:items-end w-full"
   >
     <!-- Text Content (Front Layer) -->
     <div
       id="hero-text"
-      class="relative z-50 opacity-0 w-full lg:w-4/5 pb-20 text-white"
+      class="relative z-50 opacity-0 w-full lg:w-[65%] xl:w-3/4 text-white"
     >
       <div
-        class="w-full relative max-w-[815px] flex flex-col items-start lg:space-y-4"
+        class="w-full relative lg:max-w-[650px] xl:max-w-[800px] 2xl:max-w-[1000px] flex flex-col items-start lg:space-y-4"
       >
         <h1
-          class="text-4xl md:text-[48px] leading-[48px] lg:leading-[58px]z font-semibold capitalize"
+          class="text-2xl md:text-4xl lg:text-3xl xl:text-4xl canvas:text-5xl 2xl:text-[54px] 3xl:text-6xl font-semibold capitalize"
         >
           We at NixxonTech are dedicated to helping businesses succeed online.
         </h1>
-        <p class="mt-4 text-sm md:text-md lg:text-base opacity-80">
+        <p
+          class="text-base lg:text-base xl:text-lg canvas:text-xl 3xl:text-2xl mt-4 opacity-80"
+        >
           Whether you run a small business, startup or large corporation, we are
           here to support you. Our committed staff combines cutting-edge
           technology, data-driven strategies, and creativity to get the desired
@@ -48,7 +50,7 @@ import Image from "astro/components/Image.astro";
     <!-- Right Side Image (Back Layer) -->
     <div
       id="hero-image"
-      class="hidden absolute right-0 pt-16 app-right-padding top-0 lg:block w-1/2 z-0 opacity-0"
+      class="hidden absolute right-0 pt-16 app-right-padding top-0 lg:block w-[55%] canvas:w-1/2 z-0 opacity-0"
     >
       <div id="hero-image-container" class="w-full">
         <Image

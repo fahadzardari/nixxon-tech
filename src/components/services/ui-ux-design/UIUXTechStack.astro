@@ -12,12 +12,13 @@ import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
 <section class="app-max-width py-8 md:py-16" id="uiux-tech-stack-section">
   <div class="tech-stack-heading mb-8 md:mb-12">
     <Heading>
-      <h2 class="font-medium description-animation" id="tech-stack-heading">
+      <h2 class="font-medium tech-animate-element" id="tech-stack-heading">
         Technology Stack
       </h2>
     </Heading>
     <p
-      class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 my-4 description-animation"
+      class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 tech-animate-element"
+      id="uiux-tech-stack-description"
     >
       The robust technology stack that our web app development team uses yields
       dependable and efficient results. Our responsive web applications are made
@@ -35,7 +36,7 @@ import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
         src={FigmaImage}
         alt="Figma"
         title="Figma"
-        class="tech-icon w-16 md:w-24 lg:w-28 h-auto opacity-0"
+        class="tech-icon w-16 md:w-24 lg:w-28 h-auto tech-animate-element"
         id="figma-icon"
         loading="lazy"
       />
@@ -45,7 +46,7 @@ import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
         src={XDImage}
         alt="Adobe XD"
         title="Adobe XD"
-        class="tech-icon w-16 md:w-24 lg:w-28 h-auto opacity-0"
+        class="tech-icon w-16 md:w-24 lg:w-28 h-auto tech-animate-element"
         id="xd-icon"
         loading="lazy"
       />
@@ -55,7 +56,7 @@ import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
         src={PhotoshopImage}
         alt="Photoshop"
         title="Photoshop"
-        class="tech-icon w-16 md:w-24 lg:w-28 h-auto opacity-0"
+        class="tech-icon w-16 md:w-24 lg:w-28 h-auto tech-animate-element"
         id="photoshop-icon"
         loading="lazy"
       />
@@ -65,7 +66,7 @@ import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
         src={IllustratorImage}
         alt="Illustrator"
         title="Illustrator"
-        class="tech-icon w-16 md:w-24 lg:w-28 h-auto opacity-0"
+        class="tech-icon w-16 md:w-24 lg:w-28 h-auto tech-animate-element"
         id="illustrator-icon"
         loading="lazy"
       />
@@ -77,7 +78,7 @@ import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
         src={SketchImage}
         alt="Sketch"
         title="Sketch"
-        class="tech-icon w-16 md:w-24 lg:w-28 h-auto opacity-0"
+        class="tech-icon w-16 md:w-24 lg:w-28 h-auto tech-animate-element"
         id="sketch-icon"
         loading="lazy"
       />
@@ -89,225 +90,176 @@ import IllustratorImage from "../../../assets/services/ui-ux-design/ai.png";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
 
-  // Wait for DOM content to be fully loaded
-  document.addEventListener("DOMContentLoaded", () => {
-    // Initialize animations with a slight delay to ensure DOM is ready
-    setTimeout(() => {
-      initTextAnimations();
-      initIconAnimations();
-    }, 100);
-
-    // Refresh ScrollTrigger when page is fully loaded
-    window.addEventListener("load", () => {
-      ScrollTrigger.refresh(true);
-    });
-  });
-
-  // Function to initialize text animations
-  function initTextAnimations() {
-    // Split heading text for animation
-    splitAndAnimateText("#tech-stack-heading", ".description-animation");
-  }
-
-  // Split and animate text - similar to other components
-  function splitAndAnimateText(headingSelector, descriptionSelector) {
-    // Add responsive margin function
-    const getResponsiveMargin = () => {
-      const vw = Math.max(
-        document.documentElement.clientWidth || 0,
-        window.innerWidth || 0
-      );
-
-      if (vw < 640) return "0.35rem";
-      else if (vw < 1024) return "0.45rem";
-      else return "0.55rem";
-    };
-
-    // Animate heading
-    const heading = document.querySelector(headingSelector);
-    if (heading) {
-      const originalContent = heading.innerHTML;
-
-      try {
-        const headingText = heading.textContent.trim();
-        const responsiveMargin = getResponsiveMargin();
-        const words = headingText.split(" ");
-        let newContent = "";
-
-        words.forEach((word, index) => {
-          const isLastWord = index === words.length - 1;
-          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
-            <span class="word-inner" style="display:inline-block; transform:translateY(30px); opacity:0;">${word}</span>
-          </span>`;
-        });
-
-        heading.innerHTML = newContent;
-        heading.style.opacity = 1;
-
-        // Animate heading words
-        const headingWords = heading.querySelectorAll(".word-inner");
-        gsap.to(headingWords, {
-          scrollTrigger: {
-            trigger: heading,
-            start: "top 85%",
-            end: "top 65%",
-            scrub: 0.6,
-          },
-          y: 0,
-          opacity: 1,
-          stagger: 0.04,
-          ease: "power2.inOut",
-        });
-      } catch (error) {
-        console.error("Heading split error:", error);
-        heading.innerHTML = originalContent;
-      }
-    }
-
-    // Animate description
-    const descriptions = document.querySelectorAll(descriptionSelector);
-    descriptions.forEach((description) => {
-      if (description) {
-        const originalContent = description.textContent;
-
-        try {
-          const responsiveMargin = window.innerWidth < 768 ? "0.1em" : "0.2em";
-          const normalizedText = description.textContent
-            .replace(/\s+/g, " ")
-            .trim();
-          const words = normalizedText.split(" ");
-          let newContent = "";
-
-          words.forEach((word, index) => {
-            const isLastWord = index === words.length - 1;
-            newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; ${!isLastWord ? `margin-right: ${responsiveMargin}` : ""}">
-              <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
-            </span>`;
-          });
-
-          description.innerHTML = newContent;
-
-          // Animate paragraph words
-          const paragraphWords = description.querySelectorAll(".word-inner");
-          gsap.to(paragraphWords, {
-            scrollTrigger: {
-              trigger: description,
-              start: "top 90%",
-              end: "center 75%",
-              scrub: 0.7,
-            },
-            y: 0,
-            opacity: 1,
-            stagger: 0.015,
-            ease: "power1.inOut",
-          });
-        } catch (error) {
-          console.error("Description split error:", error);
-          description.textContent = originalContent;
-        }
+  function initTechStackAnimations() {
+    // Reset any existing ScrollTriggers for this section
+    ScrollTrigger.getAll().forEach(st => {
+      if (st.vars.trigger && typeof st.vars.trigger === 'string' && 
+         (st.vars.trigger.includes('uiux-tech') || st.vars.trigger.includes('tech-stack'))) {
+        st.kill();
       }
     });
-  }
 
-  // Function to initialize icon animations
-  function initIconAnimations() {
-    // Get all tech icons individually
-    const techIcons = document.querySelectorAll(".tech-icon");
-
-    // Create individual animations for each icon
-    techIcons.forEach((icon, index) => {
-      // Set initial state with GSAP to ensure consistency
+    // Set initial states for animations
+    gsap.set('#tech-stack-heading', { 
+      opacity: 0, 
+      y: 30 
+    });
+    
+    gsap.set('#uiux-tech-stack-description', { 
+      opacity: 0, 
+      y: 20 
+    });
+    
+    // Set initial states for tech icons
+    const techIcons = [
+      "#figma-icon", 
+      "#xd-icon", 
+      "#photoshop-icon",
+      "#illustrator-icon",
+      "#sketch-icon"
+    ];
+    
+    techIcons.forEach(icon => {
       gsap.set(icon, {
         opacity: 0,
-        y: 20,
-        scale: 0.9,
-        rotation: -5,
+        y: 15,
+        scale: 0.92
       });
+    });
 
-      // Create animation for this specific icon
+    // Heading animation with scroll-based trigger
+    gsap.to('#tech-stack-heading', {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#tech-stack-heading",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
+
+    // Description paragraph animation
+    gsap.to('#uiux-tech-stack-description', {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#uiux-tech-stack-description",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
+
+    // Animate each tech icon with staggered delay
+    techIcons.forEach((icon, index) => {
       gsap.to(icon, {
         opacity: 1,
         y: 0,
         scale: 1,
-        rotation: 0,
-        duration: 0.7,
-        ease: "back.out(1.4)",
+        duration: 0.5,
+        ease: "back.out(1.2)",
         scrollTrigger: {
-          trigger: icon,
-          start: "top 85%", // Trigger when the icon is 85% from the top of viewport
-          end: "bottom 70%",
-          toggleActions: "play none none reset", // Play once when scrolled into view
-          once: false, // Allow animation to play again if scrolled back
-          markers: false, // For debugging, set to true to see trigger points
+          trigger: ".tech-stack-container",
+          start: "top 80%",
+          end: "top 60%",
+          scrub: true,
+          toggleActions: "play reverse play reverse"
         },
+        delay: index * 0.05 // Creates a staggered effect
       });
-
-      // Add improved hover effect with subtle rotation and scale
-      const iconWrapper = icon.closest(".tech-icon-wrapper");
-
-      // Only add hover if device supports it (not touch-only)
-      if (window.matchMedia("(hover: hover)").matches) {
-        iconWrapper.addEventListener("mouseenter", () => {
+      
+      // Add hover effect to each tech icon
+      const iconElement = document.querySelector(icon);
+      if (iconElement) {
+        iconElement.addEventListener("mouseenter", () => {
           gsap.to(icon, {
-            scale: 1.15,
+            scale: 1.1,
             rotation: index % 2 === 0 ? 5 : -5, // Alternate rotation direction
-            duration: 0.4,
-            ease: "power2.out",
-            clearProps: "", // Don't clear properties to allow smooth transitions
+            duration: 0.3,
+            ease: "back.out(1.5)",
+            filter: "drop-shadow(0 0 8px rgba(30, 79, 172, 0.4))"
           });
         });
-
-        iconWrapper.addEventListener("mouseleave", () => {
+        
+        iconElement.addEventListener("mouseleave", () => {
           gsap.to(icon, {
             scale: 1,
             rotation: 0,
-            duration: 0.4,
-            ease: "power2.inOut",
+            duration: 0.3,
+            ease: "power2.out",
+            filter: "none"
           });
         });
       }
     });
 
-    // Add subtle parallax effect on scroll
-    gsap.to(".tech-icon-wrapper", {
-      y: "-5%",
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".tech-stack-container",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 0.5,
-      },
+    // Create floating animation effect for tech icons
+    techIcons.forEach((icon, index) => {
+      // Create a repeating floating animation with variation
+      gsap.to(icon, {
+        y: -4 + (index % 2) * 8, // Alternating movement for wave effect
+        duration: 1.8 + index * 0.3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: index * 0.2 // Staggered start
+      });
     });
   }
 
-  // Handle window resize to refresh animations
-  window.addEventListener("resize", () => {
-    ScrollTrigger.refresh(true);
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', initTechStackAnimations);
+
+  // Refresh on page transitions for Astro
+  document.addEventListener('astro:page-load', initTechStackAnimations);
+
+  // Immediate initialization for cases where DOMContentLoaded already fired
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(initTechStackAnimations, 100);
+  }
+
+  // Update animations on resize with debouncing
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initTechStackAnimations();
+    }, 250);
   });
 </script>
 
 <style>
-  /* Add smooth transitions for all elements */
-  .tech-icon-wrapper {
-    transform: translateY(0);
-    transition: transform 0.3s ease-out;
+  /* Initial states for animations */
+  .tech-animate-element {
+    opacity: 0;
   }
-
+  
+  /* Smooth transition base */
+  #uiux-tech-stack-section * {
+    transition: transform 0.05s linear; /* Very subtle transition for smoother scrubbing */
+  }
+  
+  /* Enhanced tech icon interaction */
   .tech-icon {
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease, rotation 0.3s ease;
     transform-origin: center center;
     will-change: transform, opacity;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0));
-    transition: filter 0.3s ease;
   }
-
-  .tech-icon-wrapper:hover .tech-icon {
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  
+  .tech-icon:hover {
+    filter: drop-shadow(0 0 8px rgba(30, 79, 172, 0.4));
   }
-
+  
   /* Add slight animation delay based on grid position */
   @media (prefers-reduced-motion: no-preference) {
     .tech-icon-wrapper:nth-child(2) .tech-icon {

@@ -127,7 +127,7 @@ const TestimonialCard = ({ testimonial }) => {
           <img src={Star.src} alt="Star" className="w-4 h-4" />
           <img src={Star.src} alt="Star" className="w-4 h-4" />
         </div>
-        <p className="text-black text-base mb-4 line-clamp-4">
+        <p className="text-black text-xs lg:text-sm canvas:text-base mb-4 line-clamp-4">
           {testimonial.quote}
         </p>
       </div>
@@ -142,8 +142,8 @@ const TestimonialCard = ({ testimonial }) => {
           )}
         </div>
         <div className="ml-3">
-          <h4 className="text-base font-medium">{testimonial.name}</h4>
-          <p className="text-xs">{testimonial.company}</p>
+          <h4 className="text-xs md:text-sm canvas:text-base font-medium">{testimonial.name}</h4>
+          <p className="text-[10px] md:text-xs">{testimonial.company}</p>
         </div>
       </div>
     </div>

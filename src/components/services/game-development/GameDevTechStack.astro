@@ -8,14 +8,14 @@ import MayaIcon from "../../../assets/services/video-animation/maya.png";
 import MaxIcon from "../../../assets/services/video-animation/max.png";
 ---
 
-<section class="app-max-width py-16">
+<section class="app-max-width py-16" id="game-dev-tech-stack-section">
   <div class="game-dev-tech-stack">
     <Heading>
-      <h2 class="text-4xl" id="game-dev-tech-stack-heading">
+      <h2 class="font-medium tech-animate-element" id="game-dev-tech-stack-heading">
         Technology Stack
       </h2>
     </Heading>
-    <p class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4">
+    <p class="text-[#2a2111] text-xs md:text-sm canvas:text-base 2xl:text-lg my-4 tech-animate-element" id="game-dev-tech-stack-description">
       Get a full technology stack including Unity 3D and Unreal Engine together with the newest advancements in VR, AR, AI, and multiplayer networking in order to create state-of-the-art, high-performing gaming experiences.
     </p>
   </div>
@@ -27,7 +27,7 @@ import MaxIcon from "../../../assets/services/video-animation/max.png";
       src={UnityIcon}
       alt="Unity"
       title="Unity"
-      class="w-full tech-icon"
+      class="w-[80px] md:w-auto tech-icon tech-animate-element"
       id="game-dev-unity-icon"
       loading="lazy"
     />
@@ -35,7 +35,7 @@ import MaxIcon from "../../../assets/services/video-animation/max.png";
       src={UnrealIcon}
       alt="Unreal Engine"
       title="Unreal Engine"
-      class="w-full tech-icon"
+      class="w-[80px] md:w-auto tech-icon tech-animate-element"
       id="game-dev-unreal-icon"
       loading="lazy"
     />
@@ -43,7 +43,7 @@ import MaxIcon from "../../../assets/services/video-animation/max.png";
       src={BlanderIcon}
       alt="Blender"
       title="Blender"
-      class="w-full tech-icon"
+      class="w-[80px] md:w-auto tech-icon tech-animate-element"
       id="game-dev-blender-icon"
       loading="lazy"
     />
@@ -51,7 +51,7 @@ import MaxIcon from "../../../assets/services/video-animation/max.png";
       src={MayaIcon}
       alt="Maya"
       title="Maya"
-      class="w-full tech-icon"
+      class="w-[80px] md:w-auto tech-icon tech-animate-element"
       id="game-dev-maya-icon"
       loading="lazy"
     />
@@ -59,7 +59,7 @@ import MaxIcon from "../../../assets/services/video-animation/max.png";
       src={MaxIcon}
       alt="3ds Max"
       title="3ds Max"
-      class="w-full tech-icon"
+      class="w-[80px] md:w-auto tech-icon tech-animate-element"
       id="game-dev-max-icon"
       loading="lazy"
     />
@@ -68,37 +68,169 @@ import MaxIcon from "../../../assets/services/video-animation/max.png";
 
 <script>
   import { gsap } from "gsap";
-  import ScrollTrigger from "gsap/ScrollTrigger";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
   gsap.registerPlugin(ScrollTrigger);
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // Fade in the content on scroll
-    gsap.from(".game-dev-tech-stack", {
-      opacity: 0,
-      y: 20,
-      duration: 0.7,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".game-dev-tech-stack",
-        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
-        toggleActions: "play none none none",
-      },
+  function initTechStackAnimations() {
+    // Reset any existing ScrollTriggers for this section
+    ScrollTrigger.getAll().forEach(st => {
+      if (st.vars.trigger && typeof st.vars.trigger === 'string' && 
+         (st.vars.trigger.includes('game-dev-tech') || st.vars.trigger.includes('tech-icon'))) {
+        st.kill();
+      }
     });
 
-    // Staggered reveal for tech icons on scroll
-    gsap.from(".tech-icon", {
+    // Set initial states for animations
+    gsap.set('#game-dev-tech-stack-heading', { 
+      opacity: 0, 
+      y: 30 
+    });
+    
+    gsap.set('#game-dev-tech-stack-description', { 
+      opacity: 0, 
+      y: 20 
+    });
+    
+    // Set initial states for tech icons with slight staggered initial positions
+    gsap.set('.tech-icon', {
       opacity: 0,
       y: 15,
-      scale: 0.95,
-      duration: 0.5,
-      stagger: 0.1,
-      ease: "back.out(1.2)",
-      scrollTrigger: {
-        trigger: ".game-dev-tech-stack-container",
-        start: "top 80%", // Triggers when the top of the element hits 80% from the top of viewport
-        toggleActions: "play none none none",
-      },
+      scale: 0.92
     });
+
+    // Heading animation with scroll-based trigger
+    gsap.to('#game-dev-tech-stack-heading', {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#game-dev-tech-stack-heading",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
+
+    // Description paragraph animation
+    gsap.to('#game-dev-tech-stack-description', {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#game-dev-tech-stack-description",
+        start: "top 85%",
+        end: "top 65%",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
+
+    // Create a sequence for tech icons that applies staggered animations
+    const techIcons = [
+      "#game-dev-unity-icon", 
+      "#game-dev-unreal-icon", 
+      "#game-dev-blender-icon",
+      "#game-dev-maya-icon",
+      "#game-dev-max-icon"
+    ];
+    
+    techIcons.forEach((icon, index) => {
+      gsap.to(icon, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.5,
+        ease: "back.out(1.2)",
+        scrollTrigger: {
+          trigger: ".game-dev-tech-stack-container",
+          start: "top 80%",
+          end: "top 60%",
+          scrub: true,
+          toggleActions: "play reverse play reverse"
+        },
+        delay: index * 0.05 // Creates staggered effect with scrub
+      });
+      
+      // Add hover effect to each tech icon
+      const iconElement = document.querySelector(icon);
+      if (iconElement) {
+        iconElement.addEventListener("mouseenter", () => {
+          gsap.to(icon, {
+            scale: 1.07,
+            duration: 0.3,
+            ease: "back.out(1.5)",
+            filter: "drop-shadow(0 0 8px rgba(30, 79, 172, 0.4))"
+          });
+        });
+        
+        iconElement.addEventListener("mouseleave", () => {
+          gsap.to(icon, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out",
+            filter: "none"
+          });
+        });
+      }
+    });
+
+    // Create floating animation effect for tech icons
+    techIcons.forEach((icon, index) => {
+      // Create a repeating floating animation with variation
+      gsap.to(icon, {
+        y: -4 + (index % 2) * 8, // Alternating movement for wave effect
+        duration: 1.8 + index * 0.3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: index * 0.2 // Staggered start
+      });
+    });
+  }
+
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', initTechStackAnimations);
+
+  // Refresh on page transitions for Astro
+  document.addEventListener('astro:page-load', initTechStackAnimations);
+
+  // Immediate initialization for cases where DOMContentLoaded already fired
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(initTechStackAnimations, 100);
+  }
+
+  // Update animations on resize with debouncing
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initTechStackAnimations();
+    }, 250);
   });
 </script>
+
+<style>
+  /* Initial states for animations */
+  .tech-animate-element {
+    opacity: 0;
+  }
+  
+  /* Smooth transition base */
+  #game-dev-tech-stack-section * {
+    transition: transform 0.05s linear; /* Very subtle transition for smoother scrubbing */
+  }
+  
+  /* Enhanced tech icon interaction */
+  .tech-icon {
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  
+  .tech-icon:hover {
+    filter: drop-shadow(0 0 8px rgba(30, 79, 172, 0.4));
+  }
+</style>

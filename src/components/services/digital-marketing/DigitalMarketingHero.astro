@@ -5,7 +5,7 @@ import Image from "astro/components/Image.astro";
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:min-h-[810px] w-full pt-16"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:min-h-[810px] w-full pt-16 overflow-y-hidden"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
@@ -14,7 +14,7 @@ import Image from "astro/components/Image.astro";
 
   <!-- Container with relative positioning -->
   <div
-    class="app-max-width relative md:h-[60vh] flex md:flex-row items-center w-full"
+    class="app-max-width relative md:h-[60vh] lg:min-h-[550px] canvas:min-h-[588px] 2xl:min-h-[700px] flex md:flex-row items-center w-full"
   >
     <!-- Left Side Text - Front Layer -->
     <div
@@ -23,12 +23,14 @@ import Image from "astro/components/Image.astro";
     >
       <div class="w-full relative">
         <h1
-          class="text-4xl md:text-[48px] leading-[48px] lg:leading-[58px] font-semibold capitalize"
+          class="text-2xl md:text-4xl xl:text-4xl canvas:text-5xl 2xl:text-[54px] 3xl:text-6xl font-semibold capitalize"
         >
           Increase Reach, Leads, & Conversions With Our Strategic Performance
           Marketing Solutions
         </h1>
-        <p class="mt-4 text-sm md:text-md xl:text-base opacity-80">
+        <p
+          class="text-base lg:text-lg canvas:text-xl 3xl:text-2xl mt-4 opacity-80"
+        >
           You can help your business realize its full potential with our
           tactical performance marketing solutions. Our focused campaigns and
           data-driven tactics boost conversions, generate quality leads, and
