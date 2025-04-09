@@ -5,7 +5,7 @@ import Image from "astro/components/Image.astro";
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:min-h-[810px] w-full pt-16 overflow-y-hidden"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center lg:min-h-[810px] w-full pt-24 pb-16 min-h-[90dvh] sm:pt-32 lg:pb-0 lg:pt-16 overflow-y-hidden"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
@@ -14,7 +14,7 @@ import Image from "astro/components/Image.astro";
 
   <!-- Container with relative positioning -->
   <div
-    class="app-left-padding relative lg:h-[80vh] flex md:flex-row items-center w-full"
+    class="app-left-padding relative lg:h-[80vh] flex flex-col gap-y-16 lg:gap-y-0 lg:flex-row items-center w-full"
   >
     <!-- Left Side Text - Front Layer -->
     <div
@@ -43,16 +43,16 @@ import Image from "astro/components/Image.astro";
     <!-- Right Side Image - Absolute positioning to extend beyond container -->
     <div
       id="hero-image"
-      class="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 canvas:w-2/3 z-0 opacity-0"
+      class="block lg:absolute lg:right-0 lg:top-0 lg:bottom-0 w-full lg:w-1/2 canvas:w-2/3 z-0 opacity-0"
     >
       <div
         id="hero-image-container"
-        class="h-full lg:min-w-[580px] canvas:min-w-[795px] canvas:max-w-[795px] 2xl:max-w-[840px] 3xl:max-w-[1000px] right-0 float-right flex justify-end"
+        class="h-full flex justify-center lg:min-w-[580px] mx-auto md:mx-0 canvas:min-w-[795px] canvas:max-w-[795px] 2xl:max-w-[840px] 3xl:max-w-[1000px] lg:right-0 lg:float-right lg:justify-end"
       >
         <Image
           src={Art}
           alt="Web Development Illustration"
-          class="h-full object-contain object-right"
+          class="h-full w-[90%] lg:w-full object-contain lg:object-right"
         />
       </div>
     </div>
@@ -227,6 +227,15 @@ import Image from "astro/components/Image.astro";
 
     #hero-image img {
       max-width: none;
+      width: 100%;
+    }
+  }
+
+  /* Control image width on smaller screens */
+  @media (max-width: 767px) {
+    #hero-image-container {
+      display: flex;
+      justify-content: center;
       width: 100%;
     }
   }

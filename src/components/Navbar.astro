@@ -47,7 +47,7 @@ const currentPath = Astro.url.pathname;
 >
   <div class="app-max-width">
     <nav
-      class="flex justify-between items-center h-16 2xl:h-20 "
+      class="flex justify-between items-center h-16 2xl:h-20"
       aria-label="Main navigation"
     >
       <!-- Logo -->
@@ -71,22 +71,23 @@ const currentPath = Astro.url.pathname;
               );
 
               return (
-                <li class="relative group">
-                  <span
+                <li class="relative">
+                  <button
                     class:list={[
-                      "transition duration-300 flex items-center lg:text-sm 2xl:text-base cursor-pointer",
+                      "desktop-dropdown-toggle transition duration-300 flex items-center lg:text-sm 2xl:text-base cursor-pointer",
                       "text-white hover:text-[#39D0FF]",
                       {
-                        "text-[#39D0FF]  nav-active":
-                          isActive || hasActiveChild,
+                        "text-[#39D0FF] nav-active": isActive || hasActiveChild,
                       },
                     ]}
                     aria-current={isActive ? "page" : undefined}
+                    aria-expanded="false"
+                    aria-haspopup="true"
                   >
                     {item.label}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-[14px] w-[14px] ml-1"
+                      class="h-[14px] w-[14px] ml-1 desktop-dropdown-arrow transition-transform duration-300"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -96,30 +97,32 @@ const currentPath = Astro.url.pathname;
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </span>
-                  <div class="dropdown-menu absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    <div class="py-1">
+                  </button>
+                  <div class="desktop-dropdown-menu absolute px-16 pb-6 pt-3 -right-1/2 mt-2 w-[520px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible transition-all duration-300 transform translate-y-2">
+                    <ul class="py-1 grid grid-cols-2 gap-x-6 list-disc">
                       {item.dropdownItems?.map((dropdownItem) => {
                         const isDropdownItemActive = currentPath.startsWith(
                           dropdownItem.href
                         );
                         return (
-                          <a
-                            href={dropdownItem.href}
-                            class:list={[
-                              "block px-4 py-2 lg:text-sm 2xl:text-base text-gray-700 hover:bg-gray-100",
-                              {
-                                "bg-gray-50 text-[#39D0FF]":
-                                  isDropdownItemActive,
-                              },
-                            ]}
-                            aria-label="Dropdown item"
-                          >
-                            {dropdownItem.label}
-                          </a>
+                          <li class="list-disc">
+                            <a
+                              href={dropdownItem.href}
+                              class:list={[
+                                " block px-4 py-1 lg:text-sm font-semibold 2xl:text-base text-[#1e1e1e] hover:bg-gray-100",
+                                {
+                                  "bg-gray-50 text-[#39D0FF]":
+                                    isDropdownItemActive,
+                                },
+                              ]}
+                              aria-label="Dropdown item"
+                            >
+                              {dropdownItem.label}
+                            </a>
+                          </li>
                         );
                       })}
-                    </div>
+                    </ul>
                   </div>
                 </li>
               );
@@ -210,7 +213,7 @@ const currentPath = Astro.url.pathname;
                 <div class="mobile-dropdown">
                   <button
                     class:list={[
-                      "flex justify-between items-center w-full py-2 transition duration-300",
+                      "flex justify-between items-center w-full py-2 text-sm transition duration-300",
                       "text-gray-700 hover:text-[#39D0FF]",
                       {
                         "text-[#39D0FF]": isActive || hasActiveChild,
@@ -242,7 +245,7 @@ const currentPath = Astro.url.pathname;
                           href={dropdownItem.href}
                           class:list={[
                             "block py-2 transition duration-300",
-                            "text-gray-700 hover:text-[#39D0FF]",
+                            "text-gray-700 text-xs hover:text-[#39D0FF]",
                             {
                               "text-[#39D0FF] font-medium":
                                 isDropdownItemActive,
@@ -264,7 +267,7 @@ const currentPath = Astro.url.pathname;
               <a
                 href={item.href}
                 class:list={[
-                  "block py-2 transition duration-300",
+                  "block py-2 transition duration-300 text-sm",
                   "text-gray-700 hover:text-[#39D0FF]",
                   { "text-[#39D0FF] font-medium": isActive },
                 ]}
@@ -288,6 +291,9 @@ const currentPath = Astro.url.pathname;
   const mobileMenuClose = document.getElementById("mobile-menu-close");
   const mobileMenu = document.getElementById("mobile-menu");
 
+  // Track active desktop dropdown
+  let activeDropdown: Element | null = null;
+
   // Toggle mobile menu function
   function toggleMenu(show: boolean) {
     if (!mobileMenu || !mobileMenuButton) return;
@@ -306,15 +312,80 @@ const currentPath = Astro.url.pathname;
   mobileMenuButton?.addEventListener("click", () => toggleMenu(true));
   mobileMenuClose?.addEventListener("click", () => toggleMenu(false));
 
+  // Close desktop dropdown function
+  function closeDesktopDropdown() {
+    if (!activeDropdown) return;
+
+    const menu = activeDropdown.nextElementSibling as HTMLElement;
+    const arrow = activeDropdown.querySelector(".desktop-dropdown-arrow");
+
+    gsap.to(menu, {
+      opacity: 0,
+      y: 10,
+      duration: 0.2,
+      ease: "power2.in",
+      onComplete: () => {
+        menu.classList.add("invisible");
+        activeDropdown?.setAttribute("aria-expanded", "false");
+        activeDropdown = null;
+      },
+    });
+
+    gsap.to(arrow, { rotation: 0, duration: 0.2 });
+  }
+
+  // Handle desktop dropdown toggles
+  document.querySelectorAll(".desktop-dropdown-toggle").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      const menu = button.nextElementSibling as HTMLElement;
+      const arrow = button.querySelector(".desktop-dropdown-arrow");
+      const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+      // Close active dropdown if it's not the current one
+      if (activeDropdown && activeDropdown !== button) {
+        closeDesktopDropdown();
+      }
+
+      if (!isExpanded) {
+        // Open dropdown
+        menu.classList.remove("invisible");
+        gsap.to(menu, {
+          opacity: 1,
+          y: 0,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+        gsap.to(arrow, { rotation: 180, duration: 0.3 });
+        button.setAttribute("aria-expanded", "true");
+        activeDropdown = button;
+      } else {
+        // Close dropdown
+        closeDesktopDropdown();
+      }
+    });
+  });
+
   // Close menu when clicking outside
   document.addEventListener("click", (e) => {
+    const target = e.target as Node;
+    // Handle mobile menu clicks
     if (
       mobileMenu &&
-      !mobileMenu.contains(e.target as Node) &&
+      !mobileMenu.contains(target) &&
       mobileMenuButton &&
-      !mobileMenuButton.contains(e.target as Node)
+      !mobileMenuButton.contains(target)
     ) {
       toggleMenu(false);
+    }
+
+    // Handle desktop dropdown clicks
+    if (
+      activeDropdown &&
+      !activeDropdown.contains(target) &&
+      !activeDropdown.nextElementSibling?.contains(target)
+    ) {
+      closeDesktopDropdown();
     }
   });
 
@@ -402,6 +473,7 @@ const currentPath = Astro.url.pathname;
   }
 
   /* Styles for dropdown menu */
+  .desktop-dropdown-menu,
   .dropdown-menu {
     z-index: 20;
     min-width: 12rem;

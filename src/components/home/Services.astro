@@ -70,90 +70,94 @@ const services = [
 
 <section
   id="services"
-  class="app-max-width py-16"
+  class="app-max-width py-16 relative"
   aria-labelledby="services-heading"
 >
-  <h2
-    id="services-heading"
-    class="text-xl md:text-2xl lg:text-3xl canvas:text-[38px] 2xl:text-[42px] 3xl:text-[46px] font-medium mb-8 md:mb-16 opacity-0"
-  >
-    Your Full Service
-    <span class="text-primary-blue neon-glow">Digital Partner</span>
-  </h2>
-  <div
-    class="flex flex-col md:flex-row md:border-l md:border-l-[#E0E0E0] md:space-x-4"
-  >
-    <nav
-      class="service-tabs-nav w-full md:w-1/3 overflow-x-auto mb-8 md:mb-0"
-      aria-label="Services navigation"
+  <div class="services-sticky-container">
+    <h2
+      id="services-heading"
+      class="text-xl md:text-2xl lg:text-3xl canvas:text-[38px] 2xl:text-[42px] 3xl:text-[46px] font-medium mb-8 md:mb-16 opacity-0"
     >
-      <ul
-        role="tablist"
-        class="flex flex-nowrap md:flex-col space-x-3 md:space-x-0 md:space-y-4 w-full"
+      Your Full Service
+      <span class="text-primary-blue neon-glow">Digital Partner</span>
+    </h2>
+    <div
+      class="flex flex-col md:flex-row md:border-l md:border-l-[#E0E0E0] md:space-x-4"
+    >
+      <nav
+        class="service-tabs-nav w-full md:w-1/3 overflow-x-auto mb-8 md:mb-0"
+        aria-label="Services navigation"
       >
+        <ul
+          role="tablist"
+          class="flex flex-nowrap md:flex-col space-x-3 md:space-x-0 md:space-y-4 w-full"
+        >
+          {
+            services.map((service, index) => (
+              <li
+                role="presentation"
+                class="service-tab-item opacity-0 flex-shrink-0"
+              >
+                <button
+                  id={`tab-${index}`}
+                  role="tab"
+                  aria-controls={`panel-${index}`}
+                  aria-selected={index === 0 ? "true" : "false"}
+                  class:list={[
+                    "service-tab",
+                    "text-sm",
+                    "md:text-base lg:text-base xl:text-lg canvas:text-2xl",
+                    "cursor-pointer",
+                    "font-medium",
+                    "py-2",
+                    "md:py-4",
+                    "px-4",
+                    "lg:px-8 xl:px-16",
+                    "w-full",
+                    "text-center",
+                    "md:text-left",
+                    "transition-colors",
+                    "duration-300",
+                    "rounded-full",
+                    "whitespace-nowrap",
+                    "md:rounded-none",
+                  ]}
+                  data-index={index}
+                >
+                  {service.title}
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <div class="w-full md:w-2/3" id="service-details-container">
         {
           services.map((service, index) => (
-            <li
-              role="presentation"
-              class="service-tab-item opacity-0 flex-shrink-0"
+            <article
+              id={`panel-${index}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${index}`}
+              class:list={[
+                "service-detail",
+                "flex",
+                "items-center",
+                "justify-center",
+                "opacity-0",
+                {
+                  hidden: index !== 0,
+                },
+              ]}
             >
-              <button
-                id={`tab-${index}`}
-                role="tab"
-                aria-controls={`panel-${index}`}
-                aria-selected={index === 0 ? "true" : "false"}
-                class:list={[
-                  "service-tab",
-                  "text-sm",
-                  "md:text-base lg:text-base xl:text-lg canvas:text-2xl",
-                  "cursor-pointer",
-                  "font-medium",
-                  "py-2",
-                  "md:py-4",
-                  "px-4",
-                  "lg:px-8 xl:px-16",
-                  "w-full",
-                  "text-center",
-                  "md:text-left",
-                  "transition-colors",
-                  "duration-300",
-                  "rounded-full",
-                  "whitespace-nowrap",
-                  "md:rounded-none",
-                ]}
-                data-index={index}
-              >
-                {service.title}
-              </button>
-            </li>
+              <ServiceDetail service={service} />
+            </article>
           ))
         }
-      </ul>
-    </nav>
-    <div class="w-full md:w-2/3" id="service-details-container">
-      {
-        services.map((service, index) => (
-          <article
-            id={`panel-${index}`}
-            role="tabpanel"
-            aria-labelledby={`tab-${index}`}
-            class:list={[
-              "service-detail",
-              "flex",
-              "items-center",
-              "justify-center",
-              "opacity-0",
-              {
-                hidden: index !== 0,
-              },
-            ]}
-          >
-            <ServiceDetail service={service} />
-          </article>
-        ))
-      }
+      </div>
     </div>
   </div>
+  <!-- Spacer div to create scrolling area -->
+  <div id="services-scroll-spacer"></div>
 </section>
 
 <style>
@@ -193,6 +197,23 @@ const services = [
   .service-tab:hover::after {
     width: 100%;
   }
+
+  /* Sticky styling */
+  .services-sticky-container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Ensure each panel takes full height within container */
+  .service-detail {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  /* Apply transition for smooth panel changes */
+  [role="tabpanel"] {
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
 </style>
 
 <script>
@@ -207,6 +228,7 @@ const services = [
     setTimeout(() => {
       initServicesAnimations();
       splitAndAnimateText();
+      setupStickyServices();
     }, 100);
 
     // Refresh ScrollTrigger when page is fully loaded
@@ -214,6 +236,128 @@ const services = [
       ScrollTrigger.refresh(true);
     });
   });
+
+  function setupStickyServices() {
+    const servicesSection = document.getElementById("services");
+    const stickyContainer = document.querySelector(".services-sticky-container");
+    const tabs = document.querySelectorAll("[role='tab']");
+    const panels = document.querySelectorAll("[role='tabpanel']");
+    const spacerDiv = document.getElementById("services-scroll-spacer");
+    
+    // Calculate how tall the spacer needs to be to accommodate all panels
+    const panelCount = panels.length;
+    // Each panel takes 100vh of scroll, minus some overlap for smoother transitions
+    const spacerHeight = (panelCount * window.innerHeight * 0.9);
+    
+    // Set spacer height
+    spacerDiv.style.height = `${spacerHeight}px`;
+    
+    // Create a ScrollTrigger for each panel transition
+    let sectionPin;
+    
+    // Function to update scroll spacer height on resize
+    const updateSpacerHeight = () => {
+      const updatedHeight = (panelCount * window.innerHeight * 0.9);
+      spacerDiv.style.height = `${updatedHeight}px`;
+      
+      // Refresh ScrollTrigger to update pinning dimensions
+      if (sectionPin) {
+        sectionPin.refresh();
+      }
+    };
+    
+    // Listen for window resize events
+    window.addEventListener('resize', updateSpacerHeight);
+    
+    // Create pin for the section
+    sectionPin = ScrollTrigger.create({
+      trigger: servicesSection,
+      start: "top top",
+      end: () => `+=${spacerHeight}`,
+      pin: stickyContainer,
+      pinSpacing: false,
+      onRefresh: self => {
+        // Update any dependent calculations when ScrollTrigger refreshes
+      }
+    });
+    
+    // Create scroll-driven tab transitions
+    panels.forEach((panel, index) => {
+      // Skip the first panel as it's shown by default
+      if (index === 0) return;
+      
+      const prevPanel = panels[index - 1];
+      const tab = tabs[index];
+      
+      ScrollTrigger.create({
+        trigger: spacerDiv,
+        start: () => `top+=${index * window.innerHeight * 0.9 - window.innerHeight * 0.1} top`,
+        end: () => `top+=${index * window.innerHeight * 0.9 + window.innerHeight * 0.2} top`,
+        onEnter: () => {
+          activateTabAndPanel(index);
+        },
+        onEnterBack: () => {
+          activateTabAndPanel(index - 1);
+        },
+        // Markers for debugging (remove in production)
+        // markers: true
+      });
+    });
+    
+    // Function to activate a specific tab and panel with snappy transition
+    function activateTabAndPanel(index) {
+      // Update active tab styling and ARIA attributes
+      tabs.forEach((t, i) => {
+        // Kill any existing GSAP animations on tabs
+        gsap.killTweensOf(t, "backgroundColor");
+        
+        if (i === index) {
+          t.style.backgroundColor = "#39d0ff"; // Primary blue
+          t.style.color = "#ffffff"; // White text
+          t.setAttribute("aria-selected", "true");
+          
+          // Ensure mobile tab scrolls into view
+          if (window.innerWidth < 768) {
+            t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        } else {
+          t.style.backgroundColor = "transparent";
+          t.style.color = "#1e1e1e";
+          t.setAttribute("aria-selected", "false");
+        }
+      });
+      
+      // Hide all panels first
+      panels.forEach((p, i) => {
+        if (i !== index) {
+          p.style.opacity = "0";
+          p.style.transform = "translateY(20px)";
+          p.classList.add("hidden");
+          p.style.display = "none";
+        }
+      });
+      
+      // Show the active panel with a snappy transition
+      const activePanel = panels[index];
+      activePanel.classList.remove("hidden");
+      activePanel.style.display = "flex";
+      
+      // Use GSAP for smoother animation
+      gsap.to(activePanel, {
+        opacity: 1,
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out",
+        onComplete: () => {
+          // Handle any post-animation tasks
+          animateActivePanel();
+        }
+      });
+    }
+    
+    // Initial activation of the first panel
+    activateTabAndPanel(0);
+  }
 
   function splitAndAnimateText() {
     // Split heading text

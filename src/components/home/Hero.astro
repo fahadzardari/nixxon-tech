@@ -5,19 +5,19 @@ import Image from "astro/components/Image.astro";
 
 <section
   id="hero-section"
-  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-screen lg:items-start lg:min-h-[720px] canvas:min-h-[810px] w-full pt-16"
+  class="hero bg-fixed bg-no-repeat bg-cover relative flex items-center justify-center min-h-[90dvh] lg:items-start lg:min-h-[720px] canvas:min-h-[810px] w-full pt-24 sm:pt-32 lg:pt-16"
 >
   <div
     class="absolute inset-0 bg-radial-[at_50%] opacity-70 from-[#1E1504]/5 to-black"
   >
   </div>
   <div
-    class="app-max-width relative md:h-[80dvh] canvas:h-[85dvh] lg:pb-8 xl:pb-16 canvas:pb-12 2xl:pb-16 3xl:pb-20 flex items-center lg:items-end w-full"
+    class="app-max-width relative lg:h-[80dvh] canvas:h-[85dvh] lg:pb-8 xl:pb-16 canvas:pb-12 2xl:pb-16 3xl:pb-20 flex flex-col lg:flex-row items-center lg:items-end w-full"
   >
     <!-- Text Content (Front Layer) -->
     <div
       id="hero-text"
-      class="relative z-50 opacity-0 w-full lg:w-[65%] xl:w-3/4 text-white"
+      class="relative z-10 opacity-0 w-full lg:w-[65%] xl:w-3/4 text-white mb-8 lg:mb-0"
     >
       <div
         class="w-full relative lg:max-w-[650px] xl:max-w-[800px] 2xl:max-w-[1000px] flex flex-col items-start lg:space-y-4"
@@ -47,16 +47,16 @@ import Image from "astro/components/Image.astro";
       </div>
     </div>
 
-    <!-- Right Side Image (Back Layer) -->
+    <!-- Image - Now visible on all screens -->
     <div
       id="hero-image"
-      class="hidden absolute right-0 pt-16 app-right-padding top-0 lg:block w-[55%] canvas:w-1/2 z-0 opacity-0"
+      class="relative lg:absolute right-0 pt-8 lg:pt-16 app-right-padding lg:top-0 w-[85%] sm:w-[75%] md:w-[65%] lg:block lg:w-[55%] canvas:w-1/2 z-5 lg:z-0 opacity-0 mx-auto lg:mx-0 mt-4 lg:mt-0"
     >
       <div id="hero-image-container" class="w-full">
         <Image
           src={Art}
           alt={"3D VR Person"}
-          class={"object-fit right-0 ml-auto"}
+          class={"object-fit right-0 mx-auto lg:ml-auto"}
           loading={"eager"}
         />
       </div>
@@ -72,36 +72,45 @@ import Image from "astro/components/Image.astro";
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Initial animations (equivalent to initial + animate in Framer)
+    // Initial animations - now with responsive handling
+    const isMobile = window.innerWidth < 1024;
+
+    // Text animation
     gsap.fromTo(
       "#hero-text",
       {
         opacity: 0,
-        x: -50,
+        x: isMobile ? 0 : -50,
+        y: isMobile ? -30 : 0,
       },
       {
         opacity: 1,
         x: 0,
+        y: 0,
         duration: 0.5,
         ease: "power2.out",
       }
     );
 
+    // Image animation
     gsap.fromTo(
       "#hero-image",
       {
         opacity: 0,
-        x: 50,
+        x: isMobile ? 0 : 50,
+        y: isMobile ? 30 : 0,
       },
       {
         opacity: 1,
         x: 0,
+        y: 0,
         duration: 0.5,
+        delay: isMobile ? 0.1 : 0,
         ease: "power2.out",
       }
     );
 
-    // Scroll-based animations (equivalent to useTransform)
+    // Responsive scroll animations
     ScrollTrigger.create({
       trigger: "#hero-section",
       start: "top top",
@@ -109,25 +118,26 @@ import Image from "astro/components/Image.astro";
       scrub: true,
       onUpdate: (self) => {
         const progress = self.progress;
+        const isMobile = window.innerWidth < 1024;
 
-        // Text fade and movement (equivalent to textOpacity and textY)
+        // Text fade and movement (with responsive behavior)
         if (progress <= 0.5) {
           const opacity = 1 - progress * 2;
-          const y = progress * -50;
+          const y = progress * (isMobile ? -25 : -50);
           gsap.to("#hero-text", { opacity, y, duration: 0 });
         }
 
-        // Image scale and rotation (equivalent to imageScale and imageRotate)
+        // Image scale and rotation (with responsive adjustments)
         if (progress <= 0.5) {
           const scale = 1 - progress * 0.15;
-          const rotate = progress * -10;
-          gsap.to("#hero-image", { scale, rotate, duration: 0 });
+          const rotate = progress * (isMobile ? -5 : -10);
+          const y = isMobile ? progress * 50 : 0; // Move down on mobile when scrolling
+          gsap.to("#hero-image", { scale, rotate, y, duration: 0 });
         }
       },
     });
 
-    // Wave-like animation (infinite loop)
-    // This replaces the waveAnimation from Framer Motion
+    // Wave-like animation (infinite loop) - now with responsive considerations
     const waveTimeline = gsap.timeline({
       repeat: -1,
     });
@@ -162,7 +172,7 @@ import Image from "astro/components/Image.astro";
         ease: "sine.inOut",
       });
 
-    // Button pulse animation (replacing whileInView from Framer)
+    // Button pulse animation - unchanged
     gsap.to("#hero-cta", {
       scale: 1.05,
       duration: 0.75,
@@ -171,15 +181,11 @@ import Image from "astro/components/Image.astro";
       ease: "power1.inOut",
     });
 
-    // Add hover effect for CTA button
+    // Add hover effect for CTA button - unchanged
     const ctaButton = document.querySelector("#hero-cta");
     if (ctaButton) {
-      // Pause the automatic animation on hover
       ctaButton.addEventListener("mouseenter", () => {
-        // Kill any existing animations
         gsap.killTweensOf("#hero-cta");
-
-        // Create hover animation
         gsap.to(ctaButton, {
           scale: 1.05,
           boxShadow: "0 10px 25px rgba(57, 208, 255, 0.7)",
@@ -188,12 +194,10 @@ import Image from "astro/components/Image.astro";
       });
 
       ctaButton.addEventListener("mouseleave", () => {
-        // Restore default state
         gsap.to(ctaButton, {
           scale: 1,
           boxShadow: "0 5px 15px rgba(57, 208, 255, 0.5)",
           duration: 0.3,
-          // Restart the pulse animation after hover
           onComplete: () => {
             gsap.to("#hero-cta", {
               scale: 1.05,
@@ -206,5 +210,31 @@ import Image from "astro/components/Image.astro";
         });
       });
     }
+
+    // Handle resize to adjust animations
+    window.addEventListener("resize", () => {
+      ScrollTrigger.refresh();
+    });
   });
 </script>
+
+<style>
+  /* Ensure correct stacking on mobile and image sizing */
+  @media (max-width: 1023px) {
+    #hero-section {
+      overflow-x: hidden;
+      min-height: auto;
+      padding-bottom: 2rem;
+    }
+
+    #hero-image {
+      margin-top: 2rem;
+    }
+
+    #hero-image img {
+      max-height: 50vh;
+      width: auto;
+      margin: 0 auto;
+    }
+  }
+</style>
