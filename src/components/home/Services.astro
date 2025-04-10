@@ -9,7 +9,7 @@ const services = [
       "Creating user-friendly, quickly loaded websites is crucial to delivering a top-notch experience. A well-developed website makes sure that your design is applied correctly, that your content is accessible, and that it runs smoothly on many browsers and devices. It enables users to interact with your brand successfully, browse with ease, and locate pertinent information with ease.",
     image: WebDevImage,
     alt: "Web Development",
-    link: "/web-development",
+    link: "/services/web-development",
   },
   {
     title: "Mobile Development",
@@ -17,7 +17,7 @@ const services = [
       "We build mobile apps that are fast, secure, and easy to manage.",
     image: WebDevImage,
     alt: "Mobile Development",
-    link: "/mobile-development",
+    link: "/services/mobile-app-development",
   },
   {
     title: "UI/UX Design",
@@ -25,7 +25,7 @@ const services = [
       "We design user interfaces that are easy to use and visually appealing.",
     image: WebDevImage,
     alt: "UI/UX Design",
-    link: "/ui-ux-design",
+    link: "/services/ui-ux-design",
   },
   {
     title: "Digital Marketing",
@@ -33,7 +33,7 @@ const services = [
       "We help you reach your target audience and grow your business.",
     image: WebDevImage,
     alt: "Digital Marketing",
-    link: "/digital-marketing",
+    link: "/services/digital-marketing",
   },
   {
     title: "SEO",
@@ -41,21 +41,21 @@ const services = [
       "We help you rank higher on search engines and get more traffic.",
     image: WebDevImage,
     alt: "SEO",
-    link: "/seo",
+    link: "/services/digital-marketing",
   },
   {
     title: "Game Development",
     description: "We build games that are fun, engaging, and addictive.",
     image: WebDevImage,
     alt: "Game Development",
-    link: "/game-development",
+    link: "/services/game-development",
   },
   {
     title: "Business Strategy",
     description: "We help you grow your business and reach your goals.",
     image: WebDevImage,
     alt: "Business Strategy",
-    link: "/business-strategy",
+    link: "/services/digital-marketing",
   },
   {
     title: "DevOps",
@@ -63,7 +63,7 @@ const services = [
       "We help you automate your development and deployment processes.",
     image: WebDevImage,
     alt: "DevOps",
-    link: "/devops",
+    link: "/services/devops-services",
   },
 ];
 ---
@@ -157,7 +157,7 @@ const services = [
     </div>
   </div>
   <!-- Spacer div to create scrolling area -->
-  <div id="services-scroll-spacer"></div>
+  <div id="services-scroll-spacer" class=""></div>
 </section>
 
 <style>
@@ -212,7 +212,9 @@ const services = [
 
   /* Apply transition for smooth panel changes */
   [role="tabpanel"] {
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
   }
 </style>
 
@@ -222,6 +224,56 @@ const services = [
 
   // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
+
+  // Split and animate service descriptions in the active panel
+  const animateActivePanel = () => {
+    const activePanel = document.querySelector(
+      "[role='tabpanel']:not(.hidden)"
+    );
+    if (!activePanel) return;
+
+    // Find the description paragraph in the active panel
+    const description = activePanel.querySelector("p");
+    if (!description || description.querySelector(".split-word")) return;
+
+    const originalContent = description.textContent;
+
+    try {
+      // Normalize and split description
+      const normalizedText = description.textContent
+        .replace(/\s+/g, " ")
+        .trim();
+      const words = normalizedText.split(" ");
+      let newContent = "";
+
+      // Create wrapped words with subtle initial transformation
+      words.forEach((word) => {
+        newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; margin-right:6px;">
+            <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
+          </span>`;
+      });
+
+      description.innerHTML = newContent;
+
+      // Animate the words
+      const descriptionWords = description.querySelectorAll(".word-inner");
+      gsap.to(descriptionWords, {
+        scrollTrigger: {
+          trigger: description,
+          start: "top 90%",
+          end: "center 75%",
+          scrub: 0.7,
+        },
+        y: 0,
+        opacity: 1,
+        stagger: 0.015,
+        ease: "power1.inOut",
+      });
+    } catch (error) {
+      console.error("Description split error:", error);
+      description.textContent = originalContent;
+    }
+  };
 
   document.addEventListener("DOMContentLoaded", () => {
     // Initialize text splitting and animations
@@ -239,36 +291,68 @@ const services = [
 
   function setupStickyServices() {
     const servicesSection = document.getElementById("services");
-    const stickyContainer = document.querySelector(".services-sticky-container");
+    const stickyContainer = document.querySelector(
+      ".services-sticky-container"
+    );
     const tabs = document.querySelectorAll("[role='tab']");
     const panels = document.querySelectorAll("[role='tabpanel']");
     const spacerDiv = document.getElementById("services-scroll-spacer");
-    
+
+    const isMobile = window.innerWidth < 768;
+    const viewportHeight = window.innerHeight;
+    const viewportWidth = window.innerWidth;
+
     // Calculate how tall the spacer needs to be to accommodate all panels
     const panelCount = panels.length;
-    // Each panel takes 100vh of scroll, minus some overlap for smoother transitions
-    const spacerHeight = (panelCount * window.innerHeight * 0.9);
-    
+
+    // Define panel spacing first so we can use it to calculate spacer height
+    const getPanelSpacing = () => {
+      if (viewportWidth < 768) {
+        return viewportHeight * 0.95; // Slightly reduced spacing for mobile
+      } else {
+        return viewportHeight * 0.9; // Original spacing for desktop
+      }
+    };
+
+    // Calculate spacer height based on panel spacing
+    const getSpacerHeight = () => {
+      const spacing = getPanelSpacing();
+      // For mobile: use exact panel count minus a small buffer to reduce empty space
+      if (viewportWidth < 480) {
+        // Last panel needs less space as we don't need to scroll past it
+        return (panelCount - 1) * spacing + viewportHeight * 0.7;
+      }
+      // For larger screens: use panel count with a buffer for smoother scrolling
+      else if (viewportWidth < 768) {
+        return (panelCount - 1) * spacing + viewportHeight * 0.75;
+      } else {
+        return panelCount * spacing - 100; // Slightly reduce desktop height too
+      }
+    };
+
+    const spacerHeight = getSpacerHeight();
+    console.log("Spacer height:", spacerHeight);
+
     // Set spacer height
     spacerDiv.style.height = `${spacerHeight}px`;
-    
+
     // Create a ScrollTrigger for each panel transition
     let sectionPin;
-    
+
     // Function to update scroll spacer height on resize
     const updateSpacerHeight = () => {
-      const updatedHeight = (panelCount * window.innerHeight * 0.9);
+      const updatedHeight = getSpacerHeight();
       spacerDiv.style.height = `${updatedHeight}px`;
-      
+
       // Refresh ScrollTrigger to update pinning dimensions
       if (sectionPin) {
         sectionPin.refresh();
       }
     };
-    
+
     // Listen for window resize events
-    window.addEventListener('resize', updateSpacerHeight);
-    
+    window.addEventListener("resize", updateSpacerHeight);
+
     // Create pin for the section
     sectionPin = ScrollTrigger.create({
       trigger: servicesSection,
@@ -276,49 +360,73 @@ const services = [
       end: () => `+=${spacerHeight}`,
       pin: stickyContainer,
       pinSpacing: false,
-      onRefresh: self => {
-        // Update any dependent calculations when ScrollTrigger refreshes
-      }
+      // markers: true,
     });
-    
-    // Create scroll-driven tab transitions
+
+    // Create scroll-driven tab transitions with adjusted spacing for mobile
     panels.forEach((panel, index) => {
       // Skip the first panel as it's shown by default
       if (index === 0) return;
-      
+
       const prevPanel = panels[index - 1];
       const tab = tabs[index];
-      
+
+      // Use consistent spacing based on the same function as spacer height
+      const panelSpacing = getPanelSpacing();
+
+      // Adjust trigger points for each panel
+      const getTriggerPositions = () => {
+        // Special case for last panel to ensure it triggers before the spacer ends
+        if (index === panelCount - 1) {
+          return {
+            // Start the last panel transition earlier
+            start: `top+=${index * panelSpacing - viewportHeight * 0.15} top`,
+            // End the last panel transition sooner
+            end: `top+=${index * panelSpacing + viewportHeight * 0.1} top`,
+          };
+        }
+
+        return {
+          start: `top+=${index * panelSpacing - viewportHeight * 0.1} top`,
+          end: `top+=${index * panelSpacing + viewportHeight * 0.2} top`,
+        };
+      };
+
+      const triggerPositions = getTriggerPositions();
+
       ScrollTrigger.create({
         trigger: spacerDiv,
-        start: () => `top+=${index * window.innerHeight * 0.9 - window.innerHeight * 0.1} top`,
-        end: () => `top+=${index * window.innerHeight * 0.9 + window.innerHeight * 0.2} top`,
+        start: () => triggerPositions.start,
+        end: () => triggerPositions.end,
         onEnter: () => {
           activateTabAndPanel(index);
         },
         onEnterBack: () => {
           activateTabAndPanel(index - 1);
         },
-        // Markers for debugging (remove in production)
-        // markers: true
+        // markers: true,
       });
     });
-    
+
     // Function to activate a specific tab and panel with snappy transition
     function activateTabAndPanel(index) {
       // Update active tab styling and ARIA attributes
       tabs.forEach((t, i) => {
         // Kill any existing GSAP animations on tabs
         gsap.killTweensOf(t, "backgroundColor");
-        
+
         if (i === index) {
           t.style.backgroundColor = "#39d0ff"; // Primary blue
           t.style.color = "#ffffff"; // White text
           t.setAttribute("aria-selected", "true");
-          
+
           // Ensure mobile tab scrolls into view
           if (window.innerWidth < 768) {
-            t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            t.scrollIntoView({
+              behavior: "smooth",
+              inline: "center",
+              block: "nearest",
+            });
           }
         } else {
           t.style.backgroundColor = "transparent";
@@ -326,7 +434,7 @@ const services = [
           t.setAttribute("aria-selected", "false");
         }
       });
-      
+
       // Hide all panels first
       panels.forEach((p, i) => {
         if (i !== index) {
@@ -336,12 +444,12 @@ const services = [
           p.style.display = "none";
         }
       });
-      
+
       // Show the active panel with a snappy transition
       const activePanel = panels[index];
       activePanel.classList.remove("hidden");
       activePanel.style.display = "flex";
-      
+
       // Use GSAP for smoother animation
       gsap.to(activePanel, {
         opacity: 1,
@@ -351,10 +459,10 @@ const services = [
         onComplete: () => {
           // Handle any post-animation tasks
           animateActivePanel();
-        }
+        },
       });
     }
-    
+
     // Initial activation of the first panel
     activateTabAndPanel(0);
   }
@@ -473,56 +581,6 @@ const services = [
         gsap.to(heading, { opacity: 1, y: 0, duration: 0.8 });
       }
     }
-
-    // Split and animate service descriptions in the active panel
-    const animateActivePanel = () => {
-      const activePanel = document.querySelector(
-        "[role='tabpanel']:not(.hidden)"
-      );
-      if (!activePanel) return;
-
-      // Find the description paragraph in the active panel
-      const description = activePanel.querySelector("p");
-      if (!description || description.querySelector(".split-word")) return;
-
-      const originalContent = description.textContent;
-
-      try {
-        // Normalize and split description
-        const normalizedText = description.textContent
-          .replace(/\s+/g, " ")
-          .trim();
-        const words = normalizedText.split(" ");
-        let newContent = "";
-
-        // Create wrapped words with subtle initial transformation
-        words.forEach((word) => {
-          newContent += `<span class="split-word" style="display:inline-block; overflow:hidden; margin-right:6px;">
-            <span class="word-inner" style="display:inline-block; transform:translateY(20px); opacity:0;">${word}</span>
-          </span>`;
-        });
-
-        description.innerHTML = newContent;
-
-        // Animate the words
-        const descriptionWords = description.querySelectorAll(".word-inner");
-        gsap.to(descriptionWords, {
-          scrollTrigger: {
-            trigger: description,
-            start: "top 90%",
-            end: "center 75%",
-            scrub: 0.7,
-          },
-          y: 0,
-          opacity: 1,
-          stagger: 0.015,
-          ease: "power1.inOut",
-        });
-      } catch (error) {
-        console.error("Description split error:", error);
-        description.textContent = originalContent;
-      }
-    };
 
     // Process active panel on initial load
     animateActivePanel();
