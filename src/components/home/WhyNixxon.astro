@@ -34,9 +34,6 @@ import Image from "astro/components/Image.astro";
           trends enable us to keep on top of developments and provide effective
           strategies.
         </p>
-        <a href="#" class="text-primary-blue read-more-link">
-          Read More <span>&rarr;</span>
-        </a>
       </li>
       <li class="flex flex-col space-y-2 benefit-item opacity-0">
         <h4
@@ -50,9 +47,6 @@ import Image from "astro/components/Image.astro";
           objectives. Customized to optimize your success, our solutions are not
           one-size-fits-all.
         </p>
-        <a href="#" class="text-primary-blue read-more-link">
-          Read More <span>&rarr;</span>
-        </a>
       </li>
       <li class="flex flex-col space-y-2 benefit-item opacity-0">
         <h4
@@ -66,9 +60,6 @@ import Image from "astro/components/Image.astro";
           performance indicators (KPIs), and conduct frequent data analysis. Our
           goal is to provide measurable outcomes that spur income and expansion.
         </p>
-        <a href="#" class="text-primary-blue read-more-link">
-          Read More <span>&rarr;</span>
-        </a>
       </li>
       <li class="flex flex-col space-y-2 benefit-item opacity-0">
         <h4
@@ -83,9 +74,6 @@ import Image from "astro/components/Image.astro";
           are in line with your goals by establishing a cooperative
           relationship.
         </p>
-        <a href="#" class="text-primary-blue read-more-link">
-          Read More <span>&rarr;</span>
-        </a>
       </li>
     </ul>
   </div>
@@ -310,52 +298,7 @@ import Image from "astro/components/Image.astro";
         }
       }
 
-      // Add subtle entrance animation for Read More links
-      const readMoreLink = item.querySelector(".read-more-link");
-      if (readMoreLink) {
-        const arrow = readMoreLink.querySelector("span");
-
-        gsap.from(readMoreLink, {
-          scrollTrigger: {
-            trigger: readMoreLink,
-            start: "top 90%",
-          },
-          y: 10,
-          opacity: 0,
-          duration: 0.5,
-          delay: 0.3 + itemIndex * 0.1,
-          ease: "power2.out",
-        });
-
-        // Add hover effects consistent with AboutUs section
-        readMoreLink.addEventListener("mouseenter", () => {
-          gsap.to(readMoreLink, {
-            color: "#0056b3",
-            duration: 0.3,
-          });
-          if (arrow) {
-            gsap.to(arrow, {
-              x: 8,
-              duration: 0.3,
-              ease: "power1.out",
-            });
-          }
-        });
-
-        readMoreLink.addEventListener("mouseleave", () => {
-          gsap.to(readMoreLink, {
-            color: "#1141D3",
-            duration: 0.3,
-          });
-          if (arrow) {
-            gsap.to(arrow, {
-              x: 0,
-              duration: 0.3,
-              ease: "power1.in",
-            });
-          }
-        });
-      }
+    
     });
   }
 
@@ -365,7 +308,7 @@ import Image from "astro/components/Image.astro";
       document.documentElement.clientWidth || 0,
       window.innerWidth || 0
     );
-    
+
     // Increased margins at each breakpoint for better readability
     if (vw < 480) {
       return "0.32em"; // Extra margin for very small mobile screens
@@ -376,7 +319,7 @@ import Image from "astro/components/Image.astro";
     } else if (vw < 1024) {
       return "0.22em"; // Spacing for tablets
     } else {
-      return "0.2em";  // Original spacing for desktop
+      return "0.2em"; // Original spacing for desktop
     }
   }
 
@@ -384,8 +327,8 @@ import Image from "astro/components/Image.astro";
   function updateParagraphSpacing() {
     const newMargin = getResponsiveParagraphMargin();
     const splitWords = document.querySelectorAll(".benefit-item p .split-word");
-    
-    splitWords.forEach(word => {
+
+    splitWords.forEach((word) => {
       word.style.marginRight = newMargin;
     });
   }
@@ -465,12 +408,12 @@ import Image from "astro/components/Image.astro";
       line-height: 1.6; /* Increased line height for better readability */
       letter-spacing: 0.01em; /* Slight letter spacing */
     }
-    
+
     .paragraph-word {
       padding: 0.02em 0; /* Add vertical padding to words */
     }
   }
-  
+
   /* Extra spacing for very small screens */
   @media (max-width: 480px) {
     .benefit-item p {

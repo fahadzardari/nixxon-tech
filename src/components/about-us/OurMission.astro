@@ -34,28 +34,27 @@ import Image from "astro/components/Image.astro";
         Our Mission
       </h2>
 
-      <div class="opacity-0 mt-5" id="mission-description">
-        <p
-          class="text-center md:text-left text-xs md:text-sm canvas:text-base 2xl:text-lg"
-        >
-          At NixxonTech, our mission is to revolutionize the digital landscape.
-          It is our objective to turn possibilities into realities besides
-          providing services. To prosper in the digital era, we facilitate
-          startups, small businesses, and large corporations. Our aim is to
-          stimulate expansion, be it via custom website development services,
-          data interpretation, or cloud-based solutions. Creating flawless user
-          experiences is what drives us crazy. Technology should be easy to use,
-          enjoyable, and intuitive for use.
-        </p>
+      <div
+        class="opacity-0 mt-5 text-center md:text-left text-xs md:text-sm canvas:text-base 2xl:text-lg"
+        id="mission-description"
+      >
+        At NixxonTech, our mission is to revolutionize the digital landscape. It
+        is our objective to turn possibilities into realities besides providing
+        services. To prosper in the digital era, we facilitate startups, small
+        businesses, and large corporations. Our aim is to stimulate expansion,
+        be it via custom website development services, data interpretation, or
+        cloud-based solutions. Creating flawless user experiences is what drives
+        us crazy. Technology should be easy to use, enjoyable, and intuitive for
+        use.
       </div>
 
       <a
-        href="/contact"
+        href="/contact-us"
         id="mission-cta"
         class="mt-6 w-fit mx-auto md:mx-0 inline-block px-4 md:px-8 py-1 md:py-2 lg:px-12 lg:py-3 leading-5 border border-primary-blue rounded-full text-white
 text-xs md:text-sm xl:text-base canvas:text-lg transition
         shadow-md shadow-primary-blue/50 hover:shadow-xl hover:shadow-primary-blue/80
-        hover:scale-105 duration-300"
+        hover:scale-105 duration-300 cursor-pointer"
         aria-label="Contact us to discuss your project"
       >
         Have a Plan? Let's Get Started
@@ -73,8 +72,12 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
 
   function initGetStartedAnimations() {
     // Reset any existing ScrollTriggers for this section
-    ScrollTrigger.getAll().forEach(st => {
-      if (st.vars.trigger && typeof st.vars.trigger === 'string' && st.vars.trigger.includes('mission')) {
+    ScrollTrigger.getAll().forEach((st) => {
+      if (
+        st.vars.trigger &&
+        typeof st.vars.trigger === "string" &&
+        st.vars.trigger.includes("mission")
+      ) {
         st.kill();
       }
     });
@@ -84,35 +87,35 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
     try {
       headingText = new SplitType("#mission-heading", {
         types: "words",
-        tagName: "span"
+        tagName: "span",
       });
-      
+
       descriptionText = new SplitType("#mission-description p", {
         types: "lines",
-        tagName: "span"
+        tagName: "span",
       });
     } catch (error) {
       console.error("Error initializing SplitType:", error);
     }
 
     // Set initial states
-    gsap.set("#mission-image-container", { 
-      opacity: 0, 
-      x: -30
+    gsap.set("#mission-image-container", {
+      opacity: 0,
+      x: -30,
     });
 
-    gsap.set("#mission-heading", { 
-      opacity: 0
+    gsap.set("#mission-heading", {
+      opacity: 0,
     });
 
-    gsap.set("#mission-description", { 
-      opacity: 0
+    gsap.set("#mission-description", {
+      opacity: 0,
     });
 
     // Set initial state for button but ensure it's not completely invisible
-    gsap.set("#mission-cta", { 
-      opacity: 0.01, 
-      y: 30
+    gsap.set("#mission-cta", {
+      opacity: 0.01,
+      y: 30,
     });
 
     // Image animation - scroll based
@@ -126,8 +129,8 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
         start: "top 80%",
         end: "top 50%",
         scrub: true,
-        toggleActions: "play reverse play reverse"
-      }
+        toggleActions: "play reverse play reverse",
+      },
     });
 
     // Floating animation for the image (independent of scroll)
@@ -137,7 +140,7 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
-      paused: true
+      paused: true,
     });
 
     // Start floating animation only when image is visible
@@ -147,7 +150,7 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
       onEnter: () => floatingAnimation.play(),
       onLeave: () => floatingAnimation.pause(),
       onEnterBack: () => floatingAnimation.play(),
-      onLeaveBack: () => floatingAnimation.pause()
+      onLeaveBack: () => floatingAnimation.pause(),
     });
 
     // Heading animation with words - scroll based
@@ -160,8 +163,8 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
           start: "top 85%",
           end: "top 65%",
           scrub: true,
-          toggleActions: "play reverse play reverse"
-        }
+          toggleActions: "play reverse play reverse",
+        },
       });
 
       // Words appear sequentially with scroll
@@ -176,8 +179,8 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
           start: "top 85%",
           end: "top 60%",
           scrub: true,
-          toggleActions: "play reverse play reverse"
-        }
+          toggleActions: "play reverse play reverse",
+        },
       });
     }
 
@@ -191,8 +194,8 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
         start: "top 85%",
         end: "top 65%",
         scrub: true,
-        toggleActions: "play reverse play reverse"
-      }
+        toggleActions: "play reverse play reverse",
+      },
     });
 
     // Individual lines animation (if split text worked)
@@ -208,8 +211,8 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
           start: "top 85%",
           end: "top 60%",
           scrub: true,
-        toggleActions: "play reverse play reverse"
-        }
+          toggleActions: "play reverse play reverse",
+        },
       });
     }
 
@@ -221,11 +224,11 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
       ease: "back.out(1.7)",
       scrollTrigger: {
         trigger: "#mission-cta",
-        start: "top 95%", 
+        start: "top 95%",
         end: "top 75%",
         scrub: true,
-        toggleActions: "play reverse play reverse"
-      }
+        toggleActions: "play reverse play reverse",
+      },
     });
 
     // Fallback to ensure button becomes visible
@@ -235,7 +238,7 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
         gsap.to("#mission-cta", {
           opacity: 1,
           y: 0,
-          duration: 0.8
+          duration: 0.8,
         });
       }
     }, 1500);
@@ -248,7 +251,7 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
         gsap.to(button, {
           scale: 1.05,
           boxShadow: "0 0 25px 8px rgba(57, 208, 255, 0.7)",
-          duration: 0.3
+          duration: 0.3,
         });
       });
 
@@ -256,7 +259,7 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
         gsap.to(button, {
           scale: 1,
           boxShadow: "0 0 15px 3px rgba(57, 208, 255, 0.4)",
-          duration: 0.3
+          duration: 0.3,
         });
       });
 
@@ -267,37 +270,40 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
         onEnter: () => {
           // Make button immediately visible on enter
           gsap.to(button, { opacity: 1, duration: 0.3 });
-          
+
           const glowTl = gsap.timeline({ repeat: -1 });
           glowTl.to(button, {
             boxShadow: "0 0 20px 5px rgba(57, 208, 255, 0.5)",
             duration: 2,
-            ease: "sine.inOut"
+            ease: "sine.inOut",
           });
           glowTl.to(button, {
             boxShadow: "0 0 10px 2px rgba(57, 208, 255, 0.3)",
             duration: 2,
-            ease: "sine.inOut"
+            ease: "sine.inOut",
           });
-        }
+        },
       });
     }
   }
 
   // Initialize on load
-  document.addEventListener('DOMContentLoaded', initGetStartedAnimations);
+  document.addEventListener("DOMContentLoaded", initGetStartedAnimations);
 
   // Refresh on page transitions for Astro
-  document.addEventListener('astro:page-load', initGetStartedAnimations);
+  document.addEventListener("astro:page-load", initGetStartedAnimations);
 
   // Immediate initialization for cases where DOMContentLoaded already fired
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
     setTimeout(initGetStartedAnimations, 100);
   }
 
   // Update animations on resize with debouncing
   let resizeTimer;
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       initGetStartedAnimations();
@@ -327,8 +333,12 @@ text-xs md:text-sm xl:text-base canvas:text-lg transition
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   /* Line container styles for split text */

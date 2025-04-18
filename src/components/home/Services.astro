@@ -1,7 +1,14 @@
 ---
 import ServiceDetail from "./ServiceDetail.astro";
-import WebDevImage from "../../assets/home/services/web-dev.svg";
-
+import WebDevImage from "../../assets/home-services/web-dev.svg";
+import UIUXImage from "../../assets/home-services/ui-ux.svg";
+import MobileDevImage from "../../assets/home-services/app-development.svg";
+import DevOpsImage from "../../assets/home-services/dev-ops.svg";
+import GameDevImage from "../../assets/home-services/game-dev.svg";
+import BusinessStrategyImage from "../../assets/home-services/business-strategy.svg";
+import BrandingImage from "../../assets/home-services/branding.svg";
+import VideoAnimationImage from "../../assets/home-services/video-animation.svg";
+import { m } from "framer-motion";
 const services = [
   {
     title: "Web Development",
@@ -12,56 +19,59 @@ const services = [
     link: "/services/web-development",
   },
   {
-    title: "Mobile Development",
-    description:
-      "We build mobile apps that are fast, secure, and easy to manage.",
-    image: WebDevImage,
-    alt: "Mobile Development",
-    link: "/services/mobile-app-development",
-  },
-  {
     title: "UI/UX Design",
     description:
-      "We design user interfaces that are easy to use and visually appealing.",
-    image: WebDevImage,
+      "Enhance user satisfaction with intuitive and visually appealing designs. Our UI/UX experts craft engaging interfaces and user flows that drive interaction and deliver a memorable digital experience.",
+    image: UIUXImage,
     alt: "UI/UX Design",
     link: "/services/ui-ux-design",
   },
   {
-    title: "Digital Marketing",
+    title: "Branding",
     description:
-      "We help you reach your target audience and grow your business.",
-    image: WebDevImage,
-    alt: "Digital Marketing",
-    link: "/services/digital-marketing",
+      "Shape a strong brand identity that speaks to your audience. From logo design to complete brand strategy, we create consistent and impactful visuals that set you apart and build brand loyalty.",
+    image: BrandingImage,
+    alt: "Branding",
+    link: "/services/branding",
   },
   {
-    title: "SEO",
+    title: "Video Animation",
     description:
-      "We help you rank higher on search engines and get more traffic.",
-    image: WebDevImage,
-    alt: "SEO",
-    link: "/services/digital-marketing",
+      "Tell your story through motion with our creative video animation services. We produce high-quality 2D and 3D animations that simplify complex ideas, captivate viewers, and boost your visual presence.",
+    image: VideoAnimationImage,
+    alt: "Video Animation",
+    link: "/services/video-animation",
   },
+  {
+    title: "App Development",
+    description:
+      "Launch powerful, user-friendly mobile apps for iOS and Android. Our team builds custom applications with sleek interfaces and robust functionality to ensure performance, scalability, and impact.",
+    image: MobileDevImage,
+    alt: "App Development",
+    link: "/services/mobile-app-development",
+  },
+
   {
     title: "Game Development",
-    description: "We build games that are fun, engaging, and addictive.",
-    image: WebDevImage,
+    description:
+      "Bring your game ideas to life with our full-cycle game development services. From concept and design to development and deployment, we create immersive and engaging games across mobile, PC, and web platforms—powered by cutting-edge technology and creative storytelling.",
+    image: GameDevImage,
     alt: "Game Development",
     link: "/services/game-development",
   },
   {
-    title: "Business Strategy",
-    description: "We help you grow your business and reach your goals.",
-    image: WebDevImage,
-    alt: "Business Strategy",
+    title: "Digital Marketing",
+    description:
+      "Maximize your reach with our data-driven digital marketing strategies. From SEO and PPC to content and social media, we help grow your online presence and drive measurable business results.",
+    image: BusinessStrategyImage,
+    alt: "Digital Marketing",
     link: "/services/digital-marketing",
   },
   {
     title: "DevOps",
     description:
-      "We help you automate your development and deployment processes.",
-    image: WebDevImage,
+      "Streamline your development and deployment process with our end-to-end DevOps solutions. We help you achieve faster releases, improved collaboration, and scalable infrastructure by integrating CI/CD pipelines, cloud automation, and performance monitoring tailored to your business needs.",
+    image: DevOpsImage,
     alt: "DevOps",
     link: "/services/devops-services",
   },
@@ -131,7 +141,7 @@ const services = [
           }
         </ul>
       </nav>
-      <div class="w-full md:w-2/3" id="service-details-container">
+      <div class="w-full ml-4" id="service-details-container">
         {
           services.map((service, index) => (
             <article
@@ -141,8 +151,8 @@ const services = [
               class:list={[
                 "service-detail",
                 "flex",
-                "items-center",
-                "justify-center",
+                "items-start",
+                // "justify-center",
                 "opacity-0",
                 {
                   hidden: index !== 0,

@@ -124,11 +124,6 @@ const ProjectCard = ({ project }) => {
         <p className="text-gray-600 mb-2 lg:mb-4 text-[10px] md:text-xs canvas:text-sm 2xl:text-base line-clamp-3">
           {project.description}
         </p>
-        <div className="mt-auto flex items-center justify-between">
-          <button className="text-primary-blue text-xs md:text-sm canvas:text-base underline hover:underline">
-            Read more
-          </button>
-        </div>
       </div>
     </div>
   );

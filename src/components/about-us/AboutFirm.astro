@@ -48,13 +48,14 @@ import { Image } from "astro:assets";
           your company will have all it needs to succeed and keep one step ahead
           of the competition.
         </p>
-        <button
+        <a
           class="w-fit inline-block px-8 md:px-12 py-3 leading-5 bg-primary-blue rounded-full text-white text-base md:text-lg transition
-  shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80"
+  shadow-md shadow-primary-blue/50 hover:shadow-sm hover:shadow-primary-blue/80 cursor-pointer"
           id="cta-button"
+          href="/contact-us"
         >
           Let's Talk
-        </button>
+        </a>
       </div>
     </div>
   </article>
@@ -79,9 +80,8 @@ import { Image } from "astro:assets";
         class="font-medium w-full text-2xl lg:text-3xl canvas:text-[38px] 2xl:text-[42px] 3xl:text-[46px] md:w-2/3 text-black"
         id="experience-heading"
       >
-        We Run All Kinds of <span class="text-primary-blue"
-          >IT Services</span
-        > That Vow <span class="text-primary-blue">Your Success</span>
+        We Run All Kinds of <span class="text-primary-blue">IT Services</span> That
+        Vow <span class="text-primary-blue">Your Success</span>
       </h4>
     </div>
     <div
@@ -92,9 +92,9 @@ import { Image } from "astro:assets";
         class="text-xl xl:text-2xl canvas:text-3xl 2xl:text-[38px] 3xl:text-[42px]"
         id="innovation-heading"
       >
-        Accelerate <span class="text-primary-blue">Innovation</span> with
-        world class tech teams We'll match you to an entire <span
-          class="text-primary-blue">Remote Technology</span
+        Accelerate <span class="text-primary-blue">Innovation</span> with world class
+        tech teams We'll match you to an entire <span class="text-primary-blue"
+          >Remote Technology</span
         >
       </h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 text-[16px] gap-5 md:gap-7">
@@ -316,37 +316,40 @@ import { Image } from "astro:assets";
     });
 
     // Make all heading text visible immediately with no opacity transition
-    document.querySelectorAll('h3, h4, .text-primary-blue').forEach(element => {
-      element.style.opacity = '1';
-      element.style.visibility = 'visible';
-    });
-    
+    document
+      .querySelectorAll("h3, h4, .text-primary-blue")
+      .forEach((element) => {
+        element.style.opacity = "1";
+        element.style.visibility = "visible";
+      });
+
     // Make both headings visible explicitly with direct DOM manipulation
-    document.getElementById('experience-heading').style.opacity = '1';
-    document.getElementById('innovation-heading').style.opacity = '1';
+    document.getElementById("experience-heading").style.opacity = "1";
+    document.getElementById("innovation-heading").style.opacity = "1";
 
     // Set styles directly for all blue text spans
-    document.querySelectorAll('.text-primary-blue').forEach(element => {
-      element.style.color = '#39D0FF';
-      element.style.opacity = '1';
+    document.querySelectorAll(".text-primary-blue").forEach((element) => {
+      element.style.color = "#39D0FF";
+      element.style.opacity = "1";
       // Remove any text-shadow that might have been applied
-      element.style.textShadow = 'none';
+      element.style.textShadow = "none";
     });
 
     // Simple one-time animation for the innovation heading
-    gsap.fromTo('#innovation-heading', 
+    gsap.fromTo(
+      "#innovation-heading",
       { y: 30, opacity: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
+      {
+        y: 0,
+        opacity: 1,
         duration: 0.8,
         delay: 0.3,
-        ease: 'power2.out',
+        ease: "power2.out",
         scrollTrigger: {
-          trigger: '#innovation-heading',
-          start: 'top 85%',
-          toggleActions: 'play none none none'
-        }
+          trigger: "#innovation-heading",
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
       }
     );
 
@@ -379,9 +382,9 @@ import { Image } from "astro:assets";
     });
 
     // Remove any remaining neon-glow styling and classes
-    document.querySelectorAll('.neon-glow').forEach(element => {
-      element.classList.remove('neon-glow');
-      element.style.textShadow = 'none';
+    document.querySelectorAll(".neon-glow").forEach((element) => {
+      element.classList.remove("neon-glow");
+      element.style.textShadow = "none";
     });
 
     gsap.set("#firm-stats-second h3", {
@@ -676,7 +679,7 @@ import { Image } from "astro:assets";
 
   /* Simpler blue text styling without glow */
   .text-primary-blue {
-    color: #39D0FF !important;
+    color: #39d0ff !important;
     text-shadow: none !important; /* Override any glow */
     opacity: 1 !important;
   }
