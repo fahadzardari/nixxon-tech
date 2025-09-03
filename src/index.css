@@ -8,6 +8,16 @@ body {
 
 @theme {
   --color-primary: #2563eb;
+  --color-footer-bg: #40326b;
+  --color-contact-blue: #000047;
   --font-primary: "Poppins", sans-serif;
 }
 
+.internal-padding {
+  padding-left: 11%;
+  padding-right: 11%;
+}
+
+.bg-button-gradient {
+  background: linear-gradient(90deg, #9d7eff 0%, #8067ce 100%);
+}

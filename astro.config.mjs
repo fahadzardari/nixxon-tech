@@ -7,7 +7,10 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  site: "https://nixxontech.com",
+  output: "static",
+  integrations: [],
   devToolbar: {
     enabled: true,
-  }
+  },
 });

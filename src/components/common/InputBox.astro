@@ -1,0 +1,16 @@
+---
+const {
+  placeholder,
+  type = "text",
+  value = "",
+  className = "",
+  // onInput,
+} = Astro.props;
+---
+
+<input
+  type={type}
+  placeholder={placeholder}
+  value={value}
+  class={`w-full border-b py-6 placeholder:text-[#9A9A9A] px-5 font-medium text-lg  focus:outline-none border-b-[#A1A1A1] ${className}`}
+/>

@@ -1,0 +1,73 @@
+---
+const { className } = Astro.props;
+---
+
+<button
+  class={`relative overflow-hidden animated-btn text-lg text-white bg-button-gradient py-[10px] px-10 rounded-3xl cursor-pointer ${className}`}
+>
+  <span class="button-text"><slot /></span>
+</button>
+
+<script>
+  document.querySelectorAll(".animated-btn").forEach((btn) => {
+    btn.addEventListener("mouseenter", (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      btn.style.setProperty("--mouse-x", `${x}px`);
+      btn.style.setProperty("--mouse-y", `${y}px`);
+      btn.classList.add("hovered");
+    });
+    btn.addEventListener("mouseleave", (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      btn.style.setProperty("--mouse-x", `${x}px`);
+      btn.style.setProperty("--mouse-y", `${y}px`);
+      btn.classList.remove("hovered");
+    });
+  });
+</script>
+
+<style>
+  .button-text {
+    position: relative;
+    z-index: 2;
+    transition: color 0.4s;
+  }
+
+  button.relative {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(90deg, #9d7eff, #8067ce);
+    color: white;
+    overflow: hidden;
+  }
+
+  /* Overlay for hover effect */
+  button.relative::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: white;
+    clip-path: circle(0% at var(--mouse-x, 50%) var(--mouse-y, 50%));
+    transition: clip-path 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(128, 103, 206, 0.08) inset;
+    border: 1.5px solid rgba(157, 126, 255, 0.18);
+  }
+
+  button.relative.hovered::before {
+    clip-path: circle(150% at var(--mouse-x, 50%) var(--mouse-y, 50%));
+  }
+
+  button.relative:hover {
+    filter: drop-shadow(1px 1px 5px #9d7eff88);
+  }
+  /* Text switches to gradient when hovered */
+  button.relative.hovered .button-text {
+    background: linear-gradient(90deg, #9d7eff, #8067ce);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>
