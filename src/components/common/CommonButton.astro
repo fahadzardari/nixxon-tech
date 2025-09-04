@@ -51,7 +51,7 @@ const { className } = Astro.props;
     inset: 0;
     background: white;
     clip-path: circle(0% at var(--mouse-x, 50%) var(--mouse-y, 50%));
-    transition: clip-path 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1;
     box-shadow: 0 2px 8px rgba(128, 103, 206, 0.08) inset;
     border: 1.5px solid rgba(157, 126, 255, 0.18);
@@ -63,6 +63,7 @@ const { className } = Astro.props;
 
   button.relative:hover {
     filter: drop-shadow(1px 1px 5px #9d7eff88);
+    scale: 1.01;
   }
   /* Text switches to gradient when hovered */
   button.relative.hovered .button-text {

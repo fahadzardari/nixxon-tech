@@ -1,0 +1,67 @@
+---
+// ...existing imports...
+import CommonButton from "./CommonButton.astro";
+---
+
+<section
+  id="collaborate-section"
+  class="internal-padding flex items-center gap-6 overflow-hidden bg-cover bg-no-repeat py-72 text-white"
+>
+  <div class="flex w-1/2 max-w-[580px] flex-col">
+    <h1 class="mb-7 text-[90px] leading-24 font-medium text-[#4B00A3]">
+      Collaborate with Us
+    </h1>
+    <p class="mb-14 text-3xl">
+      Share your tech-related business ideas with us. We'll support you
+      transform your dreams into reality!
+    </p>
+    <CommonButton className="w-fit"> Learn More </CommonButton>
+  </div>
+</section>
+
+<!-- <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const section = document.getElementById("collaborate-section");
+    const content = section.querySelector(".flex-col");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            content.classList.add("fade-in");
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(content);
+  });
+</script> -->
+
+<style>
+  #collaborate-section {
+    background-image: url("../../assets/home/colloborate-bg-compressed.webp");
+    background-size: 102%;
+    transition: background-size 2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #collaborate-section:hover {
+    background-size: 100%;
+  }
+
+  /* @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #collaborate-section .flex-col {
+    opacity: 0;
+    animation: fadeUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+  } */
+</style>

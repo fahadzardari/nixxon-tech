@@ -1,0 +1,64 @@
+---
+import OurProcessCard from "../home/OurProcessCard.astro";
+import ideaIcon from "../../assets/home/process/idea.png";
+import ideaArt from "../../assets/home/process/idea-art.png";
+import creativityIcon from "../../assets/home/process/creativity.png";
+import creativityArt from "../../assets/home/process/creativity-art.png";
+import magicIcon from "../../assets/home/process/magic.png";
+import magicArt from "../../assets/home/process/magic-art.png";
+import deliveredIcon from "../../assets/home/process/delivered.png";
+import deliveredArt from "../../assets/home/process/delivered-art.png";
+
+const processes = [
+  {
+    title: "Your Idea",
+    description:
+      "We believe in giving our clients the freedom to express their ideas so the final product reflects their initial thought.",
+    icon: ideaIcon,
+    bgArt: ideaArt,
+  },
+  {
+    title: "Our creativity",
+    description:
+      "Once we get your input, now’s the time for you to sitback and let our creativity dothe wonders.",
+    icon: creativityIcon,
+    bgArt: creativityArt,
+  },
+  {
+    title: "Make the magic",
+    description:
+      "The stage where the magic begins. The exquisite touch of our maestros brings mereideas to life. We put every essence of your thought in the final product.",
+    icon: magicIcon,
+    bgArt: magicArt,
+  },
+  {
+    title: "Delivered to you",
+    description:
+      "We hate to keep our clients waiting for their project. Your project getsdelivered to you as soon as we are done perfecting the minute details. We keep in touch unless you are satisfied.",
+    icon: deliveredIcon,
+    bgArt: deliveredArt,
+  },
+];
+---
+
+<section class="px-[8%] flex flex-col py-36">
+  <h2
+    class="mb-16 text-center text-6xl leading-20 font-bold text-black uppercase"
+  >
+    Our <span class="text-gradient-start">Process</span>
+  </h2>
+  <div
+    class="grid w-full grid-cols-1 justify-between gap-4 md:grid-cols-2 lg:grid-cols-4"
+  >
+    {
+      processes.map((process) => (
+        <OurProcessCard
+          title={process.title}
+          description={process.description}
+          icon={process.icon}
+          bgArt={process.bgArt}
+        />
+      ))
+    }
+  </div>
+</section>

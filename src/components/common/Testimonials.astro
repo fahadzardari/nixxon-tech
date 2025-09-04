@@ -1,0 +1,104 @@
+---
+import TestimonialCard from "./TestimonialCard.astro";
+---
+
+<section class="internal-padding py-36">
+  <h2 class="text-6xl leading-20 mb-20">
+    <span class="text-gradient-start font-semibold"> Endorsements From </span>
+    <br />
+    <span class="text-[#040404]">Our Clients</span>
+  </h2>
+  <div class="mySwiper  overflow-x-hidden p-8">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <TestimonialCard
+          name="Jane Doe"
+          details="CEO, Tech Innovations"
+          description="Nixxon Tech transformed our digital presence with their innovative solutions and exceptional service. Their team is highly skilled and dedicated to delivering results."
+          avatar="../../assets/testimonials/jane-doe.jpg"
+        />
+      </div>
+      <div class="swiper-slide">
+        <TestimonialCard
+          name="John Smith"
+          details="Founder, Startup Hub"
+          description="Working with Nixxon Tech was a game-changer for our startup. Their expertise in web development and design helped us launch a successful platform that exceeded our expectations."
+          avatar="../../assets/testimonials/john-smith.jpg"
+        />
+      </div>
+      <div class="swiper-slide">
+        <TestimonialCard
+          name="Emily Johnson"
+          details="Marketing Director, Creative Solutions"
+          description="Nixxon Tech provided us with top-notch digital marketing services that significantly boosted our online visibility and engagement. Their strategic approach and attention to detail are unmatched."
+          avatar="../../assets/testimonials/emily-johnson.jpg"
+        />
+      </div>
+      <div class="swiper-slide">
+        <TestimonialCard
+          name="Emily Johnson"
+          details="Marketing Director, Creative Solutions"
+          description="Nixxon Tech provided us with top-notch digital marketing services that significantly boosted our online visibility and engagement. Their strategic approach and attention to detail are unmatched."
+          avatar="../../assets/testimonials/emily-johnson.jpg"
+        />
+      </div>
+      <div class="swiper-slide">
+        <TestimonialCard
+          name="Emily Johnson"
+          details="Marketing Director, Creative Solutions"
+          description="Nixxon Tech provided us with top-notch digital marketing services that significantly boosted our online visibility and engagement. Their strategic approach and attention to detail are unmatched."
+          avatar="../../assets/testimonials/emily-johnson.jpg"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import Swiper from "swiper";
+  import "swiper/css";
+
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 3,
+    spaceBetween: 80,
+    centeredSlides: true,
+    loop: true,
+    keyboard: {
+      enabled: true,
+    },
+  });
+</script>
+
+<style>
+  .swiper-slide {
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.7;
+    z-index: 1;
+  }
+
+  .swiper-slide-active {
+    transform: scale(1.07);
+    opacity: 1;
+    z-index: 2;
+  } 
+
+  .swiper-slide-active > article {
+    background: linear-gradient(135deg, #f3e8ff, #e0d7ff);
+    box-shadow: 0 8px 32px rgba(128, 103, 206, 0.18);
+  }
+
+  .swiper-slide-active .font-roboto {
+    background: linear-gradient(90deg, #9d7eff, #8067ce);
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(128, 103, 206, 0.18);
+  }
+
+  .swiper-slide-active .font-roboto p,
+  .swiper-slide-active .font-roboto span {
+    color: #fff !important;
+  }
+</style>

@@ -1,5 +1,6 @@
 /* import font poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 @import "tailwindcss";
 
 body {
@@ -11,6 +12,9 @@ body {
   --color-footer-bg: #40326b;
   --color-contact-blue: #000047;
   --font-primary: "Poppins", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --color-gradient-start: #9d7eff;
+  --color-gradient-end: #8067ce;
 }
 
 .internal-padding {
