@@ -1,0 +1,76 @@
+---
+import Image from "astro/components/Image.astro";
+import Art from "../../assets/home/ideas/object.png";
+import BGArt from "../../assets/home/ideas/art.png";
+---
+
+<section
+  class="internal-padding relative flex flex-row bg-[#4B00A3] text-white"
+>
+  <Image
+    src={BGArt}
+    alt="Background Art"
+    class="absolute top-0 left-0 h-full w-full object-cover opacity-10"
+  />
+  <div class="flex-1 md:block">
+    <div class="z-10 p-4">
+      <Image
+        src={Art}
+        alt="Main Art"
+        id="floaty-art"
+        class="cursor-pointer floaty h-auto w-full"
+      />
+    </div>
+  </div>
+  <div class="flex flex-1 flex-col justify-center gap-6">
+    <h2 class="text-6xl leading-[4.5rem] font-semibold">
+      Where Ideas Take Flight, and Results Land Big
+    </h2>
+    <h3 class="text-[26px] font-medium">The Nixxon Australia Impact</h3>
+    <p class="text-base">
+      From local startups to global ventures, we’ve turned bold visions into
+      measurable success. Every project we deliver blends innovation, trust, and
+      precision — creating results that speak louder than words.
+    </p>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="flex flex-col gap-2 rounded-lg bg-white/20 p-4 text-center">
+        <h4 class="text-3xl font-bold text-white">500+</h4>
+        <p class="text-white">Projects Delivered</p>
+      </div>
+      <div class="flex flex-col gap-2 rounded-lg bg-white/20 p-4 text-center">
+        <h4 class="text-3xl font-bold text-white">300%</h4>
+        <p class="text-white">Average ROI Increase</p>
+      </div>
+      <div class="flex flex-col gap-2 rounded-lg bg-white/20 p-4 text-center">
+        <h4 class="text-3xl font-bold text-white">150+</h4>
+        <p class="text-white">Happy Clients</p>
+      </div>
+      <div class="flex flex-col gap-2 rounded-lg bg-white/20 p-4 text-center">
+        <h4 class="text-3xl font-bold text-white">24/7</h4>
+        <p class="text-white">Support & Maintenance</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .floaty {
+    animation: floatUpDown 3.5s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes floatUpDown {
+    0% {
+      transform: translateY(0px) scale(1);
+      filter: drop-shadow(0 4px 24px rgba(77, 0, 163, 0.1));
+    }
+    60% {
+      transform: translateY(-18px) scale(1.03);
+      filter: drop-shadow(0 12px 32px rgba(77, 0, 163, 0.14));
+    }
+    100% {
+      transform: translateY(0px) scale(1);
+      filter: drop-shadow(0 4px 24px rgba(77, 0, 163, 0.1));
+    }
+  }
+</style>

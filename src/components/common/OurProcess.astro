@@ -41,24 +41,50 @@ const processes = [
 ];
 ---
 
-<section class="px-[8%] flex flex-col py-36">
+<section class="flex flex-col px-[8%] py-36">
   <h2
     class="mb-16 text-center text-6xl leading-20 font-bold text-black uppercase"
   >
     Our <span class="text-gradient-start">Process</span>
   </h2>
   <div
-    class="grid w-full grid-cols-1 justify-between gap-4 md:grid-cols-2 lg:grid-cols-4"
+    class="process-grid grid w-full grid-cols-1 justify-between gap-4 md:grid-cols-2 lg:grid-cols-4"
   >
     {
-      processes.map((process) => (
+      processes.map((process, idx) => (
         <OurProcessCard
           title={process.title}
           description={process.description}
           icon={process.icon}
           bgArt={process.bgArt}
+          // className="process-card"
         />
       ))
     }
   </div>
 </section>
+
+<style>
+  .process-grid {
+    /* Needed for child selector */
+  }
+
+.process-grid  .process-card {
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+.process-grid  .process-card:hover {
+    transform: scale(1.07) !important;
+    z-index: 2;
+    box-shadow: 0 8px 32px rgba(128, 103, 206, 0.18);
+  }
+
+  .process-grid:hover .process-card:not(:hover) {
+    transform: scale(0.93);
+    opacity: 0.8;
+    z-index: 1;
+  }
+</style>
