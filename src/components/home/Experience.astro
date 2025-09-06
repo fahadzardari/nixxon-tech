@@ -1,0 +1,44 @@
+---
+import CommonButton from "../common/CommonButton.astro";
+---
+
+<section class="internal-padding my-24">
+  <div class="flex flex-wrap items-center gap-4">
+    <h2 class="m-0 text-5xl font-normal text-[#000047] leading-16">
+      <div class="inline w-[35ch] min-w-[35ch]">
+        <span
+          id="typewriter"
+          class="from-gradient-start to-gradient-end w-[35ch] bg-gradient-to-r bg-clip-text text-lg font-semibold whitespace-nowrap text-transparent"
+        ></span>
+      </div>
+      With over two decades of experience and a global footprint, our teams operate
+      as a cohesive unit, consistently exceeding expectations and delivering unparalleled
+      service to our diverse clientele worldwide.
+    </h2>
+  </div>
+  <CommonButton className="mt-10"> Learn More </CommonButton>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const el = document.getElementById("typewriter");
+    const text = "We have Passion for our craft";
+    let i = 0;
+
+    function type() {
+      if (el && i <= text.length) {
+        el.textContent = text.slice(0, i);
+        i++;
+        setTimeout(type, 38);
+      } else if (el) {
+        // Wait 10 seconds, then restart
+        setTimeout(() => {
+          el.textContent = "";
+          i = 0;
+          setTimeout(type, 400); // small pause before restarting
+        }, 10000);
+      }
+    }
+    type();
+  });
+</script>

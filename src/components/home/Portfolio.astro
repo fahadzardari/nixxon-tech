@@ -1,0 +1,194 @@
+---
+const { projects = [] } = Astro.props;
+import Image from "astro/components/Image.astro";
+import Logo1 from "../../assets/home/portfolio/logos/1.png";
+import Logo2 from "../../assets/home/portfolio/logos/2.png";
+import Logo3 from "../../assets/home/portfolio/logos/3.png";
+import Logo4 from "../../assets/home/portfolio/logos/4.png";
+
+const logos = [Logo1, Logo2, Logo3, Logo4, Logo1, Logo2, Logo3, Logo4, Logo4];
+const filters = ["Logo Design", "Website", "Mobile App", "Video Animation"];
+
+import Website1 from "../../assets/home/portfolio/websites/1.webp";
+
+const websites = [Website1, Website1, Website1, Website1, Website1];
+---
+
+<section class="internal-padding py-20">
+  <header class="relative mx-auto mb-12 max-w-6xl text-center">
+    <h1
+      class="absolute top-[-72px] -z-100 mx-auto translate-x-1/2 transform text-[144px] font-semibold text-[#9D7EFF] opacity-10"
+    >
+      Portfolio
+    </h1>
+    <p
+      class="text-gradient-start mb-2 text-xl font-semibold tracking-wider uppercase"
+    >
+      Our Project Collection
+    </p>
+    <h2 class="mb-3 text-4xl font-semibold text-black md:text-[54px]">
+      Award Winning Portfolio
+    </h2>
+    <p class="mx-auto max-w-2xl text-base leading-6 text-[#707070]">
+      Most of our customers give us a call promptly after going through our
+      professional portfolio.
+    </p>
+
+    <!-- filters -->
+    <nav
+      class="mt-6 flex flex-wrap items-center justify-center gap-3"
+      id="portfolio-filters"
+    >
+      {
+        filters.map((filter, idx) => (
+          <button
+            type="button"
+            class={`portfolio-filter-btn${idx === 0 ? " selected" : ""}`}
+            data-filter={filter}
+          >
+            {filter}
+          </button>
+        ))
+      }
+    </nav>
+  </header>
+
+  <div class="mx-auto">
+    <div
+      id="portfolio-grid"
+      class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+    >
+      {
+        // Default: show logos (Logo Design)
+        logos.map((logo, index) => (
+          <Image
+            src={logo}
+            alt={`Project Logo ${index + 1}`}
+            class="portfolio-item h-auto max-h-[410px] w-full max-w-[480px] rounded-lg"
+            data-category="Logo Design"
+          />
+        ))
+      }
+      {
+        websites.map((website, index) => (
+          <div
+            class="portfolio-item website-scroll-container relative h-[410px] max-h-[410px] w-full max-w-[480px] overflow-hidden rounded-lg"
+            data-category="Website"
+            style="background: #fff;"
+          >
+            <Image
+              src={website}
+              alt={`Website Project ${index + 1}`}
+              class="website-scroll-img absolute top-0 left-0 h-auto w-full transition-transform duration-[4000ms] ease-linear"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const nav = document.getElementById("portfolio-filters");
+    const grid = document.getElementById("portfolio-grid");
+    if (!nav || !grid) return;
+
+    nav.addEventListener("click", (e) => {
+      const btn = e.target.closest(".portfolio-filter-btn");
+      if (!btn) return;
+      nav
+        .querySelectorAll(".portfolio-filter-btn")
+        .forEach((b) => b.classList.remove("selected"));
+      btn.classList.add("selected");
+
+      const filter = btn.dataset.filter;
+      grid.querySelectorAll(".portfolio-item").forEach((item) => {
+        const cat = item.dataset.category;
+        if (filter === cat) {
+          item.style.display = "";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+
+    // Show only logos by default
+    grid.querySelectorAll(".portfolio-item").forEach((item) => {
+      item.style.display =
+        item.dataset.category === "Logo Design" ? "" : "none";
+    });
+  });
+</script>
+
+<style>
+  :root {
+    --gradient-start: #9d7eff;
+    --gradient-end: #8067ce;
+    --btn-inactive-bg: #ece6ff;
+    --btn-inactive-text: #8067ce;
+  }
+
+  .portfolio-filter-btn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 0.625rem 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    background: var(--btn-inactive-bg);
+    color: var(--btn-inactive-text);
+    transition:
+      background 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+    position: relative;
+    z-index: 1;
+    border-radius: 1.5rem;
+  }
+
+  .portfolio-filter-btn.selected {
+    background: linear-gradient(
+      90deg,
+      var(--gradient-start),
+      var(--gradient-end)
+    );
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(157, 126, 255, 0.12);
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  .portfolio-filter-btn:not(.selected):hover {
+    background: #e0d6fa;
+    color: var(--gradient-end);
+    transform: translateY(-2px) scale(1.01);
+  }
+
+  .website-scroll-container {
+    position: relative;
+    overflow: hidden;
+    height: 410px;
+    width: 100%;
+    max-width: 480px;
+    border-radius: 0.75rem;
+    background: #fff;
+  }
+
+  .website-scroll-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Make sure the image is tall enough to scroll */
+    min-height: 100%;
+    transition: transform 4s linear;
+    will-change: transform;
+  }
+
+  /* On hover, scroll the image up to reveal the bottom */
+  .website-scroll-container:hover .website-scroll-img {
+    transform: translateY(calc(-100% + 410px));
+  }
+</style>

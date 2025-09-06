@@ -2,10 +2,14 @@
 import Image from "astro/components/Image.astro";
 import Art from "../../assets/home/ideas/object.png";
 import BGArt from "../../assets/home/ideas/art.png";
+import Coffee from "../../assets/home/ideas/coffee.png";
+import Person from "../../assets/home/ideas/person.png";
+import World from "../../assets/home/ideas/world.png";
+import Bulb from "../../assets/home/ideas/bulb.png";
 ---
 
 <section
-  class="internal-padding relative flex flex-row bg-[#4B00A3] text-white"
+  class="internal-padding relative flex flex-row bg-[#4B00A3] text-[#FFFFFF]"
 >
   <Image
     src={BGArt}
@@ -13,13 +17,15 @@ import BGArt from "../../assets/home/ideas/art.png";
     class="absolute top-0 left-0 h-full w-full object-cover opacity-10"
   />
   <div class="flex-1 md:block">
-    <div class="z-10 p-4">
-      <Image
-        src={Art}
-        alt="Main Art"
-        id="floaty-art"
-        class="cursor-pointer floaty h-auto w-full"
-      />
+    <div class="z-10 p-4 tilt-container">
+      <div class="tilt-wrapper">
+        <Image
+          src={Art}
+          alt="Main Art"
+          id="floaty-art"
+          class="floaty h-auto w-full cursor-pointer"
+        />
+      </div>
     </div>
   </div>
   <div class="flex flex-1 flex-col justify-center gap-6">
@@ -32,22 +38,56 @@ import BGArt from "../../assets/home/ideas/art.png";
       measurable success. Every project we deliver blends innovation, trust, and
       precision — creating results that speak louder than words.
     </p>
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      <div class="flex flex-col gap-2 rounded-lg bg-white/20 p-4 text-center">
-        <h4 class="text-3xl font-bold text-white">500+</h4>
-        <p class="text-white">Projects Delivered</p>
+
+    <!-- stats grid -->
+    <div class="mt-8 grid grid-cols-1 justify-between gap-x-4 gap-y-8 sm:grid-cols-2">
+      <div
+        class="flex w-full items-center gap-4 border-r border-r-white py-1 pr-4"
+      >
+        <Image src={Coffee} alt="Coffee Icon" height={92} width={92} class={"ml-auto"} />
+        <div class="flex flex-col items-end">
+          <h3 class="text-[44px] font-medium">4,200+</h3>
+          <p class="text-[22px] font-medium">Coffees Shared</p>
+          <p class="text-right text-sm font-medium capitalize">
+            Fuel for our brightest <br /> ideas
+          </p>
+        </div>
       </div>
-      <div class="flex flex-col gap-2 rounded-lg bg-white/20 p-4 text-center">
-        <h4 class="text-3xl font-bold text-white">300%</h4>
-        <p class="text-white">Average ROI Increase</p>
+      <div
+        class="flex w-full items-center gap-4 border-r border-r-white py-1 pr-4"
+      >
+        <Image src={Person} alt="Coffee Icon" height={92} width={92} class={"ml-auto"} />
+        <div class="flex flex-col items-end">
+          <h3 class="text-[44px] font-medium">2.5K</h3>
+          <p class="text-[22px] font-medium">Projects Delivered</p>
+          <p class="text-right text-sm font-medium capitalize">
+            Big and small, each <br /> one unique
+          </p>
+        </div>
       </div>
-      <div class="flex flex-col gap-2 rounded-lg bg-white/20 p-4 text-center">
-        <h4 class="text-3xl font-bold text-white">150+</h4>
-        <p class="text-white">Happy Clients</p>
+      <div
+        class="flex w-full items-center gap-4 border-r border-r-white py-1 pr-4"
+      >
+        <Image src={Bulb} alt="Coffee Icon" height={92} width={92} class={"ml-auto"} />
+        <div class="flex flex-col items-end">
+          <h3 class="text-[44px] font-medium">44</h3>
+          <p class="text-[22px] font-medium">Creative Minds</p>
+          <p class="text-right text-sm font-medium capitalize">
+            Turning visions into <br /> visuals
+          </p>
+        </div>
       </div>
-      <div class="flex flex-col gap-2 rounded-lg bg-white/20 p-4 text-center">
-        <h4 class="text-3xl font-bold text-white">24/7</h4>
-        <p class="text-white">Support & Maintenance</p>
+      <div
+        class="flex w-full items-center gap-4 border-r border-r-white py-1 pr-4"
+      >
+        <Image src={World} alt="Coffee Icon" height={92} width={92} class={"ml-auto"} />
+        <div class="flex flex-col items-end">
+          <h3 class="text-[44px] font-medium">8</h3>
+          <p class="text-[22px] font-medium">Countries Reached</p>
+          <p class="text-right text-sm font-medium capitalize">
+            Taking Aussie creativity <br> worldwide
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -57,6 +97,10 @@ import BGArt from "../../assets/home/ideas/art.png";
   .floaty {
     animation: floatUpDown 3.5s ease-in-out infinite alternate;
     will-change: transform;
+    transform-origin: center center;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), filter 320ms;
+    backface-visibility: hidden;
+    display: block;
   }
 
   @keyframes floatUpDown {
@@ -71,6 +115,39 @@ import BGArt from "../../assets/home/ideas/art.png";
     100% {
       transform: translateY(0px) scale(1);
       filter: drop-shadow(0 4px 24px rgba(77, 0, 163, 0.1));
+    }
+  }
+
+  /* Perspective container so 3D tilt feels natural */
+  .tilt-container {
+    perspective: 1200px;
+    -webkit-perspective: 1200px;
+  }
+
+  /* subtle wrapper to control overflow and preserve 3D */
+  .tilt-wrapper {
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  /* on hover: pause floating and apply a gentle 3D tilt + scale */
+  .tilt-wrapper:hover .floaty,
+  .floaty:hover {
+    animation-play-state: paused;
+    transform: rotateX(6deg) rotateY(-8deg) scale(1.04);
+    filter: drop-shadow(0 18px 40px rgba(77, 0, 163, 0.18));
+  }
+
+  /* slightly reduce the tilt/scale on small screens */
+  @media (max-width: 768px) {
+    .tilt-container {
+      perspective: 800px;
+    }
+    .tilt-wrapper:hover .floaty,
+    .floaty:hover {
+      transform: rotateX(3deg) rotateY(-4deg) scale(1.02);
+      filter: drop-shadow(0 8px 20px rgba(77, 0, 163, 0.12));
     }
   }
 </style>
