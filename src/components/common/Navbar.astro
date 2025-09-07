@@ -28,19 +28,19 @@ import CommonButton from "./CommonButton.astro";
   <!-- Sidebar - stays full height -->
 
   <!-- Top Nav - only as tall as its content -->
-  <div class="flex w-full justify-between">
+  <div class="flex w-full justify-between ">
     <div
       id="nav-container"
-      class="flex items-center justify-between gap-5 bg-[#f8f8f8] px-6 py-2 transition-all duration-300"
+      class="flex items-center   bg-[#f8f8f8] px-6 py-2 transition-all duration-300"
     >
-      <div class="flex items-center">
+      <div class="flex items-center mr-12">
         <Image src={Logo} alt="Nixxon Tech Logo" class="h-auto w-[170px]" />
       </div>
 
       <ul
-        class="hidden w-1/2 items-center gap-x-4 font-medium text-gray-600 md:flex"
+        class="hidden text-nowrap text-[#000000] items-center gap-x-12 font-medium  md:flex"
       >
-        <li><a href="/" class="hover:text-black">Home</a></li>
+        <li><a href="/" class="text-white rounded-full px-3 py-2 bg-[#9D7EFF]">Home</a></li>
         <li><a href="/about" class="hover:text-black">About Us</a></li>
         <li class="group relative">
           <button class="flex items-center space-x-1 hover:text-black">
@@ -141,13 +141,14 @@ import CommonButton from "./CommonButton.astro";
     )
       .fromTo(
         innerButton,
-        { opacity: 0, pointerEvents: "none" },
+        { display: 'none', opacity: 0, pointerEvents: "none" },
         {
           opacity: 1,
           pointerEvents: "auto",
           duration: 0.2,
           marginTop: "1rem",
           marginBottom: "1rem",
+          display: 'block'
         },
       )
       .fromTo(
