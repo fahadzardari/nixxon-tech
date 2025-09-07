@@ -1,0 +1,188 @@
+---
+import Logo from "../../assets/logo.png";
+import Image from "astro/components/Image.astro";
+import CommonButton from "./CommonButton.astro";
+---
+
+<aside id="wrapper-sidebar">
+  
+  <div id="sidebar" class="fixed top-0 left-0 z-50 h-screen w-[88px] bg-[#f8f8f8]">
+    <svg
+      width="13"
+      height="52"
+      viewBox="0 0 13 52"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="mx-auto mt-4"
+    >
+      <line x1="0.5" y1="0" x2="0.5" y2="52" stroke="#000047"></line>
+      <line x1="12.5" y1="0" x2="12.5" y2="52" stroke="#000047"></line>
+    </svg>
+    <div class="absolute right-2 h-[95%] w-[1px] bg-[#DADEFF]"></div>
+    <div class="absolute top-4 right-2 h-[10%] w-[1.5px] bg-[#606DD1]"></div>
+  </div>
+  
+</aside>
+
+<nav class="fixed top-0 left-[88px] right-0  z-50 flex w-[calc(100vw - 88px)]">
+  <!-- Sidebar - stays full height -->
+
+  <!-- Top Nav - only as tall as its content -->
+  <div class="flex w-full justify-between">
+    <div
+      id="nav-container"
+      class="flex items-center justify-between gap-5 bg-[#f8f8f8] px-6 py-2 transition-all duration-300"
+    >
+      <div class="flex items-center">
+        <Image src={Logo} alt="Nixxon Tech Logo" class="h-auto w-[170px]" />
+      </div>
+
+      <ul
+        class="hidden w-1/2 items-center gap-x-4 font-medium text-gray-600 md:flex"
+      >
+        <li><a href="/" class="hover:text-black">Home</a></li>
+        <li><a href="/about" class="hover:text-black">About Us</a></li>
+        <li class="group relative">
+          <button class="flex items-center space-x-1 hover:text-black">
+            <span>Services</span>
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <ul
+            class="absolute left-0 mt-2 hidden w-40 rounded-lg border bg-[#f8f8f8] shadow-lg group-hover:block"
+          >
+            <li>
+              <a href="/services/web" class="block px-4 py-2 hover:bg-gray-100"
+                >Web Design</a
+              >
+            </li>
+            <li>
+              <a href="/services/seo" class="block px-4 py-2 hover:bg-gray-100"
+                >SEO</a
+              >
+            </li>
+            <li>
+              <a
+                href="/services/branding"
+                class="block px-4 py-2 hover:bg-gray-100">Branding</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li><a href="/portfolio" class="hover:text-black">Portfolio</a></li>
+      </ul>
+
+      <div
+        id="inner-button"
+        class="pointer-events-none my-auto ml-auto opacity-0 transition-opacity duration-300"
+      >
+        <CommonButton className="my-auto mr-4">
+          Book A discovery call
+        </CommonButton>
+      </div>
+    </div>
+
+    <!-- Outer button sits under nav if needed -->
+    <div id="outer-button" class="my-auto transition-opacity duration-300">
+      <CommonButton className="my-auto mr-4">Book A discovery call</CommonButton
+      >
+    </div>
+  </div>
+</nav>
+
+
+<script>
+  import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const navContainer = document.getElementById("nav-container");
+    const innerButton = document.getElementById("inner-button");
+    const outerButton = document.getElementById("outer-button");
+
+    if (!navContainer || !innerButton || !outerButton) return;
+
+    // Create a timeline for smooth animation
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".hero-section",
+        start: "bottom 10%",
+        end: "bottom top",
+        scrub: 0.01,
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    // Animate the width and toggle button visibility
+    tl.fromTo(
+      navContainer,
+      {
+        width: "50%",
+        borderTopRightRadius: "-50px",
+        borderBottomRightRadius: "1.5rem",
+      },
+      {
+        width: "100%",
+        borderRadius: 0,
+        ease: "power2.inOut",
+        duration: 0.5,
+        borderBottom: "1px",
+        borderBottomColor: "black",
+      },
+    )
+      .fromTo(
+        innerButton,
+        { opacity: 0, pointerEvents: "none" },
+        {
+          opacity: 1,
+          pointerEvents: "auto",
+          duration: 0.2,
+          marginTop: "1rem",
+          marginBottom: "1rem",
+        },
+      )
+      .fromTo(
+        outerButton,
+        { opacity: 1, pointerEvents: "auto", display: "block" },
+        { opacity: 0, pointerEvents: "none", display: "none" },
+      );
+
+          
+     const sidebar = document.getElementById("wrapper-sidebar");
+     const nav = document.querySelector("nav"); // add this
+    if (sidebar) {
+      ScrollTrigger.create({
+        trigger: sidebar,
+        start: "top top",
+        endTrigger: ".our-services",
+        end: "top top",
+        pin: true,
+        // pinSpacing: false, // No extra space below
+        anticipatePin: 1,
+        onLeave: () => {
+          // Expand navbar to full width when sidebar unpins
+          nav.style.left = "0";
+          nav.style.width = "100vw";
+          nav.classList.remove("left-[88px]", "w-[calc(100vw - 88px)]");
+          nav.classList.add("w-full");
+        },
+        onEnterBack: () => {
+          // Restore navbar width when scrolling back up
+          nav.style.left = "88px";
+          nav.style.width = "";
+          nav.classList.remove("w-full");
+          nav.classList.add("left-[88px]", "w-[calc(100vw - 88px)]");
+        }
+      });
+    }
+  });
+</script>

@@ -1,0 +1,136 @@
+---
+import Image from "astro/components/Image.astro";
+import VideoSub from "../../assets/home/services/video-sub.png";
+---
+
+<section class="video-section py-32 relative">
+  <div class="video-scroll-container">
+    <div class="video-scroll-wrapper">
+      <Image
+        src={VideoSub}
+        alt="Video Subscription"
+        class="video-scroll-img mx-auto w-full rounded-lg"
+        loading="eager"
+      />
+    </div>
+  </div>
+  <div class="video-spacer"></div>
+</section>
+
+<!-- <script>
+  import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
+
+  function setupVideoAnimation() {
+    const img = document.querySelector(".video-scroll-img");
+    const wrapper = document.querySelector(".video-scroll-wrapper");
+    const container = document.querySelector(".video-scroll-container");
+    const spacer = document.querySelector(".video-spacer");
+
+    if (!img || !container || !spacer || !wrapper) return;
+
+    // Reset styles
+    gsap.set(img, { clearProps: "all" });
+
+    // Get initial position and size
+    const rect = img.getBoundingClientRect();
+    const scrollY = window.scrollY || window.pageYOffset;
+    const initial = {
+      width: rect.width,
+      height: rect.height,
+      top: rect.top + scrollY,
+      left: rect.left,
+      x: rect.left + rect.width / 2,
+      y: rect.top + scrollY + rect.height / 2,
+    };
+
+    // Set spacer height to viewport height to push next section down
+    spacer.style.height = "120vh";
+
+    // Animate from center using fixed positioning
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container,
+        start: "top top",
+        end: "+=100vh",
+        scrub: true,
+        pin: container,
+        anticipatePin: 1,
+        markers: true,
+        id: "video-grow",
+      }
+    });
+
+    tl.set(img, {
+      position: "fixed",
+      left: initial.x,
+      top: initial.y,
+      xPercent: -50,
+      yPercent: -50,
+      width: initial.width,
+      height: initial.height,
+      zIndex: 100,
+    })
+    .to(img, {
+      width: "90vw",
+      height: "50vw", // 16:9 ratio, adjust as needed
+      borderRadius: 0,
+      boxShadow: "0 8px 32px rgba(75, 0, 163, 0.1)",
+      ease: "power2.inOut",
+    });
+
+    // Return to normal flow after animation
+    tl.set(img, {
+      clearProps: "all",
+      position: "relative",
+      left: "auto",
+      top: "auto",
+      xPercent: 0,
+      yPercent: 0,
+      zIndex: 1,
+    });
+  }
+
+  if (document.readyState === "complete") {
+    setupVideoAnimation();
+  } else {
+    window.addEventListener("load", setupVideoAnimation);
+  }
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
+    setupVideoAnimation();
+  });
+</script>
+
+<style>
+  .video-section {
+    position: relative;
+    z-index: 2;
+    background: white;
+    overflow: visible;
+  }
+  .video-scroll-container {
+    position: relative;
+    width: 100%;
+  }
+  .video-scroll-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+  .video-scroll-img {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(75, 0, 163, 0.1);
+    display: block;
+    will-change: transform, width, height, border-radius;
+  }
+  .video-spacer {
+    width: 100%;
+    height: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+</style> -->

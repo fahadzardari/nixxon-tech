@@ -57,7 +57,7 @@ const processes = [
           description={process.description}
           icon={process.icon}
           bgArt={process.bgArt}
-          // className="process-card"
+          className="process-card"
         />
       ))
     }
@@ -69,14 +69,14 @@ const processes = [
     /* Needed for child selector */
   }
 
-.process-grid  .process-card {
+  .process-grid .process-card {
     transition:
       transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
       box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
   }
 
-.process-grid  .process-card:hover {
+  .process-grid .process-card:hover {
     transform: scale(1.07) !important;
     z-index: 2;
     box-shadow: 0 8px 32px rgba(128, 103, 206, 0.18);

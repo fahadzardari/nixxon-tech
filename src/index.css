@@ -25,3 +25,9 @@ body {
 .bg-button-gradient {
   background: linear-gradient(90deg, #9d7eff 0%, #8067ce 100%);
 }
+
+.gradient-text {
+  background: linear-gradient(90deg, #9d7eff 0%, #8067ce 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

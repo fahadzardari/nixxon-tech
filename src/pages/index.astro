@@ -9,11 +9,18 @@ import Ideas from "../components/home/ideas.astro";
 import Experience from "../components/home/Experience.astro";
 import Portfolio from "../components/home/Portfolio.astro";
 import Vision from "../components/home/Vision.astro";
+import OurServices from "../components/home/OurServices.astro";
+import Video from "../components/home/Video.astro";
+import Navbar from "../components/common/Navbar.astro";
+import HeroHome from "../components/home/HeroHome.astro";
 ---
 
 <Layout title="Home - Nixxon Tech">
-  <p class="bg-primary h-[200vh]">kljsdf</p>
+  <Navbar />
+  <HeroHome />
   <Experience />
+  <OurServices />
+  <Video />
   <Vision />
   <Ideas />
   <OurProcess />
