@@ -5,8 +5,10 @@ import CommonButton from "./CommonButton.astro";
 ---
 
 <aside id="wrapper-sidebar">
-  
-  <div id="sidebar" class="fixed top-0 left-0 z-50 h-screen w-[88px] bg-[#f8f8f8]">
+  <div
+    id="sidebar"
+    class="fixed top-0 left-0 z-50 h-screen w-[88px] bg-[#f8f8f8]"
+  >
     <svg
       width="13"
       height="52"
@@ -21,26 +23,29 @@ import CommonButton from "./CommonButton.astro";
     <div class="absolute right-2 h-[95%] w-[1px] bg-[#DADEFF]"></div>
     <div class="absolute top-4 right-2 h-[10%] w-[1.5px] bg-[#606DD1]"></div>
   </div>
-  
 </aside>
 
-<nav class="fixed top-0 left-[88px] right-0  z-50 flex w-[calc(100vw - 88px)]">
+<nav class="w-[calc(100vw - 88px)] fixed top-0 right-0 left-[88px] z-50 flex">
   <!-- Sidebar - stays full height -->
 
   <!-- Top Nav - only as tall as its content -->
-  <div class="flex w-full justify-between ">
+  <div class="flex w-full justify-between">
     <div
       id="nav-container"
-      class="flex items-center   bg-[#f8f8f8] px-6 py-2 transition-all duration-300"
+      class="flex items-center bg-[#f8f8f8] shadow-xs px-6 py-2 transition-all duration-300"
     >
-      <div class="flex items-center mr-12">
+      <div class="mr-12 flex items-center">
         <Image src={Logo} alt="Nixxon Tech Logo" class="h-auto w-[170px]" />
       </div>
 
       <ul
-        class="hidden text-nowrap text-[#000000] items-center gap-x-12 font-medium  md:flex"
+        class="hidden items-center gap-x-12 font-medium text-nowrap text-[#000000] md:flex"
       >
-        <li><a href="/" class="text-white rounded-full px-3 py-2 bg-[#9D7EFF]">Home</a></li>
+        <li>
+          <a href="/" class="rounded-full bg-[#9D7EFF] px-3 py-2 text-white"
+            >Home</a
+          >
+        </li>
         <li><a href="/about" class="hover:text-black">About Us</a></li>
         <li class="group relative">
           <button class="flex items-center space-x-1 hover:text-black">
@@ -100,7 +105,6 @@ import CommonButton from "./CommonButton.astro";
   </div>
 </nav>
 
-
 <script>
   import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
 
@@ -141,14 +145,14 @@ import CommonButton from "./CommonButton.astro";
     )
       .fromTo(
         innerButton,
-        { display: 'none', opacity: 0, pointerEvents: "none" },
+        { display: "none", opacity: 0, pointerEvents: "none" },
         {
           opacity: 1,
           pointerEvents: "auto",
           duration: 0.2,
           marginTop: "1rem",
           marginBottom: "1rem",
-          display: 'block'
+          display: "block",
         },
       )
       .fromTo(
@@ -157,9 +161,8 @@ import CommonButton from "./CommonButton.astro";
         { opacity: 0, pointerEvents: "none", display: "none" },
       );
 
-          
-     const sidebar = document.getElementById("wrapper-sidebar");
-     const nav = document.querySelector("nav"); // add this
+    const sidebar = document.getElementById("wrapper-sidebar");
+    const nav = document.querySelector("nav"); // add this
     if (sidebar) {
       ScrollTrigger.create({
         trigger: sidebar,
@@ -182,8 +185,9 @@ import CommonButton from "./CommonButton.astro";
           nav.style.width = "";
           nav.classList.remove("w-full");
           nav.classList.add("left-[88px]", "w-[calc(100vw - 88px)]");
-        }
+        },
       });
     }
   });
 </script>
+

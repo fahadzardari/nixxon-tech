@@ -7,27 +7,24 @@ import Image from "astro/components/Image.astro";
 <section
   class="hero-section relative ml-[88px] h-screen overflow-hidden rounded-l-3xl bg-[#4B00A3] pt-32 text-white"
 >
-  <div
-    class="  flex flex-row  pl-20 pt-16 h-full justify-between "
-  >
+  <div class="flex h-full flex-row justify-between pt-16 pl-20">
     <!-- Left -->
-    <div class="mt-auto pb-40 w-[60%] z-10">
-      <span class="mb-4 block h-[2px] w-10 bg-white"></span>
-      <h1 class="text-[86px] leading-[100px] font-bold mb-4">
-        Shaping the Future 
-        of How Your Brand is 
-        Seen.
+    <div class="z-10 mt-auto w-[60%] pb-40">
+      <span class="mb-4 block h-[2px]  w-10 bg-white"></span>
+      <h1
+        class="animated-gradient-text mb-4 text-[86px] leading-[100px] font-bold"
+      >
+        Shaping the Future of How Your Brand is Seen.
       </h1>
-      <p class="font-medium text-xl tracking-[1px] leading-6 mb-8">
+      <p class="mb-8 text-xl leading-6 font-medium tracking-[1px]">
         We have your digital solution on web design, mobile app development,
         SEO, branding & digital marketing
       </p>
       <div class="flex items-center space-x-4">
-        <CommonButton className="text-lg font-semibold"
-        >
+        <CommonButton className="text-lg font-semibold">
           Get a proposal
         </CommonButton>
-       <a class="text-lg font-semibold leading-6 flex items-center">
+        <a class="flex items-center text-lg leading-6 font-semibold">
           <span>Portfolio</span>
           <span>→</span>
         </a>
@@ -35,12 +32,110 @@ import Image from "astro/components/Image.astro";
     </div>
 
     <!-- Right -->
-    <div class="flex-1 w-[40%] z-0">
+    <div class="z-0 w-[40%] flex-1">
       <Image
+        id="hand-tilt"
         src={handImage}
         alt="Hand Image"
-        class=""
+        class="cursor-pointer"
       />
-    </div>  
+    </div>
   </div>
 </section>
+
+<script>
+  import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Hand tilt effect (keep your existing code)
+    const hand = document.getElementById("hand-tilt");
+    if (hand) {
+      hand.style.transition = "transform 0.3s";
+      hand.addEventListener("mouseenter", () => {
+        hand.style.transform = "scale(1.08)";
+      });
+      hand.addEventListener("mousemove", (e) => {
+        const rect = hand.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * 18;
+        const rotateY = ((x - centerX) / centerX) * 18;
+        hand.style.transform = `scale(1.08) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      hand.addEventListener("mouseleave", () => {
+        hand.style.transition = "transform 0.5s";
+        hand.style.transform = "scale(1) rotateX(0deg) rotateY(0deg)";
+        setTimeout(() => {
+          hand.style.transition = "transform 0.3s";
+        }, 500);
+      });
+    }
+
+    // GSAP entrance animation for hero content
+    // gsap.from(".hero-section .z-10", {
+    //   y: 60,
+    //   opacity: 0,
+    //   duration: 1,
+    //   ease: "power3.out",
+    //   scrollTrigger: {
+    //     trigger: ".hero-section",
+    //     start: "top 80%",
+    //   },
+    // });
+
+    gsap.from("#hand-tilt", {
+      x: 80,
+      opacity: 0,
+      duration: 1.1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".hero-section",
+        start: "top 80%",
+      },
+    });
+
+    gsap.to("#hand-tilt", {
+      y: -40,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero-section",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  });
+</script>
+
+<style>
+  .animated-gradient-text {
+    background: linear-gradient(
+      90deg,
+      #fff 0%,
+      #7f5cff 30%,
+      #00e0ff 60%,
+      #ff6bcb 100%
+    );
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: gradient-move 3s linear infinite;
+  }
+  @keyframes gradient-move {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+</style>
+
+<!-- cubic-bezier(.22,1,.36,1), box-shadow 0.3s cubic-bezier(.22,1,.36,1) 
+ 
+ cubic-bezier(.22,1,.36,1), box-shadow 0.5s cubic-bezier(.22,1,.36,1)
+  cubic-bezier(.22,1,.36,1), box-shadow 0.3s cubic-bezier(.22,1,.36,1)
+-->

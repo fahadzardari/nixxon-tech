@@ -15,7 +15,7 @@ import TestimonialCard from "./TestimonialCard.astro";
           name="Jane Doe"
           details="CEO, Tech Innovations"
           description="Nixxon Tech transformed our digital presence with their innovative solutions and exceptional service. Their team is highly skilled and dedicated to delivering results."
-          avatar="../../assets/testimonials/jane-doe.jpg"
+          avatar="../../assets/testimonials/1.png"
         />
       </div>
       <div class="swiper-slide">
@@ -57,12 +57,19 @@ import TestimonialCard from "./TestimonialCard.astro";
 <script>
   import Swiper from "swiper";
   import "swiper/css";
+import { Autoplay } from "swiper/modules";
+  
 
+Swiper.use([Autoplay]);
   var swiper = new Swiper(".mySwiper", {
     slidesPerView: 3,
     spaceBetween: 80,
     centeredSlides: true,
     loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
     keyboard: {
       enabled: true,
     },
@@ -70,7 +77,7 @@ import TestimonialCard from "./TestimonialCard.astro";
 </script>
 
 <style>
-  .swiper-slide {
+  :global(.swiper-slide) {
     transition:
       transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
       box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
@@ -80,25 +87,44 @@ import TestimonialCard from "./TestimonialCard.astro";
     z-index: 1;
   }
 
-  .swiper-slide-active {
-    transform: scale(1.07);
+  :global(.swiper-slide-active) {
     opacity: 1;
     z-index: 2;
   }
 
-  .swiper-slide-active > article {
-    background: linear-gradient(135deg, #f3e8ff, #e0d7ff);
-    box-shadow: 0 8px 32px rgba(128, 103, 206, 0.18);
+  :global(.font-roboto) {
+    transition:
+      background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .swiper-slide-active .font-roboto {
+  :global(.swiper-slide-active > article) {
+    background: linear-gradient(135deg, #f3e8ff, #e0d7ff);
+    box-shadow: 0 8px 32px rgba(128, 103, 206, 0.18);
+    transform: scale(1.1);
+  }
+
+  :global(.swiper-slide-active .font-roboto) {
     background: linear-gradient(90deg, #9d7eff, #8067ce);
     color: #fff;
     box-shadow: 0 8px 32px rgba(128, 103, 206, 0.18);
   }
 
-  .swiper-slide-active .font-roboto p,
-  .swiper-slide-active .font-roboto span {
+  :global(
+    .swiper-slide-active .font-roboto p,
+    .swiper-slide-active .font-roboto span
+  ) {
+    color: #fff !important;
+  }
+
+  :global(
+    .swiper-slide-active .font-roboto p,
+    .swiper-slide-active .font-roboto span,
+    .swiper-slide-active
+  ) {
+    transition: all 0.3s ease;
     color: #fff !important;
   }
 </style>

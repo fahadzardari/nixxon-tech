@@ -95,6 +95,7 @@ const features = [
 
     const section = document.querySelector(".vision-section");
     const featureItems = gsap.utils.toArray(".feature-item");
+    const nextSection = document.querySelector(".ideas-section"); // Make sure this selector matches your next section
 
     gsap.set(featureItems, { opacity: 0, y: 50 });
 
@@ -106,6 +107,7 @@ const features = [
         trigger: section,
         start: "top top",
         end: `+=${pinDistance}`,
+        
         scrub: 1,
         pin: true,
         pinSpacing: true,

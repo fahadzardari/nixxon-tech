@@ -1,14 +1,16 @@
 ---
+import DefaultImage from "../../assets/home/testimonials/1.png";
+import Image from "astro/components/Image.astro";
 const { name, details, description, avatar, class: className } = Astro.props;
 ---
 
 <article
   class={`font-roboto mx-auto flex max-w-xl flex-col min-w-[450px] min-h-[408px] rounded-2xl bg-[#f8f8f8] p-8 ${className}`}
 >
-  <img
-    src={avatar}
+  <Image
+    src={DefaultImage}
     alt={name}
-    class="border-gradient-start mx-auto mb-6 h-20 w-20 rounded-full border-4 object-cover shadow"
+    class="mx-auto mb-6 h-20 w-20 rounded-full  object-cover shadow"
     loading="lazy"
   />
   <p class="mb-4 text-base leading-8 font-medium text-[#666666]">
