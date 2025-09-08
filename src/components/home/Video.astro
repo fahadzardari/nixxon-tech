@@ -3,134 +3,112 @@ import Image from "astro/components/Image.astro";
 import VideoSub from "../../assets/home/services/video-sub.png";
 ---
 
-<section class="video-section py-32 relative">
+<section class="video-section bg-[#f8f8f8]">
   <div class="video-scroll-container">
     <div class="video-scroll-wrapper">
       <Image
         src={VideoSub}
         alt="Video Subscription"
-        class="video-scroll-img mx-auto w-full rounded-lg"
+        class="video-scroll-img mx-auto rounded-lg"
         loading="eager"
       />
     </div>
   </div>
-  <div class="video-spacer"></div>
+  <!-- Add a spacer div to create distance between sections -->
+  <div class="section-spacer"></div>
 </section>
 
-<!-- <script>
-  import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
 
-  function setupVideoAnimation() {
-    const img = document.querySelector(".video-scroll-img");
-    const wrapper = document.querySelector(".video-scroll-wrapper");
-    const container = document.querySelector(".video-scroll-container");
-    const spacer = document.querySelector(".video-spacer");
+  document.addEventListener("DOMContentLoaded", () => {
+    const videoWrapper = document.querySelector(".video-scroll-wrapper");
 
-    if (!img || !container || !spacer || !wrapper) return;
-
-    // Reset styles
-    gsap.set(img, { clearProps: "all" });
-
-    // Get initial position and size
-    const rect = img.getBoundingClientRect();
-    const scrollY = window.scrollY || window.pageYOffset;
-    const initial = {
-      width: rect.width,
-      height: rect.height,
-      top: rect.top + scrollY,
-      left: rect.left,
-      x: rect.left + rect.width / 2,
-      y: rect.top + scrollY + rect.height / 2,
-    };
-
-    // Set spacer height to viewport height to push next section down
-    spacer.style.height = "120vh";
-
-    // Animate from center using fixed positioning
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: "top top",
-        end: "+=100vh",
-        scrub: true,
-        pin: container,
-        anticipatePin: 1,
-        markers: true,
-        id: "video-grow",
-      }
-    });
-
-    tl.set(img, {
-      position: "fixed",
-      left: initial.x,
-      top: initial.y,
+    // Ensure the wrapper is centered and responsive
+    gsap.set(videoWrapper, {
+      width: "80vw",
+      height: "80vh",
       xPercent: -50,
       yPercent: -50,
-      width: initial.width,
-      height: initial.height,
-      zIndex: 100,
-    })
-    .to(img, {
-      width: "90vw",
-      height: "50vw", // 16:9 ratio, adjust as needed
-      borderRadius: 0,
-      boxShadow: "0 8px 32px rgba(75, 0, 163, 0.1)",
+      top: "50%",
+      left: "50%",
+      position: "absolute",
+    });
+
+    // Timeline for zoom in and zoom out
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".video-section",
+        start: "top top",
+        end: () => "+=" + window.innerHeight * 4, // Increased for more scroll space
+        scrub: true,
+        pin: true,
+        pinSpacing: true, // Important to create proper spacing
+      },
+    });
+
+    // Step 1: scale up to fullscreen
+    tl.to(videoWrapper, {
+      width: "100vw",
+      height: "100vh",
       ease: "power2.inOut",
     });
 
-    // Return to normal flow after animation
-    tl.set(img, {
-      clearProps: "all",
-      position: "relative",
-      left: "auto",
-      top: "auto",
-      xPercent: 0,
-      yPercent: 0,
-      zIndex: 1,
+    // Step 2: hold at fullscreen for longer (increase duration here)
+    tl.to(videoWrapper, {
+      width: "100vw",
+      height: "100vh",
+      duration: 1.5, // Increase this value for a longer hold
+      ease: "none",
     });
-  }
 
-  if (document.readyState === "complete") {
-    setupVideoAnimation();
-  } else {
-    window.addEventListener("load", setupVideoAnimation);
-  }
-  window.addEventListener("resize", () => {
-    ScrollTrigger.refresh();
-    setupVideoAnimation();
+    // Step 3: scale back down
+    tl.to(videoWrapper, {
+      width: "80vw",
+      height: "80vh",
+      ease: "power2.inOut",
+    });
+
+    // Add a delay at the end before unpinning
+    tl.to({}, { duration: 1 });
   });
 </script>
 
 <style>
   .video-section {
     position: relative;
-    z-index: 2;
-    background: white;
-    overflow: visible;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 100; /* Higher than Vision section */
+    background: #f8f8f8; /* Background to hide content behind */
   }
+
   .video-scroll-container {
     position: relative;
     width: 100%;
+    height: 100%;
   }
+
   .video-scroll-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 16px;
   }
+
   .video-scroll-img {
     width: 100%;
-    max-width: 900px;
-    border-radius: 1.5rem;
-    box-shadow: 0 8px 32px rgba(75, 0, 163, 0.1);
-    display: block;
-    will-change: transform, width, height, border-radius;
+    height: 100%;
+    object-fit: cover;
   }
-  .video-spacer {
+
+  /* Add this section spacer */
+  .section-spacer {
     width: 100%;
-    height: 0;
-    pointer-events: none;
-    user-select: none;
+    height: 5vh; /* Extra space after animation */
   }
-</style> -->
+</style>

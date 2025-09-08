@@ -2,7 +2,7 @@
 import Logo from "../../assets/logo-alternate.png";
 import Image from "astro/components/Image.astro";
 import Paragraph from "../common/Paragraph.astro";
-
+import ContactModal from "../common/ContactModal.astro";
 const menuLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
@@ -22,10 +22,13 @@ const serviceLinks = [
 ---
 
 <footer
-  class="bg-footer-bg internal-padding flex flex-col gap-y-14 pt-12 pb-8 text-white"
+  class="flex-col gap-y-14 rounded-t-[4rem] bg-[#372962] px-[90px] pt-24 pb-11 text-white"
 >
-  <div class="flex flex-row items-center justify-between">
-    <Image src={Logo} alt="Nixxon Tech Logo" class="h-12 w-auto" />
+  <div class="flex flex-row items-center justify-between pb-14">
+    <p class="list-disc">
+      <span class="mr-2">•</span> Share your creative ideas with us and get back
+      beautiful designs that impress and engage.
+    </p>
     <div class="flex flex-row items-center gap-x-6">
       <a href="#" class="social-icon"
         ><svg
@@ -155,88 +158,103 @@ const serviceLinks = [
     </div>
   </div>
 
-  <div class="flex flex-row justify-between gap-x-12">
-    <span class="w-[28%]">
-      <Paragraph class="max-w-[380px]">
-        Nixxon Australia is a premier creative agency specializing in innovative
-        design, cutting-edge development, and captivating animation. We
-        transform ideas into impactful digital experiences.
-      </Paragraph>
-    </span>
+  <div class="group chat-cta mb-8 flex cursor-pointer items-center gap-x-4">
+    <p
+      class="chat-cta-text border-b-[5px] border-b-white pb-2 text-[110px] font-medium transition-all duration-300"
+    >
+      Hey, let's Have a Chat
+    </p>
+    <svg
+      width="70"
+      height="69"
+      viewBox="0 0 70 69"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="chat-cta-arrow -mt-2 transition-transform duration-300"
+    >
+      <path
+        d="M62.6083 0.0546875C63.452 0.0488774 64.2886 0.211063 65.0692 0.53125C65.8499 0.851474 66.5594 1.32326 67.1561 1.91992C67.7528 2.51658 68.2246 3.22617 68.5448 4.00684C68.865 4.78746 69.0272 5.62407 69.0214 6.46777L68.6542 56.0039C68.6229 57.341 68.0666 58.612 67.1063 59.543C66.1459 60.474 64.8579 60.9908 63.5204 60.9805C62.1829 60.9701 60.9028 60.434 59.9569 59.4883C59.011 58.5424 58.4751 57.2615 58.4647 55.9238L58.7528 17.5518L9.51648 66.7881C8.56089 67.7436 7.26431 68.2803 5.91296 68.2803C4.56181 68.2802 3.26593 67.7434 2.31042 66.7881C1.35483 65.8325 0.81727 64.536 0.817261 63.1846C0.817261 61.8331 1.35483 60.5367 2.31042 59.5811L51.5643 10.3271L13.1552 10.6084C12.4797 10.6241 11.8078 10.5052 11.1786 10.2588C10.5494 10.0124 9.97534 9.64319 9.49011 9.17285C9.00486 8.70246 8.61831 8.13987 8.35242 7.51855C8.08655 6.89727 7.94654 6.22947 7.94128 5.55371C7.93603 4.87791 8.06498 4.20741 8.32117 3.58203C8.57734 2.95679 8.95571 2.38893 9.43347 1.91113C9.91134 1.43325 10.48 1.05503 11.1053 0.798828C11.7306 0.542744 12.4004 0.413719 13.076 0.418945L13.0721 0.421875L62.6083 0.0546875Z"
+        fill="white"></path>
+    </svg>
+  </div>
 
-    <div class="">
-      <h4 class="text-xl">Contact</h4>
-      <div class="mt-4 flex flex-col gap-y-4">
-        <Paragraph>Troy St. Ste B, Dothan, AL 36303</Paragraph>
-        <span class="flex flex-row items-center gap-x-2">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 20 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M20 4.608V12.75C20 14.483 18.6435 15.8992 16.9344 15.9949L16.75 16H3.25C1.51697 16 0.10075 14.6435 0.00514007 12.9344L0 12.75V4.608L9.652 9.6644C9.87 9.7785 10.13 9.7785 10.348 9.6644L20 4.608ZM3.25 0H16.75C18.4347 0 19.8201 1.28191 19.9838 2.92355L10 8.1533L0.0161901 2.92355C0.17386 1.34271 1.46432 0.0954499 3.06409 0.00522995L3.25 0Z"
-              fill="white"></path>
-          </svg>
-          <Paragraph> info@nixxonAustralia.com </Paragraph>
-        </span>
-        <span class="flex flex-row items-center gap-x-2">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 12 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9.75 0C10.9926 0 12 1.00736 12 2.25V17.75C12 18.9926 10.9926 20 9.75 20H2.25C1.00736 20 0 18.9926 0 17.75V2.25C0 1.00736 1.00736 0 2.25 0H9.75ZM7.25 16H4.75C4.3358 16 4 16.3358 4 16.75C4 17.1642 4.3358 17.5 4.75 17.5H7.25C7.6642 17.5 8 17.1642 8 16.75C8 16.3358 7.6642 16 7.25 16Z"
-              fill="white"></path>
-          </svg>
-          <Paragraph> +1 (334) 209 4814 </Paragraph>
-        </span>
+  <div class="flex flex-row justify-end gap-x-12">
+    <div class="mt-4 flex gap-x-12 text-[22px]">
+      <div class="">
+        <p class="gradient-text">Drop a message</p>
+        <a class="text-[32px]" href="mailto:info@nixxonaustralia.com">
+          info@nixxonaustralia.com
+        </a>
+      </div>
+      <div class="">
+        <p class="gradient-text">Start a Conversation</p>
+        <a class="text-[32px]" href="phone:+112345678910">
+          (+1) 123 456 789 10
+        </a>
       </div>
     </div>
 
-    <div>
-      <h4 class="text-xl">Menu</h4>
-      <ul class="mt-4 flex flex-col gap-y-2">
-        {
-          menuLinks.map((link) => (
-            <li>
-              <a href={link.href} class="text-base text-white hover:underline">
-                <Paragraph>{link.label}</Paragraph>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+    <!-- menu column -->
+    <div class="ml-auto flex gap-x-20">
+      <div>
+        <h4 class="text-xl">Menu</h4>
+        <ul class="mt-4 flex flex-col gap-y-2">
+          {
+            menuLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-base text-white hover:underline"
+                >
+                  <Paragraph>{link.label}</Paragraph>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
 
-    <!-- Services Column -->
-    <div>
-      <h4 class="text-xl">Services</h4>
-      <ul class="mt-4 flex flex-col gap-y-2">
-        {
-          serviceLinks.map((link) => (
-            <li>
-              <a href={link.href} class="text-base text-white hover:underline">
-                <Paragraph>{link.label}</Paragraph>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      <!-- Services Column -->
+      <div>
+        <h4 class="text-xl">Services</h4>
+        <ul class="mt-4 flex flex-col gap-y-2">
+          {
+            serviceLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-base text-white hover:underline"
+                >
+                  <Paragraph>{link.label}</Paragraph>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </div>
-  <div class="mt-4 flex flex-row items-center justify-between">
-    <Paragraph> Copyright © 2025, Al Hlol All Rights Reserved </Paragraph>
-    <span class="flex flex-row items-center gap-x-8">
-      <Paragraph> Terms and Conditions </Paragraph>
-      <Paragraph> Privacy Policy </Paragraph>
-    </span>
+  <div
+    class="mt-7 flex flex-row items-center justify-between border-t border-t-[#9b94b1] pt-11 text-[22px]"
+  >
+    <div class="">
+      <p class="gradient-text">
+        Copyright © Nixxon Australia 2025. All Rights Reserved
+      </p>
+      <p class="">
+        <a class="cursor-pointer hover:underline">Privacy Policy</a> |
+        <a class="cursor-pointer hover:underline">Terms & Conditions</a>
+      </p>
+    </div>
+    <div class="">
+      <p class="gradient-text">Payment Methods</p>
+      <p class="">
+        Visa | Mastercard | Discover | Paypal | American | Experess
+      </p>
+    </div>
   </div>
+
+  <ContactModal />
 </footer>
 
 <style>
@@ -260,5 +278,51 @@ const serviceLinks = [
   .social-icon:hover svg {
     transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     filter: drop-shadow(0 0 3px #9d7eff);
+  }
+
+  // ...existing code...
+.chat-cta-text {
+    background: linear-gradient(90deg, #9d7eff 10%, #fff 90%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    transition:
+      background-position 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      text-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+  }
+
+  .chat-cta:hover .chat-cta-text,
+  .chat-cta:focus .chat-cta-text,
+  .chat-cta:active .chat-cta-text {
+    background-position: 100% 50%;
+    text-shadow:
+      0 4px 24px #9d7eff55,
+      0 1px 0 #fff;
+    transform: scale(1.025) rotate(-1deg);
+  }
+
+  .chat-cta-arrow {
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .chat-cta:hover .chat-cta-arrow,
+  .chat-cta:focus .chat-cta-arrow,
+  .chat-cta:active .chat-cta-arrow {
+    transform: translateX(18px) scale(1.12) rotate(8deg);
+    filter: drop-shadow(0 0 8px #9d7eff88);
+    /* subtle glow */
+  }
+
+  @media (max-width: 900px) {
+    .chat-cta-text {
+      font-size: 48px;
+    }
   }
 </style>

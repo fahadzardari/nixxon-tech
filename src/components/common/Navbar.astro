@@ -32,7 +32,7 @@ import CommonButton from "./CommonButton.astro";
   <div class="flex w-full justify-between">
     <div
       id="nav-container"
-      class="flex items-center bg-[#f8f8f8] shadow-xs px-6 py-2 transition-all duration-300"
+      class="flex items-center bg-[#f8f8f8] px-6 py-2 shadow-xs transition-all duration-300"
     >
       <div class="mr-12 flex items-center">
         <Image src={Logo} alt="Nixxon Tech Logo" class="h-auto w-[170px]" />
@@ -138,7 +138,7 @@ import CommonButton from "./CommonButton.astro";
         width: "100%",
         borderRadius: 0,
         ease: "power2.inOut",
-        duration: 0.5,
+        duration: 0.3,
         borderBottom: "1px",
         borderBottomColor: "black",
       },
@@ -168,7 +168,7 @@ import CommonButton from "./CommonButton.astro";
         trigger: sidebar,
         start: "top top",
         endTrigger: ".our-services",
-        end: "top top",
+        end: "bottom top",
         pin: true,
         // pinSpacing: false, // No extra space below
         anticipatePin: 1,
@@ -178,6 +178,7 @@ import CommonButton from "./CommonButton.astro";
           nav.style.width = "100vw";
           nav.classList.remove("left-[88px]", "w-[calc(100vw - 88px)]");
           nav.classList.add("w-full");
+          sidebar.style.display = "none"; // Hide sidebar when unpinned
         },
         onEnterBack: () => {
           // Restore navbar width when scrolling back up
@@ -185,9 +186,9 @@ import CommonButton from "./CommonButton.astro";
           nav.style.width = "";
           nav.classList.remove("w-full");
           nav.classList.add("left-[88px]", "w-[calc(100vw - 88px)]");
+          sidebar.style.display = ""; // Show sidebar again when scrolling back up
         },
       });
     }
   });
 </script>
-
