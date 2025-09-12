@@ -3,7 +3,7 @@ const { className } = Astro.props;
 ---
 
 <button
-  class={`relative overflow-hidden animated-btn text-lg text-white bg-button-gradient py-[10px] px-10 rounded-3xl cursor-pointer ${className}`}
+  class={`relative overflow-hidden capitalize animated-btn md:text-sm xl:text-base 2xl:text-lg text-white bg-button-gradient py-[10px] px-10 rounded-3xl cursor-pointer ${className}`}
 >
   <span class="button-text"><slot /></span>
 </button>

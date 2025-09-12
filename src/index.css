@@ -1,7 +1,7 @@
 /* import font poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Quicksand:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Quicksand:wght@300..700&display=swap");
 @import "tailwindcss";
 
 body {
@@ -17,12 +17,14 @@ body {
   --font-manrope: "Manrope", sans-serif;
   --color-gradient-start: #9d7eff;
   --color-gradient-end: #8067ce;
+  --breakpoint-3xl: 1900px;
 }
 
 .internal-padding {
-  padding-left: 11%;
-  padding-right: 11%;
+  padding-left: 8dvw;
+  padding-right: 8dvw;
 }
+
 
 .bg-button-gradient {
   background: linear-gradient(90deg, #9d7eff 0%, #8067ce 100%);
@@ -32,4 +34,15 @@ body {
   background: linear-gradient(90deg, #9d7eff 0%, #8067ce 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+
+
+
+@media screen and (min-width: 1900px) {
+ .internal-padding {
+  padding-left: 11dvw;
+  padding-right: 11dvw;
+}
+  
 }

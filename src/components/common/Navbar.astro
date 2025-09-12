@@ -7,7 +7,7 @@ import CommonButton from "./CommonButton.astro";
 <aside id="wrapper-sidebar">
   <div
     id="sidebar"
-    class="fixed top-0 left-0 z-50 h-screen w-[88px] bg-[#f8f8f8]"
+    class="fixed top-0 left-0 z-50 h-screen w-[65px] bg-[#f8f8f8] xl:w-[88px]"
   >
     <svg
       width="13"
@@ -25,24 +25,31 @@ import CommonButton from "./CommonButton.astro";
   </div>
 </aside>
 
-<nav class="w-[calc(100vw - 88px)] fixed top-0 right-0 left-[88px] z-50 flex">
-  <!-- Sidebar - stays full height -->
-
-  <!-- Top Nav - only as tall as its content -->
+<nav
+  class="fixed top-0 right-0 left-[65px] z-50 flex w-[calc(100vw-65px)] xl:left-[88px] xl:w-[calc(100vw-88px)]"
+>
   <div class="flex w-full justify-between">
     <div
       id="nav-container"
-      class="flex items-center bg-[#f8f8f8] px-6 py-2 shadow-xs transition-all duration-300"
+      class="flex items-center bg-[#f8f8f8] px-3 py-1.5 shadow-xs transition-all duration-300 md:px-4 md:py-2 lg:px-4 lg:py-2"
     >
-      <div class="mr-12 flex items-center">
-        <Image src={Logo} alt="Nixxon Tech Logo" class="h-auto w-[170px]" />
+      <div
+        class="flex max-w-[100px] min-w-[100px] items-center md:mr-6 lg:mr-8 xl:mr-10 xl:min-w-[120px] 2xl:mr-12 2xl:min-w-[170px]"
+      >
+        <Image
+          src={Logo}
+          alt="Nixxon Tech Logo"
+          class="h-auto w-full max-w-[100px] min-w-[100px] xl:min-w-[120px] 2xl:min-w-[170px]"
+        />
       </div>
 
       <ul
-        class="hidden items-center gap-x-12 font-medium text-nowrap text-[#000000] md:flex"
+        class="3xl:text-xl hidden items-center gap-x-4 text-sm font-medium text-nowrap text-[#000000] md:flex md:gap-x-6 md:text-base lg:gap-x-8 lg:text-[15px] xl:gap-x-10 2xl:gap-x-12 2xl:text-lg"
       >
         <li>
-          <a href="/" class="rounded-full bg-[#9D7EFF] px-3 py-2 text-white"
+          <a
+            href="/"
+            class="3xl:px-4 3xl:py-3 rounded-full bg-[#9D7EFF] px-2.5 py-1.5 text-sm text-white md:text-base xl:px-3 xl:py-2"
             >Home</a
           >
         </li>
@@ -51,7 +58,7 @@ import CommonButton from "./CommonButton.astro";
           <button class="flex items-center space-x-1 hover:text-black">
             <span>Services</span>
             <svg
-              class="h-4 w-4"
+              class="h-3.5 w-3.5 md:h-4 md:w-4"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -64,22 +71,27 @@ import CommonButton from "./CommonButton.astro";
             </svg>
           </button>
           <ul
-            class="absolute left-0 mt-2 hidden w-40 rounded-lg border bg-[#f8f8f8] shadow-lg group-hover:block"
+            class="absolute left-0 mt-2 hidden w-36 rounded-lg border bg-[#f8f8f8] text-sm shadow-lg group-hover:block md:w-40 md:text-base"
           >
             <li>
-              <a href="/services/web" class="block px-4 py-2 hover:bg-gray-100"
+              <a
+                href="/services/web"
+                class="block px-3 py-1.5 hover:bg-gray-100 md:px-4 md:py-2"
                 >Web Design</a
               >
             </li>
             <li>
-              <a href="/services/seo" class="block px-4 py-2 hover:bg-gray-100"
+              <a
+                href="/services/seo"
+                class="block px-3 py-1.5 hover:bg-gray-100 md:px-4 md:py-2"
                 >SEO</a
               >
             </li>
             <li>
               <a
                 href="/services/branding"
-                class="block px-4 py-2 hover:bg-gray-100">Branding</a
+                class="block px-3 py-1.5 hover:bg-gray-100 md:px-4 md:py-2"
+                >Branding</a
               >
             </li>
           </ul>
@@ -91,16 +103,20 @@ import CommonButton from "./CommonButton.astro";
         id="inner-button"
         class="pointer-events-none my-auto ml-auto opacity-0 transition-opacity duration-300"
       >
-        <CommonButton className="my-auto mr-4">
+        <CommonButton
+          className="my-auto mr-2 px-2.5 py-1.5 text-sm md:mr-4 xl:px-4 xl:py-2 xl:text-base"
+        >
           Book A discovery call
         </CommonButton>
       </div>
     </div>
 
-    <!-- Outer button sits under nav if needed -->
     <div id="outer-button" class="my-auto transition-opacity duration-300">
-      <CommonButton className="my-auto mr-4">Book A discovery call</CommonButton
+      <CommonButton
+        className="my-4  mr-2 px-2.5 py-1.5 text-sm md:mr-8 md:px-3 md:py-2 md:text-base lg:px-4 xl:px-6"
       >
+        Book A discovery call
+      </CommonButton>
     </div>
   </div>
 </nav>
@@ -115,22 +131,20 @@ import CommonButton from "./CommonButton.astro";
 
     if (!navContainer || !innerButton || !outerButton) return;
 
-    // Create a timeline for smooth animation
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".hero-section",
-        start: "bottom 10%",
+        start: "bottom 5%",
         end: "bottom top",
         scrub: 0.01,
         toggleActions: "play none none reverse",
       },
     });
 
-    // Animate the width and toggle button visibility
     tl.fromTo(
       navContainer,
       {
-        width: "50%",
+        width: "60%",
         borderTopRightRadius: "-50px",
         borderBottomRightRadius: "1.5rem",
       },
@@ -162,7 +176,7 @@ import CommonButton from "./CommonButton.astro";
       );
 
     const sidebar = document.getElementById("wrapper-sidebar");
-    const nav = document.querySelector("nav"); // add this
+    const nav = document.querySelector("nav");
     if (sidebar) {
       ScrollTrigger.create({
         trigger: sidebar,
@@ -170,23 +184,29 @@ import CommonButton from "./CommonButton.astro";
         endTrigger: ".our-services",
         end: "bottom top",
         pin: true,
-        // pinSpacing: false, // No extra space below
         anticipatePin: 1,
         onLeave: () => {
-          // Expand navbar to full width when sidebar unpins
-          nav.style.left = "0";
+          // Detect if screen is xl or above (using 1280px as Tailwind's xl)
+          const isXL = window.innerWidth >= 1280;
+          nav.style.left = isXL ? "0" : "0";
           nav.style.width = "100vw";
-          nav.classList.remove("left-[88px]", "w-[calc(100vw - 88px)]");
+          nav.classList.remove(
+            isXL ? "left-[88px]" : "left-[65px]",
+            isXL ? "w-[calc(100vw-88px)]" : "w-[calc(100vw-65px)]",
+          );
           nav.classList.add("w-full");
-          sidebar.style.display = "none"; // Hide sidebar when unpinned
+          sidebar.style.display = "none";
         },
         onEnterBack: () => {
-          // Restore navbar width when scrolling back up
-          nav.style.left = "88px";
+          const isXL = window.innerWidth >= 1280;
+          nav.style.left = isXL ? "88px" : "65px";
           nav.style.width = "";
           nav.classList.remove("w-full");
-          nav.classList.add("left-[88px]", "w-[calc(100vw - 88px)]");
-          sidebar.style.display = ""; // Show sidebar again when scrolling back up
+          nav.classList.add(
+            isXL ? "left-[88px]" : "left-[65px]",
+            isXL ? "w-[calc(100vw-88px)]" : "w-[calc(100vw-65px)]",
+          );
+          sidebar.style.display = "";
         },
       });
     }

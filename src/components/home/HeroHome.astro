@@ -5,18 +5,20 @@ import Image from "astro/components/Image.astro";
 ---
 
 <section
-  class="hero-section relative ml-[88px] h-screen overflow-hidden rounded-l-3xl bg-[#4B00A3] pt-32 text-white"
+  class="hero-section relative ml-[65px] h-screen overflow-hidden rounded-l-3xl bg-[#4B00A3] pt-32 text-white xl:ml-[88px]"
 >
-  <div class="flex h-full flex-row justify-between pt-16 pl-20">
+  <div class="flex h-full flex-row justify-between pt-16 pl-12 2xl:pl-20">
     <!-- Left -->
-    <div class="z-10 mt-auto w-[60%] pb-40">
-      <span class="mb-4 block h-[2px]  w-10 bg-white"></span>
+    <div class="z-10 mt-auto w-[55%] 2xl:w-[50%] pb-24 2xl:pb-40">
+      <span class="mb-4 block h-[2px] w-10 bg-white"></span>
       <h1
-        class="animated-gradient-text mb-4 text-[86px] leading-[100px] font-bold"
+        class="animated-gradient-text mb-4 font-bold lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
       >
         Shaping the Future of How Your Brand is Seen.
       </h1>
-      <p class="mb-8 text-xl leading-6 font-medium tracking-[1px]">
+      <p
+        class="mb-8 font-medium tracking-[1px] lg:text-base xl:text-xl 2xl:text-xl 2xl:leading-6"
+      >
         We have your digital solution on web design, mobile app development,
         SEO, branding & digital marketing
       </p>
@@ -24,7 +26,9 @@ import Image from "astro/components/Image.astro";
         <CommonButton className="text-lg font-semibold">
           Get a proposal
         </CommonButton>
-        <a class="flex items-center text-lg leading-6 font-semibold">
+        <a
+          class="flex items-center text-base leading-4 font-semibold xl:text-lg xl:leading-6"
+        >
           <span>Portfolio</span>
           <span>→</span>
         </a>
@@ -32,7 +36,7 @@ import Image from "astro/components/Image.astro";
     </div>
 
     <!-- Right -->
-    <div class="z-0 w-[40%] flex-1">
+    <div class="absolute right-0 bottom-12 xl:bottom-4 z-0 w-[55%] xl:w-1/2 2xl:w-[45%]">
       <Image
         id="hand-tilt"
         src={handImage}
@@ -44,7 +48,7 @@ import Image from "astro/components/Image.astro";
 </section>
 
 <script>
-  import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
+  // import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
 
   document.addEventListener("DOMContentLoaded", () => {
     // Hand tilt effect (keep your existing code)
