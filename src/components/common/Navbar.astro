@@ -157,23 +157,26 @@ import CommonButton from "./CommonButton.astro";
         borderBottomColor: "black",
       },
     )
-      .fromTo(
-        innerButton,
-        { display: "none", opacity: 0, pointerEvents: "none" },
-        {
-          opacity: 1,
-          pointerEvents: "auto",
-          duration: 0.2,
-          marginTop: "1rem",
-          marginBottom: "1rem",
-          display: "block",
-        },
-      )
-      .fromTo(
-        outerButton,
-        { opacity: 1, pointerEvents: "auto", display: "block" },
-        { opacity: 0, pointerEvents: "none", display: "none" },
-      );
+    // Fade OUT the outer button at the same time the nav expands
+    .fromTo(
+      outerButton,
+      { opacity: 1, pointerEvents: "auto" },
+      { opacity: 0, pointerEvents: "none", duration: 0.18, display: "none" },
+      "<" // start with nav expand
+    )
+    // Fade IN the inner button after the outer has faded out
+    .fromTo(
+      innerButton,
+      { opacity: 0, pointerEvents: "none" },
+      {
+        opacity: 1,
+        pointerEvents: "auto",
+        duration: 0.18,
+        marginTop: "1rem",
+        marginBottom: "1rem",
+      },
+      ">" // start after previous tween finishes
+    );
 
     const sidebar = document.getElementById("wrapper-sidebar");
     const nav = document.querySelector("nav");
