@@ -115,18 +115,20 @@ import Image from "astro/components/Image.astro";
 
 <style>
   .animated-gradient-text {
-    background: linear-gradient(
-      90deg,
-      #fff 0%,
-      #7f5cff 30%,
-      #00e0ff 60%,
-      #ff6bcb 100%
-    );
-    background-size: 200% auto;
+     background: linear-gradient(
+    90deg,
+    #fff 0%,
+    #7f5cff 25%,
+    #00e0ff 50%,
+    #ff6bcb 75%,
+    #fff 100%
+  );
+    background-size: 200% 100%;
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
     animation: gradient-move 3s linear infinite;
+      background-repeat: repeat;
   }
   @keyframes gradient-move {
     0% {
@@ -135,6 +137,7 @@ import Image from "astro/components/Image.astro";
     100% {
       background-position: 100% 50%;
     }
+    
   }
 </style>
 

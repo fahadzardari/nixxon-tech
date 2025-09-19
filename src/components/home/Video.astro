@@ -42,7 +42,7 @@ import VideoSub from "../../assets/home/services/video-sub.png";
       scrollTrigger: {
         trigger: ".video-section",
         start: "top top",
-        end: () => "+=" + window.innerHeight * 4, // Increased for more scroll space
+        end: () => "+=" + window.innerHeight * 2, // Increased for more scroll space
         scrub: true,
         pin: true,
         pinSpacing: true, // Important to create proper spacing
@@ -60,7 +60,7 @@ import VideoSub from "../../assets/home/services/video-sub.png";
     tl.to(videoWrapper, {
       width: "100vw",
       height: "100vh",
-      duration: 1.5, // Increase this value for a longer hold
+      duration: 0.1, // Increase this value for a longer hold
       ease: "none",
     });
 
@@ -72,7 +72,7 @@ import VideoSub from "../../assets/home/services/video-sub.png";
     });
 
     // Add a delay at the end before unpinning
-    tl.to({}, { duration: 1 });
+    tl.to({}, { duration: 0.6 });
   });
 </script>
 
@@ -107,8 +107,8 @@ import VideoSub from "../../assets/home/services/video-sub.png";
   }
 
   /* Add this section spacer */
-  .section-spacer {
+  /* .section-spacer {
     width: 100%;
-    height: 5vh; /* Extra space after animation */
-  }
+    height: 1vh; 
+  } */
 </style>
