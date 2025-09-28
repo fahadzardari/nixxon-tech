@@ -25,6 +25,10 @@ body {
   padding-right: 8dvw;
 }
 
+.left-padding {
+  padding-left: 8dvw;
+}
+
 .bg-button-gradient {
   background: linear-gradient(90deg, #9d7eff 0%, #8067ce 100%);
 }
@@ -40,4 +44,7 @@ body {
     padding-left: 11dvw;
     padding-right: 11dvw;
   }
+  .left-padding {
+  padding-left: 11dvw;
+}
 }

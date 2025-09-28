@@ -1,0 +1,116 @@
+---
+const panels = [
+  {
+    title: "Corporate Websites",
+    body: "Each corporate website built by Nixxon Australia is tailored...",
+    cta: ["Get Started", "Live Chat"],
+  },
+  {
+    title: "E-Commerce Websites",
+    body: "Sell more with bespoke storefronts engineered for conversions.",
+    cta: ["View Work"],
+  },
+  {
+    title: "Landing Pages",
+    body: "High-impact funnels for campaigns and launches.",
+    cta: ["See Case Studies"],
+  },
+  {
+    title: "Responsive Websites",
+    body: "Pixel-perfect across every device.",
+    cta: ["Book a Call"],
+  },
+  {
+    title: "WordPress Websites",
+    body: "Enterprise-ready experiences on WordPress.",
+    cta: ["Discover More"],
+  },
+];
+---
+
+<section class="internal-padding">
+  <div
+    data-accordion
+    class="horizontal-accordion flex h-[360px] overflow-hidden bg-gradient-to-r from-[#0B1A36] via-[#4B1E93] to-[#6F1DB7] text-white"
+  >
+    {
+      panels.map((panel, index) => (
+        <button
+          type="button"
+          data-accordion-item
+          data-active={index === 0}
+          aria-expanded={index === 0 ? "true" : "false"}
+          class="group relative flex flex-col justify-between transition-[flex-basis] duration-500 ease-out focus:outline-none"
+          style={`--basis: ${index === 0 ? "60%" : "9%"};`}
+        >
+          <div class="flex h-full flex-col justify-between">
+            <div class="px-8 py-6 text-left group-data-[active=false]:hidden">
+              <h3 class="text-3xl leading-tight font-semibold text-white">
+                {panel.title}
+              </h3>
+              <p class="mt-4 text-sm leading-6 text-white/80">{panel.body}</p>
+
+              <div class="mt-auto flex flex-wrap gap-3 pt-6 text-sm font-semibold">
+                {panel.cta.map((label) => (
+                  <span class="rounded-full bg-white/15 px-4 py-2">
+                    {label}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div class="hidden h-full items-center justify-center bg-gradient-to-r from-[#101E39] to-[#643DB4] group-data-[active=false]:flex">
+              <h3 class="writing-vertical-lr rotate-180 text-2xl font-semibold text-white uppercase">
+                {panel.title}
+              </h3>
+            </div>
+          </div>
+
+          <span class="pointer-events-none absolute inset-y-0 left-0 w-[1px] bg-white/10" />
+        </button>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const accordion = document.querySelector("[data-accordion]");
+    if (!accordion) return;
+
+    const items = [...accordion.querySelectorAll("[data-accordion-item]")];
+
+    const activeWidth = 100 - 5 * 6;
+
+    const widths = { active: `${activeWidth}%`, inactive: "6%" };
+
+    function setActive(target) {
+      items.forEach((item) => {
+        const isActive = item === target;
+        item.dataset.active = isActive ? "true" : "false";
+        item.setAttribute("aria-expanded", isActive ? "true" : "false");
+        item.style.setProperty(
+          "--basis",
+          isActive ? widths.active : widths.inactive,
+        );
+      });
+    }
+
+    items.forEach((item) => {
+      item.addEventListener("mouseenter", () => setActive(item));
+      item.addEventListener("focus", () => setActive(item));
+      item.addEventListener("click", () => setActive(item));
+    });
+  });
+</script>
+
+<style>
+  /* Make each item use the custom basis */
+  .horizontal-accordion [data-accordion-item] {
+    flex: 0 0 var(--basis, 9%);
+  }
+  .writing-vertical-lr {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+  }
+</style>
