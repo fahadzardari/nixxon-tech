@@ -1,5 +1,5 @@
 ---
-import handImage from "../../assets/hand.png";
+import webdevimage from "../../assets/web-dev.png";
 import CommonButton from "../common/CommonButton.astro";
 import Image from "astro/components/Image.astro";
 ---
@@ -10,28 +10,24 @@ import Image from "astro/components/Image.astro";
   <div class="flex h-full flex-row justify-between pt-16 pl-12 2xl:pl-20">
     <!-- Left -->
     <div class="z-10 mt-auto w-[55%] pb-24 2xl:w-[50%] 2xl:pb-40">
-      <span class="mb-4 block h-[2px] w-10 bg-white"></span>
+      <!-- <span class="mb-4 block h-[2px] w-10 bg-white"></span> -->
       <h1
-        class="animated-gradient-text mb-4 font-bold lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
+        class="mb-6 font-medium lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
       >
-        Shaping the Future of How Your Brand is Seen.
+        Building More Than Websites, <span class="font-bold"
+          >We Build Legacies</span
+        >.
       </h1>
       <p
         class="mb-8 font-medium tracking-[1px] lg:text-base xl:text-xl 2xl:text-xl 2xl:leading-6"
       >
-        We have your digital solution on web design, mobile app development,
-        SEO, branding & digital marketing
+        Where elegance meets performance delivering digital experiences that are
+        as functional as they are unforgettable.
       </p>
       <div class="flex items-center space-x-4">
         <CommonButton className="text-lg font-semibold">
-          Get a proposal
+          Lets Talk
         </CommonButton>
-        <a
-          class="flex items-center text-base leading-4 font-semibold xl:text-lg xl:leading-6"
-        >
-          <span>Portfolio</span>
-          <span>→</span>
-        </a>
       </div>
     </div>
 
@@ -41,7 +37,7 @@ import Image from "astro/components/Image.astro";
     >
       <Image
         id="hand-tilt"
-        src={handImage}
+        src={webdevimage}
         alt="Hand Image"
         class="cursor-pointer"
       />

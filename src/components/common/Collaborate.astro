@@ -5,13 +5,15 @@ import CommonButton from "./CommonButton.astro";
 
 <section
   id="collaborate-section"
-  class="internal-padding flex items-center gap-6 overflow-hidden bg-cover bg-no-repeat py-72 text-white"
+  class="internal-padding flex items-center gap-6 overflow-hidden bg-cover bg-no-repeat text-white lg:py-60 2xl:py-72"
 >
   <div class="flex w-1/2 max-w-[580px] flex-col">
-    <h1 class="mb-7 text-[90px] leading-24 font-medium text-[#4B00A3]">
+    <h1
+      class="3xl:text-[90px] 3xl:leading-24 mb-7 font-medium text-[#4B00A3] lg:text-[60px] lg:leading-12 xl:text-[70px] xl:leading-16 2xl:text-[80px] 2xl:leading-20"
+    >
       Collaborate with Us
     </h1>
-    <p class="mb-14 text-3xl">
+    <p class="mb-14 lg:text-xl xl:text-2xl 2xl:text-3xl">
       Share your tech-related business ideas with us. We'll support you
       transform your dreams into reality!
     </p>
@@ -43,6 +45,7 @@ import CommonButton from "./CommonButton.astro";
     background-image: url("../../assets/home/colloborate-bg-compressed.webp");
     background-size: 102%;
     transition: background-size 2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-position: center;
   }
 
   #collaborate-section:hover {

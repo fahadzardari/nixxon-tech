@@ -2,8 +2,10 @@
 import TestimonialCard from "./TestimonialCard.astro";
 ---
 
-<section class="internal-padding py-36">
-  <h2 class="mb-20 text-6xl leading-20">
+<section class="internal-padding py-20 xl:py-28 2xl:py-36">
+  <h2
+    class="mb-20 md:text-4xl md:leading-8 xl:text-5xl xl:leading-16 2xl:text-6xl 2xl:leading-20"
+  >
     <span class="text-gradient-start font-semibold"> Endorsements From </span>
     <br />
     <span class="text-[#040404]">Our Clients</span>
@@ -57,10 +59,9 @@ import TestimonialCard from "./TestimonialCard.astro";
 <script>
   import Swiper from "swiper";
   import "swiper/css";
-import { Autoplay } from "swiper/modules";
-  
+  import { Autoplay } from "swiper/modules";
 
-Swiper.use([Autoplay]);
+  Swiper.use([Autoplay]);
   var swiper = new Swiper(".mySwiper", {
     slidesPerView: 3,
     spaceBetween: 80,

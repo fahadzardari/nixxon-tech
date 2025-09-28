@@ -1,17 +1,25 @@
 ---
 import CommonButton from "../common/CommonButton.astro";
+const {
+  typewriter = "We have Passion for our craft",
+  experience = "With over two decades of experience and a global footprint, our teams operate as a cohesive unit, consistently exceeding expectations and delivering unparalleled service to our diverse clientele worldwide.",
+} = Astro.props;
+
+// Calculate width based on typewriter length (+2ch for safety)
+const typewriterWidth = `${typewriter.length - 5}ch`;
 ---
 
 <section class="internal-padding my-16 2xl:my-24">
   <div class="flex flex-wrap items-center gap-4">
-    <h2 class="m-0 lg:text-2xl xl:text-3xl 2xl:text-[40px] 3xl:text-5xl lg:leading-12 xl:leading-14 2xl:leading-16 font-normal text-[#000047]">
+    <h2
+      class="3xl:text-5xl m-0 font-normal text-[#000047] lg:text-2xl lg:leading-12 xl:text-3xl xl:leading-14 2xl:text-[40px] 2xl:leading-16"
+    >
       <span
         id="typewriter"
-        class="from-gradient-start my-auto to-gradient-end inline-flex items-center w-[23ch] bg-gradient-to-r bg-clip-text align-center text-base xl:text-lg font-semibold whitespace-nowrap text-transparent mb-[4px]"
-      ></span>
-      With over two decades of experience and a global footprint, our teams operate
-      as a cohesive unit, consistently exceeding expectations and delivering unparalleled
-      service to our diverse clientele worldwide.
+        class="from-gradient-start to-gradient-end align-center my-auto mb-[4px] inline-flex items-center bg-gradient-to-r bg-clip-text text-base font-semibold whitespace-nowrap text-transparent xl:text-lg"
+        style={`width: ${typewriterWidth};`}
+        data-text={typewriter}></span>
+      {experience}
     </h2>
   </div>
   <CommonButton className="mt-10"> Learn More </CommonButton>
@@ -20,7 +28,10 @@ import CommonButton from "../common/CommonButton.astro";
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const el = document.getElementById("typewriter");
-    const text = "We have Passion for our craft";
+    if (!el) return;
+
+    // Get text from data attribute (from props)
+    const text = el.getAttribute("data-text") || "";
     let i = 0;
 
     function type() {

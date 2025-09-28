@@ -75,9 +75,9 @@ import CommonButton from "./CommonButton.astro";
           >
             <li>
               <a
-                href="/services/web"
+                href="/services/web-development"
                 class="block px-3 py-1.5 hover:bg-gray-100 md:px-4 md:py-2"
-                >Web Design</a
+                >Web Development</a
               >
             </li>
             <li>
@@ -113,7 +113,7 @@ import CommonButton from "./CommonButton.astro";
 
     <div id="outer-button" class="my-auto transition-opacity duration-300">
       <CommonButton
-        className="my-4  mr-2 px-2.5 py-1.5 text-sm md:mr-8 md:px-3 md:py-2 md:text-base lg:px-4 xl:px-6"
+        className="my-4 mr-2 px-2.5 py-1.5 text-sm md:mr-8 md:px-3 md:py-2 md:text-base lg:px-4 xl:px-6"
       >
         Book A discovery call
       </CommonButton>
@@ -157,26 +157,26 @@ import CommonButton from "./CommonButton.astro";
         borderBottomColor: "black",
       },
     )
-    // Fade OUT the outer button at the same time the nav expands
-    .fromTo(
-      outerButton,
-      { opacity: 1, pointerEvents: "auto" },
-      { opacity: 0, pointerEvents: "none", duration: 0.18, display: "none" },
-      "<" // start with nav expand
-    )
-    // Fade IN the inner button after the outer has faded out
-    .fromTo(
-      innerButton,
-      { opacity: 0, pointerEvents: "none" },
-      {
-        opacity: 1,
-        pointerEvents: "auto",
-        duration: 0.18,
-        marginTop: "1rem",
-        marginBottom: "1rem",
-      },
-      ">" // start after previous tween finishes
-    );
+      // Fade OUT the outer button at the same time the nav expands
+      .fromTo(
+        outerButton,
+        { opacity: 1, pointerEvents: "auto" },
+        { opacity: 0, pointerEvents: "none", duration: 0.18, display: "none" },
+        "<", // start with nav expand
+      )
+      // Fade IN the inner button after the outer has faded out
+      .fromTo(
+        innerButton,
+        { opacity: 0, pointerEvents: "none" },
+        {
+          opacity: 1,
+          pointerEvents: "auto",
+          duration: 0.18,
+          marginTop: "1rem",
+          marginBottom: "1rem",
+        },
+        ">", // start after previous tween finishes
+      );
 
     const sidebar = document.getElementById("wrapper-sidebar");
     const nav = document.querySelector("nav");

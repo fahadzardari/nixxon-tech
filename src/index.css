@@ -25,7 +25,6 @@ body {
   padding-right: 8dvw;
 }
 
-
 .bg-button-gradient {
   background: linear-gradient(90deg, #9d7eff 0%, #8067ce 100%);
 }
@@ -36,13 +35,9 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-
-
-
 @media screen and (min-width: 1900px) {
- .internal-padding {
-  padding-left: 11dvw;
-  padding-right: 11dvw;
-}
-  
+  .internal-padding {
+    padding-left: 11dvw;
+    padding-right: 11dvw;
+  }
 }
