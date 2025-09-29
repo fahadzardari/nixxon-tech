@@ -1,0 +1,138 @@
+---
+import VerticalImage1 from "../../assets/web-dev/web-vertical-1.png";
+
+import Image from "astro/components/Image.astro";
+
+// Create array of data for swiper slides
+const slides = [
+  {
+    id: "01",
+    title: "Informative Websites",
+    description:
+      "With our visually appealing and highly functional websites, you will get maximum user engagements with an amazing browsing experience.",
+    image: VerticalImage1,
+  },
+  {
+    id: "02",
+    title: "E-Commerce Platforms",
+    description:
+      "Our custom e-commerce solutions provide seamless shopping experiences with secure payment processing and intuitive product management.",
+    image: VerticalImage1,
+  },
+  {
+    id: "03",
+    title: "Web Applications",
+    description:
+      "We develop powerful, scalable web applications that streamline business processes and enhance productivity with user-friendly interfaces.",
+    image: VerticalImage1,
+  },
+];
+---
+
+<section class="">
+  <h2
+    class="mb-4 text-center font-semibold text-[#000047] lg:text-3xl xl:text-4xl 2xl:text-[40px]"
+  >
+    Website Services That Set Us Apart
+  </h2>
+  <p
+    class="mx-auto max-w-7xl text-center text-xs text-[#2A2111] xl:text-sm 2xl:text-base"
+  >
+    Businesses may differentiate themselves from the competition online with a
+    distinctive online presence thanks to our bespoke website services. Our
+    staff has the know-how to provide custom solutions, whether it's designing a
+    web application, constructing a content management system, or developing a
+    unique e-commerce platform.
+  </p>
+
+  <div class="vertical-swiper-container relative mx-20 mt-12 h-[780px]">
+    <div class="swiper verticalSwiper h-full">
+      <div class="swiper-wrapper">
+        {
+          slides.map((slide) => (
+            <div class="swiper-slide">
+              <div class="relative flex">
+                <span class="absolute -top-8 left-[45%] text-[#000000] lg:text-[140px] xl:text-[150px] 2xl:text-[170px]">
+                  {slide.id}
+                </span>
+                <Image
+                  src={slide.image}
+                  alt={`${slide.title} Image`}
+                  class="h-[780px] w-1/2"
+                />
+                <div class="mt-24 ml-32 flex w-1/2 max-w-[550px] flex-col">
+                  <h2 class="mb-6 font-semibold text-[#000047] lg:text-3xl xl:text-4xl 2xl:text-[40px]">
+                    {slide.title}
+                  </h2>
+                  <p class="mb-7 text-[#2A2111] capitalize lg:text-lg xl:text-xl 2xl:text-xl">
+                    {slide.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <div class="swiper-pagination vertical-pagination"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import Swiper from "swiper";
+  import { Pagination, Mousewheel } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/pagination";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const swiper = new Swiper(".verticalSwiper", {
+      direction: "vertical",
+      slidesPerView: 1,
+      spaceBetween: 30,
+      mousewheel: true,
+      modules: [Pagination, Mousewheel],
+      parallax: true,
+      pagination: {
+        el: ".vertical-pagination",
+        clickable: true,
+        renderBullet: function (index, className) {
+          return `<span class="${className}"></span>`;
+        },
+      },
+      // Optional autoplay
+      // autoplay: {
+      //   delay: 5000,
+      //   disableOnInteraction: false,
+      // },
+    });
+  });
+</script>
+
+<style>
+  .vertical-swiper-container {
+    position: relative;
+  }
+
+  .vertical-pagination {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    gap: 10px;
+  }
+
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #d9d9d9;
+    opacity: 1;
+    margin: 6px 0 !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #9d7eff;
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+import "../../index.css";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/common/Navbar.astro";
+import Experience from "../../components/home/Experience.astro";
+import OurServices from "../../components/home/OurServices.astro";
+import Accordion from "../../components/common/Accordion.astro";
+import SwiperSection from "../../components/common/SwiperSection.astro";
+import { webDevSwiperCards } from "../../data/swipers";
+import VerticalSwiper from "../../components/common/VerticalSwiper.astro";
+import Testimonials from "../../components/common/Testimonials.astro";
+import HeroLogoDesign from "../../components/logo-design/HeroLogoDesign.astro";
+import PresentBrand from "../../components/logo-design/PresentBrand.astro";
+import WhyLogoDesignsMatter from "../../components/logo-design/WhyLogoDesignsMatter.astro";
+import HeroBranding from "../../components/branding/HeroBranding.astro";
+---
+
+<Layout title="Home - Nixxon Tech">
+  <Navbar />
+  <HeroBranding />
+
+  <Experience
+    typewriter="Eye catching Branding"
+    experience="We create impactful brand identities that go beyond the logo, capturing your business essence across every touchpoint. With creative precision, we craft visuals that build trust, recognition, and lasting impact."
+  />
+  <span class="h-0 w-0 our-services">
+
+  </span>
+  <VerticalSwiper 
+    title="Our Branding Services"
+    cards={webDevSwiperCards}
+  />
+  <PresentBrand />
+  
+  <Testimonials />
+</Layout>

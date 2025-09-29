@@ -1,0 +1,143 @@
+---
+import webdevimage from "../../assets/logo-design.png";
+import CommonButton from "../common/CommonButton.astro";
+import Image from "astro/components/Image.astro";
+---
+
+<section
+  class="hero-section relative ml-[65px] h-screen overflow-hidden rounded-l-3xl bg-[#4B00A3] pt-32 text-white xl:ml-[88px]"
+>
+  <div class="flex h-full flex-row justify-between pt-16 pl-12 2xl:pl-20">
+    <!-- Left -->
+    <div class="z-10 mt-auto w-[55%] pb-24 2xl:w-[50%] 2xl:pb-40">
+      <!-- <span class="mb-4 block h-[2px] w-10 bg-white"></span> -->
+      <h1
+        class="capitalize mb-6 font-medium lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
+      >
+        let’s create an outstanding logo to
+        <span class="font-bold">present your business</span>.
+      </h1>
+      <p
+        class="mb-8 font-medium tracking-[1px] lg:text-base xl:text-xl 2xl:text-xl 2xl:leading-6"
+      >
+        A wide range of services, including brand planning, are provided by our skilled experts. Be it establishing a visual identity, creating a logo, or crafting brand messaging, we are here to help. With our innovative ideas, your company will stand out and build long-lasting relationships with clients.
+      </p>
+      <div class="flex items-center space-x-4">
+        <CommonButton className="text-lg font-semibold">
+          Lets Talk
+        </CommonButton>
+      </div>
+    </div>
+
+    <!-- Right -->
+    <div
+      class="absolute right-0 bottom-12 z-0 w-[55%] xl:bottom-4 xl:w-1/2 2xl:w-[45%]"
+    >
+      <Image
+        id="hand-tilt"
+        src={webdevimage}
+        alt="Hand Image"
+        class="cursor-pointer"
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  // import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Hand tilt effect (keep your existing code)
+    const hand = document.getElementById("hand-tilt");
+    if (hand) {
+      hand.style.transition = "transform 0.3s";
+      hand.addEventListener("mouseenter", () => {
+        hand.style.transform = "scale(1.08)";
+      });
+      hand.addEventListener("mousemove", (e) => {
+        const rect = hand.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * 18;
+        const rotateY = ((x - centerX) / centerX) * 18;
+        hand.style.transform = `scale(1.08) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      hand.addEventListener("mouseleave", () => {
+        hand.style.transition = "transform 0.5s";
+        hand.style.transform = "scale(1) rotateX(0deg) rotateY(0deg)";
+        setTimeout(() => {
+          hand.style.transition = "transform 0.3s";
+        }, 500);
+      });
+    }
+
+    // GSAP entrance animation for hero content
+    // gsap.from(".hero-section .z-10", {
+    //   y: 60,
+    //   opacity: 0,
+    //   duration: 1,
+    //   ease: "power3.out",
+    //   scrollTrigger: {
+    //     trigger: ".hero-section",
+    //     start: "top 80%",
+    //   },
+    // });
+
+    // gsap.from("#hand-tilt", {
+    //   x: 80,
+    //   opacity: 0,
+    //   duration: 1.1,
+    //   ease: "power3.out",
+    //   scrollTrigger: {
+    //     trigger: ".hero-section",
+    //     start: "top 80%",
+    //   },
+    // });
+
+    // gsap.to("#hand-tilt", {
+    //   y: -40,
+    //   ease: "none",
+    //   scrollTrigger: {
+    //     trigger: ".hero-section",
+    //     start: "top top",
+    //     end: "bottom top",
+    //     scrub: true,
+    //   },
+    // });
+  });
+</script>
+
+<style>
+  .animated-gradient-text {
+    background: linear-gradient(
+      90deg,
+      #fff 0%,
+      #7f5cff 25%,
+      #00e0ff 50%,
+      #ff6bcb 75%,
+      #fff 100%
+    );
+    background-size: 200% 100%;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: gradient-move 3s linear infinite;
+    background-repeat: repeat;
+  }
+  @keyframes gradient-move {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+</style>
+
+<!-- cubic-bezier(.22,1,.36,1), box-shadow 0.3s cubic-bezier(.22,1,.36,1) 
+ 
+ cubic-bezier(.22,1,.36,1), box-shadow 0.5s cubic-bezier(.22,1,.36,1)
+  cubic-bezier(.22,1,.36,1), box-shadow 0.3s cubic-bezier(.22,1,.36,1)
+-->

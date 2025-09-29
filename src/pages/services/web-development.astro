@@ -8,6 +8,8 @@ import OurServices from "../../components/home/OurServices.astro";
 import Accordion from "../../components/common/Accordion.astro";
 import SwiperSection from "../../components/common/SwiperSection.astro";
 import { webDevSwiperCards } from "../../data/swipers";
+import VerticalSwiper from "../../components/common/VerticalSwiper.astro";
+import Testimonials from "../../components/common/Testimonials.astro";
 ---
 
 <Layout title="Home - Nixxon Tech">
@@ -21,10 +23,12 @@ import { webDevSwiperCards } from "../../data/swipers";
     title="Our Standard"
     description="Crafting excellence across leading web platforms and technologies."
   />
+  <VerticalSwiper />
   <SwiperSection
     title="The Art of Web Development"
     description="We blend creativity with technology to build websites that are not only functional but also inspiring crafted to engage, perform, and grow with your business."
     swiperCards={webDevSwiperCards}
   />
   <Accordion />
+  <Testimonials />
 </Layout>
