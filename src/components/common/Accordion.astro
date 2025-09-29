@@ -11,6 +11,12 @@ const panels = [
     cta: ["View Work"],
   },
   {
+    title: "Flat Design Website",
+    body: "Sell more with bespoke storefronts engineered for conversions.",
+    cta: ["View Work"],
+  },
+
+  {
     title: "Landing Pages",
     body: "High-impact funnels for campaigns and launches.",
     cta: ["See Case Studies"],
@@ -26,23 +32,30 @@ const panels = [
     cta: ["Discover More"],
   },
 ];
+import Image from "astro/components/Image.astro";
+import Acc1 from "../../assets/accordion/1.png";
+import Acc2 from "../../assets/accordion/2.png";
+import Acc3 from "../../assets/accordion/3.png";
+import Acc4 from "../../assets/accordion/4.png";
+const {
+  title = "Website Services That set us apart",
+  description = "Businesses may differentiate themselves from the competition online with a distinctive online presence thanks to our bespoke website services. Our staff has the know-how to provide custom solutions, whether it's designing a web application, constructing a content management system, or developing a unique e-commerce platform.",
+  para = "Each corporate website built by Nixxon Australia is tailored to your company's specific demands and objectives. Our goal is to create a professional, branded website for your company that will set it out from the competition.",
+  slides = panels,
+} = Astro.props;
 ---
 
 <section class="internal-padding">
   <h2
     class="mb-1 font-semibold text-[#000047] lg:text-3xl xl:text-4xl 2xl:text-[40px]"
   >
-    Website Services That Set Us Apart
+    {title}
   </h2>
   <h3 class="mb-3 font-medium text-[#000000] lg:text-lg xl:text-xl 2xl:text-xl">
-    Whether it's a store, blog, or corporate site we make it happen.
+    {description}
   </h3>
   <p class="mb-12 text-xs text-[#2A2111] xl:text-sm 2xl:text-base">
-    From sleek online stores that drive sales, to engaging blogs that share your
-    voice, to professional corporate websites that inspire trust our team
-    delivers it all. No matter your industry or audience, we combine strategy,
-    design, and technology to create websites that not only look great but also
-    work flawlessly for your goals.
+    {para}
   </p>
   <div
     data-accordion
@@ -56,34 +69,75 @@ const panels = [
           data-active={index === 0}
           aria-expanded={index === 0 ? "true" : "false"}
           class="group relative flex flex-col justify-between transition-[flex-basis] duration-500 ease-out focus:outline-none"
-          style={`--basis: ${index === 0 ? "65%" : "8.75%"};`}
+          style={`--basis: ${index === 0 ? "65%" : "6.75%"};`}
         >
           <div class="flex h-full w-full">
             {/* Vertical title for active state - matching inactive width */}
             <div class="hidden h-full w-[6.75vw] items-center justify-center bg-gradient-to-r from-[#101E39] to-[#643DB4] group-data-[active=true]:flex">
-              <h3 class="writing-vertical-lr rotate-180 text-[26px] font-semibold text-white uppercase">
+              <h3 class="writing-vertical-lr accordion-title rotate-180 text-[26px] font-semibold text-white uppercase">
                 {panel.title}
               </h3>
             </div>
 
             {/* Content area for active state */}
-            <div class="flex h-full flex-1 flex-col px-8 py-6 text-left group-data-[active=false]:hidden">
-              <h3 class="pb-4 text-3xl leading-tight font-semibold text-white">
+            <div class="accordion-content flex h-full flex-1 flex-col px-8 py-6 text-left group-data-[active=false]:hidden">
+              <h3 class="accordion-content-item pb-4 text-3xl leading-tight font-semibold text-white">
                 {panel.title}
               </h3>
-              <p class="text-sm leading-6 text-white/80">{panel.body}</p>
-              <div class="mt-auto flex flex-wrap gap-3 pt-6 text-sm font-semibold">
-                {panel.cta.map((label) => (
-                  <span class="cursor-pointer rounded-full bg-white/15 px-4 py-2 transition-colors hover:bg-white/25">
-                    {label}
-                  </span>
-                ))}
+              <p class="accordion-content-item text-lg leading-6 text-white">
+                Each corporate website built by Nixxon Australia is tailored to
+                your company's specific demands and objectives. Our goal is to
+                create a professional, branded website for your company that
+                will set it out from the competition.
+              </p>
+              <div class="accordion-content-item flex py-12">
+                <Image
+                  src={Acc1}
+                  alt="Accordion Image 1"
+                  class="accordion-img w-1/4 px-2"
+                />
+                <Image
+                  src={Acc2}
+                  alt="Accordion Image 2"
+                  class="accordion-img w-1/4 px-2"
+                />
+                <Image
+                  src={Acc3}
+                  alt="Accordion Image 3"
+                  class="accordion-img w-1/4 px-2"
+                />
+                <Image
+                  src={Acc4}
+                  alt="Accordion Image 4"
+                  class="accordion-img w-1/4 px-2"
+                />
+              </div>
+              <div class="accordion-content-item flex flex-wrap gap-3 pt-6">
+                <span class="get-started-btn btn-animate flex items-center justify-center text-xl">
+                  Get Started
+                </span>
+                <span class="btn-text-animate flex items-center text-xl">
+                  Live Chat
+                  <svg
+                    width="21"
+                    height="21"
+                    viewBox="0 0 21 21"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="arrow-icon ml-2"
+                  >
+                    <path
+                      d="M15.3733 11.0958L8.03537 18.4338C7.68147 18.7877 7.1077 18.7877 6.75384 18.4338L5.89799 17.5779C5.54469 17.2246 5.54401 16.652 5.89648 16.2979L11.7119 10.455L5.89648 4.61224C5.54401 4.25811 5.54469 3.68551 5.89799 3.33222L6.75384 2.47636C7.10774 2.12246 7.6815 2.12246 8.03537 2.47636L15.3733 9.81429C15.7272 10.1682 15.7272 10.7419 15.3733 11.0958Z"
+                      fill="white"
+                    />
+                  </svg>
+                </span>
               </div>
             </div>
 
             {/* Vertical title only for inactive state - full width */}
-            <div class="hidden h-full w-full items-center justify-center bg-gradient-to-r from-[#101E39] to-[#643DB4] group-data-[active=false]:flex">
-              <h3 class="writing-vertical-lr rotate-180 text-[26px] font-semibold text-white uppercase">
+            <div class="accordion-inactive hidden h-full w-full items-center justify-center bg-gradient-to-r from-[#101E39] to-[#643DB4] group-data-[active=false]:flex">
+              <h3 class="writing-vertical-lr accordion-title rotate-180 text-[26px] font-semibold text-white uppercase">
                 {panel.title}
               </h3>
             </div>
@@ -97,6 +151,8 @@ const panels = [
 </section>
 
 <script>
+  import { gsap } from "../../utils/gsapUtils.js";
+
   document.addEventListener("DOMContentLoaded", () => {
     const accordion = document.querySelector("[data-accordion]");
     if (!accordion) return;
@@ -105,13 +161,31 @@ const panels = [
     const totalItems = items.length;
 
     // Calculate widths - narrower inactive tabs to fit better
-    const inactiveWidth = 8.75; // Each inactive tab width
+    const inactiveWidth = 6.75; // Each inactive tab width
     const totalInactiveWidth = inactiveWidth * (totalItems - 1);
     const activeWidth = 100 - totalInactiveWidth;
 
     const widths = { active: `${activeWidth}%`, inactive: `${inactiveWidth}%` };
 
+    // Initial animations for the accordion when it comes into view
+    gsap.from(accordion, {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: accordion,
+        start: "top 80%",
+      },
+    });
+
+    // Animate the initial active content
+    animateActiveContent(items.find((item) => item.dataset.active === "true"));
+
     function setActive(target) {
+      // Don't do anything if already active
+      if (target.dataset.active === "true") return;
+
       items.forEach((item) => {
         const isActive = item === target;
         item.dataset.active = isActive ? "true" : "false";
@@ -121,10 +195,104 @@ const panels = [
           isActive ? widths.active : widths.inactive,
         );
       });
+
+      // Animate content for newly active panel
+      if (target.dataset.active === "true") {
+        animateActiveContent(target);
+      }
+    }
+
+    // Function to animate the content of active panel
+    function animateActiveContent(activePanel) {
+      if (!activePanel) return;
+
+      // Reset any ongoing animations first
+      gsap.killTweensOf(".accordion-content-item");
+
+      // Animate the content items with stagger
+      gsap.fromTo(
+        activePanel.querySelectorAll(".accordion-content-item"),
+        { opacity: 0, x: -20 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+          delay: 0.3, // Delay to let panel expand first
+        },
+      );
+
+      // Special animation for images
+      gsap.fromTo(
+        activePanel.querySelectorAll(".accordion-img"),
+        { opacity: 0, scale: 0.92 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "back.out(1.2)",
+          delay: 0.4,
+        },
+      );
     }
 
     items.forEach((item) => {
       item.addEventListener("click", () => setActive(item));
+
+      // Add hover effect for inactive panels
+      item.addEventListener("mouseenter", () => {
+        if (item.dataset.active !== "true") {
+          gsap.to(item.querySelector(".accordion-title"), {
+            opacity: 0.85,
+            scale: 1.05,
+            duration: 0.3,
+          });
+        }
+      });
+
+      item.addEventListener("mouseleave", () => {
+        if (item.dataset.active !== "true") {
+          gsap.to(item.querySelector(".accordion-title"), {
+            opacity: 1,
+            scale: 1,
+            duration: 0.3,
+          });
+        }
+      });
+    });
+
+    // Button hover animations
+    const buttons = document.querySelectorAll(".btn-animate");
+    buttons.forEach((btn) => {
+      btn.addEventListener("mouseenter", () => {
+        gsap.to(btn, { scale: 1.05, duration: 0.2, ease: "power1.out" });
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        gsap.to(btn, { scale: 1, duration: 0.2, ease: "power1.out" });
+      });
+    });
+
+    // Text button with arrow animations
+    const textButtons = document.querySelectorAll(".btn-text-animate");
+    textButtons.forEach((btn) => {
+      btn.addEventListener("mouseenter", () => {
+        gsap.to(btn.querySelector(".arrow-icon"), {
+          x: 4,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        gsap.to(btn.querySelector(".arrow-icon"), {
+          x: 0,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
     });
   });
 </script>
@@ -132,11 +300,60 @@ const panels = [
 <style>
   /* Make each item use the custom basis */
   .horizontal-accordion [data-accordion-item] {
-    flex: 0 0 var(--basis, 8.75%);
+    flex: 0 0 var(--basis, 6.75%);
   }
 
   .writing-vertical-lr {
     writing-mode: vertical-lr;
     text-orientation: mixed;
+  }
+
+  .get-started-btn {
+    width: 156.41px;
+    height: 50.26px;
+    background: #643db4;
+    border-radius: 27.0647px 38.6638px 5.15517px 27.0647px;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    will-change: transform;
+  }
+
+  .get-started-btn:hover {
+    box-shadow: 0 4px 12px rgba(100, 61, 180, 0.25);
+  }
+
+  .accordion-title {
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .accordion-inactive:hover .accordion-title {
+    opacity: 0.9;
+  }
+
+  /* For smooth transitions between states */
+  .accordion-content {
+    opacity: 0;
+    animation: fadeIn 0.4s ease-out 0.3s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .arrow-icon {
+    transition: transform 0.3s ease;
+    will-change: transform;
+  }
+
+  .btn-text-animate:hover .arrow-icon {
+    transform: translateX(4px);
   }
 </style>

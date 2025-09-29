@@ -71,16 +71,20 @@ const currentPath = Astro.url.pathname;
             }`}
           >About Us</a>
         </li>
-        <li class="group relative">
+        <li class="group relative" id="services-dropdown-container">
           <button 
+            id="services-dropdown-toggle"
             class={`flex items-center space-x-1 rounded-full px-2.5 py-1.5 text-sm md:text-base xl:px-3 xl:py-2 transition-all duration-200 ${
               currentPath.startsWith('/services/') 
                 ? 'bg-[#9D7EFF] text-white shadow-md' 
                 : 'hover:bg-[#9D7EFF]/10 hover:text-[#9D7EFF] group-hover:bg-[#9D7EFF]/10 group-hover:text-[#9D7EFF]'
             }`}
+            aria-expanded="false"
+            aria-controls="services-dropdown-menu"
           >
             <span>Services</span>
             <svg
+              id="services-dropdown-arrow"
               class="h-3.5 w-3.5 md:h-4 md:w-4 transition-transform duration-200 group-hover:rotate-180"
               fill="none"
               stroke="currentColor"
@@ -94,7 +98,9 @@ const currentPath = Astro.url.pathname;
             </svg>
           </button>
           <ul
+            id="services-dropdown-menu"
             class="absolute left-0 pt-2 hidden w-56 overflow-hidden rounded-xl border border-gray-200 bg-white text-sm shadow-xl group-hover:block md:w-64 md:text-base animate-fade-in"
+            aria-labelledby="services-dropdown-toggle"
           >
             <li>
               <a
@@ -243,6 +249,112 @@ const currentPath = Astro.url.pathname;
     const outerButton = document.getElementById("outer-button");
 
     if (!navContainer || !innerButton || !outerButton) return;
+
+    // Services dropdown functionality
+    const dropdownContainer = document.getElementById("services-dropdown-container");
+    const dropdownToggle = document.getElementById("services-dropdown-toggle");
+    const dropdownMenu = document.getElementById("services-dropdown-menu");
+    const dropdownArrow = document.getElementById("services-dropdown-arrow");
+    
+    if (dropdownToggle && dropdownMenu && dropdownArrow) {
+      let isDropdownOpen = false;
+      
+      // Toggle dropdown on click
+      dropdownToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        isDropdownOpen = !isDropdownOpen;
+        
+        // Update aria-expanded
+        dropdownToggle.setAttribute("aria-expanded", isDropdownOpen.toString());
+        
+        // Toggle display
+        if (isDropdownOpen) {
+          dropdownMenu.classList.add("block");
+          dropdownMenu.classList.remove("hidden");
+          dropdownArrow.classList.add("rotate-180");
+        } else {
+          closeDropdown();
+        }
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener("click", (e) => {
+        if (isDropdownOpen && !dropdownContainer.contains(e.target)) {
+          closeDropdown();
+        }
+      });
+      
+      // Stop propagation for dropdown menu clicks to prevent closing
+      dropdownMenu.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+      
+      // Ensure keyboard navigation works properly
+      dropdownToggle.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          dropdownToggle.click();
+        } else if (e.key === "Escape" && isDropdownOpen) {
+          closeDropdown();
+        } else if (e.key === "ArrowDown" && isDropdownOpen) {
+          e.preventDefault();
+          const firstItem = dropdownMenu.querySelector("a");
+          if (firstItem) firstItem.focus();
+        }
+      });
+      
+      // Focus management within dropdown
+      const dropdownItems = dropdownMenu.querySelectorAll("a");
+      dropdownItems.forEach((item, index) => {
+        item.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            const nextItem = dropdownItems[index + 1] || dropdownItems[0];
+            nextItem.focus();
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            const prevItem = dropdownItems[index - 1] || dropdownItems[dropdownItems.length - 1];
+            prevItem.focus();
+          } else if (e.key === "Escape") {
+            closeDropdown();
+            dropdownToggle.focus();
+          }
+        });
+      });
+      
+      // When hovering off dropdown container, keep dropdown open if it was clicked open
+      dropdownContainer.addEventListener("mouseleave", () => {
+        // Only close if it wasn't explicitly opened by click
+        if (!isDropdownOpen) {
+          // Add a small delay to allow moving to the dropdown
+          setTimeout(() => {
+            // Only close if not hovered and not explicitly opened
+            if (!dropdownContainer.matches(":hover") && !isDropdownOpen) {
+              closeDropdown();
+            }
+          }, 100);
+        }
+      });
+      
+      // Function to close dropdown
+      function closeDropdown() {
+        isDropdownOpen = false;
+        dropdownToggle.setAttribute("aria-expanded", "false");
+        dropdownMenu.classList.remove("block");
+        dropdownMenu.classList.add("hidden");
+        dropdownArrow.classList.remove("rotate-180");
+      }
+
+      // Fix for touch devices - make first touch open the menu
+      if ('ontouchstart' in window) {
+        dropdownToggle.addEventListener('touchstart', (e) => {
+          if (!isDropdownOpen) {
+            e.preventDefault();
+            dropdownToggle.click();
+          }
+        });
+      }
+    }
 
     const tl = gsap.timeline({
       scrollTrigger: {

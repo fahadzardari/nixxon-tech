@@ -12,6 +12,39 @@ import Testimonials from "../../components/common/Testimonials.astro";
 import HeroLogoDesign from "../../components/logo-design/HeroLogoDesign.astro";
 import PresentBrand from "../../components/logo-design/PresentBrand.astro";
 import WhyLogoDesignsMatter from "../../components/logo-design/WhyLogoDesignsMatter.astro";
+
+const accordionItems = [
+  {
+    title: "2D Animated Logo",
+    body: "Each corporate website built by Nixxon Australia is tailored...",
+    cta: ["Get Started", "Live Chat"],
+  },
+  {
+    title: "3D Animated Logo",
+    body: "Sell more with bespoke storefronts engineered for conversions.",
+    cta: ["View Work"],
+  },
+  {
+    title: "Iconic Logo Desing",
+    body: "Pixel-perfect across every device.",
+    cta: ["Book a Call"],
+  },
+  {
+    title: "Illustrative Logo",
+    body: "High-impact funnels for campaigns and launches.",
+    cta: ["See Case Studies"],
+  },
+  {
+    title: "Symbolic Logo",
+    body: "Pixel-perfect across every device.",
+    cta: ["Book a Call"],
+  },
+  {
+    title: "Typographic Logo",
+    body: "Enterprise-ready experiences on WordPress.",
+    cta: ["Discover More"],
+  },
+];
 ---
 
 <Layout title="Home - Nixxon Tech">
@@ -22,12 +55,15 @@ import WhyLogoDesignsMatter from "../../components/logo-design/WhyLogoDesignsMat
     typewriter="Eye catching identity design"
     experience="We craft impactful brand identities that capture the essence of our clients’ businesses. With skilled designers and attention to detail, we create memorable visuals that clearly convey their message and values."
   />
-  <span class="h-0 w-0 our-services">
-
-  </span>
+  <span class="our-services h-0 w-0"> </span>
   <WhyLogoDesignsMatter />
   <PresentBrand />
-  
-  <Accordion />
+
+  <Accordion
+    title="Logos That Define Your Brand."
+    description="From classic to animated, we design logos that define your brand."
+    para="Our approach blends creativity and strategy, ensuring every logo not only looks stunning but also resonates with your audience. Whether you need a mark that inspires trust, a bold design that stands out, or motion graphics that tell a story, we deliver logos that adapt seamlessly to your brand’s world."
+    panels={accordionItems}
+    />
   <Testimonials />
 </Layout>

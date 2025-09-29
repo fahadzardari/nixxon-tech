@@ -73,14 +73,14 @@ const {
     {description}
   </p>
 
-  <div class="vertical-swiper-container relative mx-20 mt-12 h-[780px]">
+  <div class="vertical-swiper-container relative mx-20 mt-12 h-[710px]">
     <div class="swiper verticalSwiper h-full">
       <div class="swiper-wrapper">
         {
           slides.map((slide) => (
             <div class="swiper-slide">
               <div class="relative flex">
-                <span class="absolute -top-8 left-[45%] text-[#000000] lg:text-[140px] xl:text-[150px] 2xl:text-[170px]">
+                <span class="absolute -top-6 2xl:-top-8 left-[43%] 2xl:left-[45%] text-[#000000] lg:text-[140px] xl:text-[150px] 2xl:text-[170px]">
                   {slide.id}
                 </span>
                 <Image
@@ -88,13 +88,14 @@ const {
                   alt={`${slide.title} Image`}
                   class="h-[780px] w-1/2"
                 />
-                <div class="mt-24 ml-32 flex w-1/2 max-w-[550px] flex-col">
-                  <h2 class="mb-6 font-semibold text-[#000047] lg:text-3xl xl:text-4xl 2xl:text-[40px]">
+                <div class="mt-24 ml-16 xl:m;-24 2xl:ml-32 flex w-1/2 max-w-[550px] flex-col">
+                  <h2 class="mb-6 font-semibold text-[#000047] lg:text-2xl xl:text-3xl 2xl:text-4xl 3xl:text-[40px]">
                     {slide.title}
                   </h2>
-                  <p class="mb-7 text-[#2A2111] capitalize lg:text-lg xl:text-xl 2xl:text-xl">
-                    {slide.description}
-                  </p>
+                  <p
+                    set:html={slide.description}
+                    class="mb-7 text-[#2A2111] capitalize text-sm lg:text-base xl:text-lg 2xl:text-xl 3xl:text-xl"
+                  />
                 </div>
               </div>
             </div>
@@ -117,7 +118,7 @@ const {
       direction: "vertical",
       slidesPerView: 1,
       spaceBetween: 30,
-      mousewheel: true,
+      // mousewheel: true,
       modules: [Pagination, Mousewheel],
       parallax: true,
       pagination: {

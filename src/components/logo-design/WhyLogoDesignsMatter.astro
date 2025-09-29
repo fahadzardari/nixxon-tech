@@ -2,63 +2,157 @@
 import Image from "astro/components/Image.astro";
 import Logo from "../../assets/logo-without-text.png";
 import Diamond from "../../assets/logo-design/diamond.png";
+import Icon2 from "../../assets/logo-design/2.png";
+import Icon3 from "../../assets/logo-design/3.png";
+import Icon4 from "../../assets/logo-design/4.png";
+import Icon5 from "../../assets/logo-design/5.png";
+import Icon6 from "../../assets/logo-design/6.png";
 ---
 
-<section class="internal-padding flex">
-  <div class="min-w-1/4">
+<section class="internal-padding flex" id="why-logo-section">
+  <div class="min-w-1/4 logo-heading">
     <h2 class="mb-8 text-4xl font-semibold text-[#000047] md:text-[54px]">
       Why Logo Designs Matter?
     </h2>
-    <Image src={Logo} alt="Nixxon Tech Logo" class="h-32 w-auto" />
+    <Image src={Logo} alt="Nixxon Tech Logo" class="h-32 w-auto logo-image" />
   </div>
-  <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
-    <article class="rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939]">
-      <Image src={Diamond} alt="Diamond Icon" class="mb-6 h-12 w-12" />
-      <h3 class="mb-6 text-[28px] font-semibold">Define Your Brand</h3>
-      <p class="">
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 logo-cards-grid">
+    <article class="logo-card rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939] hover:scale-[102%] cursor-pointer">
+      <Image src={Diamond} alt="Diamond Icon" class="mb-3 h-12 w-12 card-icon" />
+      <h3 class="mb-4 xl:mb-6 text-22px xl:text-[28px] font-semibold">Define Your Brand</h3>
+      <p class="text-sm xl:text-base">
         A Logo that represents your company and what you stand for creates a
         brand persona that leaves a lasting impression.
       </p>
     </article>
-    <article class="rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939]">
-      <Image src={Diamond} alt="Diamond Icon" class="mb-6 h-12 w-12" />
-      <h3 class="mb-6 text-[28px] font-semibold">Define Your Brand</h3>
-      <p class="">
+    <article class="logo-card rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939] hover:scale-[102%] cursor-pointer">
+      <Image src={Icon2} alt="Diamond Icon" class="mb-3 h-12 w-12 card-icon" />
+      <h3 class="mb-4 xl:mb-6 text-22px xl:text-[28px] font-semibold">Inspire Instant Trust</h3>
+      <p class="text-sm xl:text-base">
         A Logo that represents your company and what you stand for creates a
         brand persona that leaves a lasting impression.
       </p>
     </article>
-    <article class="rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939]">
-      <Image src={Diamond} alt="Diamond Icon" class="mb-6 h-12 w-12" />
-      <h3 class="mb-6 text-[28px] font-semibold">Define Your Brand</h3>
-      <p class="">
+    <article class="logo-card rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939] hover:scale-[102%] cursor-pointer">
+      <Image src={Icon3} alt="Diamond Icon" class="mb-3 h-12 w-12 card-icon" />
+      <h3 class="mb-4 xl:mb-6 text-22px xl:text-[28px] font-semibold">Elevate Every Interaction</h3>
+      <p class="text-sm xl:text-base">
         A Logo that represents your company and what you stand for creates a
         brand persona that leaves a lasting impression.
       </p>
     </article>
-    <article class="rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939]">
-      <Image src={Diamond} alt="Diamond Icon" class="mb-6 h-12 w-12" />
-      <h3 class="mb-6 text-[28px] font-semibold">Define Your Brand</h3>
-      <p class="">
+    <article class="logo-card rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939] hover:scale-[102%] cursor-pointer">
+      <Image src={Icon4} alt="Diamond Icon" class="mb-3 h-12 w-12 card-icon" />
+      <h3 class="mb-4 xl:mb-6 text-22px xl:text-[28px] font-semibold">Build Unshakable Consistency</h3>
+      <p class="text-sm xl:text-base">
         A Logo that represents your company and what you stand for creates a
         brand persona that leaves a lasting impression.
       </p>
     </article>
-    <article class="rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939]">
-      <Image src={Diamond} alt="Diamond Icon" class="mb-6 h-12 w-12" />
-      <h3 class="mb-6 text-[28px] font-semibold">Define Your Brand</h3>
-      <p class="">
+    <article class="logo-card rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939] hover:scale-[102%] cursor-pointer">
+      <Image src={Icon5} alt="Diamond Icon" class="mb-3 h-12 w-12 card-icon" />
+      <h3 class="mb-4 xl:mb-6 text-22px xl:text-[28px] font-semibold">Build Unshakable Consistency</h3>
+      <p class="text-sm xl:text-base">
         A Logo that represents your company and what you stand for creates a
         brand persona that leaves a lasting impression.
       </p>
     </article>
-    <article class="rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939]">
-      <Image src={Diamond} alt="Diamond Icon" class="mb-6 h-12 w-12" />
-      <h3 class="mb-6 text-[28px] font-semibold">Define Your Brand</h3>
-      <p class="">
+    <article class="logo-card rounded-lg bg-[#F5F5F5] p-6 text-[#3A3939] hover:scale-[102%] cursor-pointer">
+      <Image src={Icon6} alt="Diamond Icon" class="mb-3 h-12 w-12 card-icon" />
+      <h3 class="mb-4 xl:mb-6 text-22px xl:text-[28px] font-semibold">Leave a Legacy</h3>
+      <p class="text-sm xl:text-base">
         A Logo that represents your company and what you stand for creates a
         brand persona that leaves a lasting impression.
       </p>
     </article>
   </div>
 </section>
+
+<script>
+  import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
+  
+  // Only run animations if user hasn't requested reduced motion
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!prefersReducedMotion) {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Animate heading and logo on scroll into view
+    gsap.from("#why-logo-section .logo-heading", {
+      y: 30,
+      opacity: 0,
+      duration: 0.7,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#why-logo-section",
+        start: "top 85%"
+      }
+    });
+    
+    // Animate the logo image with a slight delay
+    gsap.from(".logo-image", {
+      scale: 0.85,
+      opacity: 0,
+      duration: 0.6,
+      delay: 0.2,
+      ease: "back.out(1.2)",
+      scrollTrigger: {
+        trigger: "#why-logo-section",
+        start: "top 85%"
+      }
+    });
+    
+
+    
+    // Add hover effects to icons (these won't affect performance when not hovered)
+    document.querySelectorAll(".logo-card").forEach(card => {
+      const icon = card.querySelector(".card-icon");
+      
+      // Setup hover animations
+      card.addEventListener("mouseenter", () => {
+        gsap.to(icon, { 
+          rotate: 10, 
+          scale: 1.15, 
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+      
+      card.addEventListener("mouseleave", () => {
+        gsap.to(icon, { 
+          rotate: 0, 
+          scale: 1, 
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+    });
+    
+    // Subtle parallax scroll effect on cards
+    gsap.to(".logo-card", {
+      y: -10,
+      stagger: 0.05,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#why-logo-section",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 0.5
+      }
+    });
+  }
+</script>
+
+<style>
+  .logo-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .logo-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  }
+  
+  .card-icon {
+    transition: transform 0.3s ease;
+    will-change: transform;
+  }
+</style>
