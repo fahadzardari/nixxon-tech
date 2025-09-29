@@ -160,3 +160,63 @@ export const mobileCards = [
     "background": "bg-[#E0E4FF]"
   },
 ];
+
+export const videoAnimationCards = [
+  {
+    "serialNo": "01",
+    "title": "Consultation",
+    "description": "We start with understanding your goals, audience, and message to set a clear creative direction.",
+    "textColor": "text-[#2A2111]",
+    "serialBg": "bg-[#96A2FF]",
+    "background": "bg-[#E0E4FF]"
+  },
+  {
+    "serialNo": "02",
+    "title": "Concept Development",
+    "description": "Transforming ideas into a strong foundation with themes, style, and storytelling approach.",
+    "textColor": "text-[#2A2111]",
+    "serialBg": "bg-[#1DBBCB]",
+    "background": "bg-[#DEFCFF]"
+  },
+  {
+    "serialNo": "03",
+    "title": "Storyboarding",
+    "description": "Sketching the flow of your video to visualize key scenes and structure.",
+    "textColor": "text-[#FFFFFF]",
+    "serialBg": "bg-[#3D3D3D]",
+    "background": "bg-[#000000]"
+  },
+  {
+    "serialNo": "04",
+    "title": "Design & Asset Creation",
+    "description": "Crafting visuals, graphics, and assets that align perfectly with your brand identity.",
+    "textColor": "text-[#2A2111]",
+    "serialBg": "bg-[#96A2FF]",
+    "background": "bg-[#E0E4FF]"
+  },
+    {
+    "serialNo": "05",
+    "title": "Animation",
+    "description": "Bringing static designs to life with seamless motion and dynamic storytelling.",
+    "textColor": "text-[#2A2111]",
+    "serialBg": "bg-[#96A2FF]",
+    "background": "bg-[#E0E4FF]"
+  },
+  {
+    "serialNo": "06",
+    "title": "Sound & Voiceover",
+    "description": "Adding narration, sound design, and music to enhance emotion and clarity.",
+    "textColor": "text-[#2A2111]",
+    "serialBg": "bg-[#1DBBCB]",
+    "background": "bg-[#DEFCFF]"
+  },
+  {
+    "serialNo": "07",
+    "title": "Delivery",
+    "description": "Final video is exported in the required formats—ready for use across platforms.",
+    "textColor": "text-[#FFFFFF]",
+    "serialBg": "bg-[#3D3D3D]",
+    "background": "bg-[#000000]"
+  },
+  
+];
