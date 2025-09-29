@@ -66,19 +66,19 @@ const features = [
     {
       features.map((feature, index) => (
         <div
-          class={`feature-item mb-4 xl:mb-6 flex flex-col ${feature.border ? "border-b border-[#434343]/50 pb-6 xl:pb-8" : ""}`}
+          class={`feature-item mb-4 xl:mb-6 flex flex-col ${feature.border ? "border-b border-[#434343]/50 pb-6 3xl:pb-8" : ""}`}
           data-index={index}
         >
           <div class="flex">
             <Image
               src={feature.icon}
               alt={feature.title}
-              class="mr-4 aspect-square h-[50px] 2xl:mr-6 2xl:h-[62px]"
+              class="mr-4 aspect-square h-[50px] 2xl:mr-6 xl:h-[62px]"
             />
             <div class="flex flex-col">
               <h3
                 set:html={feature.title}
-                class="mb-2 text-xl leading-10 font-medium lg:text-2xl xl:text-3xl xl:leading-14 2xl:text-5xl 2xl:leading-[70px]"
+                class="mb-2 text-xl leading-10 font-medium xl:text-2xl 2xl:text-3xl 2xl:leading-14 3xl:text-5xl 3xl:leading-[70px]"
               />
               <p class="text-sm leading-4 text-[#3C3C3C] xl:text-base xl:leading-6 2xl:text-lg">
                 {feature.description}

@@ -10,6 +10,7 @@ import SwiperSection from "../../components/common/SwiperSection.astro";
 import { webDevSwiperCards } from "../../data/swipers";
 import VerticalSwiper from "../../components/common/VerticalSwiper.astro";
 import Testimonials from "../../components/common/Testimonials.astro";
+import { WebDevServices } from "../../data/services";
 ---
 
 <Layout title="Home - Nixxon Tech">
@@ -22,6 +23,7 @@ import Testimonials from "../../components/common/Testimonials.astro";
   <OurServices
     title="Our Standard"
     description="Crafting excellence across leading web platforms and technologies."
+    services={WebDevServices}
   />
   <VerticalSwiper />
   <SwiperSection

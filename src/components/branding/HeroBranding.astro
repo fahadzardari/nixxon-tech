@@ -1,5 +1,7 @@
 ---
-import webdevimage from "../../assets/logo-design.png";
+import HeroImage from "../../assets/branding/branding-1.png";
+import HeroImage2 from "../../assets/branding/branding-2.png";
+
 import CommonButton from "../common/CommonButton.astro";
 import Image from "astro/components/Image.astro";
 ---
@@ -12,7 +14,7 @@ import Image from "astro/components/Image.astro";
     <div class="z-10 mt-auto w-[55%] pb-24 2xl:w-[50%] 2xl:pb-40">
       <!-- <span class="mb-4 block h-[2px] w-10 bg-white"></span> -->
       <h1
-        class="mb-6 font-medium capitalize lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
+        class="mb-6 font-medium capitalize text-[86px] 2xl:leading-[100px]"
       >
         <span class="font-bold">Branding </span>
       </h1>
@@ -33,83 +35,111 @@ import Image from "astro/components/Image.astro";
     </div>
 
     <!-- Right -->
-    <div
-      class="absolute right-0 bottom-12 z-0 w-[55%] xl:bottom-4 xl:w-1/2 2xl:w-[45%]"
-    >
+    <div class="absolute -right-4 bottom-0 z-0 w-[80%] xl:w-[70%] 2xl:w-[60%]">
       <Image
-        id="hand-tilt"
-        src={webdevimage}
+      id={"hand-tilt"}
+        src={HeroImage}
         alt="Hand Image"
-        class="cursor-pointer"
       />
+    </div>
+    <div class="absolute top-0 left-0 z-0 w-1/3">
+      <Image src={HeroImage2} alt="Hand Image"  />
     </div>
   </div>
 </section>
 
 <script>
-  // import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
+  // lightweight, performant interactions for hero
+  const section = document.querySelector(".hero-section");
+  const hand = document.getElementById("hand-tilt");
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // Hand tilt effect (keep your existing code)
-    const hand = document.getElementById("hand-tilt");
-    if (hand) {
-      hand.style.transition = "transform 0.3s";
-      hand.addEventListener("mouseenter", () => {
-        hand.style.transform = "scale(1.08)";
-      });
-      hand.addEventListener("mousemove", (e) => {
-        const rect = hand.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * 18;
-        const rotateY = ((x - centerX) / centerX) * 18;
-        hand.style.transform = `scale(1.08) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
-      });
-      hand.addEventListener("mouseleave", () => {
-        hand.style.transition = "transform 0.5s";
-        hand.style.transform = "scale(1) rotateX(0deg) rotateY(0deg)";
-        setTimeout(() => {
-          hand.style.transition = "transform 0.3s";
-        }, 500);
-      });
-    }
+  // respect user preference
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // GSAP entrance animation for hero content
-    // gsap.from(".hero-section .z-10", {
-    //   y: 60,
-    //   opacity: 0,
-    //   duration: 1,
-    //   ease: "power3.out",
-    //   scrollTrigger: {
-    //     trigger: ".hero-section",
-    //     start: "top 80%",
-    //   },
-    // });
+  // // cheap, throttled pointer tilt using rAF (no external lib)
+  // if (hand) {
+  //   hand.style.willChange = "transform";
+  //   let raf = null;
+  //   let last = { x: 0, y: 0 };
 
-    // gsap.from("#hand-tilt", {
-    //   x: 80,
-    //   opacity: 0,
-    //   duration: 1.1,
-    //   ease: "power3.out",
-    //   scrollTrigger: {
-    //     trigger: ".hero-section",
-    //     start: "top 80%",
-    //   },
-    // });
+  //   hand.addEventListener("pointermove", (e) => {
+  //     const r = hand.getBoundingClientRect();
+  //     last.x = (e.clientX - r.left) / r.width - 0.5;
+  //     last.y = (e.clientY - r.top) / r.height - 0.5;
+  //     if (raf) return;
+  //     raf = requestAnimationFrame(() => {
+  //       const rx = (-last.y) * 10; // rotateX
+  //       const ry = last.x * 10; // rotateY
+  //       hand.style.transform = `scale(1.06) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  //       raf = null;
+  //     });
+  //   });
 
-    // gsap.to("#hand-tilt", {
-    //   y: -40,
-    //   ease: "none",
-    //   scrollTrigger: {
-    //     trigger: ".hero-section",
-    //     start: "top top",
-    //     end: "bottom top",
-    //     scrub: true,
-    //   },
-    // });
-  });
+  //   hand.addEventListener("pointerenter", () => {
+  //     hand.style.transition = "transform 220ms ease-out";
+  //   });
+  //   hand.addEventListener("pointerleave", () => {
+  //     if (raf) cancelAnimationFrame(raf);
+  //     hand.style.transition = "transform 420ms ease-out";
+  //     hand.style.transform = "scale(1) rotateX(0deg) rotateY(0deg)";
+  //     raf = null;
+  //   });
+  // }
+
+  // Lazy-load GSAP only when section is near viewport to avoid blocking initial load
+  if (!prefersReduced && "IntersectionObserver" in window && section) {
+    const io = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          obs.disconnect();
+          // dynamically import the project's gsap wrapper (keeps initial bundle small)
+          import("../../utils/gsapUtils.js")
+            .then(({ gsap, ScrollTrigger }) => {
+              gsap.registerPlugin(ScrollTrigger);
+
+              // subtle entrance for left content
+              gsap.from(".hero-section .z-10", {
+                y: 0,
+                opacity: 0,
+                duration: 0.9,
+                ease: "power3.out",
+                stagger: 0.06,
+              });
+
+              // subtle parallax on the large image with scrub (very low cost)
+              if (hand) {
+                gsap.to("#hand-tilt", {
+                  y: -28,
+                  rotation: 2,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: ".hero-section",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 0.6,
+                  },
+                });
+
+                // gentle idle "breathe" to add life without heavy cost
+                gsap.to("#hand-tilt", {
+                  scale: 1.02,
+                  duration: 3.6,
+                  yoyo: true,
+                  repeat: -1,
+                  ease: "sine.inOut",
+                });
+              }
+            })
+            .catch(() => {
+              /* fail silently — animations are non-critical */
+            });
+        });
+      },
+      { root: null, threshold: 0.12 }
+    );
+    io.observe(section);
+  }
 </script>
 
 <style>

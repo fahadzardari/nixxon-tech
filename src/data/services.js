@@ -76,3 +76,65 @@ export const HomeServices = [
 `,
   },
 ];
+
+
+export const WebDevServices = [
+  {
+    name: "Wordpress",
+    icon: `
+    <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.5 0.5C9.17893 0.5 0.5 9.17893 0.5 20.5C0.5 31.8211 9.17893 40.5 20.5 40.5C31.8211 40.5 40.5 31.8211 40.5 20.5C40.5 9.17893 31.8211 0.5 20.5 0.5ZM26.25 30.25H22.75L19.75 21.25H17L14.25 30.25H10.75L16.25 11H19L22
+.75 20.75H25.5L28.25 11H31.75L26.25 30.25Z" fill="currentColor"/>
+</svg>
+`,
+  },
+  {
+    name: "Shopify",
+    icon: `
+    <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.5 0.5C9.17893 0.5 0.5 9.17893 0.5 20.5C0.5 31.8211 9.17893 40.5 20.5 40.5C31.8211 40.5 40.5 31.8211 40.5 20.5C40.5 9.17893 31.8211 0.5 20.5 0.5ZM28.25 30.25H22.75V26.75H28.25V30.25ZM28.25 24.25H22.75V20.75
+H28.25V24.25ZM28.25 18.25H22.75V14.75H28.25V18.25ZM17 30.25H11.5V26.75H17V30.25ZM17 24.25H11.5V20.75H17V24.25ZM17 18.25H11.5V14.75H17V18.25ZM22.75 12.25H17V8.75H22.75V12.25Z" fill="currentColor"/>
+</svg>
+`,
+  },
+    {
+    name: "Wix",
+    icon: `
+    <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="1" width="39" height="39" rx="6" fill="currentColor" opacity="0.06"/>
+      <path d="M10 30L15.5 12L20.5 26L26 10L31 30" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    `,
+  },
+  {
+    name: "PHP",
+    icon: `
+    <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2.5" y="8.5" width="36" height="24" rx="4" fill="currentColor" opacity="0.06"/>
+      <path d="M12 24.5h2.8c1.8 0 2.6-0.8 2.6-2.1s-0.8-2-2.6-2h-2.8v4.1zM19.8 24.5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12 19h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    `,
+  },
+  {
+    name: "Magento",
+    icon: `
+    <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1.5" y="6.5" width="38" height="28" rx="4" fill="currentColor" opacity="0.06"/>
+      <path d="M20.5 9.5L10.5 16.5V26.5L20.5 33.5L30.5 26.5V16.5L20.5 9.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M20.5 33.5V23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    `,
+  },
+  {
+    name: "Python",
+    icon: `
+    <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="37" height="37" rx="6" fill="currentColor" opacity="0.06"/>
+      <path d="M12 14c0-2 4-4 7-4s7 2 7 4v4c0 2-4 4-7 4s-7-2-7-4v-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="14" cy="12" r="1.2" fill="currentColor"/>
+      <circle cx="27" cy="18" r="1.2" fill="currentColor"/>
+    </svg>
+    `,
+  },
+]

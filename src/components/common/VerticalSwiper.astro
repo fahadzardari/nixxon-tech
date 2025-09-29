@@ -1,10 +1,15 @@
 ---
-import VerticalImage1 from "../../assets/web-dev/web-vertical-1.png";
+import VerticalImage1 from "../../assets/web-dev/1.png";
+import VerticalImage2 from "../../assets/web-dev/2.png";
+import VerticalImage3 from "../../assets/web-dev/3.png";
+import VerticalImage4 from "../../assets/web-dev/4.png";
+import VerticalImage5 from "../../assets/web-dev/5.png";
+import VerticalImage6 from "../../assets/web-dev/6.png";
 
 import Image from "astro/components/Image.astro";
 
 // Create array of data for swiper slides
-const slides = [
+const webSlides = [
   {
     id: "01",
     title: "Informative Websites",
@@ -14,35 +19,58 @@ const slides = [
   },
   {
     id: "02",
-    title: "E-Commerce Platforms",
+    title: "E-Commerce",
     description:
-      "Our custom e-commerce solutions provide seamless shopping experiences with secure payment processing and intuitive product management.",
-    image: VerticalImage1,
+      "We got end-to-end E-commerce solutions for you, including secure payment gateways, user-friendly shopping experiences and inventory management.",
+    image: VerticalImage2,
   },
   {
     id: "03",
-    title: "Web Applications",
+    title: "Backend Web Development",
     description:
-      "We develop powerful, scalable web applications that streamline business processes and enhance productivity with user-friendly interfaces.",
-    image: VerticalImage1,
+      "Get in touch with us for robust backend web development services, optimal performance, smooth integration and efficient data management.",
+    image: VerticalImage3,
+  },
+  {
+    id: "04",
+    title: "Frontend Design & Development",
+    description:
+      "Our team of professionals excels in crafting captivating front-end designs with responsive and user-friendly interfaces.",
+    image: VerticalImage4,
+  },
+  {
+    id: "05",
+    title: "Web Portals",
+    description:
+      "Our experts specialize in developing intuitive and feature-rich web portals providing smooth access to information and services.",
+    image: VerticalImage5,
+  },
+  {
+    id: "06",
+    title: "Custom Web Apps",
+    description:
+      "Our custom web development applications cater to specific business needs ensuring unique functionalities and improved user engagement.",
+    image: VerticalImage6,
   },
 ];
+
+const {
+  title = "Website Services That set us apart",
+  description = "Businesses may differentiate themselves from the competition online with a distinctive online presence thanks to our bespoke website services. Our staff has the know-how to provide custom solutions, whether it's designing a web application, constructing a content management system, or developing a unique e-commerce platform.",
+  slides = webSlides,
+} = Astro.props;
 ---
 
 <section class="">
   <h2
-    class="mb-4 text-center font-semibold text-[#000047] lg:text-3xl xl:text-4xl 2xl:text-[40px]"
+    class="mb-4 text-center font-semibold text-[#000047] capitalize lg:text-3xl xl:text-4xl 2xl:text-[40px]"
   >
-    Website Services That Set Us Apart
+    {title}
   </h2>
   <p
     class="mx-auto max-w-7xl text-center text-xs text-[#2A2111] xl:text-sm 2xl:text-base"
   >
-    Businesses may differentiate themselves from the competition online with a
-    distinctive online presence thanks to our bespoke website services. Our
-    staff has the know-how to provide custom solutions, whether it's designing a
-    web application, constructing a content management system, or developing a
-    unique e-commerce platform.
+    {description}
   </p>
 
   <div class="vertical-swiper-container relative mx-20 mt-12 h-[780px]">

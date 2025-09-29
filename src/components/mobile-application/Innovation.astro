@@ -1,13 +1,15 @@
 ---
 const { projects = [] } = Astro.props;
 import Image from "astro/components/Image.astro";
-import Logo1 from "../../assets/home/portfolio/logos/1.png";
-import Logo2 from "../../assets/home/portfolio/logos/2.png";
-import Logo3 from "../../assets/home/portfolio/logos/3.png";
-import Logo4 from "../../assets/home/portfolio/logos/4.png";
+import Logo1 from "../../assets/mobile-application/1.png";
+import Logo2 from "../../assets/mobile-application/2.png";
+import Logo3 from "../../assets/mobile-application/3.png";
+import Logo4 from "../../assets/mobile-application/4.png";
+import Logo5 from "../../assets/mobile-application/5.png";
+import Logo6 from "../../assets/mobile-application/6.png";
 
-const logos = [Logo1, Logo2, Logo3, Logo4, Logo1, Logo2, Logo3, Logo4, Logo4];
-const filters = ["Logo Design", "Website", "Mobile App", "Video Animation"];
+const logos = [Logo1, Logo2, Logo3, Logo4, Logo5, Logo6];
+const filters = ["Programming Languages", "Development Technologies", "Backend Development", "Database", "UI/UX Design"];
 
 import Website1 from "../../assets/home/portfolio/websites/1.webp";
 
@@ -35,54 +37,42 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
       professional portfolio.
     </p>
 
-    <!-- filters -->
-    <nav
-      class="mt-6 flex flex-wrap items-center justify-center gap-3"
-      id="portfolio-filters"
-    >
-      {
-        filters.map((filter, idx) => (
-          <button
-            type="button"
-            class={`cursor-pointer portfolio-filter-btn${idx === 0 ? " selected" : ""}`}
-            data-filter={filter}
-          >
-            {filter}
-          </button>
-        ))
-      }
-    </nav>
   </header>
-
+  <!-- filters -->
+  <nav
+    class="mt-6 flex flex-wrap items-center justify-center gap-3 mb-12"
+    id="portfolio-filters"
+  >
+    {
+      filters.map((filter, idx) => (
+        <button
+          type="button"
+          class={`cursor-pointer portfolio-filter-btn${idx === 0 ? " selected" : ""}`}
+          data-filter={filter}
+        >
+          {filter}
+        </button>
+      ))
+    }
+  </nav>
+  
   <div class="mx-auto">
     <div
       id="portfolio-grid"
-      class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+      class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-6"
     >
       {
         // Default: show logos (Logo Design)
         logos.map((logo, index) => (
-          <Image
-            src={logo}
-            alt={`Project Logo ${index + 1}`}
-            class="portfolio-item h-auto max-h-[410px] w-full max-w-[480px] rounded-lg"
-            data-category="Logo Design"
-          />
-        ))
-      }
-      {
-        websites.map((website, index) => (
-          <div
-            class="portfolio-item website-scroll-container relative h-[410px] max-h-[410px] w-full max-w-[480px] overflow-hidden rounded-lg"
-            data-category="Website"
-            style="background: #fff;"
-          >
-            <Image
-              src={website}
-              alt={`Website Project ${index + 1}`}
-              class="website-scroll-img absolute top-0 left-0 h-auto w-full transition-transform duration-[4000ms] ease-linear"
-            />
-          </div>
+          <button class="hover:scale-105 cursor-pointer shadow-lg service-tab flex min-w-[220px] flex-col items-center justify-between gap-4 rounded-md bg-white pt-5 pb-6 text-base font-medium transition">
+            <div class="h-20 w-40">
+              <Image
+                src={logo}
+                alt={`Logo ${index + 1}`}
+                class="h-full w-full object-contain"
+              />
+            </div>
+          </button>
         ))
       }
     </div>
@@ -130,71 +120,9 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
       );
       const toShow = items.filter((item) => item.dataset.category === filter);
 
-      // Animate out current items
-      gsap.to(toHide, {
-        opacity: 0,
-        scale: 0.92,
-        y: 40,
-        stagger: 0.05,
-        duration: 0.3,
-        ease: "power2.in",
-        onComplete: () => {
-          toHide.forEach((item) => (item.style.display = "none"));
-          // Animate in new items
-          toShow.forEach((item) => {
-            item.style.display = "";
-            item.style.opacity = 0;
-            item.style.transform = "scale(0.92) translateY(40px)";
-          });
-          gsap.to(toShow, {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            stagger: 0.07,
-            duration: 0.5,
-            ease: "power3.out",
-          });
-        },
-      });
     });
 
-    // Show only logos by default (with animation)
-    const allItems = Array.from(grid.querySelectorAll(".portfolio-item"));
-    const toShow = allItems.filter(
-      (item) => item.dataset.category === "Logo Design",
-    );
-    const toHide = allItems.filter(
-      (item) => item.dataset.category !== "Logo Design",
-    );
-    toHide.forEach((item) => (item.style.display = "none"));
-    toShow.forEach((item) => {
-      item.style.display = "";
-      item.style.opacity = 0;
-      item.style.transform = "scale(0.92) translateY(40px)";
-    });
-    gsap.to(toShow, {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      stagger: 0.07,
-      duration: 0.5,
-      ease: "power3.out",
-    });
-
-    const bgTitle = document.getElementById("portfolio-bg-title");
-    const section = document.querySelector(".internal-padding.py-20");
-    if (bgTitle && section) {
-      function onScroll() {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.7) {
-          bgTitle.classList.add("visible");
-        } else {
-          bgTitle.classList.remove("visible");
-        }
-      }
-      window.addEventListener("scroll", onScroll, { passive: true });
-      onScroll();
-    }
+    
   });
 </script>
 
