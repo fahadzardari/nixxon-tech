@@ -9,7 +9,7 @@ import Bulb from "../../assets/home/ideas/bulb.png";
 ---
 
 <section
-  class="ideas-section internal-padding relative z-10 flex flex-row bg-[#4B00A3] text-[#FFFFFF]"
+  class="ideas-section internal-padding relative z-10 flex flex-row bg-[#4B00A3] py-12 text-[#FFFFFF]"
   id="ideas-section"
 >
   <Image
@@ -29,12 +29,16 @@ import Bulb from "../../assets/home/ideas/bulb.png";
       </div>
     </div>
   </div>
-  <div class="flex flex-1 flex-col justify-center gap-6">
-    <h2 class="text-6xl leading-[4.5rem] font-semibold">
+  <div class="flex flex-1 flex-col justify-center gap-4 2xl:gap-6">
+    <h2
+      class="text-3xl font-semibold lg:text-4xl lg:text-[2.5rem] xl:text-[3.5rem] 2xl:text-6xl 2xl:leading-[4.5rem]"
+    >
       Where Ideas Take Flight, and Results Land Big
     </h2>
-    <h3 class="text-[26px] font-medium">The Nixxon Australia Impact</h3>
-    <p class="text-base">
+    <h3 class="text-lg font-medium lg:text-xl 2xl:text-[26px]">
+      The Nixxon Australia Impact
+    </h3>
+    <p class="lg:text-sm 2xl:text-base">
       From local startups to global ventures, we’ve turned bold visions into
       measurable success. Every project we deliver blends innovation, trust, and
       precision — creating results that speak louder than words.
@@ -50,68 +54,87 @@ import Bulb from "../../assets/home/ideas/bulb.png";
         <Image
           src={Coffee}
           alt="Coffee Icon"
-          height={92}
-          width={92}
-          class={"ml-auto"}
+          class={"ml-auto aspect-square w-[60px] lg:w-[72px] xl:w-[80px] 2xl:w-[92px]"}
         />
         <div class="flex flex-col items-end">
-          <h3 class="text-[44px] font-medium">4,200+</h3>
-          <p class="text-[22px] font-medium">Coffees Shared</p>
-          <p class="text-right text-sm font-medium capitalize">
+          <h3
+            class="text-[28px] font-medium lg:text-[32px] xl:text-[36px] 2xl:text-[44px]"
+          >
+            4,200+
+          </h3>
+          <p class="text-right text-lg font-medium xl:text-xl 2xl:text-[22px]">
+            Coffees Shared
+          </p>
+          <p class="text-right text-xs font-medium capitalize xl:text-sm">
             Fuel for our brightest <br /> ideas
           </p>
         </div>
       </div>
+
       <div
         class="ideas-stat flex w-full items-center gap-4 border-r border-r-white py-1 pr-4"
       >
         <Image
           src={Person}
-          alt="Coffee Icon"
-          height={92}
-          width={92}
-          class={"ml-auto"}
+          alt="Person Icon"
+          class={"ml-auto aspect-square w-[60px] lg:w-[72px] xl:w-[80px] 2xl:w-[92px]"}
         />
         <div class="flex flex-col items-end">
-          <h3 class="text-[44px] font-medium">2.5K</h3>
-          <p class="text-[22px] font-medium">Projects Delivered</p>
-          <p class="text-right text-sm font-medium capitalize">
+          <h3
+            class="text-[28px] font-medium lg:text-[32px] xl:text-[36px] 2xl:text-[44px]"
+          >
+            2.5K
+          </h3>
+          <p class="text-right text-lg font-medium xl:text-xl 2xl:text-[22px]">
+            Projects Delivered
+          </p>
+          <p class="text-right text-xs font-medium capitalize xl:text-sm">
             Big and small, each <br /> one unique
           </p>
         </div>
       </div>
+
       <div
-        class="ideas-stat ideas-stat flex w-full items-center gap-4 border-r border-r-white py-1 pr-4"
+        class="ideas-stat flex w-full items-center gap-4 border-r border-r-white py-1 pr-4"
       >
         <Image
           src={Bulb}
-          alt="Coffee Icon"
-          height={92}
-          width={92}
-          class={"ml-auto"}
+          alt="Lightbulb Icon"
+          class={"ml-auto aspect-square w-[60px] lg:w-[72px] xl:w-[80px] 2xl:w-[92px]"}
         />
         <div class="flex flex-col items-end">
-          <h3 class="text-[44px] font-medium">44</h3>
-          <p class="text-[22px] font-medium">Creative Minds</p>
-          <p class="text-right text-sm font-medium capitalize">
+          <h3
+            class="text-[28px] font-medium lg:text-[32px] xl:text-[36px] 2xl:text-[44px]"
+          >
+            44
+          </h3>
+          <p class="text-right text-lg font-medium xl:text-xl 2xl:text-[22px]">
+            Creative Minds
+          </p>
+          <p class="text-right text-xs font-medium capitalize xl:text-sm">
             Turning visions into <br /> visuals
           </p>
         </div>
       </div>
+
       <div
         class="ideas-stat flex w-full items-center gap-4 border-r border-r-white py-1 pr-4"
       >
         <Image
           src={World}
-          alt="Coffee Icon"
-          height={92}
-          width={92}
-          class={"ml-auto"}
+          alt="World Icon"
+          class={"ml-auto aspect-square w-[60px] lg:w-[72px] xl:w-[80px] 2xl:w-[92px]"}
         />
         <div class="flex flex-col items-end">
-          <h3 class="text-[44px] font-medium">8</h3>
-          <p class="text-[22px] font-medium">Countries Reached</p>
-          <p class="text-right text-sm font-medium capitalize">
+          <h3
+            class="text-[28px] font-medium lg:text-[32px] xl:text-[36px] 2xl:text-[44px]"
+          >
+            8
+          </h3>
+          <p class="text-right text-lg font-medium xl:text-xl 2xl:text-[22px]">
+            Countries Reached
+          </p>
+          <p class="text-right text-xs font-medium capitalize xl:text-sm">
             Taking Aussie creativity <br /> worldwide
           </p>
         </div>
@@ -157,36 +180,150 @@ import Bulb from "../../assets/home/ideas/bulb.png";
     /* border-radius: 2rem; */
     overflow: hidden;
   }
+
+  /* small perf hints for transforms */
+  .ideas-stat,
+  .floaty,
+  .ideas-stat img {
+    will-change: transform, opacity;
+  }
 </style>
 
-<script>
+<script >
   import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // ScrollTrigger.getAll().forEach((st) => st.kill());
+  gsap.registerPlugin(ScrollTrigger);
 
-    gsap.set(".ideas-stat", { opacity: 0, y: 40 });
+  document.addEventListener("DOMContentLoaded", () => {
+    // --- entrance for text block ---
+    gsap.from("#ideas-section h2", {
+      y: 28,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#ideas-section h2",
+        start: "top 92%",
+      },
+    });
+
+    gsap.from("#ideas-section h3", {
+      y: 18,
+      opacity: 0,
+      duration: 0.7,
+      delay: 0.08,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#ideas-section h3",
+        start: "top 92%",
+      },
+    });
+
+    gsap.from("#ideas-section p", {
+      y: 14,
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.14,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#ideas-section p",
+        start: "top 92%",
+      },
+    });
+
+    // --- stats items: staggered reveal + subtle scale on enter ---
+    gsap.set(".ideas-stat", { opacity: 0, y: 36, scale: 0.99 });
     ScrollTrigger.batch(".ideas-stat", {
       onEnter: (batch) =>
         gsap.to(batch, {
           opacity: 1,
           y: 0,
-          stagger: 0.15,
-          duration: 0.6,
+          scale: 1,
+          stagger: 0.12,
+          duration: 0.65,
           ease: "power2.out",
         }),
       once: true,
-      start: "top 80%",
+      start: "top 84%",
     });
 
-    gsap.to("#floaty-art", {
-      y: 40,
-      scrollTrigger: {
-        trigger: ".ideas-section",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 0.5,
-      },
+    // --- numeric counters for each stat h3 ---
+    document.querySelectorAll(".ideas-stat h3").forEach((el) => {
+      const raw = el.textContent || "";
+      // extract digits (handles commas) and optional plus
+      const digitsMatch = raw.replace(/,/g, "").match(/\d+/);
+      if (!digitsMatch) return;
+      const final = parseInt(digitsMatch[0], 10) || 0;
+      // keep formatting (commas/plus) for suffix/prefix
+      const suffix = raw.replace(/\d|,|\s/g, "");
+
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: final,
+        duration: Math.min(1.2, 0.6 + final / 5000),
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: el.closest(".ideas-stat"),
+          start: "top 92%",
+          toggleActions: "play none none none",
+        },
+        onUpdate() {
+          // format with commas
+          el.textContent = Math.round(obj.val).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (suffix || "");
+        },
+      });
+    });
+
+    // --- floaty-art gentle parallax + interactive tilt ---
+    const floaty = document.querySelector("#floaty-art");
+    if (floaty) {
+      // vertical parallax tied to scroll
+      gsap.to(floaty, {
+        y: 36,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".ideas-section",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.55,
+        },
+      });
+
+      // micro-tilt on pointer move with damping
+      floaty.style.willChange = "transform";
+      let pointerTween = null;
+      floaty.addEventListener("pointermove", (e) => {
+        const rect = floaty.getBoundingClientRect();
+        const rx = (e.clientX - rect.left) / rect.width - 0.5;
+        const ry = (e.clientY - rect.top) / rect.height - 0.5;
+        const tx = rx * 10; // translate x
+        const ty = ry * 8; // translate y
+        const rz = rx * 4; // rotate z
+        if (pointerTween) pointerTween.kill();
+        pointerTween = gsap.to(floaty, { x: tx, y: ty - 6, rotation: rz, duration: 0.45, ease: "power2.out" });
+      });
+      floaty.addEventListener("pointerleave", () => {
+        if (pointerTween) pointerTween.kill();
+        gsap.to(floaty, { x: 0, y: 0, rotation: 0, duration: 0.6, ease: "power2.out" });
+      });
+    }
+
+    // --- hover micro-interactions for stats (desktop) ---
+    document.querySelectorAll(".ideas-stat").forEach((stat) => {
+      stat.addEventListener("mouseenter", () => {
+        gsap.to(stat, { scale: 1.02, y: -4, duration: 0.18, ease: "power1.out" });
+        const img = stat.querySelector("img");
+        if (img) gsap.to(img, { scale: 1.08, rotation: 6, duration: 0.25, ease: "power1.out" });
+      });
+      stat.addEventListener("mouseleave", () => {
+        gsap.to(stat, { scale: 1, y: 0, duration: 0.22, ease: "power2.out" });
+        const img = stat.querySelector("img");
+        if (img) gsap.to(img, { scale: 1, rotation: 0, duration: 0.3, ease: "power2.out" });
+      });
+
+      // keyboard / focus accessibility
+      stat.addEventListener("focusin", () => gsap.to(stat, { scale: 1.02, y: -4, duration: 0.16 }));
+      stat.addEventListener("focusout", () => gsap.to(stat, { scale: 1, y: 0, duration: 0.16 }));
     });
   });
 </script>
