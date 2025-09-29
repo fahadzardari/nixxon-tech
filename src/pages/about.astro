@@ -1,0 +1,46 @@
+---
+import "../index.css";
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/common/Navbar.astro";
+import Experience from "../components/home/Experience.astro";
+import OurServices from "../components/home/OurServices.astro";
+import Accordion from "../components/common/Accordion.astro";
+import SwiperSection from "../components/common/SwiperSection.astro";
+import { webDevSwiperCards } from "../data/swipers";
+import VerticalSwiper from "../components/common/VerticalSwiper.astro";
+import Testimonials from "../components/common/Testimonials.astro";
+import HeroLogoDesign from "../components/logo-design/HeroLogoDesign.astro";
+import PresentBrand from "../components/logo-design/PresentBrand.astro";
+import WhyLogoDesignsMatter from "../components/logo-design/WhyLogoDesignsMatter.astro";
+import HeroBranding from "../components/branding/HeroBranding.astro";
+import HeroDigitalMarketing from "../components/digital-marketing/HeroDigitalMarketing.astro";
+import HeroAbout from "../components/about/HeroAbout.astro";
+import CommonButton from "../components/common/CommonButton.astro";
+import Stats from "../components/about/Stats.astro";
+import OurMission from "../components/about/OurMission.astro";
+---
+
+<Layout title="Home - Nixxon Tech">
+  <Navbar />
+  <HeroAbout />
+
+  <Experience
+    typewriter="Firm Overview     "
+    experience="We Specialize in Transforming Your Idea or Business in the Current Digital Era."
+    actionButton={false}
+  />
+  <div class="internal-padding mb-16 flex flex-col 2xl:mb-24">
+    <p class="mb-12 ml-60 text-lg text-[#2A2111] xl:text-xl 2xl:text-[22px]">
+      Our goal in the modern digital world is to make enterprises possible.With
+      the help of our innovative technologies and tailored programs, your
+      company will have all it needs to succeed and keep one step ahead of the
+      competition.
+    </p>
+    <CommonButton className="ml-auto w-fit"> Let's Talk </CommonButton>
+  </div>
+
+  <span class="our-services h-0 w-0"> </span>
+  <Stats />
+  <OurMission />
+  <Testimonials />
+</Layout>

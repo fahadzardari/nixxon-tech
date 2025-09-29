@@ -3,13 +3,15 @@ import CommonButton from "../common/CommonButton.astro";
 const {
   typewriter = "We have Passion for our craft",
   experience = "With over two decades of experience and a global footprint, our teams operate as a cohesive unit, consistently exceeding expectations and delivering unparalleled service to our diverse clientele worldwide.",
+  actionButton = true,
+
 } = Astro.props;
 
 // Calculate width based on typewriter length (+2ch for safety)
 const typewriterWidth = `${typewriter.length - 5}ch`;
 ---
 
-<section class="internal-padding my-16 2xl:my-24">
+<section class={`internal-padding ${actionButton ? "my-16 2xl:my-24" : "mt-16 2xl:mt-24"} `}>
   <div class="flex flex-wrap items-center gap-4">
     <h2
       class="3xl:text-5xl m-0 font-normal text-[#000047] lg:text-2xl lg:leading-12 xl:text-3xl xl:leading-14 2xl:text-[40px] 2xl:leading-16"
@@ -22,7 +24,7 @@ const typewriterWidth = `${typewriter.length - 5}ch`;
       {experience}
     </h2>
   </div>
-  <CommonButton className="mt-10"> Learn More </CommonButton>
+  {actionButton && <CommonButton className="mt-10"> Learn More </CommonButton>}
 </section>
 
 <script>

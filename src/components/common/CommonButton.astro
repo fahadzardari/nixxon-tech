@@ -1,11 +1,12 @@
 ---
-const { className } = Astro.props;
+const { className, typography = "md:text-sm xl:text-base 2xl:text-lg" } =
+  Astro.props;
 ---
 
 <button
-  class={`relative overflow-hidden capitalize animated-btn md:text-sm xl:text-base 2xl:text-lg text-white bg-button-gradient py-[10px] px-10 rounded-3xl cursor-pointer ${className}`}
+  class={`relative overflow-hidden capitalize animated-btn group  text-white bg-button-gradient py-[10px] px-10 rounded-3xl cursor-pointer ${className} ${typography} `}
 >
-  <span class="button-text"><slot /></span>
+  <span class="button-text flex items-center justify-center text-nowrap"><slot /></span>
 </button>
 
 <script>
