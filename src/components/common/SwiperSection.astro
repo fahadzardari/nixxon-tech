@@ -1,10 +1,16 @@
 ---
 import CommonButton from "./CommonButton.astro";
 import SwiperCard from "./SwiperCard.astro";
-const { swiperCards = [], title = "The Art of Web Development", description } = Astro.props;
+const {
+  swiperCards = [],
+  title = "The Art of Web Development",
+  description,
+} = Astro.props;
 ---
 
-<section class="left-padding my-36 flex h-[750px] py-12 overflow-hidden bg-[#f8f8f8]">
+<section
+  class="left-padding my-36 flex  overflow-hidden bg-[#f8f8f8] py-12 2xl:h-[750px]"
+>
   <div
     class="relative z-20 flex w-1/2 flex-col gap-5 border-r border-r-[#808080] bg-[#f8f8f8] pr-12 pb-32"
   >
@@ -94,8 +100,8 @@ const { swiperCards = [], title = "The Art of Web Development", description } = 
         prevEl: ".steps-swiper-prev",
       },
       modules: [Navigation],
-      wrapperClass: 'steps-swiper-wrapper',
-      slideClass: 'steps-swiper-slide',
+      wrapperClass: "steps-swiper-wrapper",
+      slideClass: "steps-swiper-slide",
       breakpoints: {
         640: {
           slidesPerView: 1,

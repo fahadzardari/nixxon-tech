@@ -6,7 +6,7 @@ import Experience from "../../components/home/Experience.astro";
 import OurServices from "../../components/home/OurServices.astro";
 import Accordion from "../../components/common/Accordion.astro";
 import SwiperSection from "../../components/common/SwiperSection.astro";
-import { webDevSwiperCards } from "../../data/swipers";
+import { mobileCards } from "../../data/swipers";
 import VerticalSwiper from "../../components/common/VerticalSwiper.astro";
 import Testimonials from "../../components/common/Testimonials.astro";
 import HeroLogoDesign from "../../components/logo-design/HeroLogoDesign.astro";
@@ -20,6 +20,59 @@ import Portfolio from "../../components/home/Portfolio.astro";
 import HeroMobileApp from "../../components/mobile-application/HeroMobileApp.astro";
 import Innovation from "../../components/mobile-application/Innovation.astro";
 import SuccessRecord from "../../components/mobile-application/SuccessRecord.astro";
+
+import VerticalImage1 from "../../assets/mobile-application/vert-1.png";
+import VerticalImage2 from "../../assets/mobile-application/vert-2.png";
+import VerticalImage3 from "../../assets/mobile-application/vert-3.png";
+import VerticalImage4 from "../../assets/mobile-application/vert-4.png";
+import VerticalImage5 from "../../assets/mobile-application/vert-5.png";
+import VerticalImage6 from "../../assets/mobile-application/vert-6.png";
+
+// Create array of data for swiper slides
+const mobileSlides = [
+  {
+    id: "01",
+    title: "Informative Websites",
+    description:
+      "With our visually appealing and highly functional websites, you will get maximum user engagements with an amazing browsing experience.",
+    image: VerticalImage1,
+  },
+  {
+    id: "02",
+    title: "E-Commerce",
+    description:
+      "We got end-to-end E-commerce solutions for you, including secure payment gateways, user-friendly shopping experiences and inventory management.",
+    image: VerticalImage2,
+  },
+  {
+    id: "03",
+    title: "Backend Web Development",
+    description:
+      "Get in touch with us for robust backend web development services, optimal performance, smooth integration and efficient data management.",
+    image: VerticalImage3,
+  },
+  {
+    id: "04",
+    title: "Frontend Design & Development",
+    description:
+      "Our team of professionals excels in crafting captivating front-end designs with responsive and user-friendly interfaces.",
+    image: VerticalImage4,
+  },
+  {
+    id: "05",
+    title: "Web Portals",
+    description:
+      "Our experts specialize in developing intuitive and feature-rich web portals providing smooth access to information and services.",
+    image: VerticalImage5,
+  },
+  {
+    id: "06",
+    title: "Custom Web Apps",
+    description:
+      "Our custom web development applications cater to specific business needs ensuring unique functionalities and improved user engagement.",
+    image: VerticalImage6,
+  },
+];
 ---
 
 <Layout title="Home - Nixxon Tech">
@@ -31,11 +84,15 @@ import SuccessRecord from "../../components/mobile-application/SuccessRecord.ast
     experience="Transform static concepts into motion that matters. Our video animations bring clarity, creativity, and impact to your brand’s story, ensuring your message is not just seen but remembered and acted upon."
   />
   <span class="our-services h-0 w-0"> </span>
-  <VerticalSwiper title="Our Branding Services" cards={webDevSwiperCards} />
+  <VerticalSwiper 
+  title="Mobile App Services That Set Us Apart" 
+  description="Our mobile app development services blend creativity, excellence, and a customer-focused mindset to produce aesthetically pleasing, incredibly functional apps that encourage devoted users over time."
+  slides={mobileSlides} />
   <SwiperSection
-    title="Beyond Strategy The True Art of Marketing"
-    description="We go further than plans and tactics crafting campaigns that blend creativity, data, and vision to create lasting impact and measurable growth."
-  />
+    title="Our Mobile Application process"
+    description="Our process turns ideas into scalable, user-friendly apps designed, built, and launched with precision at every step."
+    swiperCards={mobileCards}
+    />
   <Innovation />
   <SuccessRecord />
   <Testimonials />

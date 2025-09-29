@@ -6,7 +6,6 @@ import VerticalImage4 from "../../assets/web-dev/4.png";
 import VerticalImage5 from "../../assets/web-dev/5.png";
 import VerticalImage6 from "../../assets/web-dev/6.png";
 
-import Image from "astro/components/Image.astro";
 
 // Create array of data for swiper slides
 const webSlides = [
@@ -53,6 +52,7 @@ const webSlides = [
     image: VerticalImage6,
   },
 ];
+import Image from "astro/components/Image.astro";
 
 const {
   title = "Website Services That set us apart",
@@ -80,7 +80,7 @@ const {
           slides.map((slide) => (
             <div class="swiper-slide">
               <div class="relative flex">
-                <span class="absolute -top-6 2xl:-top-8 left-[43%] 2xl:left-[45%] text-[#000000] lg:text-[140px] xl:text-[150px] 2xl:text-[170px]">
+                <span class="absolute -top-12 2xl:-top-10 left-[43%] 2xl:left-[45%] text-[#000000] lg:text-[140px] xl:text-[150px] 2xl:text-[170px]">
                   {slide.id}
                 </span>
                 <Image

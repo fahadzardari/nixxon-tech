@@ -6,7 +6,7 @@ import Experience from "../../components/home/Experience.astro";
 import OurServices from "../../components/home/OurServices.astro";
 import Accordion from "../../components/common/Accordion.astro";
 import SwiperSection from "../../components/common/SwiperSection.astro";
-import { webDevSwiperCards } from "../../data/swipers";
+import { digitalMarketingCards } from "../../data/swipers";
 import VerticalSwiper from "../../components/common/VerticalSwiper.astro";
 import Testimonials from "../../components/common/Testimonials.astro";
 import HeroLogoDesign from "../../components/logo-design/HeroLogoDesign.astro";
@@ -15,6 +15,59 @@ import WhyLogoDesignsMatter from "../../components/logo-design/WhyLogoDesignsMat
 import HeroBranding from "../../components/branding/HeroBranding.astro";
 import HeroDigitalMarketing from "../../components/digital-marketing/HeroDigitalMarketing.astro";
 import DigitalMarketingAdSpending from "../../components/digital-marketing/DigitalMarketingAdSpending.astro";
+
+import VerticalImage1 from "../../assets/digital-marketing/vert-1.png";
+import VerticalImage2 from "../../assets/digital-marketing/vert-2.png";
+import VerticalImage3 from "../../assets/digital-marketing/vert-3.png";
+import VerticalImage4 from "../../assets/digital-marketing/vert-4.png";
+import VerticalImage5 from "../../assets/digital-marketing/vert-5.png";
+import VerticalImage6 from "../../assets/digital-marketing/vert-6.png";
+
+// Create array of data for swiper slides
+const digitalMarketingSlides = [
+  {
+    id: "01",
+    title: "Informative Websites",
+    description:
+      "With our visually appealing and highly functional websites, you will get maximum user engagements with an amazing browsing experience.",
+    image: VerticalImage1,
+  },
+  {
+    id: "02",
+    title: "E-Commerce",
+    description:
+      "We got end-to-end E-commerce solutions for you, including secure payment gateways, user-friendly shopping experiences and inventory management.",
+    image: VerticalImage2,
+  },
+  {
+    id: "03",
+    title: "Backend Web Development",
+    description:
+      "Get in touch with us for robust backend web development services, optimal performance, smooth integration and efficient data management.",
+    image: VerticalImage3,
+  },
+  {
+    id: "04",
+    title: "Frontend Design & Development",
+    description:
+      "Our team of professionals excels in crafting captivating front-end designs with responsive and user-friendly interfaces.",
+    image: VerticalImage4,
+  },
+  {
+    id: "05",
+    title: "Web Portals",
+    description:
+      "Our experts specialize in developing intuitive and feature-rich web portals providing smooth access to information and services.",
+    image: VerticalImage5,
+  },
+  {
+    id: "06",
+    title: "Custom Web Apps",
+    description:
+      "Our custom web development applications cater to specific business needs ensuring unique functionalities and improved user engagement.",
+    image: VerticalImage6,
+  },
+];
 ---
 
 <Layout title="Home - Nixxon Tech">
@@ -26,10 +79,15 @@ import DigitalMarketingAdSpending from "../../components/digital-marketing/Digit
     experience="We Ignite your brand’s success with tailored marketing solutions that deliver measurable impact converting audiences, securing valuable leads, and driving growth with strategic, data-backed executions."
   />
   <span class="our-services h-0 w-0"> </span>
-  <VerticalSwiper title="Our Branding Services" cards={webDevSwiperCards} />
+  <VerticalSwiper
+    title="Digital Marketing Services That Set Us Apart"
+    description="Our business strategy is all about keeping up with the latest trends and updates. We make sure to facilitate our customers to the best of our abilities. At NixxonTech, the goal of our team is to provide the service that fulfills the desires of customers effectively."
+    slides={digitalMarketingSlides}
+  />
   <SwiperSection
     title="Beyond Strategy The True Art of Marketing"
     description="We go further than plans and tactics crafting campaigns that blend creativity, data, and vision to create lasting impact and measurable growth."
+    swiperCards={digitalMarketingCards}
   />
   <DigitalMarketingAdSpending />
   <Testimonials />

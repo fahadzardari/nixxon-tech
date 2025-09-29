@@ -17,6 +17,59 @@ import HeroDigitalMarketing from "../../components/digital-marketing/HeroDigital
 import DigitalMarketingAdSpending from "../../components/digital-marketing/DigitalMarketingAdSpending.astro";
 import HeroVideoAnimation from "../../components/video-animation/HeroVideoAnimation.astro";
 import Portfolio from "../../components/home/Portfolio.astro";
+
+import VerticalImage1 from "../../assets/video-animation/1.png";
+import VerticalImage2 from "../../assets/video-animation/2.png";
+import VerticalImage3 from "../../assets/video-animation/3.png";
+import VerticalImage4 from "../../assets/video-animation/4.png";
+import VerticalImage5 from "../../assets/video-animation/5.png";
+import VerticalImage6 from "../../assets/video-animation/6.png";
+
+// Create array of data for swiper slides
+const videoSlides = [
+  {
+    id: "01",
+    title: "Informative Websites",
+    description:
+      "With our visually appealing and highly functional websites, you will get maximum user engagements with an amazing browsing experience.",
+    image: VerticalImage1,
+  },
+  {
+    id: "02",
+    title: "E-Commerce",
+    description:
+      "We got end-to-end E-commerce solutions for you, including secure payment gateways, user-friendly shopping experiences and inventory management.",
+    image: VerticalImage2,
+  },
+  {
+    id: "03",
+    title: "Backend Web Development",
+    description:
+      "Get in touch with us for robust backend web development services, optimal performance, smooth integration and efficient data management.",
+    image: VerticalImage3,
+  },
+  {
+    id: "04",
+    title: "Frontend Design & Development",
+    description:
+      "Our team of professionals excels in crafting captivating front-end designs with responsive and user-friendly interfaces.",
+    image: VerticalImage4,
+  },
+  {
+    id: "05",
+    title: "Web Portals",
+    description:
+      "Our experts specialize in developing intuitive and feature-rich web portals providing smooth access to information and services.",
+    image: VerticalImage5,
+  },
+  {
+    id: "06",
+    title: "Custom Web Apps",
+    description:
+      "Our custom web development applications cater to specific business needs ensuring unique functionalities and improved user engagement.",
+    image: VerticalImage6,
+  },
+];
 ---
 
 <Layout title="Home - Nixxon Tech">
@@ -28,10 +81,14 @@ import Portfolio from "../../components/home/Portfolio.astro";
     experience="Transform static concepts into motion that matters. Our video animations bring clarity, creativity, and impact to your brand’s story, ensuring your message is not just seen but remembered and acted upon."
   />
   <span class="our-services h-0 w-0"> </span>
-  <VerticalSwiper title="Our Branding Services" cards={webDevSwiperCards} />
+  <VerticalSwiper
+    title="Video Animation Services That Set Us Apart"
+    description="We pay great attention to every small detail and go above and beyond for our clients in order to produce visually spectacular experiences that attract viewers and leave a lasting impact. With the ideal balance of technical know-how and creative inspiration, every project we work on with our distinctive video animation services is of the highest caliber and inventiveness."
+    slides={videoSlides}
+  />
   <SwiperSection
-    title="Beyond Strategy The True Art of Marketing"
-    description="We go further than plans and tactics crafting campaigns that blend creativity, data, and vision to create lasting impact and measurable growth."
+    title="Our Video Animation process"
+    description="We transform ideas into powerful visuals through a streamlined process that ensures every animation is clear, creative, and impactful."
   />
   <Portfolio />
   <Testimonials />
