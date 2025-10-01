@@ -240,28 +240,9 @@ const {
 
     items.forEach((item) => {
       item.addEventListener("click", () => setActive(item));
-      item.addEventListener("mouseeneter", () => setActive(item));
 
-      // Add hover effect for inactive panels
-      item.addEventListener("mouseenter", () => {
-        if (item.dataset.active !== "true") {
-          gsap.to(item.querySelector(".accordion-title"), {
-            opacity: 0.85,
-            scale: 1.05,
-            duration: 0.3,
-          });
-        }
-      });
-
-      item.addEventListener("mouseleave", () => {
-        if (item.dataset.active !== "true") {
-          gsap.to(item.querySelector(".accordion-title"), {
-            opacity: 1,
-            scale: 1,
-            duration: 0.3,
-          });
-        }
-      });
+      // Add hover effect to open accordion
+      item.addEventListener("mouseenter", () => setActive(item));
     });
 
     // Button hover animations
