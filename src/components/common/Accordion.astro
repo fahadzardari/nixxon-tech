@@ -1,35 +1,41 @@
 ---
-const panels = [
+const panelsDummy = [
   {
     title: "Corporate Websites",
     body: "Each corporate website built by Nixxon Australia is tailored...",
     cta: ["Get Started", "Live Chat"],
+    images: [Acc1, Acc2, Acc3, Acc4],
   },
   {
     title: "E-Commerce Websites",
     body: "Sell more with bespoke storefronts engineered for conversions.",
     cta: ["View Work"],
+    images: [Acc1, Acc2, Acc3, Acc4],
   },
   {
     title: "Flat Design Website",
     body: "Sell more with bespoke storefronts engineered for conversions.",
     cta: ["View Work"],
+    images: [Acc1, Acc2, Acc3, Acc4],
   },
 
   {
     title: "Landing Pages",
     body: "High-impact funnels for campaigns and launches.",
     cta: ["See Case Studies"],
+    images: [Acc1, Acc2, Acc3, Acc4],
   },
   {
     title: "Responsive Websites",
     body: "Pixel-perfect across every device.",
     cta: ["Book a Call"],
+    images: [Acc1, Acc2, Acc3, Acc4],
   },
   {
     title: "WordPress Websites",
     body: "Enterprise-ready experiences on WordPress.",
     cta: ["Discover More"],
+    images: [Acc1, Acc2, Acc3, Acc4],
   },
 ];
 import Image from "astro/components/Image.astro";
@@ -41,7 +47,7 @@ const {
   title = "Website Services That set us apart",
   description = "Businesses may differentiate themselves from the competition online with a distinctive online presence thanks to our bespoke website services. Our staff has the know-how to provide custom solutions, whether it's designing a web application, constructing a content management system, or developing a unique e-commerce platform.",
   para = "Each corporate website built by Nixxon Australia is tailored to your company's specific demands and objectives. Our goal is to create a professional, branded website for your company that will set it out from the competition.",
-  slides = panels,
+  panels = panelsDummy,
 } = Astro.props;
 ---
 
@@ -59,7 +65,7 @@ const {
   </p>
   <div
     data-accordion
-    class="horizontal-accordion flex h-[600px] overflow-hidden bg-gradient-to-r from-[#0B1A36] via-[#4B1E93] to-[#6F1DB7] text-white"
+    class="horizontal-accordion mx-auto flex h-[600px] max-w-[1300px] overflow-hidden bg-gradient-to-r from-[#0B1A36] via-[#4B1E93] to-[#6F1DB7] text-white"
   >
     {
       panels.map((panel, index) => (
@@ -68,55 +74,39 @@ const {
           data-accordion-item
           data-active={index === 0}
           aria-expanded={index === 0 ? "true" : "false"}
-          class="group relative flex flex-col justify-between transition-[flex-basis] duration-500 ease-out focus:outline-none"
+          class="group relative flex flex-col justify-between transition-[flex-basis] duration-[1.5s] ease-out focus:outline-none"
           style={`--basis: ${index === 0 ? "65%" : "6.75%"};`}
         >
           <div class="flex h-full w-full">
             {/* Vertical title for active state - matching inactive width */}
-            <div class="hidden h-full w-[6.75vw] items-center justify-center bg-gradient-to-r from-[#101E39] to-[#643DB4] group-data-[active=true]:flex">
-              <h3 class="writing-vertical-lr accordion-title rotate-180 text-[26px] font-semibold text-white uppercase">
+            <div class="hidden h-full w-[4.75vw] items-center justify-center group-data-[active=true]:flex">
+              <h3 class="writing-vertical-lr accordion-title rotate-180 text-[22px] font-semibold text-white uppercase">
                 {panel.title}
               </h3>
             </div>
 
             {/* Content area for active state */}
-            <div class="accordion-content flex h-full flex-1 flex-col px-8 py-6 text-left group-data-[active=false]:hidden">
-              <h3 class="accordion-content-item pb-4 text-3xl leading-tight font-semibold text-white">
+            <div class="accordion-content flex h-full flex-1 flex-col px-3 py-6 text-left group-data-[active=false]:hidden">
+              <h3 class="accordion-content-item pb-4 text-lg leading-tight font-semibold text-white xl:text-xl 2xl:text-2xl">
                 {panel.title}
               </h3>
-              <p class="accordion-content-item text-lg leading-6 text-white">
-                Each corporate website built by Nixxon Australia is tailored to
-                your company's specific demands and objectives. Our goal is to
-                create a professional, branded website for your company that
-                will set it out from the competition.
+              <p class="accordion-content-item text-sm leading-6 text-white 2xl:text-base">
+                {panel.body}
               </p>
-              <div class="accordion-content-item flex py-12">
-                <Image
-                  src={Acc1}
-                  alt="Accordion Image 1"
-                  class="accordion-img w-1/4 px-2"
-                />
-                <Image
-                  src={Acc2}
-                  alt="Accordion Image 2"
-                  class="accordion-img w-1/4 px-2"
-                />
-                <Image
-                  src={Acc3}
-                  alt="Accordion Image 3"
-                  class="accordion-img w-1/4 px-2"
-                />
-                <Image
-                  src={Acc4}
-                  alt="Accordion Image 4"
-                  class="accordion-img w-1/4 px-2"
-                />
+              <div class="accordion-content-item flex gap-x-2 py-2">
+                {panel.images.map((imgSrc, imgIndex) => (
+                  <Image
+                    src={imgSrc}
+                    alt={`Accordion Image ${imgIndex + 1}`}
+                    class="accordion-img min-h-[168px] aspect-square  cursor-pointer rounded-xl px-2 transition-all duration-700 ease-in-out hover:scale-125"
+                  />
+                ))}
               </div>
               <div class="accordion-content-item flex flex-wrap gap-3 pt-6">
-                <span class="get-started-btn btn-animate flex items-center justify-center text-xl">
+                <span class="get-started-btn btn-animate flex items-center justify-center text-sm">
                   Get Started
                 </span>
-                <span class="btn-text-animate flex items-center text-xl">
+                <span class="btn-text-animate flex items-center text-sm">
                   Live Chat
                   <svg
                     width="21"
@@ -137,7 +127,7 @@ const {
 
             {/* Vertical title only for inactive state - full width */}
             <div class="accordion-inactive hidden h-full w-full items-center justify-center bg-gradient-to-r from-[#101E39] to-[#643DB4] group-data-[active=false]:flex">
-              <h3 class="writing-vertical-lr accordion-title rotate-180 text-[26px] font-semibold text-white uppercase">
+              <h3 class="writing-vertical-lr accordion-title rotate-180 text-[22px] font-semibold text-white uppercase">
                 {panel.title}
               </h3>
             </div>
@@ -161,7 +151,7 @@ const {
     const totalItems = items.length;
 
     // Calculate widths - narrower inactive tabs to fit better
-    const inactiveWidth = 6.75; // Each inactive tab width
+    const inactiveWidth = 5.75; // Each inactive tab width
     const totalInactiveWidth = inactiveWidth * (totalItems - 1);
     const activeWidth = 100 - totalInactiveWidth;
 
@@ -224,18 +214,18 @@ const {
       );
 
       // Special animation for images
-      gsap.fromTo(
-        activePanel.querySelectorAll(".accordion-img"),
-        { opacity: 0, scale: 0.92 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.08,
-          ease: "back.out(1.2)",
-          delay: 0.4,
-        },
-      );
+      // gsap.fromTo(
+      //   activePanel.querySelectorAll(".accordion-img"),
+      //   { opacity: 0, scale: 0.92 },
+      //   {
+      //     opacity: 1,
+      //     scale: 1,
+      //     duration: 0.6,
+      //     stagger: 0.08,
+      //     ease: "back.out(1.2)",
+      //     delay: 0.4,
+      //   },
+      // );
     }
 
     items.forEach((item) => {
@@ -291,8 +281,8 @@ const {
   }
 
   .get-started-btn {
-    width: 156.41px;
-    height: 50.26px;
+    width: 136.41px;
+    height: 40.26px;
     background: #643db4;
     border-radius: 27.0647px 38.6638px 5.15517px 27.0647px;
     transition:

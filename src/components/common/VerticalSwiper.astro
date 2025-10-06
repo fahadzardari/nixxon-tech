@@ -61,14 +61,14 @@ const {
 } = Astro.props;
 ---
 
-<section class="">
+<section class="vertical-swiper-section">
   <h2
-    class="mb-4 text-center font-semibold text-[#000047] capitalize lg:text-3xl xl:text-4xl 2xl:text-[40px]"
+    class="mb-4 text-center font-semibold text-[#000047] capitalize lg:text-3xl xl:text-4xl 2xl:text-[40px] section-title"
   >
     {title}
   </h2>
   <p
-    class="mx-auto max-w-7xl text-center text-xs text-[#2A2111] xl:text-sm 2xl:text-base"
+    class="mx-auto max-w-7xl text-center text-xs text-[#2A2111] xl:text-sm 2xl:text-base section-description"
   >
     {description}
   </p>
@@ -79,23 +79,30 @@ const {
         {
           slides.map((slide) => (
             <div class="swiper-slide">
-              <div class="relative flex">
-                <span class="absolute -top-12 2xl:-top-10 left-[43%] 2xl:left-[45%] text-[#000000] lg:text-[140px] xl:text-[150px] 2xl:text-[170px]">
+              <div class="relative flex slide-content">
+                <span class="slide-number absolute z-10 -top-12 2xl:-top-10 left-[43%] 2xl:left-[45%] text-[#000000] lg:text-[140px] xl:text-[150px] 2xl:text-[170px]">
                   {slide.id}
                 </span>
-                <Image
-                  src={slide.image}
-                  alt={`${slide.title} Image`}
-                  class="h-[780px] w-1/2"
-                />
-                <div class="mt-24 ml-16 xl:m;-24 2xl:ml-32 flex w-1/2 max-w-[550px] flex-col">
-                  <h2 class="mb-6 font-semibold text-[#000047] lg:text-2xl xl:text-3xl 2xl:text-4xl 3xl:text-[40px]">
+                <div class="slide-image-container w-1/2">
+                  <Image
+                    src={slide.image}
+                    alt={`${slide.title} Image`}
+                    class="slide-image h-[780px] w-full object-contain"
+                  />
+                </div>
+                <div class="slide-text mt-24 ml-16 xl:m;-24 2xl:ml-32 flex w-1/2 max-w-[550px] flex-col">
+                  <h2 class="slide-title mb-6 font-semibold text-[#000047] lg:text-2xl xl:text-3xl 2xl:text-4xl 3xl:text-[40px]">
                     {slide.title}
                   </h2>
                   <p
                     set:html={slide.description}
-                    class="mb-7 text-[#2A2111] capitalize text-sm lg:text-base xl:text-lg 2xl:text-xl 3xl:text-xl"
+                    class="slide-description mb-7 text-[#2A2111] text-sm lg:text-base xl:text-lg 2xl:text-xl 3xl:text-xl"
                   />
+                  <div class="slide-cta">
+                    <button class="learn-more-btn bg-[#9d7eff] hover:bg-[#8a63ff] text-white font-medium py-2 px-5 rounded-md transition-all duration-300 opacity-0">
+                      Learn More
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -109,17 +116,41 @@ const {
 
 <script>
   import Swiper from "swiper";
-  import { Pagination, Mousewheel } from "swiper/modules";
+  import { Pagination, Mousewheel, EffectFade } from "swiper/modules";
   import "swiper/css";
   import "swiper/css/pagination";
+  import "swiper/css/effect-fade";
+  import { gsap } from "../../utils/gsapUtils";
 
   document.addEventListener("DOMContentLoaded", function () {
+    // GSAP animations for the section title and description
+    gsap.from(".section-title", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    gsap.from(".section-description", {
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      delay: 0.3,
+      ease: "power3.out"
+    });
+
+    // Initialize Swiper
     const swiper = new Swiper(".verticalSwiper", {
       direction: "vertical",
       slidesPerView: 1,
       spaceBetween: 30,
-     mousewheel: true,
-      modules: [Pagination, Mousewheel],
+      mousewheel: true,
+      modules: [Pagination, Mousewheel, EffectFade],
+      effect: "fade",
+      fadeEffect: {
+        crossFade: true
+      },
+      speed: 800,
       parallax: true,
       pagination: {
         el: ".vertical-pagination",
@@ -128,18 +159,92 @@ const {
           return `<span class="${className}"></span>`;
         },
       },
-      // Optional autoplay
-      // autoplay: {
-      //   delay: 5000,
-      //   disableOnInteraction: false,
-      // },
+      on: {
+        init: function() {
+          animateSlideContent(this.activeIndex);
+        },
+        slideChange: function() {
+          animateSlideContent(this.activeIndex);
+        }
+      }
     });
+
+    // Function to animate the content of the active slide
+    function animateSlideContent(index) {
+      const activeSlide = document.querySelectorAll('.swiper-slide')[index];
+      
+      if (!activeSlide) return;
+
+      // Reset all slides
+      gsap.set('.slide-number', { opacity: 0, scale: 0.5 });
+      gsap.set('.slide-image', { opacity: 0, x: -50 });
+      gsap.set('.slide-title', { opacity: 0, y: 30 });
+      gsap.set('.slide-description', { opacity: 0, y: 20 });
+      gsap.set('.learn-more-btn', { opacity: 0, y: 15 });
+      
+      // Create a timeline for the active slide
+      const tl = gsap.timeline();
+      
+      // Animate the active slide elements
+      tl.to(activeSlide.querySelector('.slide-number'), {
+        opacity: 0.7,
+        scale: 1,
+        duration: 0.8,
+        ease: "back.out(1.7)"
+      })
+      .to(activeSlide.querySelector('.slide-image'), {
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        ease: "power2.out"
+      }, "-=0.4")
+      .to(activeSlide.querySelector('.slide-title'), {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out"
+      }, "-=0.4")
+      .to(activeSlide.querySelector('.slide-description'), {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out"
+      }, "-=0.3")
+      .to(activeSlide.querySelector('.learn-more-btn'), {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out"
+      }, "-=0.3");
+    }
+
+    // Add hover effects to the buttons
+    const buttons = document.querySelectorAll('.learn-more-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        gsap.to(btn, {
+          scale: 1.05,
+          duration: 0.3
+        });
+      });
+      
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+          scale: 1,
+          duration: 0.3
+        });
+      });
+    });
+
+    // Initial animation for the first slide
+    animateSlideContent(0);
   });
 </script>
 
 <style>
   .vertical-swiper-container {
     position: relative;
+    overflow: hidden;
   }
 
   .vertical-pagination {
@@ -159,9 +264,26 @@ const {
     background: #d9d9d9;
     opacity: 1;
     margin: 6px 0 !important;
+    transition: all 0.3s ease;
   }
 
   .swiper-pagination-bullet-active {
     background: #9d7eff;
+    width: 12px;
+    height: 12px;
+    box-shadow: 0 0 10px rgba(157, 126, 255, 0.5);
+  }
+  
+  .swiper-slide {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .swiper-slide-active {
+    opacity: 1;
+  }
+  
+  .slide-content {
+    overflow: hidden;
   }
 </style>
