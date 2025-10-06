@@ -93,12 +93,12 @@ const {
               <p class="accordion-content-item text-sm leading-6 text-white 2xl:text-base">
                 {panel.body}
               </p>
-              <div class="accordion-content-item flex gap-x-2 py-2">
+              <div class="accordion-content-item flex w-fit gap-x-2 py-2">
                 {panel.images.map((imgSrc, imgIndex) => (
                   <Image
                     src={imgSrc}
                     alt={`Accordion Image ${imgIndex + 1}`}
-                    class="accordion-img min-h-[168px] aspect-square  cursor-pointer rounded-xl px-2 transition-all duration-700 ease-in-out hover:scale-125"
+                    class="accordion-img aspect-square h-[168px] cursor-pointer rounded-xl px-2 transition-all duration-700 ease-in-out hover:scale-125"
                   />
                 ))}
               </div>
