@@ -93,15 +93,22 @@ const {
               <p class="accordion-content-item text-sm leading-6 text-white 2xl:text-base">
                 {panel.body}
               </p>
-              <div class="accordion-content-item flex w-fit gap-x-2 py-2">
+              
+              {/* FIXED: Image container with proper layout and consistent sizing */}
+              <div class="accordion-content-item grid grid-cols-4 gap-2 py-2 w-full">
                 {panel.images.map((imgSrc, imgIndex) => (
-                  <Image
-                    src={imgSrc}
-                    alt={`Accordion Image ${imgIndex + 1}`}
-                    class="accordion-img aspect-square h-[168px] cursor-pointer rounded-xl px-2 transition-all duration-700 ease-in-out hover:scale-125"
-                  />
+                  <div class="image-wrapper overflow-hidden rounded-xl hover:scale-125 transition-all ease-in-out duration-700">
+                    <Image
+                      src={imgSrc}
+                      alt={`Accordion Image ${imgIndex + 1}`}
+                      class="accordion-img w-full h-full object-cover cursor-pointer"
+                      width={168}
+                      height={168}
+                    />
+                  </div>
                 ))}
               </div>
+              
               <div class="accordion-content-item flex flex-wrap gap-3 pt-6">
                 <span class="get-started-btn btn-animate flex items-center justify-center text-sm">
                   Get Started
@@ -212,27 +219,20 @@ const {
           delay: 0.3, // Delay to let panel expand first
         },
       );
-
-      // Special animation for images
-      // gsap.fromTo(
-      //   activePanel.querySelectorAll(".accordion-img"),
-      //   { opacity: 0, scale: 0.92 },
-      //   {
-      //     opacity: 1,
-      //     scale: 1,
-      //     duration: 0.6,
-      //     stagger: 0.08,
-      //     ease: "back.out(1.2)",
-      //     delay: 0.4,
-      //   },
-      // );
     }
 
+    // FIXED: Improved click handler for all screen sizes
     items.forEach((item) => {
-      item.addEventListener("click", () => setActive(item));
+      // Ensure click works on all devices
+      item.addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevent event bubbling
+        setActive(item);
+      });
 
-      // Add hover effect to open accordion
-      item.addEventListener("mouseenter", () => setActive(item));
+      // Add hover effect only for non-touch devices
+      if (window.matchMedia("(hover: hover)").matches) {
+        item.addEventListener("mouseenter", () => setActive(item));
+      }
     });
 
     // Button hover animations
@@ -327,5 +327,30 @@ const {
 
   .btn-text-animate:hover .arrow-icon {
     transform: translateX(4px);
+  }
+  
+  /* FIXED: Image wrapper styling to ensure consistent sizing */
+  .image-wrapper {
+    aspect-ratio: 1/1;
+    height: 168px;
+    display: block;
+  }
+
+  
+  /* FIXED: Mobile-friendly adjustments */
+  @media (max-width: 768px) {
+    .horizontal-accordion [data-accordion-item] {
+      min-height: 50px;
+      touch-action: manipulation;
+    }
+    
+    .image-wrapper {
+      height: auto; /* Let aspect ratio control height on mobile */
+    }
+    
+    /* Grid layout for smaller screens */
+    .accordion-content-item.grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>
