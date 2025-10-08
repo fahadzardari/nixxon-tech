@@ -7,19 +7,19 @@ import Image from "astro/components/Image.astro";
 ---
 
 <section
-  class="hero-section relative lg:ml-[65px] h-screen overflow-hidden lg:rounded-l-3xl bg-[#4B00A3] pt-32 text-white xl:ml-[88px]"
+  class="hero-section relative lg:ml-[65px] lg:min-h-screen overflow-hidden lg:rounded-l-3xl bg-[#4B00A3] pt-32 text-white xl:ml-[88px]"
 >
-  <div class="flex h-full flex-row justify-between pt-16 pl-12 2xl:pl-20">
+  <div class="flex h-full flex-col lg:justify-between pt-8 lg:pt-16 lg:pl-12 lg:flex-row 2xl:pl-20">
     <!-- Left -->
-    <div class="z-10 mt-auto w-[55%] pb-24 2xl:w-[50%] 2xl:pb-40">
+    <div class="z-10 lg:mt-auto w-auto lg:w-[55%] px-6 lg:pb-24 2xl:w-[50%] 2xl:pb-40">
       <!-- <span class="mb-4 block h-[2px] w-10 bg-white"></span> -->
       <h1
-        class="mb-6 font-medium capitalize text-[86px] 2xl:leading-[100px]"
+        class="mb-6 font-medium capitalize text-[42px] md:text-[52px] lg:text-[86px] 2xl:leading-[100px]"
       >
         <span class="font-bold">Branding </span>
       </h1>
       <p
-        class="mb-8 font-medium tracking-[1px] lg:text-base xl:text-xl 2xl:text-xl 2xl:leading-6"
+        class="mb-4 lg:mb-8 font-medium tracking-[1px] text-sm lg:text-base xl:text-xl 2xl:text-xl 2xl:leading-6"
       >
         A wide range of services, including brand planning, are provided by our
         skilled experts. Be it establishing a visual identity, creating a logo,
@@ -28,14 +28,14 @@ import Image from "astro/components/Image.astro";
         with clients.
       </p>
       <div class="flex items-center space-x-4">
-        <CommonButton className="text-lg font-semibold">
+        <CommonButton className="text-xs font-semibold md:text-sm lg:text-lg">
           Lets Talk
         </CommonButton>
       </div>
     </div>
 
     <!-- Right -->
-    <div class="absolute -right-4 bottom-0 z-0 w-[80%] xl:w-[70%] 2xl:w-[60%]">
+    <div class="lg:absolute lg:-right-4 lg:bottom-0 z-0 w-full lg:w-[80%] xl:w-[70%] 2xl:w-[60%]">
       <Image
       id={"hand-tilt"}
         src={HeroImage}

@@ -5,25 +5,33 @@ import Image from "astro/components/Image.astro";
 ---
 
 <section
-  class="hero-section relative lg:ml-[65px] h-screen overflow-hidden lg:rounded-l-3xl bg-[#4B00A3] pt-32 text-white xl:ml-[88px]"
+  class="hero-section relative min-h-screen overflow-hidden bg-[#4B00A3] pt-16 lg:pt-32 text-white lg:ml-[65px] lg:rounded-l-3xl xl:ml-[88px]"
 >
-  <div class="flex h-full flex-row justify-between pt-16 pl-12 2xl:pl-20">
+  <div
+    class="flex h-full flex-col pt-8 lg:flex-row lg:justify-between lg:pt-16 lg:pl-12 2xl:pl-20"
+  >
     <!-- Left -->
-    <div class="z-10 mt-auto w-[65%] pb-24 xl:w-[80%] 2xl:w-[60%] 3xl:w-[55%] 2xl:pb-40">
+    <div
+      class="3xl:w-[55%] z-10 w-full px-6 lg:pb-24 lg:mt-auto lg:w-[65%] xl:w-[80%] 2xl:w-[60%] 2xl:pb-40"
+    >
       <!-- <span class="mb-4 block h-[2px] w-10 bg-white"></span> -->
       <h1
-        class="capitalize mb-6 font-medium lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
+        class="mb-4 text-[32px] font-bold capitalize md:text-[42px] lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
       >
         let’s create an outstanding logo to
         <span class="font-bold">present your business</span>.
       </h1>
       <p
-        class="mb-8 font-medium tracking-[1px] lg:text-base xl:text-xl 2xl:text-xl 2xl:leading-6"
+        class="mb-4 lg:mb-8 font-medium tracking-[1px] text-sm lg:text-base xl:text-xl 2xl:text-xl 2xl:leading-6"
       >
-        A wide range of services, including brand planning, are provided by our skilled experts. Be it establishing a visual identity, creating a logo, or crafting brand messaging, we are here to help. With our innovative ideas, your company will stand out and build long-lasting relationships with clients.
+        A wide range of services, including brand planning, are provided by our
+        skilled experts. Be it establishing a visual identity, creating a logo,
+        or crafting brand messaging, we are here to help. With our innovative
+        ideas, your company will stand out and build long-lasting relationships
+        with clients.
       </p>
       <div class="flex items-center space-x-4">
-        <CommonButton className="text-lg font-semibold">
+        <CommonButton className="text-xs font-semibold md:text-sm lg:text-lg">
           Lets Talk
         </CommonButton>
       </div>
@@ -31,7 +39,7 @@ import Image from "astro/components/Image.astro";
 
     <!-- Right -->
     <div
-      class="absolute right-0 bottom-12 z-0 w-[50%] xl:bottom-4 xl:w-1/2 2xl:w-[45%]"
+      class="lg:absolute lg:right-0 lg:bottom-12 z-0 w-auto lg:w-[50%] xl:bottom-4 xl:w-1/2 2xl:w-[45%]"
     >
       <Image
         id="hand-tilt"

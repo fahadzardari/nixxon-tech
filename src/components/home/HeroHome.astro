@@ -8,10 +8,12 @@ import Image from "astro/components/Image.astro";
   class="hero-section relative min-h-screen overflow-hidden bg-[#4B00A3] pt-32 text-white lg:ml-[65px] lg:rounded-l-3xl xl:ml-[88px]"
 >
   <div
-    class="flex h-full flex-col lg:justify-between  pt-8 lg:pt-16 lg:pl-12 lg:flex-row 2xl:pl-20"
+    class="flex h-full flex-col pt-8 lg:flex-row lg:justify-between lg:pt-16 lg:pl-12 2xl:pl-20"
   >
     <!-- Left -->
-    <div class="z-10 w-full px-6 lg:px-0 lg:pb-24 lg:mt-auto lg:w-[55%] 2xl:w-[50%] 2xl:pb-40">
+    <div
+      class="z-10 w-full px-6 lg:mt-auto lg:w-[55%] lg:px-0 lg:pb-24 2xl:w-[50%] 2xl:pb-40"
+    >
       <span class="mb-4 block h-[2px] w-10 bg-white"></span>
       <h1
         class="mb-4 text-[32px] font-bold md:text-[42px] lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
@@ -19,7 +21,7 @@ import Image from "astro/components/Image.astro";
         Shaping the Future of How Your Brand is Seen.
       </h1>
       <p
-        class="mb-8 font-medium tracking-[1px] lg:text-base xl:text-xl 2xl:text-xl 2xl:leading-6"
+        class="mb-4 lg:mb-8 font-medium tracking-[1px] text-sm lg:text-base xl:text-xl 2xl:text-xl 2xl:leading-6"
       >
         We have your digital solution on web design, mobile app development,
         SEO, branding & digital marketing
@@ -39,7 +41,7 @@ import Image from "astro/components/Image.astro";
 
     <!-- Right -->
     <div
-      class="lg:absolute lg:right-0 ml-auto lg:bottom-12 z-0 w-auto lg:w-[55%] xl:bottom-4 xl:w-1/2 2xl:w-[45%]"
+      class="z-0 ml-auto w-auto lg:absolute lg:right-0 lg:bottom-12 lg:w-[55%] xl:bottom-4 xl:w-1/2 2xl:w-[45%]"
     >
       <Image
         id="hand-tilt"
