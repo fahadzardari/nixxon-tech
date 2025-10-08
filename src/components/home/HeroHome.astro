@@ -5,14 +5,16 @@ import Image from "astro/components/Image.astro";
 ---
 
 <section
-  class="hero-section relative lg:ml-[65px] h-screen overflow-hidden lg:rounded-l-3xl bg-[#4B00A3] pt-32 text-white xl:ml-[88px]"
+  class="hero-section relative min-h-screen overflow-hidden bg-[#4B00A3] pt-32 text-white lg:ml-[65px] lg:rounded-l-3xl xl:ml-[88px]"
 >
-  <div class="flex h-full flex-row justify-between pt-16 pl-12 2xl:pl-20">
+  <div
+    class="flex h-full flex-col lg:justify-between  pt-8 lg:pt-16 lg:pl-12 lg:flex-row 2xl:pl-20"
+  >
     <!-- Left -->
-    <div class="z-10 mt-auto w-[55%] pb-24 2xl:w-[50%] 2xl:pb-40">
+    <div class="z-10 w-full px-6 lg:px-0 lg:pb-24 lg:mt-auto lg:w-[55%] 2xl:w-[50%] 2xl:pb-40">
       <span class="mb-4 block h-[2px] w-10 bg-white"></span>
       <h1
-        class="mb-4 font-bold lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
+        class="mb-4 text-[32px] font-bold md:text-[42px] lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
       >
         Shaping the Future of How Your Brand is Seen.
       </h1>
@@ -23,11 +25,11 @@ import Image from "astro/components/Image.astro";
         SEO, branding & digital marketing
       </p>
       <div class="flex items-center space-x-4">
-        <CommonButton className="text-lg font-semibold">
+        <CommonButton className="text-xs font-semibold md:text-sm lg:text-lg">
           Get a proposal
         </CommonButton>
         <a
-          class="flex items-center text-base leading-4 font-semibold xl:text-lg xl:leading-6"
+          class="flex items-center text-xs leading-4 font-semibold md:text-sm lg:text-base xl:text-lg xl:leading-6"
         >
           <span>Portfolio</span>
           <span>→</span>
@@ -37,7 +39,7 @@ import Image from "astro/components/Image.astro";
 
     <!-- Right -->
     <div
-      class="absolute right-0 bottom-12 z-0 w-[55%] xl:bottom-4 xl:w-1/2 2xl:w-[45%]"
+      class="lg:absolute lg:right-0 ml-auto lg:bottom-12 z-0 w-auto lg:w-[55%] xl:bottom-4 xl:w-1/2 2xl:w-[45%]"
     >
       <Image
         id="hand-tilt"
