@@ -4,7 +4,7 @@ import TestimonialCard from "./TestimonialCard.astro";
 
 <section class="internal-padding py-20 xl:py-28 2xl:py-36">
   <h2
-    class="mb-20 md:text-4xl md:leading-8 xl:text-5xl xl:leading-16 2xl:text-6xl 2xl:leading-20"
+    class="mb:mb-12 mb-8 text-2xl md:text-4xl md:leading-8 lg:mb-20 xl:text-5xl xl:leading-16 2xl:text-6xl 2xl:leading-20"
   >
     <span class="text-gradient-start font-semibold"> Endorsements From </span>
     <br />
@@ -67,7 +67,7 @@ import TestimonialCard from "./TestimonialCard.astro";
     spaceBetween: 80,
     centeredSlides: true,
     effect: "slide",
-  
+
     loop: true,
     autoplay: {
       delay: 3000,
@@ -75,6 +75,18 @@ import TestimonialCard from "./TestimonialCard.astro";
     },
     keyboard: {
       enabled: true,
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        centeredSlides: true,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 80,
+        centeredSlides: true,
+      },
     },
   });
 </script>

@@ -5,22 +5,24 @@ import Image from "astro/components/Image.astro";
 ---
 
 <section
-  class="hero-section relative lg:ml-[65px] h-screen overflow-hidden lg:rounded-l-3xl bg-[#4B00A3] pt-32 text-white xl:ml-[88px]"
+  class="hero-section relative min-h-screen overflow-hidden bg-[#4B00A3] pt-32 text-white lg:ml-[65px] lg:rounded-l-3xl xl:ml-[88px]"
 >
   <div
-    class="flex h-full flex-row justify-between pt-8 pl-12 xl:pt-12 2xl:pl-20"
+    class="flex h-full flex-col justify-between pt-8 lg:flex-row lg:pl-12 xl:pt-12 2xl:pl-20"
   >
     <!-- Left -->
-    <div class="z-10 mt-auto w-[95%] pb-24 2xl:w-[85%] 3xl:w-[60%] 2xl:pb-40">
+    <div
+      class="3xl:w-[60%] z-10 w-full px-6 lg:mt-auto lg:w-[95%] lg:pb-24 2xl:w-[85%] 2xl:pb-40"
+    >
       <!-- <span class="mb-4 block h-[2px] w-10 bg-white"></span> -->
       <h1
-        class="mb-6 font-medium capitalize lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
+        class="mb-6 text-[32px] font-medium capitalize md:text-[42px] lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
       >
         Turning complex challenges into beautifully engineered
         <span class="font-bold">applications</span>.
       </h1>
       <p
-        class="mb-4 lg:mb-8 font-medium tracking-[1px] text-sm lg:text-base xl:text-xl 2xl:text-xl 2xl:leading-6"
+        class="mb-4 text-sm font-medium tracking-[1px] lg:mb-8 lg:text-base xl:text-xl 2xl:text-xl 2xl:leading-6"
       >
         We build intuitive iOS and Android applications that drive business
         growth and scalability. By combining the latest technologies with real
@@ -37,7 +39,9 @@ import Image from "astro/components/Image.astro";
     </div>
 
     <!-- Right -->
-    <div class="absolute right-0 bottom-0 z-0 lg:w-[90%] xl:w-2/3">
+    <div
+      class="z-0 w-full lg:absolute lg:right-0 lg:bottom-0 lg:w-[90%] xl:w-2/3"
+    >
       <Image
         id="hand-tilt"
         src={HeroArt}
