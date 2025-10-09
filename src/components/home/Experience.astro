@@ -40,14 +40,13 @@ const typewriterWidth = `${typewriter.length - 5}ch`;
       if (el && i <= text.length) {
         el.textContent = text.slice(0, i);
         i++;
-        setTimeout(type, 38);
+        setTimeout(type, 35);
       } else if (el) {
-        // Wait 10 seconds, then restart
         setTimeout(() => {
           el.textContent = "";
           i = 0;
-          setTimeout(type, 400); // small pause before restarting
-        }, 10000);
+          setTimeout(type, 300); // small pause before restarting
+        }, 4000);
       }
     }
     type();

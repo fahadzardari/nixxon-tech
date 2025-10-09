@@ -59,107 +59,218 @@ const {
 } = Astro.props;
 ---
 
-<section class="vertical-swiper-section py-12 lg:py-20">
-  <h2
-    class="internal-padding section-title mb-4 text-center text-xl font-semibold text-[#000047] capitalize md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-[40px]"
-  >
-    {title}
-  </h2>
-  <p
-    class="internal-padding section-description mx-auto max-w-7xl text-center text-xs text-[#2A2111] md:text-sm lg:text-base xl:text-lg"
-  >
-    {description}
-  </p>
+<section class="vertical-swiper-section py-12 lg:py-20 relative overflow-hidden">
+  <!-- Background decoration elements -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="bg-gradient-blob blur-3xl opacity-10 bg-purple-500/10 w-[800px] h-[800px] absolute -top-[400px] -left-[400px] rounded-full"></div>
+    <div class="bg-gradient-blob blur-3xl opacity-10 bg-blue-500/10 w-[600px] h-[600px] absolute top-[30%] -right-[300px] rounded-full"></div>
+    <div class="decoration-line opacity-20 absolute top-0 bottom-0 left-[15%] w-[1px] bg-gradient-to-b from-transparent via-purple-500/50 to-transparent"></div>
+    <div class="decoration-line opacity-20 absolute top-0 bottom-0 right-[15%] w-[1px] bg-gradient-to-b from-transparent via-purple-500/50 to-transparent"></div>
+    <div class="decoration-dots absolute top-[20%] right-[10%] flex flex-col gap-2">
+      <div class="w-1 h-1 rounded-full bg-purple-500/50"></div>
+      <div class="w-1 h-1 rounded-full bg-purple-500/50"></div>
+      <div class="w-1 h-1 rounded-full bg-purple-500/50"></div>
+    </div>
+  </div>
+
+  <!-- Header content -->
+  <div class="relative z-10">
+    <h2
+      class="internal-padding section-title mb-4 text-center text-xl font-semibold text-[#000047] capitalize md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-[40px]"
+    >
+      {title}
+    </h2>
+    <div class="section-decoration mx-auto w-16 h-1 bg-gradient-to-r from-purple-600 to-blue-500 rounded mb-6"></div>
+    <p
+      class="internal-padding section-description mx-auto max-w-4xl text-center text-xs text-[#2A2111] md:text-sm lg:text-base xl:text-lg"
+    >
+      {description}
+    </p>
+  </div>
 
   <!-- Mobile/Tablet Layout (< 1024px) -->
-  <div class="mobile-swiper-container mt-8 px-4 lg:hidden">
+  <div class="mobile-swiper-container mt-12 lg:hidden">
     <div class="swiper mobileVerticalSwiper">
       <div class="swiper-wrapper">
         {
           slides.map((slide) => (
             <div class="swiper-slide">
-              <div class="mobile-slide-content mx-auto flex max-w-md flex-col items-center rounded-2xl bg-white p-6 shadow-lg">
-                <span class="mb-4 text-6xl font-bold text-[#000000] md:text-7xl">
-                  {slide.id}
-                </span>
-                <div class="mobile-slide-image-container mb-6 w-full">
-                  <Image
-                    src={slide.image}
-                    alt={`${slide.title} Image`}
-                    class="mobile-slide-image h-auto max-h-[300px] w-full rounded-lg object-contain"
-                  />
+              <div class="mobile-slide-content mx-auto flex max-w-lg flex-col items-center rounded-2xl p-6">
+                <!-- Card container with glassmorphism effect -->
+                <div class="mobile-card-inner w-full bg-white/90 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-100 relative overflow-hidden">
+                  <!-- Background graphic element -->
+                  <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-200 to-blue-100 rounded-full blur-md -m-10 opacity-60"></div>
+                  
+                  <div class="relative z-10">
+                    <div class="flex justify-between items-center mb-6">
+                      <span class="mobile-slide-number text-6xl font-bold text-gradient bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                        {slide.id}
+                      </span>
+                      <span class="mobile-slide-badge text-xs font-semibold px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full">Web Service</span>
+                    </div>
+                    
+                    <h3 class="mobile-slide-title mb-4 text-left text-xl font-semibold text-[#000047] md:text-2xl">
+                      {slide.title}
+                    </h3>
+                    
+                    <p class="mobile-slide-description text-left text-sm text-gray-600 md:text-base mb-6">
+                      {slide.description}
+                    </p>
+                    
+                    <div class="mobile-slide-image-container w-full mb-2">
+                        <Image
+                          src={slide.image}
+                          alt={`${slide.title} Image`}
+                          class="mobile-slide-image h-auto max-h-[240px] w-full rounded-lg object-contain p-2 transform transition-transform"
+                        />
+                    </div>
+                    
+                    <a class="mobile-slide-link inline-flex items-center text-sm text-purple-600 font-medium gap-1 mt-4 group">
+                      Learn more 
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right transition-transform group-hover:translate-x-1" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                      </svg>
+                    </a>
+                  </div>
                 </div>
-                <h3 class="mobile-slide-title mb-4 text-center text-xl font-semibold text-[#000047] md:text-2xl">
-                  {slide.title}
-                </h3>
-                <p class="mobile-slide-description text-center text-sm text-[#2A2111] md:text-base">
-                  {slide.description}
-                </p>
               </div>
             </div>
           ))
         }
       </div>
-      <div class="swiper-pagination mobile-pagination mx-auto"></div>
+      <div class="swiper-pagination mobile-pagination mx-auto mt-8"></div>
+      
+      <!-- Add navigation buttons -->
+      <div class="swiper-navigation flex justify-center gap-4 mt-6">
+        <button class="mobile-swiper-prev w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-purple-800 shadow-md hover:bg-purple-50 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+          </svg>
+        </button>
+        <button class="mobile-swiper-next w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-purple-800 shadow-md hover:bg-purple-50 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- Desktop Layout (>= 1024px) -->
   <div
-    class="vertical-swiper-container relative mx-4 mt-12 hidden h-[600px] lg:mx-12 lg:block lg:h-[650px] xl:mx-20 xl:h-[710px]"
+    class="vertical-swiper-container relative mx-4 mt-16 hidden h-[600px] lg:mx-12 lg:block lg:h-[650px] xl:mx-20 xl:h-[710px]"
   >
+    <!-- Vertical progress bar -->
+    <!-- <div class="vertical-progress-container absolute left-0 top-0 bottom-0 w-[2px] bg-gray-200 z-10 ml-12 lg:ml-16 xl:ml-20">
+      <div class="vertical-progress h-0 w-full bg-purple-600"></div>
+    </div> -->
+    
     <div class="swiper verticalSwiper h-full">
       <div class="swiper-wrapper">
         {
           slides.map((slide) => (
             <div class="swiper-slide">
               <div class="slide-content relative flex h-full items-center">
-                <span class="absolute -top-8 left-[40%] z-10 text-[100px] text-[#000000] lg:-top-10 lg:left-[42%] lg:text-[120px] xl:-top-12 xl:left-[43%] xl:text-[140px] 2xl:left-[45%] 2xl:text-[170px]">
-                  {slide.id}
-                </span>
-
-                <div class="slide-image-container flex w-5/12 items-center justify-center lg:w-[45%] xl:w-1/2">
-                  <Image
-                    src={slide.image}
-                    alt={`${slide.title} Image`}
-                    class="slide-image h-auto max-h-[450px] w-full object-contain lg:max-h-[500px] xl:max-h-[600px] 2xl:max-h-[700px]"
-                  />
+                <div class="slide-info flex flex-col items-start w-[35%] lg:w-[30%] pr-8 relative">
+                  <span class="slide-number text-[80px] lg:text-[120px] xl:text-[140px] 2xl:text-[160px] font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent opacity-90 leading-none">
+                    {slide.id}
+                  </span>
+                  
+                  <div class="slide-text mt-4 lg:mt-6 relative">
+                    <h2 class="slide-title mb-4 text-xl font-semibold text-[#000047] lg:mb-6 lg:text-2xl xl:text-3xl 2xl:text-4xl">
+                      {slide.title}
+                    </h2>
+                    <p class="slide-description text-sm leading-relaxed text-gray-600 lg:text-base xl:text-lg">
+                      {slide.description}
+                    </p>
+                    
+                    <a class="slide-link inline-flex items-center text-purple-600 font-medium gap-1 mt-6 group">
+                      Learn more 
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-right transition-transform group-hover:translate-x-1" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                      </svg>
+                    </a>
+                  </div>
                 </div>
-
-                <div class="slide-text flex w-7/12 flex-col pr-4 pl-8 lg:w-[55%] lg:pr-8 lg:pl-12 xl:w-1/2 xl:pl-16 2xl:pl-24">
-                  <h2 class="slide-title mb-4 text-xl font-semibold text-[#000047] lg:mb-6 lg:text-2xl xl:text-3xl 2xl:text-4xl">
-                    {slide.title}
-                  </h2>
-                  <p
-                    set:html={slide.description}
-                    class="slide-description text-sm leading-relaxed text-[#2A2111] lg:text-base xl:text-lg 2xl:text-xl"
-                  />
+                
+                <div class="slide-image-container flex items-center justify-center w-[65%] lg:w-[70%] relative">
+                  <div class="image-backdrop absolute w-full h-full max-w-[80%] max-h-[80%] bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl opacity-70"></div>
+                  
+                  <div class="relative w-full flex items-center justify-center">
+                    <div class="absolute w-40 h-40 rounded-full bg-gradient-to-r from-purple-200/40 to-blue-200/40 blur-xl right-[10%] top-[10%]"></div>
+                    <div class="absolute w-24 h-24 rounded-full bg-gradient-to-r from-blue-200/40 to-purple-200/40 blur-xl left-[10%] bottom-[10%]"></div>
+                    
+                    <div class="image-frame relative z-10">
+                      <div class="frame-inner bg-white border border-gray-100 rounded-xl shadow-xl overflow-hidden p-3 lg:p-4">
+                        <Image
+                          src={slide.image}
+                          alt={`${slide.title} Image`}
+                          class="slide-image h-auto max-h-[450px] w-full object-contain lg:max-h-[460px] xl:max-h-[500px] 2xl:max-h-[550px]"
+                        />
+                      </div>
+                      
+                      <div class="tech-dots absolute -bottom-3 -right-3 flex gap-2">
+                        <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                        <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           ))
         }
       </div>
+      
       <div class="swiper-pagination vertical-pagination"></div>
+      
+      <!-- Custom navigation -->
+      <div class="vertical-navigation absolute bottom-4 right-4 flex gap-3 z-20">
+        <button class="vertical-swiper-prev w-12 h-12 rounded-full bg-white flex items-center justify-center text-purple-800 shadow-lg hover:bg-purple-50 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+          </svg>
+        </button>
+        <button class="vertical-swiper-next w-12 h-12 rounded-full bg-white flex items-center justify-center text-purple-800 shadow-lg hover:bg-purple-50 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
 
 <script>
   import Swiper from "swiper";
-  import { Pagination, Mousewheel, EffectFade, Autoplay } from "swiper/modules";
+  import { Pagination, Mousewheel, EffectFade, Autoplay, Navigation } from "swiper/modules";
   import "swiper/css";
   import "swiper/css/pagination";
   import "swiper/css/effect-fade";
   import { gsap } from "../../utils/gsapUtils";
 
   document.addEventListener("DOMContentLoaded", function () {
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     // GSAP animations for the section title and description
     gsap.from(".section-title", {
-      y: 50,
+      y: 40,
       opacity: 0,
       duration: 1,
       ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".section-title",
+        start: "top 85%",
+      },
+    });
+
+    gsap.from(".section-decoration", {
+      scaleX: 0,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
       scrollTrigger: {
         trigger: ".section-title",
         start: "top 85%",
@@ -178,20 +289,68 @@ const {
       },
     });
 
-    // Mobile Swiper (Horizontal)
+    // Subtle animations for background elements
+    if (!prefersReducedMotion) {
+      gsap.to(".bg-gradient-blob", {
+        y: -20,
+        x: 10,
+        rotation: 5,
+        duration: 8,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+      
+      gsap.to(".decoration-line", {
+        opacity: 0.1,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 1
+      });
+      
+      gsap.to(".decoration-dots div", {
+        y: -5,
+        opacity: 0.5,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.2
+      });
+    }
+
+    // Mobile Swiper (Horizontal with more features)
     const mobileSwiper = new Swiper(".mobileVerticalSwiper", {
       slidesPerView: 1,
-      spaceBetween: 20,
-      modules: [Pagination, Autoplay],
+      spaceBetween: 30,
+      grabCursor: true,
+      modules: [Pagination, Autoplay, Navigation],
       pagination: {
         el: ".mobile-pagination",
         clickable: true,
+        dynamicBullets: true,
+      },
+      navigation: {
+        nextEl: ".mobile-swiper-next",
+        prevEl: ".mobile-swiper-prev",
       },
       autoplay: {
         delay: 4000,
         disableOnInteraction: false,
+        pauseOnMouseEnter: true,
       },
       speed: 600,
+      effect: "creative",
+      creativeEffect: {
+        prev: {
+          translate: [0, 0, -400],
+        },
+        next: {
+          translate: ["100%", 0, 0],
+        },
+      },
       on: {
         init: function () {
           animateMobileSlide(this.activeIndex);
@@ -202,7 +361,7 @@ const {
       },
     });
 
-    // Desktop Swiper (Vertical)
+    // Desktop Swiper (Vertical with enhanced effects)
     const desktopSwiper = new Swiper(".verticalSwiper", {
       direction: "vertical",
       slidesPerView: 1,
@@ -212,7 +371,7 @@ const {
         sensitivity: 1,
         releaseOnEdges: true,
       },
-      modules: [Pagination, Mousewheel, EffectFade],
+      modules: [Pagination, Mousewheel, EffectFade, Navigation],
       effect: "fade",
       fadeEffect: {
         crossFade: true,
@@ -221,124 +380,238 @@ const {
       pagination: {
         el: ".vertical-pagination",
         clickable: true,
+        renderBullet: function(index, className) {
+          return `<span class="${className} custom-bullet">${index + 1}</span>`;
+        }
+      },
+      navigation: {
+        nextEl: ".vertical-swiper-next",
+        prevEl: ".vertical-swiper-prev",
       },
       on: {
         init: function () {
           animateDesktopSlide(this.activeIndex);
+          updateProgressBar(this);
         },
         slideChange: function () {
           animateDesktopSlide(this.activeIndex);
+          updateProgressBar(this);
         },
       },
     });
 
-    // Animation function for mobile slides
+    // Function to update vertical progress bar
+    function updateProgressBar(swiper) {
+      const progress = (swiper.realIndex) / (swiper.slides.length - 1);
+      gsap.to(".vertical-progress", {
+        height: `${progress * 100}%`,
+        duration: 0.8,
+        ease: "power2.out"
+      });
+    }
+
+    // Animation function for mobile slides with enhanced effects
     function animateMobileSlide(index) {
+      if (prefersReducedMotion) return;
+      
       const slides = document.querySelectorAll(
-        ".mobileVerticalSwiper .swiper-slide",
+        ".mobileVerticalSwiper .swiper-slide"
       );
       const activeSlide = slides[index];
 
       if (!activeSlide) return;
 
       // Reset all slides
-      gsap.set(".mobile-slide-number", { opacity: 0, scale: 0.8 });
-      gsap.set(".mobile-slide-image", { opacity: 0, y: 20 });
+      gsap.set(".mobile-slide-number", { opacity: 0, y: 20 });
+      gsap.set(".mobile-slide-badge", { opacity: 0, x: 20 });
       gsap.set(".mobile-slide-title", { opacity: 0, y: 15 });
       gsap.set(".mobile-slide-description", { opacity: 0, y: 10 });
+      gsap.set(".mobile-slide-image", { opacity: 0, scale: 0.9 });
+      gsap.set(".mobile-slide-link", { opacity: 0, y: 10 });
 
-      // Animate active slide
+      // Animate active slide with staggered sequence
       const tl = gsap.timeline();
 
       tl.to(activeSlide.querySelector(".mobile-slide-number"), {
-        opacity: 0.2,
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "back.out(1.5)",
+      })
+      .to(activeSlide.querySelector(".mobile-slide-badge"), {
+        opacity: 1,
+        x: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      }, "-=0.3")
+      .to(activeSlide.querySelector(".mobile-slide-title"), {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      }, "-=0.2")
+      .to(activeSlide.querySelector(".mobile-slide-description"), {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      }, "-=0.3")
+      .to(activeSlide.querySelector(".mobile-slide-image"), {
+        opacity: 1,
         scale: 1,
         duration: 0.6,
-        ease: "back.out(1.2)",
-      })
-        .to(
-          activeSlide.querySelector(".mobile-slide-image"),
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power2.out",
-          },
-          "-=0.3",
-        )
-        .to(
-          activeSlide.querySelector(".mobile-slide-title"),
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.4",
-        )
-        .to(
-          activeSlide.querySelector(".mobile-slide-description"),
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.3",
-        );
+        ease: "power2.out",
+      }, "-=0.3")
+      .to(activeSlide.querySelector(".mobile-slide-link"), {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      }, "-=0.2");
+      
+      // Hover effect for current slide image
+      const currentImage = activeSlide.querySelector(".mobile-slide-image");
+      currentImage.addEventListener("mouseenter", () => {
+        gsap.to(currentImage, {
+          scale: 1.05,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+      
+      currentImage.addEventListener("mouseleave", () => {
+        gsap.to(currentImage, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
     }
 
-    // Animation function for desktop slides
+    // Enhanced animation function for desktop slides
     function animateDesktopSlide(index) {
+      if (prefersReducedMotion) return;
+      
       const slides = document.querySelectorAll(".verticalSwiper .swiper-slide");
       const activeSlide = slides[index];
 
       if (!activeSlide) return;
 
-      // Reset all slides with reduced motion
-      gsap.set(".slide-number", { opacity: 0 });
-      gsap.set(".slide-image", { opacity: 0, scale: 0.95 });
-      gsap.set(".slide-title", { opacity: 0, x: -20 });
-      gsap.set(".slide-description", { opacity: 0, x: -15 });
+      // Reset all slides with improved reset
+      gsap.set(".slide-number", { opacity: 0, scale: 0.8 });
+      gsap.set(".image-backdrop", { opacity: 0, scale: 0.9 });
+      gsap.set(".slide-image", { opacity: 0, y: 30, scale: 0.9 });
+      gsap.set(".slide-title", { opacity: 0, y: 20 });
+      gsap.set(".slide-description", { opacity: 0, y: 15 });
+      gsap.set(".slide-link", { opacity: 0, y: 10 });
+      gsap.set(".tech-dots span", { opacity: 0, scale: 0 });
 
-      // Animate active slide
+      // Animate active slide with choreographed sequence
       const tl = gsap.timeline();
 
+      // First animate the number and backdrop
       tl.to(activeSlide.querySelector(".slide-number"), {
-        opacity: 0.1,
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        ease: "back.out(1.5)",
+      })
+      .to(activeSlide.querySelector(".image-backdrop"), {
+        opacity: 0.7,
+        scale: 1,
+        duration: 0.7,
+        ease: "power2.out",
+      }, "-=0.4")
+      
+      // Then bring in the main content
+      .to(activeSlide.querySelector(".slide-title"), {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      }, "-=0.3")
+      .to(activeSlide.querySelector(".slide-description"), {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      }, "-=0.4")
+      
+      // Then animate the image with some bounce
+      .to(activeSlide.querySelector(".slide-image"), {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: "back.out(1.5)",
+      }, "-=0.4")
+      
+      // Finally add the small details
+      .to(activeSlide.querySelector(".slide-link"), {
+        opacity: 1,
+        y: 0,
         duration: 0.5,
         ease: "power2.out",
-      })
-        .to(
-          activeSlide.querySelector(".slide-image"),
-          {
-            opacity: 1,
+      }, "-=0.3")
+      .to(activeSlide.querySelectorAll(".tech-dots span"), {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        stagger: 0.1,
+        ease: "back.out(2)",
+      }, "-=0.4");
+      
+      // Add subtle floating animations for active elements
+      gsap.to(activeSlide.querySelector(".image-frame"), {
+        y: -10,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+      
+      gsap.to(activeSlide.querySelector(".tech-dots"), {
+        rotate: 10,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    }
+
+    // Add event listeners for custom buttons if not using reduced motion
+    if (!prefersReducedMotion) {
+      // Make buttons more interactive with feedback
+      const buttons = document.querySelectorAll(".mobile-swiper-prev, .mobile-swiper-next, .vertical-swiper-prev, .vertical-swiper-next");
+      buttons.forEach(button => {
+        button.addEventListener("mouseenter", () => {
+          gsap.to(button, {
+            scale: 1.1,
+            duration: 0.2
+          });
+        });
+        
+        button.addEventListener("mouseleave", () => {
+          gsap.to(button, {
             scale: 1,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "-=0.3",
-        )
-        .to(
-          activeSlide.querySelector(".slide-title"),
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.5",
-        )
-        .to(
-          activeSlide.querySelector(".slide-description"),
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.4",
-        );
+            duration: 0.2
+          });
+        });
+        
+        button.addEventListener("mousedown", () => {
+          gsap.to(button, {
+            scale: 0.95,
+            duration: 0.1
+          });
+        });
+        
+        button.addEventListener("mouseup", () => {
+          gsap.to(button, {
+            scale: 1.1,
+            duration: 0.1
+          });
+        });
+      });
     }
   });
 </script>
@@ -348,12 +621,12 @@ const {
   .mobile-swiper-container {
     position: relative;
     overflow: visible;
-    padding-bottom: 50px;
+    padding-bottom: 70px;
   }
 
   .mobile-pagination {
     position: absolute;
-    bottom: 0;
+    bottom: 40px;
     left: 0;
     right: 0;
     width: 100%;
@@ -361,13 +634,12 @@ const {
     justify-content: center;
     gap: 8px;
     z-index: 20;
-    margin-top: 50px;
   }
 
   .mobile-pagination :global(.swiper-pagination-bullet) {
     width: 10px;
     height: 10px;
-    background: #d9d9d9;
+    background: #e4e4e4;
     opacity: 1;
     transition: all 0.3s ease;
     border-radius: 50%;
@@ -377,12 +649,14 @@ const {
     background: #9d7eff;
     width: 24px;
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(157, 126, 255, 0.5);
   }
 
   /* Desktop Swiper Styles */
   .vertical-swiper-container {
     position: relative;
     overflow: hidden;
+    border-radius: 20px;
   }
 
   .vertical-pagination {
@@ -393,23 +667,31 @@ const {
     display: flex;
     flex-direction: column;
     z-index: 20;
-    gap: 12px;
+    gap: 10px;
   }
 
-  .vertical-pagination .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
-    background: #d9d9d9;
+  .vertical-pagination :global(.swiper-pagination-bullet) {
+    width: 26px;
+    height: 26px;
+    background: white;
     opacity: 1;
     transition: all 0.3s ease;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #666;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   }
 
-  .vertical-pagination .swiper-pagination-bullet-active {
+  .vertical-pagination :global(.swiper-pagination-bullet-active) {
     background: #9d7eff;
-    width: 12px;
-    height: 12px;
-    box-shadow: 0 0 10px rgba(157, 126, 255, 0.5);
+    color: white;
+    font-weight: bold;
+    border-color: #9d7eff;
+    box-shadow: 0 0 15px rgba(157, 126, 255, 0.5);
   }
 
   .swiper-slide {
@@ -423,18 +705,13 @@ const {
 
   .slide-content {
     overflow: hidden;
+    padding: 0 40px;
   }
 
-  /* Improved responsive styles */
-  @media (min-width: 1024px) and (max-width: 1599px) {
-    .slide-image-container {
-      width: 45%;
-    }
-
-    .slide-text {
-      width: 55%;
-      padding-left: 2rem;
-    }
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
   }
 
   /* Smooth transitions */
@@ -445,5 +722,24 @@ const {
   .mobile-slide-title,
   .mobile-slide-description {
     will-change: opacity, transform;
+  }
+
+  .image-frame {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .image-frame:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg-gradient-blob,
+    .decoration-line,
+    .decoration-dots div,
+    .image-frame,
+    .tech-dots {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 </style>
