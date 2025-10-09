@@ -59,28 +59,72 @@ const {
 } = Astro.props;
 ---
 
-<section class="vertical-swiper-section py-12 lg:py-20 relative overflow-hidden">
-  <!-- Background decoration elements -->
-  <div class="absolute inset-0 pointer-events-none overflow-hidden">
-    <div class="bg-gradient-blob blur-3xl opacity-10 bg-purple-500/10 w-[800px] h-[800px] absolute -top-[400px] -left-[400px] rounded-full"></div>
-    <div class="bg-gradient-blob blur-3xl opacity-10 bg-blue-500/10 w-[600px] h-[600px] absolute top-[30%] -right-[300px] rounded-full"></div>
-    <div class="decoration-line opacity-20 absolute top-0 bottom-0 left-[15%] w-[1px] bg-gradient-to-b from-transparent via-purple-500/50 to-transparent"></div>
-    <div class="decoration-line opacity-20 absolute top-0 bottom-0 right-[15%] w-[1px] bg-gradient-to-b from-transparent via-purple-500/50 to-transparent"></div>
-    <div class="decoration-dots absolute top-[20%] right-[10%] flex flex-col gap-2">
-      <div class="w-1 h-1 rounded-full bg-purple-500/50"></div>
-      <div class="w-1 h-1 rounded-full bg-purple-500/50"></div>
-      <div class="w-1 h-1 rounded-full bg-purple-500/50"></div>
+<section
+  class="vertical-swiper-section relative overflow-hidden py-12 lg:py-20"
+>
+  <!-- Enhanced background decoration elements -->
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      class="bg-gradient-blob absolute -top-[400px] -left-[400px] h-[800px] w-[800px] rounded-full bg-purple-500/10 opacity-10 blur-3xl"
+    >
+    </div>
+    <div
+      class="bg-gradient-blob absolute top-[30%] -right-[300px] h-[600px] w-[600px] rounded-full bg-blue-500/10 opacity-10 blur-3xl"
+    >
+    </div>
+
+    <!-- New decorative elements -->
+    <div class="floating-circles">
+      <div
+        class="floating-circle absolute top-[15%] left-[45%] h-2 w-2 rounded-full bg-purple-400 opacity-40"
+      >
+      </div>
+      <div
+        class="floating-circle absolute top-[35%] left-[25%] h-3 w-3 rounded-full bg-blue-400 opacity-30"
+      >
+      </div>
+      <div
+        class="floating-circle absolute top-[65%] left-[85%] h-2 w-2 rounded-full bg-indigo-400 opacity-40"
+      >
+      </div>
+      <div
+        class="floating-circle absolute top-[75%] left-[15%] h-4 w-4 rounded-full bg-purple-300 opacity-20"
+      >
+      </div>
+    </div>
+
+    <div
+      class="decoration-line absolute top-0 bottom-0 left-[15%] w-[1px] bg-gradient-to-b from-transparent via-purple-500/50 to-transparent opacity-20"
+    >
+    </div>
+    <div
+      class="decoration-line absolute top-0 right-[15%] bottom-0 w-[1px] bg-gradient-to-b from-transparent via-purple-500/50 to-transparent opacity-20"
+    >
+    </div>
+    <div
+      class="decoration-dots absolute top-[20%] right-[10%] flex flex-col gap-2"
+    >
+      <div class="h-1 w-1 rounded-full bg-purple-500/50"></div>
+      <div class="h-1 w-1 rounded-full bg-purple-500/50"></div>
+      <div class="h-1 w-1 rounded-full bg-purple-500/50"></div>
     </div>
   </div>
 
-  <!-- Header content -->
+  <!-- Header content with enhanced animations -->
   <div class="relative z-10">
     <h2
       class="internal-padding section-title mb-4 text-center text-xl font-semibold text-[#000047] capitalize md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-[40px]"
     >
       {title}
     </h2>
-    <div class="section-decoration mx-auto w-16 h-1 bg-gradient-to-r from-purple-600 to-blue-500 rounded mb-6"></div>
+    <div
+      class="section-decoration mx-auto mb-6 h-1 w-16 rounded bg-gradient-to-r from-purple-600 to-blue-500"
+    >
+      <div
+        class="decoration-glow absolute top-1/2 left-1/2 h-4 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500/30 blur-md"
+      >
+      </div>
+    </div>
     <p
       class="internal-padding section-description mx-auto max-w-4xl text-center text-xs text-[#2A2111] md:text-sm lg:text-base xl:text-lg"
     >
@@ -96,41 +140,37 @@ const {
           slides.map((slide) => (
             <div class="swiper-slide">
               <div class="mobile-slide-content mx-auto flex max-w-lg flex-col items-center rounded-2xl p-6">
-                <!-- Card container with glassmorphism effect -->
-                <div class="mobile-card-inner w-full bg-white/90 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-100 relative overflow-hidden">
-                  <!-- Background graphic element -->
-                  <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-200 to-blue-100 rounded-full blur-md -m-10 opacity-60"></div>
-                  
+                <div class="mobile-card-inner relative w-full overflow-hidden rounded-2xl border border-gray-100 bg-white/90 p-6 shadow-lg backdrop-blur-lg">
+                  <div class="absolute top-0 right-0 -m-10 h-32 w-32 rounded-full bg-gradient-to-br from-purple-200 to-blue-100 opacity-60 blur-md" />
+                  <div class="absolute bottom-10 left-0 -m-10 h-24 w-24 rounded-full bg-gradient-to-tr from-blue-100 to-purple-100 opacity-40 blur-md" />
+
                   <div class="relative z-10">
-                    <div class="flex justify-between items-center mb-6">
-                      <span class="mobile-slide-number text-6xl font-bold text-gradient bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    <div class="mb-6 flex items-center justify-between">
+                      <span class="mobile-slide-number text-gradient bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-6xl font-bold text-transparent">
                         {slide.id}
                       </span>
-                      <span class="mobile-slide-badge text-xs font-semibold px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full">Web Service</span>
+                     
                     </div>
-                    
+
+                    <div class="mobile-slide-image-container mb-5 w-full">
+                      <div class="image-highlight absolute inset-0 bg-gradient-to-tr from-purple-500/5 to-blue-500/5" />
+                      <Image
+                        src={slide.image}
+                        alt={`${slide.title} Image`}
+                        class="mobile-slide-image h-auto max-h-[320px] w-full transform rounded-lg object-contain p-2 transition-transform"
+                      />
+                      <div class="absolute top-0 right-0 h-16 w-16 overflow-hidden">
+                        <div class="corner-highlight absolute top-0 right-0 h-4 w-4 translate-x-2 -translate-y-1 rotate-45 transform bg-gradient-to-br from-purple-400/30 to-transparent" />
+                      </div>
+                    </div>
+
                     <h3 class="mobile-slide-title mb-4 text-left text-xl font-semibold text-[#000047] md:text-2xl">
                       {slide.title}
                     </h3>
-                    
-                    <p class="mobile-slide-description text-left text-sm text-gray-600 md:text-base mb-6">
+
+                    <p class="mobile-slide-description mb-5 text-left text-sm text-gray-600 md:text-base">
                       {slide.description}
                     </p>
-                    
-                    <div class="mobile-slide-image-container w-full mb-2">
-                        <Image
-                          src={slide.image}
-                          alt={`${slide.title} Image`}
-                          class="mobile-slide-image h-auto max-h-[240px] w-full rounded-lg object-contain p-2 transform transition-transform"
-                        />
-                    </div>
-                    
-                    <a class="mobile-slide-link inline-flex items-center text-sm text-purple-600 font-medium gap-1 mt-4 group">
-                      Learn more 
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right transition-transform group-hover:translate-x-1" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                      </svg>
-                    </a>
                   </div>
                 </div>
               </div>
@@ -139,80 +179,99 @@ const {
         }
       </div>
       <div class="swiper-pagination mobile-pagination mx-auto mt-8"></div>
-      
-      <!-- Add navigation buttons -->
-      <div class="swiper-navigation flex justify-center gap-4 mt-6">
-        <button class="mobile-swiper-prev w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-purple-800 shadow-md hover:bg-purple-50 transition-all">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+
+      <!-- Enhanced navigation buttons with pulse effect -->
+      <div class="swiper-navigation mt-6 flex justify-center gap-4">
+        <button
+          class="mobile-swiper-prev relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white/90 text-purple-800 shadow-md backdrop-blur transition-all hover:bg-purple-50"
+        >
+          <span
+            class="btn-pulse absolute inset-0 rounded-full bg-purple-400/20 opacity-0"
+          ></span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+            ></path>
           </svg>
         </button>
-        <button class="mobile-swiper-next w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-purple-800 shadow-md hover:bg-purple-50 transition-all">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+        <button
+          class="mobile-swiper-next relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white/90 text-purple-800 shadow-md backdrop-blur transition-all hover:bg-purple-50"
+        >
+          <span
+            class="btn-pulse absolute inset-0 rounded-full bg-purple-400/20 opacity-0"
+          ></span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+            ></path>
           </svg>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Desktop Layout (>= 1024px) -->
+  <!-- Desktop Layout (>= 1024px) with enhanced visuals -->
   <div
     class="vertical-swiper-container relative mx-4 mt-16 hidden h-[600px] lg:mx-12 lg:block lg:h-[650px] xl:mx-20 xl:h-[710px]"
   >
-    <!-- Vertical progress bar -->
-    <!-- <div class="vertical-progress-container absolute left-0 top-0 bottom-0 w-[2px] bg-gray-200 z-10 ml-12 lg:ml-16 xl:ml-20">
-      <div class="vertical-progress h-0 w-full bg-purple-600"></div>
-    </div> -->
-    
     <div class="swiper verticalSwiper h-full">
       <div class="swiper-wrapper">
         {
           slides.map((slide) => (
             <div class="swiper-slide">
               <div class="slide-content relative flex h-full items-center">
-                <div class="slide-info flex flex-col items-start w-[35%] lg:w-[30%] pr-8 relative">
-                  <span class="slide-number text-[80px] lg:text-[120px] xl:text-[140px] 2xl:text-[160px] font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent opacity-90 leading-none">
+                <div class="slide-info relative flex w-[35%] flex-col items-start pr-8 lg:w-[30%]">
+                  <span class="slide-number bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-[80px] leading-none font-bold text-transparent opacity-90 lg:text-[120px] xl:text-[140px] 2xl:text-[160px]">
                     {slide.id}
                   </span>
-                  
-                  <div class="slide-text mt-4 lg:mt-6 relative">
+
+                  <div class="slide-text relative mt-4 lg:mt-6">
                     <h2 class="slide-title mb-4 text-xl font-semibold text-[#000047] lg:mb-6 lg:text-2xl xl:text-3xl 2xl:text-4xl">
                       {slide.title}
                     </h2>
-                    <p class="slide-description text-sm leading-relaxed text-gray-600 lg:text-base xl:text-lg">
-                      {slide.description}
-                    </p>
-                    
-                    <a class="slide-link inline-flex items-center text-purple-600 font-medium gap-1 mt-6 group">
-                      Learn more 
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-right transition-transform group-hover:translate-x-1" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                      </svg>
-                    </a>
+                    <p
+                      set:html={slide.description}
+                      class="slide-description text-sm leading-relaxed text-gray-600 lg:text-base xl:text-lg"
+                    />
                   </div>
                 </div>
-                
-                <div class="slide-image-container flex items-center justify-center w-[65%] lg:w-[70%] relative">
-                  <div class="image-backdrop absolute w-full h-full max-w-[80%] max-h-[80%] bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl opacity-70"></div>
-                  
-                  <div class="relative w-full flex items-center justify-center">
-                    <div class="absolute w-40 h-40 rounded-full bg-gradient-to-r from-purple-200/40 to-blue-200/40 blur-xl right-[10%] top-[10%]"></div>
-                    <div class="absolute w-24 h-24 rounded-full bg-gradient-to-r from-blue-200/40 to-purple-200/40 blur-xl left-[10%] bottom-[10%]"></div>
-                    
+
+                <div class="slide-image-container relative flex w-[65%] items-center justify-center lg:w-[70%]">
+                  <div class="image-backdrop absolute h-full max-h-[80%] w-full max-w-[80%] rounded-2xl bg-gradient-to-r from-purple-50 to-blue-50 opacity-70" />
+
+                  <div class="relative flex w-full items-center justify-center">
+                    <div class="absolute top-[10%] right-[10%] h-40 w-40 rounded-full bg-gradient-to-r from-purple-200/40 to-blue-200/40 blur-xl" />
+                    <div class="absolute bottom-[10%] left-[10%] h-24 w-24 rounded-full bg-gradient-to-r from-blue-200/40 to-purple-200/40 blur-xl" />
+
                     <div class="image-frame relative z-10">
-                      <div class="frame-inner bg-white border border-gray-100 rounded-xl shadow-xl overflow-hidden p-3 lg:p-4">
+                      <div class="frame-inner relative overflow-hidden rounded-xl border border-gray-100 bg-white p-3 shadow-xl lg:p-4">
+                        <div class="image-shine absolute inset-0 translate-x-full transform bg-gradient-to-tr from-white/0 via-white/30 to-white/0 opacity-0" />
+
                         <Image
                           src={slide.image}
                           alt={`${slide.title} Image`}
                           class="slide-image h-auto max-h-[450px] w-full object-contain lg:max-h-[460px] xl:max-h-[500px] 2xl:max-h-[550px]"
                         />
                       </div>
-                      
-                      <div class="tech-dots absolute -bottom-3 -right-3 flex gap-2">
-                        <span class="w-2 h-2 rounded-full bg-purple-500"></span>
-                        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-                        <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+
+                      <div class="tech-dots absolute -right-3 -bottom-3 flex gap-2">
+                        <span class="dot-1 h-2 w-2 rounded-full bg-purple-500" />
+                        <span class="dot-2 h-2 w-2 rounded-full bg-blue-500" />
+                        <span class="dot-3 h-2 w-2 rounded-full bg-indigo-500" />
                       </div>
                     </div>
                   </div>
@@ -222,19 +281,50 @@ const {
           ))
         }
       </div>
-      
+
+      <!-- Enhanced pagination with custom styling -->
       <div class="swiper-pagination vertical-pagination"></div>
-      
-      <!-- Custom navigation -->
-      <div class="vertical-navigation absolute bottom-4 right-4 flex gap-3 z-20">
-        <button class="vertical-swiper-prev w-12 h-12 rounded-full bg-white flex items-center justify-center text-purple-800 shadow-lg hover:bg-purple-50 transition-all">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+
+      <!-- Custom navigation with enhanced visuals -->
+      <div
+        class="vertical-navigation absolute right-4 bottom-4 z-20 flex gap-3"
+      >
+        <button
+          class="vertical-swiper-prev relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white text-purple-800 shadow-lg transition-all hover:bg-purple-50"
+        >
+          <span
+            class="btn-pulse absolute inset-0 rounded-full bg-purple-400/20 opacity-0"
+          ></span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"
+            ></path>
           </svg>
         </button>
-        <button class="vertical-swiper-next w-12 h-12 rounded-full bg-white flex items-center justify-center text-purple-800 shadow-lg hover:bg-purple-50 transition-all">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+        <button
+          class="vertical-swiper-next relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white text-purple-800 shadow-lg transition-all hover:bg-purple-50"
+        >
+          <span
+            class="btn-pulse absolute inset-0 rounded-full bg-purple-400/20 opacity-0"
+          ></span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
+            ></path>
           </svg>
         </button>
       </div>
@@ -244,7 +334,13 @@ const {
 
 <script>
   import Swiper from "swiper";
-  import { Pagination, Mousewheel, EffectFade, Autoplay, Navigation } from "swiper/modules";
+  import {
+    Pagination,
+    Mousewheel,
+    EffectFade,
+    Autoplay,
+    Navigation,
+  } from "swiper/modules";
   import "swiper/css";
   import "swiper/css/pagination";
   import "swiper/css/effect-fade";
@@ -252,7 +348,9 @@ const {
 
   document.addEventListener("DOMContentLoaded", function () {
     // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     // GSAP animations for the section title and description
     gsap.from(".section-title", {
@@ -289,8 +387,9 @@ const {
       },
     });
 
-    // Subtle animations for background elements
+    // Enhanced subtle animations for background elements
     if (!prefersReducedMotion) {
+      // Animate background blobs
       gsap.to(".bg-gradient-blob", {
         y: -20,
         x: 10,
@@ -298,18 +397,20 @@ const {
         duration: 8,
         repeat: -1,
         yoyo: true,
-        ease: "sine.inOut"
+        ease: "sine.inOut",
       });
-      
+
+      // Animate decoration lines
       gsap.to(".decoration-line", {
         opacity: 0.1,
         duration: 2,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
-        stagger: 1
+        stagger: 1,
       });
-      
+
+      // Animate decoration dots
       gsap.to(".decoration-dots div", {
         y: -5,
         opacity: 0.5,
@@ -317,7 +418,28 @@ const {
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
-        stagger: 0.2
+        stagger: 0.2,
+      });
+
+      // Animate floating circles with random movement
+      gsap.to(".floating-circle", {
+        y: "random(-15, 15)",
+        x: "random(-15, 15)",
+        duration: "random(3, 6)",
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.3,
+      });
+
+      // Subtle glow on the section decoration
+      gsap.to(".decoration-glow", {
+        opacity: 0.5,
+        scale: 1.2,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
       });
     }
 
@@ -380,9 +502,9 @@ const {
       pagination: {
         el: ".vertical-pagination",
         clickable: true,
-        renderBullet: function(index, className) {
+        renderBullet: function (index, className) {
           return `<span class="${className} custom-bullet">${index + 1}</span>`;
-        }
+        },
       },
       navigation: {
         nextEl: ".vertical-swiper-next",
@@ -391,31 +513,19 @@ const {
       on: {
         init: function () {
           animateDesktopSlide(this.activeIndex);
-          updateProgressBar(this);
         },
         slideChange: function () {
           animateDesktopSlide(this.activeIndex);
-          updateProgressBar(this);
         },
       },
     });
 
-    // Function to update vertical progress bar
-    function updateProgressBar(swiper) {
-      const progress = (swiper.realIndex) / (swiper.slides.length - 1);
-      gsap.to(".vertical-progress", {
-        height: `${progress * 100}%`,
-        duration: 0.8,
-        ease: "power2.out"
-      });
-    }
-
-    // Animation function for mobile slides with enhanced effects
+    // Enhanced animation function for mobile slides
     function animateMobileSlide(index) {
       if (prefersReducedMotion) return;
-      
+
       const slides = document.querySelectorAll(
-        ".mobileVerticalSwiper .swiper-slide"
+        ".mobileVerticalSwiper .swiper-slide",
       );
       const activeSlide = slides[index];
 
@@ -424,74 +534,139 @@ const {
       // Reset all slides
       gsap.set(".mobile-slide-number", { opacity: 0, y: 20 });
       gsap.set(".mobile-slide-badge", { opacity: 0, x: 20 });
+      gsap.set(".mobile-slide-image", { opacity: 0, scale: 0.9, y: 10 });
       gsap.set(".mobile-slide-title", { opacity: 0, y: 15 });
       gsap.set(".mobile-slide-description", { opacity: 0, y: 10 });
-      gsap.set(".mobile-slide-image", { opacity: 0, scale: 0.9 });
       gsap.set(".mobile-slide-link", { opacity: 0, y: 10 });
+      gsap.set(".img-wrapper", { boxShadow: "0 5px 15px rgba(0,0,0,0.05)" });
 
-      // Animate active slide with staggered sequence
+      // Animate active slide with staggered sequence - IMAGE FIRST for quicker visibility
       const tl = gsap.timeline();
 
+      // Start with number and image (most important elements)
       tl.to(activeSlide.querySelector(".mobile-slide-number"), {
         opacity: 1,
         y: 0,
         duration: 0.5,
         ease: "back.out(1.5)",
       })
-      .to(activeSlide.querySelector(".mobile-slide-badge"), {
-        opacity: 1,
-        x: 0,
-        duration: 0.4,
-        ease: "power2.out",
-      }, "-=0.3")
-      .to(activeSlide.querySelector(".mobile-slide-title"), {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      }, "-=0.2")
-      .to(activeSlide.querySelector(".mobile-slide-description"), {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      }, "-=0.3")
-      .to(activeSlide.querySelector(".mobile-slide-image"), {
-        opacity: 1,
-        scale: 1,
-        duration: 0.6,
-        ease: "power2.out",
-      }, "-=0.3")
-      .to(activeSlide.querySelector(".mobile-slide-link"), {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        ease: "power2.out",
-      }, "-=0.2");
-      
+        .to(
+          activeSlide.querySelector(".mobile-slide-image"),
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "back.out(1.2)",
+          },
+          "-=0.3",
+        )
+        .to(
+          activeSlide.querySelector(".img-wrapper"),
+          {
+            boxShadow: "0 8px 30px rgba(0,0,0,0.15)",
+            duration: 0.8,
+          },
+          "-=0.4",
+        )
+        .to(
+          activeSlide.querySelector(".mobile-slide-badge"),
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          "-=0.7",
+        )
+        .to(
+          activeSlide.querySelector(".mobile-slide-title"),
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "-=0.4",
+        )
+        .to(
+          activeSlide.querySelector(".mobile-slide-description"),
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "-=0.3",
+        )
+        .to(
+          activeSlide.querySelector(".mobile-slide-link"),
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          "-=0.2",
+        );
+
+      // Animated shine effect across the image
+      gsap.fromTo(
+        activeSlide.querySelector(".image-highlight"),
+        {
+          opacity: 0,
+          x: "-100%",
+          skewX: 30,
+        },
+        {
+          opacity: 0.4,
+          x: "100%",
+          skewX: 30,
+          duration: 1.5,
+          delay: 0.3,
+          ease: "power2.inOut",
+        },
+      );
+
+      // Corner highlight animation
+      gsap.fromTo(
+        activeSlide.querySelector(".corner-highlight"),
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          duration: 0.8,
+          delay: 0.4,
+          ease: "power2.out",
+          repeat: 1,
+          yoyo: true,
+        },
+      );
+
       // Hover effect for current slide image
       const currentImage = activeSlide.querySelector(".mobile-slide-image");
       currentImage.addEventListener("mouseenter", () => {
         gsap.to(currentImage, {
           scale: 1.05,
           duration: 0.3,
-          ease: "power2.out"
+          ease: "power2.out",
         });
       });
-      
+
       currentImage.addEventListener("mouseleave", () => {
         gsap.to(currentImage, {
           scale: 1,
           duration: 0.3,
-          ease: "power2.out"
+          ease: "power2.out",
         });
       });
     }
 
-    // Enhanced animation function for desktop slides
+    // Enhanced animation function for desktop slides - IMAGE APPEARING EARLIER
     function animateDesktopSlide(index) {
       if (prefersReducedMotion) return;
-      
+
       const slides = document.querySelectorAll(".verticalSwiper .swiper-slide");
       const activeSlide = slides[index];
 
@@ -500,115 +675,255 @@ const {
       // Reset all slides with improved reset
       gsap.set(".slide-number", { opacity: 0, scale: 0.8 });
       gsap.set(".image-backdrop", { opacity: 0, scale: 0.9 });
-      gsap.set(".slide-image", { opacity: 0, y: 30, scale: 0.9 });
+      gsap.set(".slide-image", { opacity: 0, y: 30, scale: 0.95 });
       gsap.set(".slide-title", { opacity: 0, y: 20 });
       gsap.set(".slide-description", { opacity: 0, y: 15 });
       gsap.set(".slide-link", { opacity: 0, y: 10 });
       gsap.set(".tech-dots span", { opacity: 0, scale: 0 });
+      gsap.set(".tech-badge", { opacity: 0, y: -10 });
+      gsap.set(".frame-inner", { boxShadow: "0 5px 15px rgba(0,0,0,0.05)" });
 
       // Animate active slide with choreographed sequence
       const tl = gsap.timeline();
 
-      // First animate the number and backdrop
+      // First animate the number and backdrop together with image for quicker visibility
       tl.to(activeSlide.querySelector(".slide-number"), {
         opacity: 1,
         scale: 1,
         duration: 0.6,
         ease: "back.out(1.5)",
       })
-      .to(activeSlide.querySelector(".image-backdrop"), {
-        opacity: 0.7,
-        scale: 1,
-        duration: 0.7,
-        ease: "power2.out",
-      }, "-=0.4")
-      
-      // Then bring in the main content
-      .to(activeSlide.querySelector(".slide-title"), {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-      }, "-=0.3")
-      .to(activeSlide.querySelector(".slide-description"), {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-      }, "-=0.4")
-      
-      // Then animate the image with some bounce
-      .to(activeSlide.querySelector(".slide-image"), {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        ease: "back.out(1.5)",
-      }, "-=0.4")
-      
-      // Finally add the small details
-      .to(activeSlide.querySelector(".slide-link"), {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      }, "-=0.3")
-      .to(activeSlide.querySelectorAll(".tech-dots span"), {
-        opacity: 1,
-        scale: 1,
-        duration: 0.4,
-        stagger: 0.1,
-        ease: "back.out(2)",
-      }, "-=0.4");
-      
+        .to(
+          activeSlide.querySelector(".image-backdrop"),
+          {
+            opacity: 0.7,
+            scale: 1,
+            duration: 0.7,
+            ease: "power2.out",
+          },
+          "-=0.4",
+        )
+
+        // Image appears earlier in the animation sequence
+        .to(
+          activeSlide.querySelector(".slide-image"),
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(1.5)",
+          },
+          "-=0.5",
+        )
+        .to(
+          activeSlide.querySelector(".frame-inner"),
+          {
+            boxShadow: "0 15px 35px rgba(0,0,0,0.12)",
+            duration: 0.8,
+          },
+          "-=0.6",
+        )
+
+        // Then bring in the main content
+        .to(
+          activeSlide.querySelector(".slide-title"),
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.6",
+        )
+        .to(
+          activeSlide.querySelector(".slide-description"),
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.4",
+        )
+
+        // Finally add the small details
+        .to(
+          activeSlide.querySelector(".slide-link"),
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "-=0.3",
+        )
+        .to(
+          activeSlide.querySelectorAll(".tech-dots span"),
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.4,
+            stagger: 0.1,
+            ease: "back.out(2)",
+          },
+          "-=0.3",
+        )
+        .to(
+          activeSlide.querySelector(".tech-badge"),
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "back.out(1.5)",
+          },
+          "-=0.4",
+        );
+
+      // Image shine effect
+      gsap.fromTo(
+        activeSlide.querySelector(".image-shine"),
+        {
+          opacity: 0,
+          x: "-100%",
+        },
+        {
+          opacity: 0.6,
+          x: "100%",
+          duration: 1.2,
+          delay: 0.2,
+          ease: "power2.inOut",
+        },
+      );
+
       // Add subtle floating animations for active elements
       gsap.to(activeSlide.querySelector(".image-frame"), {
         y: -10,
         duration: 3,
         repeat: -1,
         yoyo: true,
-        ease: "sine.inOut"
+        ease: "sine.inOut",
       });
-      
+
       gsap.to(activeSlide.querySelector(".tech-dots"), {
         rotate: 10,
         duration: 4,
         repeat: -1,
         yoyo: true,
-        ease: "sine.inOut"
+        ease: "sine.inOut",
+      });
+
+      // Badge pulse effect
+      gsap.to(activeSlide.querySelector(".tech-badge"), {
+        scale: 1.1,
+        duration: 0.8,
+        repeat: 1,
+        yoyo: true,
+        ease: "power1.inOut",
+        delay: 0.5,
+      });
+
+      // Animate each dot individually
+      gsap.to(activeSlide.querySelector(".dot-1"), {
+        y: -3,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 0.1,
+      });
+
+      gsap.to(activeSlide.querySelector(".dot-2"), {
+        y: -3,
+        duration: 1.7,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 0.3,
+      });
+
+      gsap.to(activeSlide.querySelector(".dot-3"), {
+        y: -3,
+        duration: 1.9,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 0.5,
       });
     }
 
     // Add event listeners for custom buttons if not using reduced motion
     if (!prefersReducedMotion) {
-      // Make buttons more interactive with feedback
-      const buttons = document.querySelectorAll(".mobile-swiper-prev, .mobile-swiper-next, .vertical-swiper-prev, .vertical-swiper-next");
-      buttons.forEach(button => {
+      // Enhanced button interactions with pulse effect
+      const buttons = document.querySelectorAll(
+        ".mobile-swiper-prev, .mobile-swiper-next, .vertical-swiper-prev, .vertical-swiper-next",
+      );
+
+      buttons.forEach((button) => {
+        const pulse = button.querySelector(".btn-pulse");
+
         button.addEventListener("mouseenter", () => {
           gsap.to(button, {
             scale: 1.1,
-            duration: 0.2
+            duration: 0.2,
           });
+
+          gsap.fromTo(
+            pulse,
+            {
+              opacity: 0.7,
+              scale: 0.5,
+            },
+            {
+              opacity: 0,
+              scale: 1.5,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+          );
         });
-        
+
         button.addEventListener("mouseleave", () => {
           gsap.to(button, {
             scale: 1,
-            duration: 0.2
+            duration: 0.2,
           });
         });
-        
+
         button.addEventListener("mousedown", () => {
           gsap.to(button, {
             scale: 0.95,
-            duration: 0.1
+            duration: 0.1,
           });
         });
-        
+
         button.addEventListener("mouseup", () => {
           gsap.to(button, {
             scale: 1.1,
-            duration: 0.1
+            duration: 0.1,
+          });
+        });
+      });
+
+      // Add interactive hover effect for learn more links
+      const links = document.querySelectorAll(".slide-link");
+
+      links.forEach((link) => {
+        const underline = link.querySelector(".link-underline");
+
+        link.addEventListener("mouseenter", () => {
+          gsap.to(underline, {
+            width: "100%",
+            duration: 0.3,
+            ease: "power1.out",
+          });
+        });
+
+        link.addEventListener("mouseleave", () => {
+          gsap.to(underline, {
+            width: 0,
+            duration: 0.3,
+            ease: "power1.in",
           });
         });
       });
@@ -683,7 +998,7 @@ const {
     font-size: 12px;
     color: #666;
     border: 1px solid #eaeaea;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   }
 
   .vertical-pagination :global(.swiper-pagination-bullet-active) {
@@ -714,7 +1029,7 @@ const {
     color: transparent;
   }
 
-  /* Smooth transitions */
+  /* Enhanced transitions and hover effects */
   .slide-image,
   .slide-title,
   .slide-description,
@@ -725,19 +1040,44 @@ const {
   }
 
   .image-frame {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
   }
 
   .image-frame:hover {
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
   }
 
+  .tech-badge {
+    transform: rotate(0);
+    transition: transform 0.3s ease;
+  }
+
+  .image-frame:hover .tech-badge {
+    transform: rotate(-8deg);
+  }
+
+  /* Improved shine effect */
+  .image-shine {
+    will-change: transform, opacity;
+    pointer-events: none;
+  }
+
+  /* Prevent animations for users who prefer reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .bg-gradient-blob,
     .decoration-line,
     .decoration-dots div,
     .image-frame,
-    .tech-dots {
+    .tech-dots,
+    .floating-circle,
+    .decoration-glow,
+    .btn-pulse,
+    .image-shine,
+    .corner-highlight,
+    .image-highlight {
       animation: none !important;
       transition: none !important;
     }
