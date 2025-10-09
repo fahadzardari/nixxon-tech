@@ -9,7 +9,7 @@ import Image5 from "../../assets/digital-marketing/5.png";
 ---
 
 <section
-  class="ad-spending-section internal-padding just relative z-10 flex flex-row py-32 text-[#FFFFFF]"
+  class="ad-spending-section internal-padding justify-center md:justify-start relative z-10 flex flex-row py-32 text-[#FFFFFF]"
   id="ad-spending-section"
 >
   <Image
@@ -18,24 +18,48 @@ import Image5 from "../../assets/digital-marketing/5.png";
     class="absolute top-0 left-0 h-full w-full object-cover"
   />
 
-  <div class="flex w-1/2 flex-col justify-center gap-4 2xl:gap-6">
-    <h3 class="text-center text-lg font-medium lg:text-xl 2xl:text-[26px]">
+  <div
+    class="flex flex-col justify-center gap-y-2 md:w-1/2 md:gap-y-4 2xl:gap-6"
+  >
+    <h3
+      class="text-center text-base font-medium md:text-lg lg:text-xl 2xl:text-[26px]"
+    >
       We Have Managed Over
     </h3>
     <h2
-      class="text-center text-[78px] font-semibold lg:text-[90px] xl:text-[106px] 2xl:text-[116px] 2xl:leading-[4.5rem]"
+      class="text-center text-[54px] font-semibold md:text-[78px] lg:text-[90px] xl:text-[106px] 2xl:text-[116px] 2xl:leading-[4.5rem]"
     >
       $1.3 million
     </h2>
-    <h3 class="text-center text-lg font-medium lg:text-xl 2xl:text-[26px]">
+    <h3 class="mb-2 text-center text-lg font-medium lg:text-xl 2xl:text-[26px]">
       In Ad Spend Across All Platforms
     </h3>
     <div class="z-10 flex items-center justify-center gap-x-10">
-      <Image src={Image1} alt="Google Ads" class="aspect-square w-20" />
-      <Image src={Image2} alt="Facebook Ads" class="aspect-square w-20" />
-      <Image src={Image3} alt="Instagram Ads" class="aspect-square w-20" />
-      <Image src={Image4} alt="LinkedIn Ads" class="aspect-square w-20" />
-      <Image src={Image5} alt="YouTube Ads" class="aspect-square w-20" />
+      <Image
+        src={Image1}
+        alt="Google Ads"
+        class="aspect-square w-8 md:w-12 lg:w-20"
+      />
+      <Image
+        src={Image2}
+        alt="Facebook Ads"
+        class="aspect-square w-8 md:w-12 lg:w-20"
+      />
+      <Image
+        src={Image3}
+        alt="Instagram Ads"
+        class="aspect-square w-8 md:w-12 lg:w-20"
+      />
+      <Image
+        src={Image4}
+        alt="LinkedIn Ads"
+        class="aspect-square w-8 md:w-12 lg:w-20"
+      />
+      <Image
+        src={Image5}
+        alt="YouTube Ads"
+        class="aspect-square w-8 md:w-12 lg:w-20"
+      />
     </div>
   </div>
 </section>

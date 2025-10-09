@@ -52,7 +52,7 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
       filters.map((filter, idx) => (
         <button
           type="button"
-          class={`cursor-pointer portfolio-filter-btn${idx === 0 ? "selected" : ""}`}
+          class={`cursor-pointer portfolio-filter-btn${idx === 0 ? " selected" : ""}`}
           data-filter={filter}
         >
           {filter}
@@ -153,6 +153,7 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
     position: relative;
     z-index: 1;
+    border-radius: 1.5rem;
   }
 
   .portfolio-filter-btn.selected {

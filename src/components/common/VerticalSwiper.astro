@@ -6,8 +6,6 @@ import VerticalImage4 from "../../assets/web-dev/4.png";
 import VerticalImage5 from "../../assets/web-dev/5.png";
 import VerticalImage6 from "../../assets/web-dev/6.png";
 
-
-// Create array of data for swiper slides
 const webSlides = [
   {
     id: "01",
@@ -61,48 +59,81 @@ const {
 } = Astro.props;
 ---
 
-<section class="vertical-swiper-section">
+<section class="vertical-swiper-section py-12 lg:py-20">
   <h2
-    class="mb-4 text-center internal-padding font-semibold text-[#000047] capitalize text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-[40px] section-title"
+    class="internal-padding section-title mb-4 text-center text-xl font-semibold text-[#000047] capitalize md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-[40px]"
   >
     {title}
   </h2>
   <p
-    class="mx-auto max-w-7xl internal-padding text-center text-xs text-[#2A2111] xl:text-sm 2xl:text-base section-description"
+    class="internal-padding section-description mx-auto max-w-7xl text-center text-xs text-[#2A2111] md:text-sm lg:text-base xl:text-lg"
   >
     {description}
   </p>
 
-  <div class="vertical-swiper-container relative mr-4 lg:mx-20 mt-6 lg:mt-12 h-[710px]">
+  <!-- Mobile/Tablet Layout (< 1024px) -->
+  <div class="mobile-swiper-container mt-8 px-4 lg:hidden">
+    <div class="swiper mobileVerticalSwiper">
+      <div class="swiper-wrapper">
+        {
+          slides.map((slide) => (
+            <div class="swiper-slide">
+              <div class="mobile-slide-content mx-auto flex max-w-md flex-col items-center rounded-2xl bg-white p-6 shadow-lg">
+                <span class="mb-4 text-6xl font-bold text-[#000000] md:text-7xl">
+                  {slide.id}
+                </span>
+                <div class="mobile-slide-image-container mb-6 w-full">
+                  <Image
+                    src={slide.image}
+                    alt={`${slide.title} Image`}
+                    class="mobile-slide-image h-auto max-h-[300px] w-full rounded-lg object-contain"
+                  />
+                </div>
+                <h3 class="mobile-slide-title mb-4 text-center text-xl font-semibold text-[#000047] md:text-2xl">
+                  {slide.title}
+                </h3>
+                <p class="mobile-slide-description text-center text-sm text-[#2A2111] md:text-base">
+                  {slide.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <div class="swiper-pagination mobile-pagination mx-auto"></div>
+    </div>
+  </div>
+
+  <!-- Desktop Layout (>= 1024px) -->
+  <div
+    class="vertical-swiper-container relative mx-4 mt-12 hidden h-[600px] lg:mx-12 lg:block lg:h-[650px] xl:mx-20 xl:h-[710px]"
+  >
     <div class="swiper verticalSwiper h-full">
       <div class="swiper-wrapper">
         {
           slides.map((slide) => (
             <div class="swiper-slide">
-              <div class="relative flex slide-content">
-                <span class="slide-number absolute z-10 -top-12 2xl:-top-10 left-[43%] 2xl:left-[45%] text-[#000000] lg:text-[140px] xl:text-[150px] 2xl:text-[170px]">
+              <div class="slide-content relative flex h-full items-center">
+                <span class="absolute -top-8 left-[40%] z-10 text-[100px] text-[#000000] lg:-top-10 lg:left-[42%] lg:text-[120px] xl:-top-12 xl:left-[43%] xl:text-[140px] 2xl:left-[45%] 2xl:text-[170px]">
                   {slide.id}
                 </span>
-                <div class="slide-image-container w-1/2">
+
+                <div class="slide-image-container flex w-5/12 items-center justify-center lg:w-[45%] xl:w-1/2">
                   <Image
                     src={slide.image}
                     alt={`${slide.title} Image`}
-                    class="slide-image h-[780px] w-full object-contain"
+                    class="slide-image h-auto max-h-[450px] w-full object-contain lg:max-h-[500px] xl:max-h-[600px] 2xl:max-h-[700px]"
                   />
                 </div>
-                <div class="slide-text mt-24 ml-16 xl:m;-24 2xl:ml-32 flex w-1/2 max-w-[550px] flex-col">
-                  <h2 class="slide-title mb-6 font-semibold text-[#000047] lg:text-2xl xl:text-3xl 2xl:text-4xl 3xl:text-[40px]">
+
+                <div class="slide-text flex w-7/12 flex-col pr-4 pl-8 lg:w-[55%] lg:pr-8 lg:pl-12 xl:w-1/2 xl:pl-16 2xl:pl-24">
+                  <h2 class="slide-title mb-4 text-xl font-semibold text-[#000047] lg:mb-6 lg:text-2xl xl:text-3xl 2xl:text-4xl">
                     {slide.title}
                   </h2>
                   <p
                     set:html={slide.description}
-                    class="slide-description mb-7 text-[#2A2111] text-sm lg:text-base xl:text-lg 2xl:text-xl 3xl:text-xl"
+                    class="slide-description text-sm leading-relaxed text-[#2A2111] lg:text-base xl:text-lg 2xl:text-xl"
                   />
-                  {/* <div class="slide-cta">
-                    <button class="learn-more-btn bg-[#9d7eff] hover:bg-[#8a63ff] text-white font-medium py-2 px-5 rounded-md transition-all duration-300 opacity-0">
-                      Learn More
-                    </button>
-                  </div> */}
                 </div>
               </div>
             </div>
@@ -116,7 +147,7 @@ const {
 
 <script>
   import Swiper from "swiper";
-  import { Pagination, Mousewheel, EffectFade } from "swiper/modules";
+  import { Pagination, Mousewheel, EffectFade, Autoplay } from "swiper/modules";
   import "swiper/css";
   import "swiper/css/pagination";
   import "swiper/css/effect-fade";
@@ -128,120 +159,227 @@ const {
       y: 50,
       opacity: 0,
       duration: 1,
-      ease: "power3.out"
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".section-title",
+        start: "top 85%",
+      },
     });
 
     gsap.from(".section-description", {
       y: 30,
       opacity: 0,
       duration: 1,
-      delay: 0.3,
-      ease: "power3.out"
+      delay: 0.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".section-description",
+        start: "top 85%",
+      },
     });
 
-    // Initialize Swiper
-    const swiper = new Swiper(".verticalSwiper", {
+    // Mobile Swiper (Horizontal)
+    const mobileSwiper = new Swiper(".mobileVerticalSwiper", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      modules: [Pagination, Autoplay],
+      pagination: {
+        el: ".mobile-pagination",
+        clickable: true,
+      },
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      speed: 600,
+      on: {
+        init: function () {
+          animateMobileSlide(this.activeIndex);
+        },
+        slideChange: function () {
+          animateMobileSlide(this.activeIndex);
+        },
+      },
+    });
+
+    // Desktop Swiper (Vertical)
+    const desktopSwiper = new Swiper(".verticalSwiper", {
       direction: "vertical",
       slidesPerView: 1,
       spaceBetween: 30,
-      mousewheel: true,
+      mousewheel: {
+        forceToAxis: true,
+        sensitivity: 1,
+        releaseOnEdges: true,
+      },
       modules: [Pagination, Mousewheel, EffectFade],
       effect: "fade",
       fadeEffect: {
-        crossFade: true
+        crossFade: true,
       },
       speed: 800,
-      parallax: true,
       pagination: {
         el: ".vertical-pagination",
         clickable: true,
-        renderBullet: function (index, className) {
-          return `<span class="${className}"></span>`;
-        },
       },
       on: {
-        init: function() {
-          animateSlideContent(this.activeIndex);
+        init: function () {
+          animateDesktopSlide(this.activeIndex);
         },
-        slideChange: function() {
-          animateSlideContent(this.activeIndex);
-        }
-      }
+        slideChange: function () {
+          animateDesktopSlide(this.activeIndex);
+        },
+      },
     });
 
-    // Function to animate the content of the active slide
-    function animateSlideContent(index) {
-      const activeSlide = document.querySelectorAll('.swiper-slide')[index];
-      
+    // Animation function for mobile slides
+    function animateMobileSlide(index) {
+      const slides = document.querySelectorAll(
+        ".mobileVerticalSwiper .swiper-slide",
+      );
+      const activeSlide = slides[index];
+
       if (!activeSlide) return;
 
       // Reset all slides
-      gsap.set('.slide-number', { opacity: 0, scale: 0.5 });
-      gsap.set('.slide-image', { opacity: 0, x: -50 });
-      gsap.set('.slide-title', { opacity: 0, y: 30 });
-      gsap.set('.slide-description', { opacity: 0, y: 20 });
-      gsap.set('.learn-more-btn', { opacity: 0, y: 15 });
-      
-      // Create a timeline for the active slide
+      gsap.set(".mobile-slide-number", { opacity: 0, scale: 0.8 });
+      gsap.set(".mobile-slide-image", { opacity: 0, y: 20 });
+      gsap.set(".mobile-slide-title", { opacity: 0, y: 15 });
+      gsap.set(".mobile-slide-description", { opacity: 0, y: 10 });
+
+      // Animate active slide
       const tl = gsap.timeline();
-      
-      // Animate the active slide elements
-      tl.to(activeSlide.querySelector('.slide-number'), {
-        opacity: 0.7,
+
+      tl.to(activeSlide.querySelector(".mobile-slide-number"), {
+        opacity: 0.2,
         scale: 1,
-        duration: 0.8,
-        ease: "back.out(1.7)"
+        duration: 0.6,
+        ease: "back.out(1.2)",
       })
-      .to(activeSlide.querySelector('.slide-image'), {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.4")
-      .to(activeSlide.querySelector('.slide-title'), {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out"
-      }, "-=0.4")
-      .to(activeSlide.querySelector('.slide-description'), {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out"
-      }, "-=0.3")
-      .to(activeSlide.querySelector('.learn-more-btn'), {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out"
-      }, "-=0.3");
+        .to(
+          activeSlide.querySelector(".mobile-slide-image"),
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power2.out",
+          },
+          "-=0.3",
+        )
+        .to(
+          activeSlide.querySelector(".mobile-slide-title"),
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.4",
+        )
+        .to(
+          activeSlide.querySelector(".mobile-slide-description"),
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.3",
+        );
     }
 
-    // Add hover effects to the buttons
-    const buttons = document.querySelectorAll('.learn-more-btn');
-    buttons.forEach(btn => {
-      btn.addEventListener('mouseenter', () => {
-        gsap.to(btn, {
-          scale: 1.05,
-          duration: 0.3
-        });
-      });
-      
-      btn.addEventListener('mouseleave', () => {
-        gsap.to(btn, {
-          scale: 1,
-          duration: 0.3
-        });
-      });
-    });
+    // Animation function for desktop slides
+    function animateDesktopSlide(index) {
+      const slides = document.querySelectorAll(".verticalSwiper .swiper-slide");
+      const activeSlide = slides[index];
 
-    // Initial animation for the first slide
-    animateSlideContent(0);
+      if (!activeSlide) return;
+
+      // Reset all slides with reduced motion
+      gsap.set(".slide-number", { opacity: 0 });
+      gsap.set(".slide-image", { opacity: 0, scale: 0.95 });
+      gsap.set(".slide-title", { opacity: 0, x: -20 });
+      gsap.set(".slide-description", { opacity: 0, x: -15 });
+
+      // Animate active slide
+      const tl = gsap.timeline();
+
+      tl.to(activeSlide.querySelector(".slide-number"), {
+        opacity: 0.1,
+        duration: 0.5,
+        ease: "power2.out",
+      })
+        .to(
+          activeSlide.querySelector(".slide-image"),
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.3",
+        )
+        .to(
+          activeSlide.querySelector(".slide-title"),
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.5",
+        )
+        .to(
+          activeSlide.querySelector(".slide-description"),
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.4",
+        );
+    }
   });
 </script>
 
 <style>
+  /* Mobile Swiper Styles */
+  .mobile-swiper-container {
+    position: relative;
+    overflow: visible;
+    padding-bottom: 50px;
+  }
+
+  .mobile-pagination {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 20;
+    margin-top: 50px;
+  }
+
+  .mobile-pagination :global(.swiper-pagination-bullet) {
+    width: 10px;
+    height: 10px;
+    background: #d9d9d9;
+    opacity: 1;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+  }
+
+  .mobile-pagination :global(.swiper-pagination-bullet-active) {
+    background: #9d7eff;
+    width: 24px;
+    border-radius: 5px;
+  }
+
+  /* Desktop Swiper Styles */
   .vertical-swiper-container {
     position: relative;
     overflow: hidden;
@@ -255,35 +393,57 @@ const {
     display: flex;
     flex-direction: column;
     z-index: 20;
-    gap: 10px;
+    gap: 12px;
   }
 
-  .swiper-pagination-bullet {
+  .vertical-pagination .swiper-pagination-bullet {
     width: 10px;
     height: 10px;
     background: #d9d9d9;
     opacity: 1;
-    margin: 6px 0 !important;
     transition: all 0.3s ease;
+    border-radius: 50%;
   }
 
-  .swiper-pagination-bullet-active {
+  .vertical-pagination .swiper-pagination-bullet-active {
     background: #9d7eff;
     width: 12px;
     height: 12px;
     box-shadow: 0 0 10px rgba(157, 126, 255, 0.5);
   }
-  
+
   .swiper-slide {
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.4s ease;
   }
-  
+
   .swiper-slide-active {
     opacity: 1;
   }
-  
+
   .slide-content {
     overflow: hidden;
+  }
+
+  /* Improved responsive styles */
+  @media (min-width: 1024px) and (max-width: 1599px) {
+    .slide-image-container {
+      width: 45%;
+    }
+
+    .slide-text {
+      width: 55%;
+      padding-left: 2rem;
+    }
+  }
+
+  /* Smooth transitions */
+  .slide-image,
+  .slide-title,
+  .slide-description,
+  .mobile-slide-image,
+  .mobile-slide-title,
+  .mobile-slide-description {
+    will-change: opacity, transform;
   }
 </style>
