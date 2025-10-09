@@ -44,7 +44,7 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
         filters.map((filter, idx) => (
           <button
             type="button"
-            class={`cursor-pointer rounded portfolio-filter-btn${idx === 0 ? "selected" : ""}`}
+            class={`cursor-pointer rounded portfolio-filter-btn${idx === 0 ? " selected" : ""}`}
             data-filter={filter}
           >
             {filter}
@@ -57,7 +57,7 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
   <div class="mx-auto">
     <div
       id="portfolio-grid"
-      class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+      class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-3"
     >
       {
         // Default: show logos (Logo Design)
@@ -65,7 +65,7 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
           <Image
             src={logo}
             alt={`Project Logo ${index + 1}`}
-            class="portfolio-item h-auto max-h-[410px] w-full max-w-[480px] rounded-lg"
+            class="portfolio-item w-full max-w-[220px] md:max-w-[480px] aspect-square rounded-lg"
             data-category="Logo Design"
           />
         ))
