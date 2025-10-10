@@ -126,7 +126,7 @@ const {
       </div>
     </div>
     <p
-      class="internal-padding section-description mx-auto max-w-4xl text-center text-xs text-[#2A2111] md:text-sm lg:text-base xl:text-lg"
+      class="internal-padding section-description mx-auto l text-center text-xs text-[#2A2111] md:text-sm lg:text-base xl:text-lg"
     >
       {description}
     </p>
@@ -149,7 +149,6 @@ const {
                       <span class="mobile-slide-number text-gradient bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-6xl font-bold text-transparent">
                         {slide.id}
                       </span>
-                     
                     </div>
 
                     <div class="mobile-slide-image-container mb-5 w-full">
@@ -251,22 +250,18 @@ const {
                 </div>
 
                 <div class="slide-image-container relative flex w-[65%] items-center justify-center lg:w-[70%]">
-                  <div class="image-backdrop absolute h-full max-h-[80%] w-full max-w-[80%] rounded-2xl bg-gradient-to-r from-purple-50 to-blue-50 opacity-70" />
+                  {/* <div class="image-backdrop absolute h-full max-h-[80%] w-full max-w-[80%] rounded-2xl bg-gradient-to-r from-purple-50 to-blue-50 opacity-70" /> */}
 
                   <div class="relative flex w-full items-center justify-center">
-                    <div class="absolute top-[10%] right-[10%] h-40 w-40 rounded-full bg-gradient-to-r from-purple-200/40 to-blue-200/40 blur-xl" />
-                    <div class="absolute bottom-[10%] left-[10%] h-24 w-24 rounded-full bg-gradient-to-r from-blue-200/40 to-purple-200/40 blur-xl" />
+                    {/* <div class="absolute top-[10%] right-[10%] h-40 w-40 rounded-full bg-gradient-to-r from-purple-200/40 to-blue-200/40 blur-xl" />
+                    <div class="absolute bottom-[10%] left-[10%] h-24 w-24 rounded-full bg-gradient-to-r from-blue-200/40 to-purple-200/40 blur-xl" /> */}
 
-                    <div class="image-frame relative z-10">
-                      <div class="frame-inner relative overflow-hidden rounded-xl border border-gray-100 bg-white p-3 shadow-xl lg:p-4">
-                        <div class="image-shine absolute inset-0 translate-x-full transform bg-gradient-to-tr from-white/0 via-white/30 to-white/0 opacity-0" />
-
-                        <Image
-                          src={slide.image}
-                          alt={`${slide.title} Image`}
-                          class="slide-image h-auto max-h-[450px] w-full object-contain lg:max-h-[460px] xl:max-h-[500px] 2xl:max-h-[550px]"
-                        />
-                      </div>
+                    <div class="relative z-10">
+                      <Image
+                        src={slide.image}
+                        alt={`${slide.title} Image`}
+                        class="slide-image h-auto max-h-[450px] w-full object-contain lg:max-h-[460px] xl:max-h-[500px] 2xl:max-h-[550px]"
+                      />
 
                       <div class="tech-dots absolute -right-3 -bottom-3 flex gap-2">
                         <span class="dot-1 h-2 w-2 rounded-full bg-purple-500" />
