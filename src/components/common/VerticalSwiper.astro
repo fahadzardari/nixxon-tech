@@ -479,15 +479,11 @@ const {
     });
 
     // Desktop Swiper (Vertical with enhanced effects)
-    const desktopSwiper = new Swiper(".verticalSwiper", {
+    let desktopSwiper = new Swiper(".verticalSwiper", {
       direction: "vertical",
       slidesPerView: 1,
       spaceBetween: 30,
-      mousewheel: {
-        forceToAxis: true,
-        sensitivity: 1,
-        releaseOnEdges: true,
-      },
+      mousewheel: false, // Initially disable mousewheel
       modules: [Pagination, Mousewheel, EffectFade, Navigation],
       effect: "fade",
       fadeEffect: {
@@ -514,6 +510,40 @@ const {
         },
       },
     });
+
+    // IntersectionObserver to enable/disable mousewheel only when swiper is fully visible
+    const swiperContainer = document.querySelector('.vertical-swiper-container');
+    if (swiperContainer) {
+      const swiperObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // Only enable mousewheel when swiper is fully visible
+            if (entry.intersectionRatio >= 0.99) {
+              // Fully visible - enable mousewheel
+              if (desktopSwiper && desktopSwiper.params) {
+                desktopSwiper.params.mousewheel.enabled = true;
+                desktopSwiper.mousewheel.enable();
+                swiperContainer.classList.add('mousewheel-active');
+              }
+            } else {
+              // Not fully visible - disable mousewheel
+              if (desktopSwiper && desktopSwiper.params) {
+                desktopSwiper.params.mousewheel.enabled = false;
+                desktopSwiper.mousewheel.disable();
+                swiperContainer.classList.remove('mousewheel-active');
+              }
+            }
+          });
+        },
+        {
+          root: null,
+          threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 1.0],
+          rootMargin: '0px',
+        }
+      );
+      
+      swiperObserver.observe(swiperContainer);
+    }
 
     // Enhanced animation function for mobile slides
     function animateMobileSlide(index) {
@@ -1075,6 +1105,37 @@ const {
     .image-highlight {
       animation: none !important;
       transition: none !important;
+    }
+  }
+
+  /* Visual indicator for when mousewheel is active */
+  .mousewheel-active::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: #9d7eff;
+    border-radius: 50%;
+    opacity: 0;
+    animation: pulse 2s infinite;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(0.95);
+      opacity: 0.7;
+    }
+    70% {
+      transform: scale(1.1);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(0.95);
+      opacity: 0;
     }
   }
 </style>

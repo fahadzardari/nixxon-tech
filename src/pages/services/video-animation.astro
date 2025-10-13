@@ -24,6 +24,29 @@ import VerticalImage3 from "../../assets/video-animation/3.png";
 import VerticalImage4 from "../../assets/video-animation/4.png";
 import VerticalImage5 from "../../assets/video-animation/5.png";
 import VerticalImage6 from "../../assets/video-animation/6.png";
+import SpecificPortfolioSection from "../../components/common/SpecificPortfolioSection.astro";
+
+import PortfolioImage1 from "../../assets/video-animation/portfolio/1.png";
+import PortfolioImage2 from "../../assets/video-animation/portfolio/2.png";
+import PortfolioImage3 from "../../assets/video-animation/portfolio/3.png";
+import PortfolioImage4 from "../../assets/video-animation/portfolio/4.png";
+import PortfolioImage5 from "../../assets/video-animation/portfolio/5.png";
+import PortfolioImage6 from "../../assets/video-animation/portfolio/6.png";
+import PortfolioImage7 from "../../assets/video-animation/portfolio/7.png";
+import PortfolioImage8 from "../../assets/video-animation/portfolio/8.png";
+import PortfolioImage9 from "../../assets/video-animation/portfolio/9.png";
+
+const portfolioImages = [
+  PortfolioImage1,
+  PortfolioImage2,
+  PortfolioImage3,
+  PortfolioImage4,
+  PortfolioImage5,
+  PortfolioImage6,
+  PortfolioImage7,
+  PortfolioImage8,
+  PortfolioImage9,
+];
 
 // Create array of data for swiper slides
 const videoSlides = [
@@ -92,6 +115,9 @@ const videoSlides = [
     description="We transform ideas into powerful visuals through a streamlined process that ensures every animation is clear, creative, and impactful."
     swiperCards={videoAnimationCards}
   />
-  <Portfolio />
+  <SpecificPortfolioSection 
+    description="Most of our customers give us a call promptly after going through our professional portfolio.Have a look at it, and you will know why!"
+    images={portfolioImages}
+    />
   <Testimonials />
 </Layout>

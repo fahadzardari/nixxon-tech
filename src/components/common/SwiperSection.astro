@@ -64,10 +64,10 @@ const {
   <div
     class="stepsSwiper relative z-10 mt-12 w-full overflow-hidden px-12 lg:mt-0"
   >
-    <div class="steps-swiper-wrapper">
+    <div class="swiper-wrapper">
       {
         swiperCards.map((s) => (
-          <div class="steps-swiper-slide">
+          <div class="swiper-slide">
             <SwiperCard
               serialNo={s.serialNo}
               title={s.title}
@@ -85,7 +85,7 @@ const {
 
 <script>
   import Swiper from "swiper";
-  import { Navigation } from "swiper/modules";
+  import { Navigation, Autoplay } from "swiper/modules";
   import "swiper/css";
   import "swiper/css/navigation";
 
@@ -94,78 +94,45 @@ const {
       slidesPerView: "auto",
       spaceBetween: 50,
       initialSlide: 0,
-      watchSlidesProgress: true,
-      freeMode: {
-        enabled: true,
-        sticky: true,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: true, // This will stop autoplay on click
+        pauseOnMouseEnter: false,
       },
-      navigation: {
-        nextEl: ".steps-swiper-next",
-        prevEl: ".steps-swiper-prev",
-      },
-      modules: [Navigation],
-      wrapperClass: "steps-swiper-wrapper",
-      slideClass: "steps-swiper-slide",
+      speed: 8000, // Slow speed for the ticker effect
+      loop: true,
+      modules: [Navigation, Autoplay],
       breakpoints: {
-        0: {
-          slidesPerView: 1,
-          spaceBetween: 5,
-          centeredSlides: true,
-        },
-        600: {
-          slidesPerView: 2,
-          spaceBetween: 40,
-          centeredSlides: true,
-        },
-        908: {
-          slidesPerView: 3,
-          spaceBetween: 40,
-          centeredSlides: true,
-        },
-        1024: {
-          slidesPerView: 2.5,
-          spaceBetween: 50,
-        },
+        0: { slidesPerView: 1, spaceBetween: 5, centeredSlides: true },
+        600: { slidesPerView: 2, spaceBetween: 40, centeredSlides: true },
+        908: { slidesPerView: 3, spaceBetween: 40, centeredSlides: true },
+        1024: { slidesPerView: 2.5, spaceBetween: 50 },
       },
+    });
+
+    // --- MANUAL NAVIGATION CONTROL ---
+    const prevButton = document.querySelector(".steps-swiper-prev");
+    const nextButton = document.querySelector(".steps-swiper-next");
+
+    prevButton.addEventListener("click", () => {
+      swiper.slidePrev(400); // Use a fast speed (400ms) for this transition
+    });
+
+    nextButton.addEventListener("click", () => {
+      swiper.slideNext(400); // Use a fast speed (400ms) for this transition
     });
   });
 </script>
 
 <style>
-  /* Custom wrapper styles to replicate swiper-wrapper functionality */
-  .steps-swiper-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    display: flex;
-    transition-property: transform;
-    transition-timing-function: ease-out;
-    box-sizing: content-box;
+  .stepsSwiper .swiper-wrapper {
+    transition-timing-function: linear !important;
   }
-
-  /* Custom slide styles to replicate swiper-slide functionality */
-  .steps-swiper-slide {
-    flex-shrink: 0;
+  
+  .stepsSwiper .swiper-slide {
     width: 400px;
     height: auto;
-    position: relative;
-    transition-property: transform;
-    display: block;
-  }
-
-  /* Ensure slides maintain their layout */
-  .stepsSwiper .steps-swiper-slide {
-    height: auto;
-    width: 400px;
     flex-shrink: 0;
-  }
-
-  /* Override any global swiper styles that might interfere */
-  .stepsSwiper {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 1;
+    opacity: 1 !important; /* Ensures all slides are fully visible */
   }
 </style>
