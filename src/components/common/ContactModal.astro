@@ -5,11 +5,11 @@ import ContactForm from "../common/ContactForm.astro";
 
 <div
   id="contact-modal"
-  class={`font-manrope fixed inset-0 z-50 flex items-center  justify-center bg-[#dee4ff] transition-opacity duration-300 ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+  class={`font-manrope fixed inset-0 z-50 flex  items-center  justify-center bg-[#dee4ff] transition-opacity duration-300  ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
 >
   <!-- Modal Box -->
   <div
-    class="relative mx-16 flex min-h-[90vh] w-full max-w-7xl overflow-y-auto rounded-2xl bg-white shadow-lg"
+    class="relative mx-16 flex max-h-[95vh] min-h-[90vh] w-full max-w-7xl overflow-y-auto rounded-2xl bg-white shadow-lg"
   >
     <!-- Close Button -->
     <button
@@ -30,26 +30,28 @@ import ContactForm from "../common/ContactForm.astro";
     </button>
 
     <!-- Content Wrapper (Put your form here) -->
-    <div class="flex w-full rounded-2xl bg-[#f3f0ff]">
+    <div class="flex w-full flex-col rounded-2xl bg-[#f3f0ff] lg:flex-row">
       <div
-        class="flex w-2/5 max-w-[460px] flex-col justify-center gap-16 bg-white px-14"
+        class="flex flex-col justify-center gap-4 bg-white px-6 lg:px-14 py-4 md:py-12 lg:w-2/5 lg:max-w-[460px] lg:gap-16"
       >
         <div>
-          <h1 class="mb-6 text-5xl font-medium text-black">
+          <h1
+            class="mb-3 text-3xl font-medium text-black md:text-3xl lg:mb-6 lg:text-4xl xl:text-5xl"
+          >
             Book a call to learn how we can help you!
           </h1>
-          <p class="text-base leading-6 text-[#6B7280]">
+          <p class="text-sm text-[#6B7280] lg:text-base lg:leading-6">
             Complete the form and share details of how we can help.
           </p>
         </div>
         <div>
           <p
-            class="mb-6 leading-[20px] font-semibold tracking-[2.8px] text-[#9CA3AF]"
+            class="mb-3 leading-[20px] font-semibold tracking-[2.8px] text-[#9CA3AF] lg:mb-6"
           >
             THE NEXT STEPS
           </p>
           <ul class="list-none leading-6 text-[#374151]">
-            <li class="mb-6 flex items-center gap-x-4">
+            <li class="text-sm md:text-sm lg:text-base mb-3 lg:mb-6 flex items-center gap-x-2 md:gap-x-4">
               <span
                 class="rounded-full bg-[#B6B6B6] px-3 py-1 font-bold text-white"
               >
@@ -60,7 +62,7 @@ import ContactForm from "../common/ContactForm.astro";
                 vision.
               </p>
             </li>
-            <li class="mb-6 flex items-center gap-x-4">
+            <li class="text-sm md:text-sm lg:text-base mb-3 lg:mb-6 flex items-center gap-x-2 md:gap-x-4">
               <span
                 class="rounded-full bg-[#757575] px-3 py-1 font-bold text-white"
               >
@@ -71,7 +73,7 @@ import ContactForm from "../common/ContactForm.astro";
                 vision.
               </p>
             </li>
-            <li class="mb-6 flex items-center gap-x-4">
+            <li class="text-sm md:text-sm lg:text-base mb-3 lg:mb-6 flex items-center gap-x-2 md:gap-x-4">
               <span
                 class="rounded-full bg-[#343434] px-3 py-1 font-bold text-white"
               >

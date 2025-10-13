@@ -71,7 +71,7 @@ const {
     {
       panels.map((panel, index) => (
         <li
-          class="accordion-item relative flex bg-gradient-to-r from-[#101E39] to-[#643DB4] transition-all duration-[1.5s] ease-out"
+          class="accordion-item relative flex bg-gradient-to-r from-[#101E39] to-[#643DB4] transition-all duration-[1.2s] ease-in"
           data-accordion-item
           data-active={index === 0 ? "true" : "false"}
           aria-expanded={index === 0 ? "true" : "false"}
@@ -353,7 +353,7 @@ const {
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .accordion-item {
-      width: 80px; /* Smaller width on mobile */
+      width: 50px; /* Smaller width on mobile */
     }
 
     .accordion-item[data-active="true"] {
