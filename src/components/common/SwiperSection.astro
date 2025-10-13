@@ -90,13 +90,13 @@ const {
   import "swiper/css/navigation";
 
   document.addEventListener("DOMContentLoaded", function () {
-    const swiper = new Swiper(".stepsSwiper", {
+    let swiper = new Swiper(".stepsSwiper", {
       slidesPerView: "auto",
       spaceBetween: 50,
       initialSlide: 0,
       autoplay: {
         delay: 0,
-        disableOnInteraction: true, // This will stop autoplay on click
+        disableOnInteraction: true,
         pauseOnMouseEnter: false,
       },
       speed: 8000, // Slow speed for the ticker effect
@@ -113,14 +113,89 @@ const {
     // --- MANUAL NAVIGATION CONTROL ---
     const prevButton = document.querySelector(".steps-swiper-prev");
     const nextButton = document.querySelector(".steps-swiper-next");
+    const swiperContainer = document.querySelector(".stepsSwiper");
+    let autoplayStopped = false;
 
-    prevButton.addEventListener("click", () => {
-      swiper.slidePrev(400); // Use a fast speed (400ms) for this transition
-    });
+    // The most reliable way: recreate Swiper without autoplay
+    function switchToManualMode() {
+      if (autoplayStopped) return;
 
-    nextButton.addEventListener("click", () => {
-      swiper.slideNext(400); // Use a fast speed (400ms) for this transition
-    });
+      // Add class for CSS changes
+      if (swiperContainer) {
+        swiperContainer.classList.add("manual-navigation");
+      }
+
+      // Get current slide index before destroying
+      const currentIndex = swiper.activeIndex;
+      
+      // Destroy current swiper instance
+      swiper.destroy(true, true);
+      
+      // Create new instance without autoplay, but with same configuration
+      swiper = new Swiper(".stepsSwiper", {
+        slidesPerView: "auto",
+        spaceBetween: 50,
+        initialSlide: currentIndex, // Resume from current position
+        loop: true,
+        speed: 400, // Fast transitions for manual navigation
+        modules: [Navigation],
+        breakpoints: {
+          0: { slidesPerView: 1, spaceBetween: 5, centeredSlides: true },
+          600: { slidesPerView: 2, spaceBetween: 40, centeredSlides: true },
+          908: { slidesPerView: 3, spaceBetween: 40, centeredSlides: true },
+          1024: { slidesPerView: 2.5, spaceBetween: 50 },
+        },
+      });
+      
+      // Mark as stopped
+      autoplayStopped = true;
+      
+      // Re-attach event listeners to the new instance
+      attachNavigationEvents();
+    }
+    
+    // Separate function to attach navigation events (needed for recreated swiper)
+    function attachNavigationEvents() {
+      // Remove old listeners if any
+      prevButton.removeEventListener("click", handlePrevClick);
+      nextButton.removeEventListener("click", handleNextClick);
+      
+      // Add new listeners
+      prevButton.addEventListener("click", handlePrevClick);
+      nextButton.addEventListener("click", handleNextClick);
+      
+      // Also handle direct interaction
+      swiper.on('touchStart', switchToManualMode);
+    }
+    
+    // Click handlers
+    function handlePrevClick() {
+      if (!autoplayStopped) {
+        switchToManualMode();
+      }
+      // Use a slight delay to ensure UI updates properly
+      setTimeout(() => {
+        swiper.slidePrev();
+      }, 10);
+    }
+    
+    function handleNextClick() {
+      if (!autoplayStopped) {
+        switchToManualMode();
+      }
+      // Use a slight delay to ensure UI updates properly
+      setTimeout(() => {
+        swiper.slideNext();
+      }, 10);
+    }
+    
+    // Initial attachment of events
+    attachNavigationEvents();
+
+    // Handle pointer events on slides as well
+    if (swiperContainer) {
+      swiperContainer.addEventListener('mousedown', switchToManualMode);
+    }
   });
 </script>
 
@@ -129,10 +204,22 @@ const {
     transition-timing-function: linear !important;
   }
   
+  /* Override this style when in manual mode */
+  .stepsSwiper.manual-navigation .swiper-wrapper {
+    transition-timing-function: ease !important;
+  }
+  
   .stepsSwiper .swiper-slide {
     width: 400px;
     height: auto;
     flex-shrink: 0;
-    opacity: 1 !important; /* Ensures all slides are fully visible */
+    opacity: 1 !important;
+  }
+  
+  /* Enhanced button styles to provide better feedback */
+  .steps-swiper-prev:active,
+  .steps-swiper-next:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 </style>
