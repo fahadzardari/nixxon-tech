@@ -10,7 +10,7 @@ import SwiperSection from "../../components/common/SwiperSection.astro";
 import { webDevSwiperCards } from "../../data/swipers";
 import VerticalSwiper from "../../components/common/VerticalSwiper.astro";
 import Testimonials from "../../components/common/Testimonials.astro";
-import { WebDevServices } from "../../data/services";
+import { webServices } from "../../data/services";
 
 import Acc1 from "../../assets/web-dev/accordion/1.1.png";
 import Acc2 from "../../assets/web-dev/accordion/1.2.png";
@@ -36,6 +36,7 @@ import Acc21 from "../../assets/web-dev/accordion/6.1.png";
 import Acc22 from "../../assets/web-dev/accordion/6.2.png";
 import Acc23 from "../../assets/web-dev/accordion/6.3.png";
 import Acc24 from "../../assets/web-dev/accordion/6.4.png";
+import WebDevServices from "../../components/web-development/WebDevServices.astro";
 
 const webDevPanels = [
   {
@@ -85,10 +86,9 @@ const webDevPanels = [
     typewriter="Engineering Digital Excellence"
     experience="We create websites that embody elegance, performance, and precision. With every detail refined and every interaction seamless, Nixxon Australia turns your vision into a digital experience that endures and elevates."
   />
-  <OurServices
+  <WebDevServices
     title="Our Standard"
     description="Crafting excellence across leading web platforms and technologies."
-    services={WebDevServices}
   />
   <VerticalSwiper />
   <SwiperSection

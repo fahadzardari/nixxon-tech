@@ -78,7 +78,7 @@ export const HomeServices = [
 ];
 
 
-export const WebDevServices = [
+export const webServices = [
   {
     name: "Wordpress",
     icon: `
