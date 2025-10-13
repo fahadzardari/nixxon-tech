@@ -37,6 +37,7 @@ import Acc22 from "../../assets/web-dev/accordion/6.2.png";
 import Acc23 from "../../assets/web-dev/accordion/6.3.png";
 import Acc24 from "../../assets/web-dev/accordion/6.4.png";
 import WebDevServices from "../../components/web-development/WebDevServices.astro";
+import WebDevPortfolio from "../../components/web-development/WebDevPortfolio.astro";
 
 const webDevPanels = [
   {
@@ -96,6 +97,7 @@ const webDevPanels = [
     description="We blend creativity with technology to build websites that are not only functional but also inspiring crafted to engage, perform, and grow with your business."
     swiperCards={webDevSwiperCards}
   />
+  <WebDevPortfolio />
   <Accordion panels={webDevPanels} />
   <Testimonials />
 </Layout>

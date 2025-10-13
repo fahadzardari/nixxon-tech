@@ -5,13 +5,128 @@ import Logo1 from "../../assets/home/portfolio/logos/1.png";
 import Logo2 from "../../assets/home/portfolio/logos/2.png";
 import Logo3 from "../../assets/home/portfolio/logos/3.png";
 import Logo4 from "../../assets/home/portfolio/logos/4.png";
+import Logo5 from "../../assets/home/portfolio/logos/5.png";
+import Logo6 from "../../assets/home/portfolio/logos/6.png";
+import Logo7 from "../../assets/home/portfolio/logos/7.png";
+import Logo8 from "../../assets/home/portfolio/logos/8.png";
+import Logo9 from "../../assets/home/portfolio/logos/9.png";
 
-const logos = [Logo1, Logo2, Logo3, Logo4, Logo1, Logo2, Logo3, Logo4, Logo4];
+const logos = [Logo1, Logo2, Logo3, Logo4, Logo5, Logo6, Logo7, Logo8, Logo9];
 const filters = ["Logo Design", "Website", "Mobile App", "Video Animation"];
 
 import Website1 from "../../assets/home/portfolio/websites/1.webp";
 
 const websites = [Website1, Website1, Website1, Website1, Website1];
+
+// Enhanced portfolio data with more context
+const logoProjects = [
+  {
+    image: Logo1,
+    title: "Quadrant Eye",
+    client: "Vision Care Startup",
+    description: "Modern identity for an innovative vision care provider.",
+    year: "2023",
+  },
+  {
+    image: Logo2,
+    title: "Type Mouse",
+    client: "Digital Agency",
+    description: "Sleek branding for a creative content writing service.",
+    year: "2023",
+  },
+  {
+    image: Logo3,
+    title: "MSHK Designs",
+    client: "Interior Design Studio",
+    description: "Sophisticated identity for an upscale design firm.",
+    year: "2022",
+  },
+  {
+    image: Logo4,
+    title: "Blade Works",
+    client: "Culinary Tools",
+    description: "Premium identity for artisan knife manufacturer.",
+    year: "2023",
+  },
+  {
+    image: Logo5,
+    title: "Nixxon",
+    client: "Tech Startup",
+    description: "Futuristic branding for an AI-driven technology company.",
+    year: "2023",
+  },
+  {
+    image: Logo6,
+    title: "EcoWave",
+    client: "Sustainable Products",
+    description: "Fresh, green identity for an eco-friendly brand.",
+    year: "2022",
+  },
+  {
+    image: Logo7,
+    title: "FitPulse",
+    client: "Health & Fitness",
+    description: "Dynamic logo for a fitness tracking app.",
+    year: "2023",
+  },
+  {
+    image: Logo8,
+    title: "TravelNest",
+    client: "Travel Agency",
+    description: "Adventurous branding for a travel planning service.",
+    year: "2023",
+  },
+  {
+    image: Logo9,
+    title: "ByteCraft",
+    client: "Software Development",
+    description: "Cutting-edge identity for a software solutions firm.",
+    year: "2022",
+  },
+];
+
+const websiteProjects = [
+  {
+    image: Website1,
+    title: "Quadrant Eye Web Platform",
+    client: "Healthcare Tech",
+    description: "Modern, accessible patient portal with scheduling features.",
+    year: "2023",
+    deviceType: "laptop", // All websites will use laptop view
+  },
+  {
+    image: Website1,
+    title: "Type Mouse Digital",
+    client: "Content Agency",
+    description: "Interactive showcase website with content portfolio.",
+    year: "2023",
+    deviceType: "laptop",
+  },
+  {
+    image: Website1,
+    title: "MSHK Portfolio",
+    client: "Design Studio",
+    description: "Immersive design showcase with 3D project gallery.",
+    year: "2022",
+    deviceType: "laptop",
+  },
+  {
+    image: Website1,
+    title: "Blade Works Store",
+    client: "E-Commerce",
+    description: "Premium online shopping experience with custom features.",
+    year: "2023",
+    deviceType: "laptop",
+  },
+  {
+    image: Website1,
+    title: "Nixxon Dashboard",
+    client: "Internal Tool",
+    description: "Client analytics dashboard with real-time metrics.",
+    year: "2023",
+    deviceType: "laptop",
+  },
+];
 ---
 
 <section class="internal-padding py-20">
@@ -57,34 +172,230 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
   <div class="mx-auto">
     <div
       id="portfolio-grid"
-      class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-3"
+      class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
     >
+      {/* Logo Design Items */}
       {
-        // Default: show logos (Logo Design)
-        logos.map((logo, index) => (
-          <Image
-            src={logo}
-            alt={`Project Logo ${index + 1}`}
-            class="portfolio-item w-full max-w-[220px] md:max-w-[480px] aspect-square rounded-lg"
-            data-category="Logo Design"
-          />
-        ))
-      }
-      {
-        websites.map((website, index) => (
+        logoProjects.map((project, index) => (
           <div
-            class="portfolio-item website-scroll-container relative h-[410px] max-h-[410px] w-full max-w-[480px] overflow-hidden rounded-lg"
-            data-category="Website"
-            style="background: #fff;"
+            class="portfolio-item logo-card group bg-button-gradient relative aspect-square overflow-hidden rounded-xl p-6 shadow-lg transition-all duration-300"
+            data-category="Logo Design"
           >
-            <Image
-              src={website}
-              alt={`Website Project ${index + 1}`}
-              class="website-scroll-img absolute top-0 left-0 h-auto w-full transition-transform duration-[4000ms] ease-linear"
-            />
+            <div class="logo-card-inner relative flex h-full w-full items-center justify-center transition-transform duration-500 ease-out group-hover:scale-95">
+              <Image
+                src={project.image}
+                alt={project.title}
+                class="logo-image max-h-[70%] max-w-[70%] object-contain transition-all duration-500 ease-out group-hover:scale-110"
+              />
+            </div>
+
+            <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/70 to-transparent p-6 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+              <h3 class="text-xl font-semibold text-white">{project.title}</h3>
+              <p class="text-sm text-white/80">{project.client}</p>
+              <div class="mt-2 hidden text-sm text-white/70 md:block">
+                {project.description}
+              </div>
+              <div class="mt-3 flex items-center justify-between">
+                <span class="rounded-full bg-white/20 px-3 py-1 text-xs text-white">
+                  {project.year}
+                </span>
+                <button class="rounded-full bg-indigo-600 px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-indigo-500">
+                  View Project
+                </button>
+              </div>
+            </div>
           </div>
         ))
       }
+
+      {/* Website Items */}
+      {
+        websiteProjects.map((project, index) => (
+          <div
+            class="portfolio-item website-card group relative aspect-[4/3] overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 shadow-lg transition-all duration-300"
+            data-category="Website"
+          >
+            <div class="website-device-frame laptop relative mx-auto my-4 overflow-hidden transition-all duration-500">
+              <div class="device-laptop relative mx-auto overflow-hidden">
+                <div class="laptop-bezel">
+                  <div class="laptop-camera" />
+                </div>
+                <div class="device-screen">
+                  <div class="browser-ui">
+                    <div class="browser-controls">
+                      <div class="browser-dot red" />
+                      <div class="browser-dot yellow" />
+                      <div class="browser-dot green" />
+                    </div>
+                    <div class="browser-address">
+                      www.{project.title.toLowerCase().replace(/\s+/g, "-")}.com
+                    </div>
+                  </div>
+                  <div class="website-scroll-container relative overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      class="website-scroll-img w-full transition-transform duration-[4000ms] ease-linear"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="laptop-keyboard" />
+            </div>
+
+            <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/70 to-transparent p-6 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+              <h3 class="text-xl font-semibold text-white">{project.title}</h3>
+              <p class="text-sm text-white/80">{project.client}</p>
+              <div class="mt-2 hidden text-sm text-white/70 md:block">
+                {project.description}
+              </div>
+              <div class="mt-3 flex items-center justify-between">
+                <span class="rounded-full bg-white/20 px-3 py-1 text-xs text-white">
+                  {project.year}
+                </span>
+                <button class="rounded-full bg-indigo-600 px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-indigo-500">
+                  View Live Site
+                </button>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+
+      {/* Placeholder for Mobile App */}
+      <div
+        class="portfolio-item mobile-app-card group relative aspect-[4/3] overflow-hidden rounded-xl bg-gradient-to-br from-indigo-950 to-indigo-900 shadow-lg transition-all duration-300"
+        data-category="Mobile App"
+      >
+        <div class="mobile-app-presentation">
+          <!-- Floating App Icon -->
+          <div class="app-icon-container">
+            <div class="app-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-full w-full p-3 text-white"
+              >
+                <path
+                  d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <div class="app-icon-shadow"></div>
+          </div>
+
+          <!-- Phone Showcase with App Screen -->
+          <div class="phone-showcase">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <!-- App UI Elements -->
+                <div class="app-header">
+                  <div class="app-header-text"></div>
+                  <div class="app-header-icon"></div>
+                </div>
+
+                <div class="app-content">
+                  <div class="app-content-item"></div>
+                  <div class="app-content-item"></div>
+                  <div class="app-content-item"></div>
+                </div>
+
+                <div class="app-nav">
+                  <div class="app-nav-item active"></div>
+                  <div class="app-nav-item"></div>
+                  <div class="app-nav-item"></div>
+                  <div class="app-nav-item"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating App UI Elements -->
+          <div class="floating-ui-elements">
+            <div class="ui-card card-1"></div>
+            <div class="ui-card card-2"></div>
+            <div class="notification-badge">
+              <span>1</span>
+            </div>
+          </div>
+
+          <!-- Decorative Elements -->
+          <div class="decorative-circles">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+          </div>
+        </div>
+
+        <!-- Information Overlay -->
+        <div
+          class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+        >
+          <h3 class="text-xl font-semibold text-white">
+            Mobile App Development
+          </h3>
+          <p class="text-sm text-white/80">iOS & Android Applications</p>
+          <div class="mt-2 hidden text-sm text-white/70 md:block">
+            Create stunning, high-performance native applications for all
+            platforms with our expert mobile development team.
+          </div>
+          <div class="mt-3 flex items-center justify-between">
+            <span class="rounded-full bg-white/20 px-3 py-1 text-xs text-white"
+              >Coming Soon</span
+            >
+            <button
+              class="rounded-full bg-indigo-600 px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-indigo-500"
+              >Learn More</button
+            >
+          </div>
+        </div>
+      </div>
+
+      {/* Placeholder for Video Animation */}
+      <div
+        class="portfolio-item video-card group relative aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 to-indigo-950 shadow-lg transition-all duration-300"
+        data-category="Video Animation"
+      >
+        <div
+          class="video-player-mockup flex h-full w-full items-center justify-center"
+        >
+          <div class="text-center">
+            <div
+              class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/10"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h4 class="text-sm font-medium text-white">
+              Video Animation Projects
+            </h4>
+            <p class="mt-1 text-xs text-white/70">Coming Soon</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -93,21 +404,70 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
   import { gsap } from "../../utils/gsapUtils.js";
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Animate filter buttons on scroll in
+    // Set up 3D tilt effect for logo cards
+    const logoCards = document.querySelectorAll(".logo-card");
 
-    // Animate portfolio items on scroll in
-    gsap.from(".portfolio-item", {
+    logoCards.forEach((card) => {
+      card.addEventListener("mousemove", handleTilt);
+      card.addEventListener("mouseleave", resetTilt);
+    });
+
+    function handleTilt(e) {
+      const card = this;
+      const cardRect = card.getBoundingClientRect();
+      const cardWidth = cardRect.width;
+      const cardHeight = cardRect.height;
+
+      // Calculate mouse position relative to card center
+      const centerX = cardRect.left + cardWidth / 2;
+      const centerY = cardRect.top + cardHeight / 2;
+      const mouseX = e.clientX - centerX;
+      const mouseY = e.clientY - centerY;
+
+      // Calculate rotation (limit to small values)
+      const rotateY = (mouseX / cardWidth) * 8; // max 8 degrees
+      const rotateX = -(mouseY / cardHeight) * 8; // max 8 degrees
+
+      // Apply transform with subtle perspective
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+      // Add highlight effect based on mouse position
+      const glareX = (mouseX / cardWidth) * 100 + 50;
+      const glareY = (mouseY / cardHeight) * 100 + 50;
+      card.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 60%), linear-gradient(to bottom right, #9d7eff, #8067ce)`;
+    }
+
+    function resetTilt() {
+      this.style.transform = "";
+      this.style.background = "";
+    }
+
+    // Animate filter buttons on scroll in
+    gsap.from(".portfolio-filter-btn", {
+      y: 20,
       opacity: 0,
-      scale: 0.92,
-      y: 40,
-      stagger: 0.08,
-      duration: 0.7,
-      ease: "power3.out",
+      stagger: 0.1,
+      duration: 0.6,
+      ease: "power2.out",
       scrollTrigger: {
-        trigger: "#portfolio-grid",
-        start: "top 85%",
+        trigger: "#portfolio-filters",
+        start: "top 90%",
       },
     });
+
+    // Animate portfolio items on scroll in
+    // gsap.from(".portfolio-item", {
+    //   opacity: 0,
+    //   scale: 0.92,
+    //   y: 40,
+    //   stagger: 0.08,
+    //   duration: 0.7,
+    //   ease: "power3.out",
+    //   scrollTrigger: {
+    //     trigger: "#portfolio-grid",
+    //     start: "top 85%",
+    //   },
+    // });
 
     // Animate items on filter change
     const nav = document.getElementById("portfolio-filters");
@@ -195,6 +555,25 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
     }
+
+    // Setup website scroll behavior
+    const websiteCards = document.querySelectorAll(".website-card");
+    websiteCards.forEach((card) => {
+      const scrollImg = card.querySelector(".website-scroll-img");
+      if (scrollImg) {
+        card.addEventListener("mouseenter", () => {
+          const imgHeight = scrollImg.offsetHeight;
+          const containerHeight = scrollImg.parentElement.offsetHeight;
+          if (imgHeight > containerHeight) {
+            scrollImg.style.transform = `translateY(calc(-100% + ${containerHeight}px))`;
+          }
+        });
+
+        card.addEventListener("mouseleave", () => {
+          scrollImg.style.transform = "translateY(0)";
+        });
+      }
+    });
   });
 </script>
 
@@ -242,32 +621,6 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
     transform: translateY(-2px) scale(1.01);
   }
 
-  .website-scroll-container {
-    position: relative;
-    overflow: hidden;
-    height: 410px;
-    width: 100%;
-    max-width: 480px;
-    border-radius: 0.75rem;
-    background: #fff;
-  }
-
-  .website-scroll-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    /* Make sure the image is tall enough to scroll */
-    min-height: 100%;
-    transition: transform 4s linear;
-    will-change: transform;
-  }
-
-  /* On hover, scroll the image up to reveal the bottom */
-  .website-scroll-container:hover .website-scroll-img {
-    transform: translateY(calc(-100% + 410px));
-  }
-
   .portfolio-bg-title {
     opacity: 0;
     filter: blur(12px);
@@ -287,4 +640,576 @@ const websites = [Website1, Website1, Website1, Website1, Website1];
     filter: blur(0);
     transform: translateY(0) scale(1);
   }
+
+  /* Logo Card Styles */
+  .logo-card {
+    will-change: transform, background;
+    transition: all 0.3s ease;
+  }
+
+  .logo-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Device Frame Styles */
+  .website-device-frame {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Laptop Style */
+  .device-laptop {
+    width: 90%;
+    aspect-ratio: 16/10;
+    background: linear-gradient(135deg, #9d7eff 0%, #4338ca 100%);
+    border-radius: 12px 12px 0 0;
+    padding: 12px 12px 0;
+    position: relative;
+    box-shadow:
+      0 20px 40px -15px rgba(0, 0, 0, 0.3),
+      0 10px 20px -5px rgba(0, 0, 0, 0.2);
+    transform-style: preserve-3d;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .laptop-bezel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .laptop-camera {
+    width: 4px;
+    height: 4px;
+    background: #555;
+    border-radius: 50%;
+    box-shadow: inset 0 0 1px #222;
+  }
+
+  .device-laptop:after {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 18px;
+    background: linear-gradient(to bottom, #383838, #252525);
+    border-radius: 0 0 12px 12px;
+    bottom: -8px;
+    left: -10%;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.3);
+    transform-style: preserve-3d;
+    transform: translateZ(-10px);
+  }
+
+  .laptop-keyboard {
+    position: absolute;
+    width: 90%;
+    height: 10px;
+    background: linear-gradient(to bottom, #383838, #252525);
+    bottom: -18px;
+    left: 5%;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  .device-laptop .device-screen {
+    background: #fff;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 2px;
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .browser-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 26px;
+    background: linear-gradient(90deg, #8067ce 0%, #6366f1 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    border-bottom: 1px solid #ddd;
+    z-index: 3;
+  }
+
+  .browser-controls {
+    display: flex;
+    gap: 4px;
+    margin-right: 8px;
+  }
+
+  .browser-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .browser-dot.red {
+    background: #f43f5e;
+  }
+  .browser-dot.yellow {
+    background: #ffbd2e;
+  }
+  .browser-dot.green {
+    background: #27c93f;
+  }
+
+  .browser-address {
+    flex: 1;
+    height: 16px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    font-size: 9px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .website-scroll-container {
+    height: 100%;
+    width: 100%;
+    padding-top: 26px; /* Height of browser UI */
+  }
+
+  /* Website Card 3D Effect */
+  .website-card {
+    perspective: 1200px;
+  }
+
+  .website-card:hover .website-device-frame {
+    transform: translateY(-10px) rotateX(5deg);
+    box-shadow: 0 0 0 4px #9d7eff33;
+  }
+
+  /* Completely New Mobile App Card Styles */
+  .mobile-app-card {
+    position: relative;
+    overflow: hidden;
+    perspective: 1500px;
+    background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
+  }
+
+  .mobile-app-presentation {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+  }
+
+  /* App Icon */
+  .app-icon-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    perspective: 800px;
+    transform-style: preserve-3d;
+  }
+
+  .app-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #6366f1 0%, #f43f5e 100%);
+    border-radius: 15px;
+    box-shadow: 0 15px 25px -5px rgba(67, 56, 202, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    animation: float 3s ease-in-out infinite;
+    color: white;
+  }
+
+  .app-icon-shadow {
+    position: absolute;
+    bottom: -15px;
+    left: 5px;
+    width: 50px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    filter: blur(5px);
+    animation: shadow 3s ease-in-out infinite;
+  }
+
+  /* Phone Showcase */
+  .phone-showcase {
+    position: relative;
+    z-index: 5;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+  }
+
+  .phone-frame {
+    width: 180px;
+    height: 360px;
+    background: linear-gradient(135deg, #9d7eff 0%, #8067ce 100%);
+    border-radius: 30px;
+    padding: 8px;
+    position: relative;
+    box-shadow:
+      0 30px 60px -20px rgba(0, 0, 0, 0.5),
+      0 15px 30px -10px rgba(0, 0, 0, 0.3);
+    transform-style: preserve-3d;
+    animation: phoneFloat 6s ease-in-out infinite;
+  }
+
+  .phone-notch {
+    position: absolute;
+    width: 60px;
+    height: 18px;
+    background: #1a1a1a;
+    border-radius: 0 0 10px 10px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .phone-screen {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    height: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* App UI Elements */
+  .app-header {
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .app-header-text {
+    width: 60px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+  }
+
+  .app-header-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .app-content {
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .app-content-item {
+    height: 60px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+  }
+
+  .app-content-item:nth-child(2) {
+    animation: pulse 3s infinite;
+    background: rgba(99, 102, 241, 0.2);
+  }
+
+  .app-nav {
+    height: 50px;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .app-nav-item {
+    width: 30px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+  }
+
+  .app-nav-item.active {
+    background: rgba(99, 102, 241, 0.6);
+  }
+
+  /* Floating UI Elements */
+  .floating-ui-elements {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transform-style: preserve-3d;
+  }
+
+  .ui-card {
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .ui-card.card-1 {
+    top: 80px;
+    left: 10px;
+    border: 2px solid #9d7eff;
+    background: #9d7eff22;
+    transform: translateZ(-50px) rotateX(5deg) rotateY(-10deg);
+    animation: floatCard1 5s ease-in-out infinite alternate;
+  }
+
+  .ui-card.card-2 {
+    bottom: 60px;
+    right: 10px;
+    border: 2px solid #f43f5e;
+    background: #f43f5e22;
+    transform: translateZ(-70px) rotateX(-5deg) rotateY(15deg);
+    animation: floatCard2 7s ease-in-out infinite alternate;
+  }
+
+  .notification-badge {
+    position: absolute;
+    top: 100px;
+    right: 50px;
+    width: 40px;
+    height: 40px;
+    background: #f43f5e;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 10px 20px rgba(244, 63, 94, 0.4);
+    transform: translateZ(-20px);
+    animation: badgeFloat 4s ease-in-out infinite;
+  }
+
+  /* Decorative Elements */
+  .decorative-circles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+  }
+
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+  }
+
+  .circle-1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #9d7eff33 60%, transparent 100%);
+    top: -150px;
+    left: -150px;
+  }
+
+  .circle-2 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #f43f5e33 60%, transparent 100%);
+    bottom: -100px;
+    right: -50px;
+  }
+
+  .circle-3 {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #4338ca33 60%, transparent 100%);
+    bottom: 50px;
+    left: 30px;
+  }
+
+  /* Animations */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotateY(0);
+    }
+    50% {
+      transform: translateY(-10px) rotateY(10deg);
+    }
+  }
+
+  @keyframes shadow {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.2;
+    }
+    50% {
+      transform: scale(0.8);
+      opacity: 0.1;
+    }
+  }
+
+  @keyframes phoneFloat {
+    0%,
+    100% {
+      transform: translateY(0) rotateY(0);
+    }
+    50% {
+      transform: translateY(-15px) rotateY(5deg);
+    }
+  }
+
+  @keyframes floatCard1 {
+    0% {
+      transform: translateZ(-50px) translateY(0) rotateX(5deg) rotateY(-10deg);
+    }
+    100% {
+      transform: translateZ(-50px) translateY(-15px) rotateX(8deg)
+        rotateY(-5deg);
+    }
+  }
+
+  @keyframes floatCard2 {
+    0% {
+      transform: translateZ(-70px) translateY(0) rotateX(-5deg) rotateY(15deg);
+    }
+    100% {
+      transform: translateZ(-70px) translateY(-20px) rotateX(-8deg)
+        rotateY(10deg);
+    }
+  }
+
+  @keyframes badgeFloat {
+    0%,
+    100% {
+      transform: translateZ(-20px) scale(1);
+    }
+    50% {
+      transform: translateZ(-20px) scale(1.1);
+    }
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  /* Hover Effects */
+  .mobile-app-card:hover .phone-showcase {
+    transform: scale(1.05);
+  }
+
+  .mobile-app-card:hover .ui-card.card-1 {
+    animation-play-state: paused;
+    transform: translateZ(10px) translateY(-15px) rotateX(8deg) rotateY(-5deg);
+    transition: transform 0.5s ease;
+  }
+
+  .mobile-app-card:hover .ui-card.card-2 {
+    animation-play-state: paused;
+    transform: translateZ(30px) translateY(-10px) rotateX(-8deg) rotateY(5deg);
+    transition: transform 0.5s ease;
+  }
+
+  .mobile-app-card:hover .notification-badge {
+    animation-play-state: paused;
+    transform: translateZ(50px) scale(1.2);
+    transition: transform 0.5s ease;
+  }
 </style>
+
+<script>
+  // Add this to your existing JavaScript
+  document.addEventListener("DOMContentLoaded", () => {
+    // Website laptop effect
+    const websiteCards = document.querySelectorAll(".website-card");
+
+    websiteCards.forEach((card) => {
+      card.addEventListener("mousemove", handleWebsiteCardTilt);
+      card.addEventListener("mouseleave", resetWebsiteCardTilt);
+
+      // Enhanced scroll behavior for website cards
+      const scrollImg = card.querySelector(".website-scroll-img");
+      if (scrollImg) {
+        card.addEventListener("mouseenter", () => {
+          // Add slight delay for more natural feel
+          setTimeout(() => {
+            const imgHeight = scrollImg.offsetHeight;
+            const containerHeight = scrollImg.parentElement.offsetHeight - 26; // Account for browser UI
+            if (imgHeight > containerHeight) {
+              scrollImg.style.transform = `translateY(calc(-100% + ${containerHeight}px))`;
+            }
+          }, 300);
+        });
+
+        card.addEventListener("mouseleave", () => {
+          scrollImg.style.transition = "transform 1s ease-out";
+          scrollImg.style.transform = "translateY(0)";
+
+          // Reset the transition duration after animation completes
+          setTimeout(() => {
+            scrollImg.style.transition = "transform 4s ease-out";
+          }, 1000);
+        });
+      }
+    });
+
+    function handleWebsiteCardTilt(e) {
+      const card = this;
+      const deviceFrame = card.querySelector(".website-device-frame");
+      if (!deviceFrame) return;
+
+      const cardRect = card.getBoundingClientRect();
+      const cardWidth = cardRect.width;
+      const cardHeight = cardRect.height;
+
+      // Calculate mouse position relative to card center
+      const centerX = cardRect.left + cardWidth / 2;
+      const centerY = cardRect.top + cardHeight / 2;
+      const mouseX = e.clientX - centerX;
+      const mouseY = e.clientY - centerY;
+
+      // Calculate rotation (smaller values for subtle effect)
+      const rotateY = (mouseX / cardWidth) * 5;
+      const rotateX = -(mouseY / cardHeight) * 5;
+
+      // Apply transform
+      deviceFrame.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    }
+
+    function resetWebsiteCardTilt() {
+      const deviceFrame = this.querySelector(".website-device-frame");
+      if (deviceFrame) {
+        deviceFrame.style.transform = "";
+      }
+    }
+  });
+</script>
