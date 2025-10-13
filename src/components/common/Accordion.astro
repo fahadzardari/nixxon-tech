@@ -65,19 +65,19 @@ const {
   </h3>
 
   <ul
-    class="accordion-container mx-auto flex h-[600px] max-w-[1300px] overflow-hidden text-white"
+    class="accordion-container mx-auto flex h-[600px] max-w-[1300px] justify-center overflow-hidden text-white"
     data-accordion
   >
     {
       panels.map((panel, index) => (
         <li
-          class="accordion-item relative flex bg-gradient-to-r from-[#101E39] to-[#643DB4] transition-all duration-[1.2s] ease-in"
+          class="accordion-item relative flex bg-gradient-to-r from-[#101E39] to-[#643DB4] transition-all duration-[0.8s] ease-linear"
           data-accordion-item
           data-active={index === 0 ? "true" : "false"}
           aria-expanded={index === 0 ? "true" : "false"}
         >
           {/* Vertical title always on the left */}
-          <div class="accordion-label flex h-full w-[70] items-center justify-center px-8">
+          <div class="accordion-label flex h-full items-center justify-center px-8">
             <h3 class="writing-vertical-lr rotate-180 text-lg font-semibold text-white uppercase xl:text-xl 2xl:text-[22px]">
               {panel.title}
             </h3>
@@ -147,11 +147,13 @@ const {
     const totalItems = items.length;
 
     // Configuration
-    const MAX_ACTIVE_PX = 800; // preferred max px for expanded panel
-    const MIN_INACTIVE_PX_DESKTOP = 100; // minimum px for collapsed panels on desktop
-    const MIN_INACTIVE_PX_MOBILE = 80; // min px on mobile
+    const MAX_ACTIVE_PX = 800;
+    const MIN_INACTIVE_PX_DESKTOP = 100;
+    const MIN_INACTIVE_PX_MOBILE = 80;
 
-    // helper: compute active/inactive widths (percent) based on current container width
+    document.documentElement.style.setProperty("--total-items", totalItems);
+
+    // Compute widths based on container width
     function computeWidths(containerWidth) {
       const minInactivePx =
         window.innerWidth <= 768
@@ -167,7 +169,7 @@ const {
       // Pick active width: prefer MAX_ACTIVE_PX but clamp to available space
       let activePx = Math.min(MAX_ACTIVE_PX, maxPossibleActivePx);
 
-      // If there's no room (very small container), fallback to proportional split (60%/40%)
+      // If there's no room (very small container), fallback to proportional split
       if (activePx <= 0) {
         activePx = Math.floor(containerWidth * 0.6);
       }
@@ -178,7 +180,7 @@ const {
         remainingForInactive / Math.max(1, totalItems - 1),
       );
 
-      // Convert to percentages so CSS width sums to ~100% (avoids rounding gaps by using float)
+      // Convert to percentages
       const activePercent = (activePx / containerWidth) * 100;
       const inactivePercent = (inactivePx / containerWidth) * 100;
 
@@ -187,8 +189,6 @@ const {
 
     // Initial setup
     setupAccordion();
-
-    // Handle window resize
     window.addEventListener("resize", setupAccordion);
 
     function setupAccordion() {
@@ -201,66 +201,40 @@ const {
         item.style.width = isActive
           ? `${activePercent}%`
           : `${inactivePercent}%`;
-
-        // If active, animate its content
-        if (isActive) animateActiveContent(item);
       });
     }
 
-    // Animate active content
-    function animateActiveContent(activePanel) {
-      if (!activePanel) return;
-
-      // Kill any ongoing animations
-      gsap.killTweensOf(
-        activePanel.querySelectorAll(".accordion-content-item"),
-      );
-
-      // Animate in the content items with stagger
-      gsap.fromTo(
-        activePanel.querySelectorAll(".accordion-content-item"),
-        { opacity: 0, x: -20 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: "power2.out",
-          delay: 0.2,
-        },
-      );
-    }
-
-    // Set active item
+    // Set active item with smooth transition
     function setActive(target) {
       // Don't do anything if already active
       if (target.dataset.active === "true") return;
 
+      // Find currently active item
+      const currentActive = accordion.querySelector('[data-active="true"]');
+
+      // Calculate new widths
+      const containerWidth = accordion.clientWidth;
+      const { activePercent, inactivePercent } = computeWidths(containerWidth);
+
+      // Update data attributes
       items.forEach((item) => {
         const isActive = item === target;
         item.dataset.active = isActive ? "true" : "false";
         item.setAttribute("aria-expanded", isActive ? "true" : "false");
       });
 
-      // Recalculate widths and animate via GSAP for smooth transition
-      const containerWidth = accordion.clientWidth;
-      const { activePercent, inactivePercent } = computeWidths(containerWidth);
-
-      items.forEach((item) => {
-        gsap.to(item, {
-          width:
-            item.dataset.active === "true"
-              ? `${activePercent}%`
-              : `${inactivePercent}%`,
-          duration: 0.8,
-          ease: "power2.inOut",
-        });
+      // Animate width changes with GSAP (all at once with LINEAR easing)
+      gsap.to(items, {
+        width: function (index) {
+          const item = items[index];
+          return item.dataset.active === "true"
+            ? `${activePercent}%`
+            : `${inactivePercent}%`;
+        },
+        duration: 0.7,
+        ease: "none", // Linear animation - constant speed
+        overwrite: true,
       });
-
-      // Animate in the content for newly active panel
-      if (target.dataset.active === "true") {
-        setTimeout(() => animateActiveContent(target), 200);
-      }
     }
 
     // Click and hover handlers
@@ -273,7 +247,11 @@ const {
 
       // Add hover effect only for non-touch devices
       if (window.matchMedia("(hover: hover)").matches) {
-        item.addEventListener("mouseenter", () => setActive(item));
+        let hoverTimer;
+        item.addEventListener("mouseenter", () => {
+          clearTimeout(hoverTimer);
+          hoverTimer = setTimeout(() => setActive(item), 100);
+        });
       }
     });
 
@@ -299,36 +277,31 @@ const {
 
   .accordion-item {
     cursor: pointer;
-    width: 100px; /* Default width */
-  }
-
-  .accordion-item[data-active="true"] {
-    width: 1000px;
+    position: relative;
+    overflow: hidden; /* Hide content that overflows */
   }
 
   .accordion-label {
     flex-shrink: 0;
-    /* background-color: rgba(11, 26, 54, 0.6); */
+    width: 90px; /* Fixed width */
+    z-index: 5;
   }
 
   .accordion-content {
-    width: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
+    width: 710px; /* Fixed width, matches MAX_ACTIVE_PX minus accordion-label width */
+    min-width: 710px; /* Prevent shrinking */
+    overflow: hidden;
+    padding: 1.5rem;
+    opacity: 1; /* Always visible */
   }
 
-  .accordion-item[data-active="true"] .accordion-content {
-    width: auto;
-    opacity: 1;
-    visibility: visible;
-  }
-
+  /* Vertical text styling */
   .writing-vertical-lr {
     writing-mode: vertical-lr;
     text-orientation: mixed;
   }
 
+  /* Button styling */
   .get-started-btn {
     width: 136.41px;
     height: 40.26px;
@@ -350,22 +323,14 @@ const {
     display: block;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 768px) {
-    .accordion-item {
-      width: 50px; /* Smaller width on mobile */
-    }
-
-    .accordion-item[data-active="true"] {
-      width: calc(100% - (80px * (var(--total-items) - 1)));
-    }
-
     .accordion-label {
-      width: 80px;
+      width: 60px;
     }
 
-    .image-wrapper {
-      height: auto;
+    .accordion-content {
+      width: 620px;
+      min-width: 620px;
     }
   }
 </style>
