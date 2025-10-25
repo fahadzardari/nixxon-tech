@@ -337,8 +337,6 @@ const {
     Navigation,
   } from "swiper/modules";
   import "swiper/css";
-  import "swiper/css/pagination";
-  import "swiper/css/effect-fade";
   import { gsap } from "../../utils/gsapUtils";
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -483,7 +481,9 @@ const {
       direction: "vertical",
       slidesPerView: 1,
       spaceBetween: 30,
-      mousewheel: false, // Initially disable mousewheel
+      mousewheel: {
+        releaseOnEdges: true,
+      },
       modules: [Pagination, Mousewheel, EffectFade, Navigation],
       effect: "fade",
       fadeEffect: {

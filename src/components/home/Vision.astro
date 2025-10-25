@@ -103,40 +103,48 @@ const features = [
     const featureItems = gsap.utils.toArray(".feature-item");
     const nextSection = document.querySelector(".ideas-section"); // Make sure this selector matches your next section
 
-    gsap.set(featureItems, { opacity: 0, y: 50 });
+    if (featureItems.length > 0) {
+      const firstItem = featureItems[0];
+      const restItems = featureItems.slice(1);
 
-    // pin distance = how long the section stays fixed
-    const pinDistance = window.innerHeight * (featureItems.length + 2);
+      // Set the first item to be visible from the start
+      gsap.set(firstItem, { opacity: 1, y: 0 });
+      // Set the rest of the items to be animated
+      gsap.set(restItems, { opacity: 0, y: 50 });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: `+=${pinDistance}`,
+      // pin distance = how long the section stays fixed
+      const pinDistance = window.innerHeight * (featureItems.length + 2);
 
-        scrub: 1,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-        // markers: true, // keep for debugging
-      },
-    });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: `+=${pinDistance}`,
 
-    // reveal each feature item one by one
-    featureItems.forEach((item, index) => {
-      tl.to(
-        item,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
+          scrub: 1,
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
+          // markers: true, // keep for debugging
         },
-        index * 0.8, // stagger on scroll
-      );
-    });
+      });
 
-    // add padding at the end so the last item "rests" before unpinning
-    tl.to({}, { duration: 0.25 });
+      // reveal each of the rest of the feature items one by one
+      restItems.forEach((item, index) => {
+        tl.to(
+          item,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+          },
+          index * 0.8, // stagger on scroll
+        );
+      });
+
+      // add padding at the end so the last item "rests" before unpinning
+      tl.to({}, { duration: 0.25 });
+    }
   });
 </script>
 
