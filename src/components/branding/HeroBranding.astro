@@ -7,19 +7,23 @@ import Image from "astro/components/Image.astro";
 ---
 
 <section
-  class="hero-section relative lg:ml-[65px] lg:min-h-screen overflow-hidden lg:rounded-l-3xl bg-[#4B00A3] pt-32 text-white xl:ml-[88px]"
+  class="hero-section relative overflow-hidden bg-[#4B00A3] pt-32 text-white lg:ml-[65px] lg:min-h-screen lg:rounded-l-3xl xl:ml-[88px]"
 >
-  <div class="flex h-full flex-col lg:justify-between pt-8 lg:pt-16 lg:pl-12 lg:flex-row 2xl:pl-20">
+  <div
+    class="flex h-full flex-col pt-8 lg:flex-row lg:justify-between lg:mt-20 xl:mt-32 2xl:mt-40 lg:pt-16 lg:pl-12 2xl:pl-20"
+  >
     <!-- Left -->
-    <div class="z-10 lg:mt-auto w-auto lg:w-[55%] px-6 lg:pb-24 2xl:w-[50%] 2xl:pb-40">
+    <div
+      class="z-10 w-auto px-6 lg:mt-auto lg:w-[55%] lg:pb-24 2xl:w-[50%] 2xl:pb-40"
+    >
       <!-- <span class="mb-4 block h-[2px] w-10 bg-white"></span> -->
       <h1
-        class="2xl:mb-6 font-medium capitalize text-[42px] md:text-[52px] lg:text-[76px] 2xl:text-[86px] 2xl:leading-[100px] mt-12 lg:mt-4 xl:mt-12"
+        class="text-[42px] font-medium capitalize md:text-[52px] lg:text-[76px]  2xl:mb-6 2xl:text-[86px] 2xl:leading-[100px]"
       >
         <span class="font-bold">Branding </span>
       </h1>
       <p
-        class="mb-4 lg:mb-8 font-medium tracking-[1px] text-xs md:text-sm xl:text-base 2xl:text-xl 2xl:leading-6"
+        class="mb-4 text-xs font-medium tracking-[1px] md:text-sm lg:mb-8 xl:text-base 2xl:text-xl 2xl:leading-6"
       >
         A wide range of services, including brand planning, are provided by our
         skilled experts. Be it establishing a visual identity, creating a logo,
@@ -35,15 +39,15 @@ import Image from "astro/components/Image.astro";
     </div>
 
     <!-- Right -->
-    <div class="lg:absolute lg:-right-4 xl:-right-12 lg:-bottom-24 xl:-bottom-20 z-0 w-full lg:w-[80%] xl:w-[70%] 2xl:w-[60%]">
-      <Image
-      id={"hand-tilt"}
-        src={HeroImage}
-        alt="Hand Image"
-      />
+    <div
+      class="z-0 w-full lg:absolute lg:-right-4 lg:-bottom-24 lg:w-[80%] xl:-right-12 xl:-bottom-20 xl:w-[70%] 2xl:w-[60%]"
+    >
+      <Image id={"hand-tilt"} src={HeroImage} alt="Hand Image" />
     </div>
-    <div class="absolute top-12 md:top-6 lg:-top-12 2xl:-top-32 left-0 z-0 w-1/3">
-      <Image src={HeroImage2} alt="Hand Image"  />
+    <div
+      class="absolute top-12 left-0 z-0 w-1/3 md:top-6 lg:-top-12 2xl:-top-32"
+    >
+      <Image src={HeroImage2} alt="Hand Image" />
     </div>
   </div>
 </section>
@@ -54,7 +58,9 @@ import Image from "astro/components/Image.astro";
   const hand = document.getElementById("hand-tilt");
 
   // respect user preference
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
   // cheap, throttled pointer tilt using rAF (no external lib)
   if (hand) {
@@ -68,7 +74,7 @@ import Image from "astro/components/Image.astro";
       last.y = (e.clientY - r.top) / r.height - 0.5;
       if (raf) return;
       raf = requestAnimationFrame(() => {
-        const rx = (-last.y) * 10; // rotateX
+        const rx = -last.y * 10; // rotateX
         const ry = last.x * 10; // rotateY
         hand.style.transform = `scale(1.06) rotateX(${rx}deg) rotateY(${ry}deg)`;
         raf = null;
@@ -136,7 +142,7 @@ import Image from "astro/components/Image.astro";
             });
         });
       },
-      { root: null, threshold: 0.12 }
+      { root: null, threshold: 0.12 },
     );
     io.observe(section);
   }
