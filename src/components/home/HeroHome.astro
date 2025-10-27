@@ -5,31 +5,31 @@ import Image from "astro/components/Image.astro";
 ---
 
 <section
-  class="hero-section relative min-h-screen overflow-hidden bg-[#4B00A3] pt-32 text-white lg:ml-[65px] lg:rounded-l-3xl xl:ml-[88px]"
+  class="hero-section relative min-h-screen overflow-hidden bg-[#4B00A3] pt-20 lg:pt-32 text-white lg:ml-[65px] lg:rounded-l-3xl xl:ml-[88px]"
 >
   <div
-    class="flex h-full flex-col pt-8 lg:mt-8 lg:flex-row lg:justify-between lg:pt-16 lg:pl-12 2xl:mt-12 2xl:pl-20 3xl:mt-20"
+    class="3xl:mt-20 flex h-full pl-4  flex-col pt-8 lg:mt-8 lg:flex-row lg:justify-between lg:pt-16 lg:pl-8 2xl:mt-12 2xl:pl-12"
   >
     <!-- Left -->
-    <div class="z-10 w-full px-6 lg:mt-auto lg:w-[55%] lg:px-0 2xl:w-[50%]">
-      <span class="mb-4 block h-[2px] w-10 bg-white"></span>
+    <div class="z-10 w-full lg:mt-12 xl:mt-4 2xl:mt-2 lg:w-[50%] lg:px-0 xl:w-[50%]">
+      <span class="mb-1 block h-[2px] w-10 bg-white xl:mb-4"></span>
       <h1
-        class="3xl:text-[86px] 3xl:leading-[100px] mb-4 text-[32px] font-bold md:text-[42px] lg:text-[66px] lg:leading-[80px] xl:text-[80px] xl:leading-[90px] 2xl:text-[76px]"
+        class="3xl:text-[86px] 3xl:leading-[100px] mb-2 lg:mb-4 text-[32px] font-bold md:text-[42px] lg:text-[56px] lg:leading-[60px] xl:text-[66px] xl:leading-[70px] 2xl:text-[76px] 2xl:leading-[85px]"
       >
         Shaping the Future of How Your Brand is Seen.
       </h1>
       <p
-        class="mb-4 text-sm font-medium tracking-[1px] lg:mb-8 lg:text-sm xl:text-lg 2xl:text-xl 2xl:leading-6"
+        class="mb-2 lg:mb-4 text-[10px] font-medium tracking-[1px] md:text-xs xl:mb-8 xl:text-sm 2xl:text-base 2xl:leading-6"
       >
         We have your digital solution on web design, mobile app development,
         SEO, branding & digital marketing
       </p>
       <div class="flex items-center space-x-4">
-        <CommonButton className="text-xs font-semibold md:text-sm lg:text-lg">
+        <CommonButton className="text-xs font-semibold md:text-sm lg:text-base">
           Get a proposal
         </CommonButton>
         <a
-          class="flex items-center text-xs leading-4 font-semibold md:text-sm lg:text-base xl:text-lg xl:leading-6"
+          class="flex items-center text-xs leading-4 font-semibold md:text-sm lg:text-base xl:leading-6 2xl:text-lg"
         >
           <span>Portfolio</span>
           <span>→</span>
@@ -39,7 +39,7 @@ import Image from "astro/components/Image.astro";
 
     <!-- Right -->
     <div
-      class="z-0 ml-auto w-auto lg:absolute lg:right-0 lg:bottom-12 lg:w-[55%] xl:bottom-4 xl:w-1/2 2xl:w-[45%]"
+      class="z-0 ml-auto w-auto lg:absolute lg:right-0 lg:bottom-12 lg:w-[50%] xl:bottom-4 xl:w-1/2 2xl:w-[50%]"
     >
       <Image
         id="hand-tilt"
@@ -52,8 +52,6 @@ import Image from "astro/components/Image.astro";
 </section>
 
 <script>
-  // import { gsap, ScrollTrigger } from "../../utils/gsapUtils.js";
-
   document.addEventListener("DOMContentLoaded", () => {
     // Hand tilt effect (keep your existing code)
     const hand = document.getElementById("hand-tilt");
