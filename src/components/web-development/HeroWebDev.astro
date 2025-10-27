@@ -5,13 +5,13 @@ import Image from "astro/components/Image.astro";
 ---
 
 <section
-  class="hero-section relative min-h-screen overflow-hidden bg-[#4B00A3] pt-20 text-white lg:ml-[65px] lg:rounded-l-3xl lg:pt-32 xl:ml-[88px]"
+  class="hero-section relative min-h-screen overflow-hidden bg-[#4B00A3] pt-20 text-white lg:ml-[65px] lg:rounded-l-3xl lg:pt-0 xl:ml-[88px]"
 >
   <div
-    class="3xl:mt-20 flex h-full flex-col pt-8 pl-4 lg:mt-8 lg:flex-row lg:justify-between lg:pt-16 lg:pl-8 2xl:mt-12 2xl:pl-12"
+    class="flex h-full min-h-screen flex-col pt-8 pl-4 lg:mt-0 lg:flex-row lg:items-end lg:justify-between lg:pt-0 lg:pb-20 lg:pl-8 2xl:pb-24 2xl:pl-12"
   >
     <!-- Left -->
-    <div class="z-10 w-full lg:mt-6 lg:w-[50%] lg:px-0 xl:mt-8 xl:w-[50%] 2xl:mt-12">
+    <div class="z-10 w-full lg:w-[50%] lg:px-0 xl:w-[50%]">
       <!-- <span class="mb-4 block h-[2px] w-10 bg-white"></span> -->
       <h1
         class="3xl:text-[86px] 3xl:leading-[100px] mb-2 text-[32px] font-bold md:text-[42px] lg:mb-4 lg:text-[56px] lg:leading-[60px] xl:text-[66px] xl:leading-[70px] 2xl:text-[76px] 2xl:leading-[85px]"
@@ -35,14 +35,14 @@ import Image from "astro/components/Image.astro";
 
     <!-- Right -->
     <div
-      class="z-0 w-auto lg:absolute lg:top-[12vh] lg:right-0 lg:w-[48%] xl:top-[8vh] xl:w-[48%] 2xl:top-[5vh] 2xl:w-[48%]"
+      class="z-0 ml-auto w-auto lg:absolute lg:right-0 lg:bottom-12 lg:w-[50%] xl:bottom-6 xl:w-[50%] 2xl:bottom-0"
     >
       <div id="hand-wrap" class="hand-wrap hero-breathe">
         <Image
           id="hand-tilt"
           src={webdevimage}
           alt="Hero Image"
-          class="cursor-pointer"
+          class="w-full cursor-pointer"
         />
       </div>
     </div>

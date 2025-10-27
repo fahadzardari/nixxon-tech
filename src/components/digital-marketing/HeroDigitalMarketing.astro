@@ -5,18 +5,16 @@ import Image from "astro/components/Image.astro";
 ---
 
 <section
-  class="hero-section relative min-h-screen overflow-hidden bg-[#4B00A3] pt-32 text-white lg:ml-[65px] lg:rounded-l-3xl xl:ml-[88px]"
+  class="hero-section relative min-h-screen overflow-hidden bg-[#4B00A3] pt-20 text-white lg:ml-[65px] lg:rounded-l-3xl lg:pt-0 xl:ml-[88px]"
 >
   <div
-    class="flex h-full flex-col pt-8 lg:flex-row lg:justify-between lg:pt-16 lg:pl-12 2xl:pl-20"
+    class="flex h-full min-h-screen flex-col pt-8 pl-4 lg:mt-0 lg:flex-row lg:items-end lg:justify-between lg:pt-0 lg:pb-12 lg:pl-8 2xl:pb-16 2xl:pl-12"
   >
     <!-- Left -->
-    <div
-      class="3xl:w-[55%] z-10 w-full px-6 lg:mt-auto lg:w-[55%] lg:pb-24 2xl:w-[60%] 2xl:pb-40"
-    >
+    <div class="z-10 w-full lg:w-[50%] lg:px-0 xl:w-[50%] xl:pb-4 2xl:pb-12">
       <!-- <span class="mb-4 block h-[2px] w-10 bg-white"></span> -->
       <h1
-        class="hero-title mb-6 text-[32px] font-medium capitalize md:text-[52px] lg:text-[56px] lg:leading-[70px] xl:text-[80px] xl:leading-[90px] 2xl:text-[86px] 2xl:leading-[100px]"
+        class="hero-title 3xl:text-[86px] 3xl:leading-[100px] mb-2 text-[32px] font-medium md:text-[42px] lg:mb-4 lg:text-[56px] lg:leading-[60px] xl:text-[66px] xl:leading-[70px] 2xl:text-[76px] 2xl:leading-[85px]"
       >
         Not Just Marketing, We Shape Tomorrow's
         <span class="font-bold">Market Giants</span>
@@ -39,14 +37,14 @@ import Image from "astro/components/Image.astro";
 
     <!-- Right -->
     <div
-      class="z-0 w-auto lg:absolute lg:right-0 lg:w-[50%] xl:top-[10vh] xl:w-1/2 2xl:w-[45%]"
+      class="z-0 ml-auto w-auto lg:absolute lg:right-0 lg:bottom-12 lg:w-[52%] xl:bottom-8 xl:w-[50%] 2xl:bottom-4 2xl:w-[49%]"
     >
       <div class="hero-image-wrap">
         <Image
           id="hand-tilt"
           src={webdevimage}
           alt="Digital Marketing Hero Image"
-          class="hero-image cursor-pointer"
+          class="hero-image w-full cursor-pointer"
         />
       </div>
     </div>
