@@ -117,9 +117,7 @@ import CommonButton from "../common/CommonButton.astro";
     >
       {
         logoProjects.map((project, index) => (
-          <div
-            class="logo-portfolio-cards group logo-gradient relative aspect-square overflow-hidden rounded-xl p-6 shadow-lg transition-all duration-300"
-          >
+          <div class="logo-portfolio-cards group logo-gradient relative aspect-square overflow-hidden rounded-xl p-6 shadow-lg transition-all duration-300">
             <div class="logo-portfolio-cards-inner relative flex h-full w-full items-center justify-center transition-transform duration-500 ease-out group-hover:scale-95">
               <Image
                 src={project.image}
@@ -161,9 +159,9 @@ import CommonButton from "../common/CommonButton.astro";
       // Store the handler function for later cleanup
       const tiltHandler = handleTilt.bind(card);
       const resetHandler = resetTilt.bind(card);
-      
+
       tiltHandlers.set(card, { tiltHandler, resetHandler });
-      
+
       card.addEventListener("mousemove", tiltHandler);
       card.addEventListener("mouseleave", resetHandler);
     });
@@ -204,7 +202,8 @@ import CommonButton from "../common/CommonButton.astro";
 
     function resetTilt() {
       this.style.transform = "none";
-      this.style.background = "linear-gradient(to bottom right, #9d7eff, #8067ce)";
+      this.style.background =
+        "linear-gradient(to bottom right, #9d7eff, #8067ce)";
     }
 
     // Add manual animation instead of using GSAP
@@ -213,13 +212,16 @@ import CommonButton from "../common/CommonButton.astro";
         // Set initial state
         card.style.opacity = "0";
         card.style.transform = "translateY(20px)";
-        
+
         // Animate in with a stagger
-        setTimeout(() => {
-          card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-          card.style.opacity = "1";
-          card.style.transform = "translateY(0)";
-        }, 100 + (index * 100)); // 100ms delay between each card
+        setTimeout(
+          () => {
+            card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          },
+          100 + index * 100,
+        ); // 100ms delay between each card
       });
     }
 
@@ -251,10 +253,10 @@ import CommonButton from "../common/CommonButton.astro";
 
   /* Explicitly styled button instead of using global class */
   .logo-button {
-    background: linear-gradient(90deg, #8067CE 0%, #4338CA 100%);
+    background: linear-gradient(90deg, #8067ce 0%, #4338ca 100%);
   }
 
   .logo-button:hover {
-    background: linear-gradient(90deg, #9D7EFF 0%, #6366F1 100%);
+    background: linear-gradient(90deg, #9d7eff 0%, #6366f1 100%);
   }
 </style>

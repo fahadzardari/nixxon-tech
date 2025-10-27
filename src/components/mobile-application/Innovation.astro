@@ -14,61 +14,66 @@ const mobileProjects = [
     appName: "FitPulse",
     appIcon: Logo1,
     category: "Health & Fitness",
-    description: "Track workouts, nutrition and health metrics in one seamless experience",
+    description:
+      "Track workouts, nutrition and health metrics in one seamless experience",
     features: ["Activity tracking", "Nutrition log", "Progress analytics"],
     colors: {
       primary: "#9d7eff",
-      secondary: "#f43f5e"
+      secondary: "#f43f5e",
     },
-    year: "2023"
+    year: "2023",
   },
   {
     appName: "TravelNest",
     appIcon: Logo2,
     category: "Travel & Lifestyle",
-    description: "Plan, book and share your travel experiences with friends and family",
+    description:
+      "Plan, book and share your travel experiences with friends and family",
     features: ["Trip planning", "Booking integration", "Photo sharing"],
     colors: {
       primary: "#4338ca",
-      secondary: "#6366f1"
+      secondary: "#6366f1",
     },
-    year: "2023"
+    year: "2023",
   },
   {
     appName: "EcoWave",
     appIcon: Logo3,
     category: "Sustainability",
-    description: "Track your carbon footprint and discover eco-friendly alternatives",
+    description:
+      "Track your carbon footprint and discover eco-friendly alternatives",
     features: ["Impact calculator", "Green shopping", "Community challenges"],
     colors: {
       primary: "#10b981",
-      secondary: "#34d399"
+      secondary: "#34d399",
     },
-    year: "2022"
+    year: "2022",
   },
   {
     appName: "ByteCraft",
     appIcon: Logo4,
     category: "Productivity",
-    description: "Collaborative coding and project management for development teams",
+    description:
+      "Collaborative coding and project management for development teams",
     features: ["Code editor", "Task management", "Team collaboration"],
     colors: {
       primary: "#0891b2",
-      secondary: "#22d3ee"
+      secondary: "#22d3ee",
     },
-    year: "2023"
+    year: "2023",
   },
   {
     appName: "Quadrant",
     appIcon: Logo5,
     category: "Healthcare",
-    description: "Virtual consultations and health record management for patients",
+    description:
+      "Virtual consultations and health record management for patients",
     features: ["Video appointments", "Prescription refills", "Medical history"],
     colors: {
       primary: "#8b5cf6",
-      secondary: "#a78bfa"
+      secondary: "#a78bfa",
     },
-    year: "2022"
+    year: "2022",
   },
   {
     appName: "NixonPay",
@@ -78,10 +83,10 @@ const mobileProjects = [
     features: ["Contactless payment", "Crypto trading", "Budget tracking"],
     colors: {
       primary: "#f59e0b",
-      secondary: "#fbbf24"
+      secondary: "#fbbf24",
     },
-    year: "2023"
-  }
+    year: "2023",
+  },
 ];
 ---
 
@@ -96,8 +101,9 @@ const mobileProjects = [
       Next-Gen Mobile Applications
     </h2>
     <p class="mx-auto max-w-2xl text-base leading-6 text-[#707070]">
-      We build cross-platform mobile apps that deliver exceptional user experiences, 
-      seamless performance, and innovative features for businesses of all sizes.
+      We build cross-platform mobile apps that deliver exceptional user
+      experiences, seamless performance, and innovative features for businesses
+      of all sizes.
     </p>
   </header>
 
@@ -115,38 +121,43 @@ const mobileProjects = [
             <div class="mobile-app-presentation">
               {/* App Icon */}
               <div class="app-icon-container">
-                <div class="app-icon" style={`background: linear-gradient(135deg, ${project.colors.secondary} 0%, ${project.colors.primary} 100%);`}>
-                  <Image 
-                    src={project.appIcon} 
-                    alt={project.appName} 
+                <div
+                  class="app-icon"
+                  style={`background: linear-gradient(135deg, ${project.colors.secondary} 0%, ${project.colors.primary} 100%);`}
+                >
+                  <Image
+                    src={project.appIcon}
+                    alt={project.appName}
                     class="h-[60%] w-[60%] object-contain"
                   />
                 </div>
-                <div class="app-icon-shadow"></div>
+                <div class="app-icon-shadow" />
               </div>
 
               {/* Phone Showcase with App Screen */}
               <div class="phone-showcase">
                 <div class="phone-frame">
-                  <div class="phone-notch"></div>
+                  <div class="phone-notch" />
                   <div class="phone-screen">
                     {/* App UI Elements */}
                     <div class="app-header">
-                      <div class="app-header-text"></div>
-                      <div class="app-header-icon"></div>
+                      <div class="app-header-text" />
+                      <div class="app-header-icon" />
                     </div>
 
                     <div class="app-content">
                       {project.features.map((_, i) => (
-                        <div class={`app-content-item ${i === 1 ? "active" : ""}`}></div>
+                        <div
+                          class={`app-content-item ${i === 1 ? "active" : ""}`}
+                        />
                       ))}
                     </div>
 
                     <div class="app-nav">
-                      <div class="app-nav-item active"></div>
-                      <div class="app-nav-item"></div>
-                      <div class="app-nav-item"></div>
-                      <div class="app-nav-item"></div>
+                      <div class="app-nav-item active" />
+                      <div class="app-nav-item" />
+                      <div class="app-nav-item" />
+                      <div class="app-nav-item" />
                     </div>
                   </div>
                 </div>
@@ -154,26 +165,41 @@ const mobileProjects = [
 
               {/* Floating UI Elements */}
               <div class="floating-ui-elements">
-                <div class="ui-card card-1" style={`border: 2px solid ${project.colors.primary}; background: ${project.colors.primary}22;`}></div>
-                <div class="ui-card card-2" style={`border: 2px solid ${project.colors.secondary}; background: ${project.colors.secondary}22;`}></div>
-                <div class="notification-badge" style={`background: ${project.colors.secondary};`}>
+                <div
+                  class="ui-card card-1"
+                  style={`border: 2px solid ${project.colors.primary}; background: ${project.colors.primary}22;`}
+                />
+                <div
+                  class="ui-card card-2"
+                  style={`border: 2px solid ${project.colors.secondary}; background: ${project.colors.secondary}22;`}
+                />
+                <div
+                  class="notification-badge"
+                  style={`background: ${project.colors.secondary};`}
+                >
                   <span>1</span>
                 </div>
               </div>
 
               {/* Decorative Elements */}
               <div class="decorative-circles">
-                <div class="circle circle-1" style={`background: radial-gradient(circle, ${project.colors.primary}33 60%, transparent 100%);`}></div>
-                <div class="circle circle-2" style={`background: radial-gradient(circle, ${project.colors.secondary}33 60%, transparent 100%);`}></div>
-                <div class="circle circle-3"></div>
+                <div
+                  class="circle circle-1"
+                  style={`background: radial-gradient(circle, ${project.colors.primary}33 60%, transparent 100%);`}
+                />
+                <div
+                  class="circle circle-2"
+                  style={`background: radial-gradient(circle, ${project.colors.secondary}33 60%, transparent 100%);`}
+                />
+                <div class="circle circle-3" />
               </div>
             </div>
 
             {/* Information Overlay */}
-            <div
-              class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
-            >
-              <h3 class="text-xl font-semibold text-white">{project.appName}</h3>
+            <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+              <h3 class="text-xl font-semibold text-white">
+                {project.appName}
+              </h3>
               <p class="text-sm text-white/80">{project.category}</p>
               <div class="mt-2 hidden text-sm text-white/70 md:block">
                 {project.description}
@@ -198,12 +224,12 @@ const mobileProjects = [
   document.addEventListener("DOMContentLoaded", () => {
     // Mobile app card animations
     const mobileCards = document.querySelectorAll(".mobile-app-card");
-    
+
     mobileCards.forEach((card) => {
       // Set up 3D parallax effect
       card.addEventListener("mousemove", handleMobileCardParallax);
       card.addEventListener("mouseleave", resetMobileCardParallax);
-      
+
       // Add notification badge pulse animation
       const badge = card.querySelector(".notification-badge");
       if (badge) {
@@ -212,7 +238,7 @@ const mobileProjects = [
         }, Math.random() * 2000);
       }
     });
-    
+
     function handleMobileCardParallax(e) {
       const card = this;
       const phoneShowcase = card.querySelector(".phone-showcase");
@@ -220,74 +246,82 @@ const mobileProjects = [
       const uiCard1 = card.querySelector(".ui-card.card-1");
       const uiCard2 = card.querySelector(".ui-card.card-2");
       const notificationBadge = card.querySelector(".notification-badge");
-      
+
       if (!phoneShowcase) return;
-      
+
       const cardRect = card.getBoundingClientRect();
       const cardWidth = cardRect.width;
       const cardHeight = cardRect.height;
-      
+
       // Calculate mouse position relative to card center
       const centerX = cardRect.left + cardWidth / 2;
       const centerY = cardRect.top + cardHeight / 2;
       const mouseX = (e.clientX - centerX) / (cardWidth / 2); // -1 to 1
       const mouseY = (e.clientY - centerY) / (cardHeight / 2); // -1 to 1
-      
+
       // Apply parallax effect with different intensities
       if (phoneShowcase) {
         phoneShowcase.style.transform = `translateX(${mouseX * -10}px) translateY(${mouseY * -10}px) rotateY(${mouseX * 5}deg) rotateX(${-mouseY * 5}deg)`;
       }
-      
+
       if (appIcon) {
         appIcon.style.transform = `translateX(${mouseX * 15}px) translateY(${mouseY * 15}px)`;
       }
-      
+
       if (uiCard1) {
         uiCard1.style.transform = `translateZ(-50px) translateX(${mouseX * 20}px) translateY(${mouseY * 20}px) rotateX(${5 + mouseY * 10}deg) rotateY(${-10 + mouseX * 10}deg)`;
       }
-      
+
       if (uiCard2) {
         uiCard2.style.transform = `translateZ(-70px) translateX(${mouseX * -25}px) translateY(${mouseY * -25}px) rotateX(${-5 + mouseY * -10}deg) rotateY(${15 + mouseX * -10}deg)`;
       }
-      
+
       if (notificationBadge) {
         notificationBadge.style.transform = `translateZ(-20px) translateX(${mouseX * 15}px) translateY(${mouseY * 15}px)`;
       }
     }
-    
+
     function resetMobileCardParallax() {
       const phoneShowcase = this.querySelector(".phone-showcase");
       const appIcon = this.querySelector(".app-icon");
       const uiCard1 = this.querySelector(".ui-card.card-1");
       const uiCard2 = this.querySelector(".ui-card.card-2");
       const notificationBadge = this.querySelector(".notification-badge");
-      
+
       if (phoneShowcase) phoneShowcase.style.transform = "";
       if (appIcon) appIcon.style.transform = "";
-      if (uiCard1) uiCard1.style.transform = "translateZ(-50px) rotateX(5deg) rotateY(-10deg)";
-      if (uiCard2) uiCard2.style.transform = "translateZ(-70px) rotateX(-5deg) rotateY(15deg)";
-      if (notificationBadge) notificationBadge.style.transform = "translateZ(-20px)";
+      if (uiCard1)
+        uiCard1.style.transform =
+          "translateZ(-50px) rotateX(5deg) rotateY(-10deg)";
+      if (uiCard2)
+        uiCard2.style.transform =
+          "translateZ(-70px) rotateX(-5deg) rotateY(15deg)";
+      if (notificationBadge)
+        notificationBadge.style.transform = "translateZ(-20px)";
     }
-    
+
     // Add staggered animation for cards on page load
     function animateCardsIn() {
       mobileCards.forEach((card, index) => {
         // Set initial state
         card.style.opacity = "0";
         card.style.transform = "translateY(30px) scale(0.95)";
-        
+
         // Animate in with a stagger
-        setTimeout(() => {
-          card.style.transition = "opacity 0.7s ease, transform 0.7s ease";
-          card.style.opacity = "1";
-          card.style.transform = "translateY(0) scale(1)";
-        }, 100 + (index * 150)); // 150ms delay between each card
+        setTimeout(
+          () => {
+            card.style.transition = "opacity 0.7s ease, transform 0.7s ease";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0) scale(1)";
+          },
+          100 + index * 150,
+        ); // 150ms delay between each card
       });
     }
-    
+
     // Run animation
     animateCardsIn();
-    
+
     // Handle background title animation
     const bgTitle = document.getElementById("portfolio-bg-title");
     const section = document.querySelector(".internal-padding.py-20");
@@ -303,18 +337,20 @@ const mobileProjects = [
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
     }
-    
+
     // Simulate app activity
     setInterval(() => {
-      const randomCard = mobileCards[Math.floor(Math.random() * mobileCards.length)];
+      const randomCard =
+        mobileCards[Math.floor(Math.random() * mobileCards.length)];
       const contentItems = randomCard.querySelectorAll(".app-content-item");
-      
+
       if (contentItems.length) {
         // Remove active class from all items
-        contentItems.forEach(item => item.classList.remove("active"));
-        
+        contentItems.forEach((item) => item.classList.remove("active"));
+
         // Add active class to random item
-        const randomItem = contentItems[Math.floor(Math.random() * contentItems.length)];
+        const randomItem =
+          contentItems[Math.floor(Math.random() * contentItems.length)];
         randomItem.classList.add("active");
       }
     }, 3000);
@@ -329,7 +365,11 @@ const mobileProjects = [
 
   /* Text gradient */
   .text-gradient-start {
-    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    background: linear-gradient(
+      to right,
+      var(--gradient-start),
+      var(--gradient-end)
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -434,7 +474,11 @@ const mobileProjects = [
       0 15px 30px -10px rgba(0, 0, 0, 0.3);
     transform-style: preserve-3d;
     animation: phoneFloat 6s ease-in-out infinite;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.05)
+    );
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -609,23 +653,28 @@ const mobileProjects = [
   .circle-3 {
     width: 100px;
     height: 100px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 60%, transparent 100%);
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.2) 60%,
+      transparent 100%
+    );
     bottom: 50px;
     left: 30px;
   }
 
   /* Button styles */
   .bg-indigo-600 {
-    background: linear-gradient(90deg, #8067CE 0%, #4338CA 100%);
+    background: linear-gradient(90deg, #8067ce 0%, #4338ca 100%);
   }
-  
+
   .bg-indigo-600:hover {
-    background: linear-gradient(90deg, #9D7EFF 0%, #6366F1 100%);
+    background: linear-gradient(90deg, #9d7eff 0%, #6366f1 100%);
   }
 
   /* Animations */
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0) rotateY(0);
     }
     50% {
@@ -634,7 +683,8 @@ const mobileProjects = [
   }
 
   @keyframes shadow {
-    0%, 100% {
+    0%,
+    100% {
       transform: scale(1);
       opacity: 0.2;
     }
@@ -645,7 +695,8 @@ const mobileProjects = [
   }
 
   @keyframes phoneFloat {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0) rotateY(0);
     }
     50% {
@@ -658,7 +709,8 @@ const mobileProjects = [
       transform: translateZ(-50px) translateY(0) rotateX(5deg) rotateY(-10deg);
     }
     100% {
-      transform: translateZ(-50px) translateY(-15px) rotateX(8deg) rotateY(-5deg);
+      transform: translateZ(-50px) translateY(-15px) rotateX(8deg)
+        rotateY(-5deg);
     }
   }
 
@@ -667,12 +719,14 @@ const mobileProjects = [
       transform: translateZ(-70px) translateY(0) rotateX(-5deg) rotateY(15deg);
     }
     100% {
-      transform: translateZ(-70px) translateY(-20px) rotateX(-8deg) rotateY(10deg);
+      transform: translateZ(-70px) translateY(-20px) rotateX(-8deg)
+        rotateY(10deg);
     }
   }
 
   @keyframes badgeFloat {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateZ(-20px) scale(1);
     }
     50% {
@@ -681,7 +735,8 @@ const mobileProjects = [
   }
 
   @keyframes badgePulse {
-    0%, 100% {
+    0%,
+    100% {
       box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
       transform: translateZ(-20px) scale(1);
     }
@@ -692,7 +747,8 @@ const mobileProjects = [
   }
 
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 0.6;
     }
     50% {

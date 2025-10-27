@@ -9,10 +9,10 @@ const {
 ---
 
 <section
-  class="3xl:ml-[11dvw] mx-[8dvw]  flex flex-col overflow-hidden bg-[#f8f8f8] py-8 lg:mx-0  lg:ml-[8dvw] lg:flex-row lg:py-12 "
+  class="3xl:ml-[11dvw] mx-[8dvw] flex flex-col overflow-hidden bg-[#f8f8f8] py-8 lg:mx-0 lg:ml-[8dvw] lg:flex-row lg:py-12"
 >
   <div
-    class="relative z-20 flex flex-col gap-5 border-b border-b-[#808080] bg-[#f8f8f8] pb-4 lg:w-1/2 lg:border-r lg:border-b-0 lg:border-r-[#808080] lg:pr-12 "
+    class="relative z-20 flex flex-col gap-5 border-b border-b-[#808080] bg-[#f8f8f8] pb-4 lg:w-1/2 lg:border-r lg:border-b-0 lg:border-r-[#808080] lg:pr-12"
   >
     <h2
       class="text-2xl font-semibold text-[#000047] lg:text-3xl xl:text-4xl 2xl:text-[40px]"
@@ -127,10 +127,10 @@ const {
 
       // Get current slide index before destroying
       const currentIndex = swiper.activeIndex;
-      
+
       // Destroy current swiper instance
       swiper.destroy(true, true);
-      
+
       // Create new instance without autoplay, but with same configuration
       swiper = new Swiper(".stepsSwiper", {
         slidesPerView: "auto",
@@ -146,28 +146,28 @@ const {
           1024: { slidesPerView: 2.5, spaceBetween: 50 },
         },
       });
-      
+
       // Mark as stopped
       autoplayStopped = true;
-      
+
       // Re-attach event listeners to the new instance
       attachNavigationEvents();
     }
-    
+
     // Separate function to attach navigation events (needed for recreated swiper)
     function attachNavigationEvents() {
       // Remove old listeners if any
       prevButton.removeEventListener("click", handlePrevClick);
       nextButton.removeEventListener("click", handleNextClick);
-      
+
       // Add new listeners
       prevButton.addEventListener("click", handlePrevClick);
       nextButton.addEventListener("click", handleNextClick);
-      
+
       // Also handle direct interaction
-      swiper.on('touchStart', switchToManualMode);
+      swiper.on("touchStart", switchToManualMode);
     }
-    
+
     // Click handlers
     function handlePrevClick() {
       if (!autoplayStopped) {
@@ -178,7 +178,7 @@ const {
         swiper.slidePrev();
       }, 10);
     }
-    
+
     function handleNextClick() {
       if (!autoplayStopped) {
         switchToManualMode();
@@ -188,13 +188,13 @@ const {
         swiper.slideNext();
       }, 10);
     }
-    
+
     // Initial attachment of events
     attachNavigationEvents();
 
     // Handle pointer events on slides as well
     if (swiperContainer) {
-      swiperContainer.addEventListener('mousedown', switchToManualMode);
+      swiperContainer.addEventListener("mousedown", switchToManualMode);
     }
   });
 </script>
@@ -203,23 +203,23 @@ const {
   .stepsSwiper .swiper-wrapper {
     transition-timing-function: linear !important;
   }
-  
+
   /* Override this style when in manual mode */
   .stepsSwiper.manual-navigation .swiper-wrapper {
     transition-timing-function: ease !important;
   }
-  
+
   .stepsSwiper .swiper-slide {
     width: 400px;
     height: auto;
     flex-shrink: 0;
     opacity: 1 !important;
   }
-  
+
   /* Enhanced button styles to provide better feedback */
   .steps-swiper-prev:active,
   .steps-swiper-next:active {
     transform: scale(0.95);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 </style>

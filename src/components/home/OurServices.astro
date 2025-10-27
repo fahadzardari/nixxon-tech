@@ -8,25 +8,25 @@ const {
 ---
 
 <section class="our-services internal-padding pt-8 lg:pt-16">
-  <div class="mx-auto mb-12 lg:mb-20 px-4">
+  <div class="mx-auto mb-12 px-4 lg:mb-20">
     <h5
-      class="gradient-text mb-6 text-center text-base md:text-lg lg:text-xl leading-6 font-bold tracking-[5px]"
+      class="gradient-text mb-6 text-center text-base leading-6 font-bold tracking-[5px] md:text-lg lg:text-xl"
     >
       {title}
     </h5>
     <h2
-      class="mb-6 lg:mb-10 text-center text-[30px] leading-[40px]  lg:text-[40px] lg:leading-[50px] font-medium text-[#000047] xl:text-[50px]"
+      class="mb-6 text-center text-[30px] leading-[40px] font-medium text-[#000047] lg:mb-10 lg:text-[40px] lg:leading-[50px] xl:text-[50px]"
     >
       {description}
     </h2>
 
     <!-- Services Tabs -->
     <div
-      class="mb-4 lg:mb-8 flex w-full flex-wrap justify-center gap-[10px] xl:mb-10 2xl:mb-12"
+      class="mb-4 flex w-full flex-wrap justify-center gap-[10px] lg:mb-8 xl:mb-10 2xl:mb-12"
     >
       {
         services.map((service) => (
-          <button class="service-tab flex min-w-[150px] flex-col items-center justify-between gap-4 rounded-md bg-white pt-5 pb-6 text-xs md:text-sm lg:text-base font-medium transition lg:min-w-[220px]">
+          <button class="service-tab flex min-w-[150px] flex-col items-center justify-between gap-4 rounded-md bg-white pt-5 pb-6 text-xs font-medium transition md:text-sm lg:min-w-[220px] lg:text-base">
             <span class="service-icon" set:html={service.icon} />
             <span class="service-name">{service.name}</span>
           </button>

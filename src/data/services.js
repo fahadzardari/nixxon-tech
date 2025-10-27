@@ -77,7 +77,6 @@ export const HomeServices = [
   },
 ];
 
-
 export const webServices = [
   {
     name: "Wordpress",
@@ -97,7 +96,7 @@ H28.25V24.25ZM28.25 18.25H22.75V14.75H28.25V18.25ZM17 30.25H11.5V26.75H17V30.25Z
 </svg>
 `,
   },
-    {
+  {
     name: "Wix",
     icon: `
     <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -137,4 +136,4 @@ H28.25V24.25ZM28.25 18.25H22.75V14.75H28.25V18.25ZM17 30.25H11.5V26.75H17V30.25Z
     </svg>
     `,
   },
-]
+];

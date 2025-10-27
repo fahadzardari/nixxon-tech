@@ -126,7 +126,7 @@ const {
       </div>
     </div>
     <p
-      class="internal-padding section-description mx-auto l text-center text-xs text-[#2A2111] md:text-sm lg:text-base xl:text-lg"
+      class="internal-padding section-description l mx-auto text-center text-xs text-[#2A2111] md:text-sm lg:text-base xl:text-lg"
     >
       {description}
     </p>
@@ -512,7 +512,9 @@ const {
     });
 
     // IntersectionObserver to enable/disable mousewheel only when swiper is fully visible
-    const swiperContainer = document.querySelector('.vertical-swiper-container');
+    const swiperContainer = document.querySelector(
+      ".vertical-swiper-container",
+    );
     if (swiperContainer) {
       const swiperObserver = new IntersectionObserver(
         (entries) => {
@@ -523,25 +525,27 @@ const {
               if (desktopSwiper && desktopSwiper.params) {
                 desktopSwiper.params.mousewheel.enabled = true;
                 desktopSwiper.mousewheel.enable();
-                swiperContainer.classList.add('mousewheel-active');
+                swiperContainer.classList.add("mousewheel-active");
               }
             } else {
               // Not fully visible - disable mousewheel
               if (desktopSwiper && desktopSwiper.params) {
                 desktopSwiper.params.mousewheel.enabled = false;
                 desktopSwiper.mousewheel.disable();
-                swiperContainer.classList.remove('mousewheel-active');
+                swiperContainer.classList.remove("mousewheel-active");
               }
             }
           });
         },
         {
           root: null,
-          threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 1.0],
-          rootMargin: '0px',
-        }
+          threshold: [
+            0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 1.0,
+          ],
+          rootMargin: "0px",
+        },
       );
-      
+
       swiperObserver.observe(swiperContainer);
     }
 
@@ -1110,7 +1114,7 @@ const {
 
   /* Visual indicator for when mousewheel is active */
   .mousewheel-active::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 10px;
     left: 10px;

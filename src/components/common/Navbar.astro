@@ -44,7 +44,7 @@ const currentPath = Astro.url.pathname;
           <Image
             src={Logo}
             alt="Nixxon Tech Logo"
-            class="h-auto w-full max-w-[150px] min-w-[150px] lg:max-w-[100px] lg:min-w-[100px]  xl:min-w-[120px] 2xl:min-w-[170px]"
+            class="h-auto w-full max-w-[150px] min-w-[150px] lg:max-w-[100px] lg:min-w-[100px] xl:min-w-[120px] 2xl:min-w-[170px]"
           />
         </a>
       </div>
@@ -135,7 +135,10 @@ const currentPath = Astro.url.pathname;
               >
                 <div class="flex items-center space-x-3">
                   <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   <span>Logo Design</span>
                 </div>
@@ -146,14 +149,17 @@ const currentPath = Astro.url.pathname;
               <a
                 href="/services/branding"
                 class={`block px-4 py-3 transition-all duration-150 border-l-4 ${
-                  currentPath === '/services/branding'
-                    ? 'bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold'
-                    : 'border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5'
+                  currentPath === "/services/branding"
+                    ? "bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold"
+                    : "border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5"
                 }`}
               >
                 <div class="flex items-center space-x-3">
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clip-rule="evenodd"/>
+                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   <span>Branding</span>
                 </div>
@@ -165,13 +171,16 @@ const currentPath = Astro.url.pathname;
               <a
                 href="/services/digital-marketing"
                 class={`block px-4 py-3 transition-all duration-150 border-l-4 ${
-                  currentPath === '/services/digital-marketing'
-                    ? 'bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold'
-                    : 'border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5'
+                  currentPath === "/services/digital-marketing"
+                    ? "bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold"
+                    : "border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5"
                 }`}
               >
                 <div class="flex items-center space-x-3">
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M3 3h14v2H3V3zm2 4h10v2H5V7zm-2 4h14v6H3v-6z"/></svg>
+                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                    ><path d="M3 3h14v2H3V3zm2 4h10v2H5V7zm-2 4h14v6H3v-6z"
+                    ></path></svg
+                  >
                   <span>Digital Marketing</span>
                 </div>
               </a>
@@ -181,13 +190,16 @@ const currentPath = Astro.url.pathname;
               <a
                 href="/services/mobile-application"
                 class={`block px-4 py-3 transition-all duration-150 border-l-4 ${
-                  currentPath === '/services/mobile-application'
-                    ? 'bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold'
-                    : 'border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5'
+                  currentPath === "/services/mobile-application"
+                    ? "bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold"
+                    : "border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5"
                 }`}
               >
                 <div class="flex items-center space-x-3">
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M7 2h6v1H7V2zm6 15H7V4h6v13zM9 18h2v1H9v-1z"/></svg>
+                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                    ><path d="M7 2h6v1H7V2zm6 15H7V4h6v13zM9 18h2v1H9v-1z"
+                    ></path></svg
+                  >
                   <span>Mobile Application</span>
                 </div>
               </a>
@@ -197,13 +209,15 @@ const currentPath = Astro.url.pathname;
               <a
                 href="/services/video-animation"
                 class={`block px-4 py-3 transition-all duration-150 border-l-4 ${
-                  currentPath === '/services/video-animation'
-                    ? 'bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold'
-                    : 'border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5'
+                  currentPath === "/services/video-animation"
+                    ? "bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold"
+                    : "border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5"
                 }`}
               >
                 <div class="flex items-center space-x-3">
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4h8v12H4zM14 7l4 3-4 3V7z"/></svg>
+                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                    ><path d="M4 4h8v12H4zM14 7l4 3-4 3V7z"></path></svg
+                  >
                   <span>Video Animation</span>
                 </div>
               </a>
@@ -354,7 +368,9 @@ const currentPath = Astro.url.pathname;
               }`}
             >
               <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                <path
+                  d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
+                ></path>
               </svg>
               Web Development
             </a>
@@ -369,7 +385,10 @@ const currentPath = Astro.url.pathname;
               }`}
             >
               <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                <path
+                  fill-rule="evenodd"
+                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  clip-rule="evenodd"></path>
               </svg>
               Logo Design
             </a>
@@ -383,8 +402,11 @@ const currentPath = Astro.url.pathname;
                   : "text-black"
               }`}
             >
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clip-rule="evenodd"/>
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z"
+                  clip-rule="evenodd"></path>
               </svg>
               Branding
             </a>
@@ -398,7 +420,10 @@ const currentPath = Astro.url.pathname;
                   : "text-black"
               }`}
             >
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M3 3h14v2H3V3zm2 4h10v2H5V7zm-2 4h14v6H3v-6z"/></svg>
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                ><path d="M3 3h14v2H3V3zm2 4h10v2H5V7zm-2 4h14v6H3v-6z"
+                ></path></svg
+              >
               Digital Marketing
             </a>
           </li>
@@ -411,7 +436,10 @@ const currentPath = Astro.url.pathname;
                   : "text-black"
               }`}
             >
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M7 2h6v1H7V2zm6 15H7V4h6v13zM9 18h2v1H9v-1z"/></svg>
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                ><path d="M7 2h6v1H7V2zm6 15H7V4h6v13zM9 18h2v1H9v-1z"
+                ></path></svg
+              >
               Mobile Application
             </a>
           </li>
@@ -424,7 +452,9 @@ const currentPath = Astro.url.pathname;
                   : "text-black"
               }`}
             >
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4h8v12H4zM14 7l4 3-4 3V7z"/></svg>
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                ><path d="M4 4h8v12H4zM14 7l4 3-4 3V7z"></path></svg
+              >
               Video Animation
             </a>
           </li>
@@ -445,8 +475,8 @@ const currentPath = Astro.url.pathname;
     </ul>
   </div>
 
-  <div class="absolute right-0 bottom-8 w-full flex justify-center left-0 px-4">
-    <CommonButton className="w-fit mx-auto py-2 text-center">
+  <div class="absolute right-0 bottom-8 left-0 flex w-full justify-center px-4">
+    <CommonButton className="mx-auto w-fit py-2 text-center">
       Book a Discovery Call
     </CommonButton>
   </div>

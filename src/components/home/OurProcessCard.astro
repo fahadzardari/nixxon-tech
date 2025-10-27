@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 const { title, description, icon, bgArt } = Astro.props;
 ---
 
@@ -7,24 +7,26 @@ const { title, description, icon, bgArt } = Astro.props;
   <div class="process-icon mb-4">
     <Image src={icon} alt={title} width={48} height={48} />
   </div>
-  
-  <h3 class="process-title text-xl 2xl:text-2xl text-white font-semibold mb-2 capitalize ">
+
+  <h3
+    class="process-title mb-2 text-xl font-semibold text-white capitalize 2xl:text-2xl"
+  >
     {title}
   </h3>
-  
+
   <p class="process-description text-sm text-white/90">
     {description}
   </p>
-  
+
   <!-- Shine effect overlay -->
   <div class="shine-effect"></div>
-  
+
   <!-- Background art -->
-  <Image 
-    src={bgArt} 
-    alt={`${title} background`} 
-    class="process-bg-art" 
-    width={150} 
+  <Image
+    src={bgArt}
+    alt={`${title} background`}
+    class="process-bg-art"
+    width={150}
     height={150}
   />
 </div>
@@ -35,7 +37,7 @@ const { title, description, icon, bgArt } = Astro.props;
     padding: 30px 25px;
     min-height: 280px;
   }
-  
+
   .shine-effect {
     position: absolute;
     top: 0;
@@ -53,7 +55,7 @@ const { title, description, icon, bgArt } = Astro.props;
     pointer-events: none;
     z-index: 3;
   }
-  
+
   .process-card:hover .shine-effect {
     transform: translateX(100%);
     transition: transform 1s ease;

@@ -6,4 +6,3 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Export configured instance
 export { gsap, ScrollTrigger };
-

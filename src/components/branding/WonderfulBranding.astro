@@ -4,7 +4,10 @@ import Image from "astro/components/Image.astro";
 import WhyBrandingImage from "../../assets/branding/why-branding.png";
 ---
 
-<section id="our-mission"   class="lg:ml-[8dvw] 3xl:ml-[11dvw] flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-24">
+<section
+  id="our-mission"
+  class="3xl:ml-[11dvw] flex flex-col gap-12 lg:ml-[8dvw] lg:flex-row lg:items-center lg:justify-between lg:gap-24"
+>
   <div class="3xl:ml-[11dvw] mx-[8dvw] lg:mx-0">
     <h2
       class="mb-4 text-center text-[32px] leading-[40px] font-medium text-[#000047] md:text-left lg:mb-8 lg:text-[40px] lg:leading-[50px] xl:text-[50px]"
@@ -12,7 +15,7 @@ import WhyBrandingImage from "../../assets/branding/why-branding.png";
       Create A Wonderful Branding To Turn The Visitor Into A Retained Customer
     </h2>
     <p
-      class="text-sm mb-6 text-[#2A2111] md:mb-8 md:text-base lg:mb-14 lg:text-lg xl:text-xl 2xl:text-2xl"
+      class="mb-6 text-sm text-[#2A2111] md:mb-8 md:text-base lg:mb-14 lg:text-lg xl:text-xl 2xl:text-2xl"
     >
       At NixxonTec, our mission is to revolutionize the digital landscape. It is
       our objective to turn possibilities into realities besides providing
@@ -92,7 +95,7 @@ import WhyBrandingImage from "../../assets/branding/why-branding.png";
           trigger: img,
           start: "top 85%",
         },
-      }
+      },
     );
 
     // gentle parallax as the section scrolls
@@ -122,7 +125,13 @@ import WhyBrandingImage from "../../assets/branding/why-branding.png";
       });
     });
     img.addEventListener("mouseleave", () => {
-      gsap.to(img, { x: 0, y: 0, rotation: 0, duration: 0.45, ease: "power2.out" });
+      gsap.to(img, {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        duration: 0.45,
+        ease: "power2.out",
+      });
     });
   }
 </script>

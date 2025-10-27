@@ -2,44 +2,46 @@
 import Success1 from "../../assets/mobile-application/success-1.png";
 import Success2 from "../../assets/mobile-application/success-2.png";
 const Cards = [
-  { 
-    title: "Zing Fitness App", 
-    image: Success2, 
+  {
+    title: "Zing Fitness App",
+    image: Success2,
     bgColor: "#e0e4ff",
     category: "Health & Fitness",
-    description: "A comprehensive fitness tracking app with personalized workout plans and social features.",
+    description:
+      "A comprehensive fitness tracking app with personalized workout plans and social features.",
     stats: [
       { label: "Downloads", value: "50K+" },
       { label: "Rating", value: "4.8" },
-      { label: "Users", value: "30K+" }
+      { label: "Users", value: "30K+" },
     ],
-    tags: ["iOS", "Android", "Health"]
+    tags: ["iOS", "Android", "Health"],
   },
-  { 
-    title: "Food Delivery App", 
-    image: Success1, 
+  {
+    title: "Food Delivery App",
+    image: Success1,
     bgColor: "#defcff",
     category: "Food & Beverage",
-    description: "Seamless food ordering experience with real-time tracking and multiple payment options.",
+    description:
+      "Seamless food ordering experience with real-time tracking and multiple payment options.",
     stats: [
       { label: "Orders", value: "100K+" },
       { label: "Rating", value: "4.9" },
-      { label: "Restaurants", value: "500+" }
+      { label: "Restaurants", value: "500+" },
     ],
-    tags: ["iOS", "Android", "Delivery"]
+    tags: ["iOS", "Android", "Delivery"],
   },
 ];
 import Image from "astro/components/Image.astro";
 ---
 
 <section class="internal-padding py-16 lg:py-24">
-  <div class="text-center mb-12 lg:mb-20">
+  <div class="mb-12 text-center lg:mb-20">
     <h2
-      class="text-[32px] font-bold text-[#000047] lg:text-[40px] xl:text-[48px] 2xl:text-[56px] mb-4"
+      class="mb-4 text-[32px] font-bold text-[#000047] lg:text-[40px] xl:text-[48px] 2xl:text-[56px]"
     >
       Our Track Record of Success
     </h2>
-    <p class="text-base lg:text-lg text-gray-600 max-w-3xl mx-auto">
+    <p class="mx-auto max-w-3xl text-base text-gray-600 lg:text-lg">
       Delivering exceptional mobile experiences that drive real business results
     </p>
   </div>
@@ -47,59 +49,61 @@ import Image from "astro/components/Image.astro";
   <div class="grid grid-cols-1 gap-8 lg:gap-12 xl:gap-16">
     {
       Cards.map((card, index) => (
-        <article 
-          class={`success-card relative group ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} flex flex-col lg:items-center gap-8`}
+        <article
+          class={`success-card group relative ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} flex flex-col gap-8 lg:items-center`}
         >
           {/* Image Container */}
-          <div class="image-container lg:w-1/2 relative">
-            <div 
-              class="image-wrapper rounded-3xl lg:rounded-4xl p-8 lg:p-12 relative overflow-hidden"
+          <div class="image-container relative lg:w-1/2">
+            <div
+              class="image-wrapper relative overflow-hidden rounded-3xl p-8 lg:rounded-4xl lg:p-12"
               style={`background-color: ${card.bgColor}`}
             >
               {/* Decorative elements */}
-              <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
-              <div class="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-              
-              <Image 
-                src={card.image} 
-                alt={card.title} 
-                class="app-image relative z-10 w-full h-auto drop-shadow-2xl"
+              <div class="absolute top-0 right-0 h-32 w-32 rounded-full bg-white/10 blur-3xl" />
+              <div class="absolute bottom-0 left-0 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
+
+              <Image
+                src={card.image}
+                alt={card.title}
+                class="app-image relative z-10 h-auto w-full drop-shadow-2xl"
               />
-              
+
               {/* Floating badge */}
-              <div class="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-                <span class="text-sm font-semibold text-[#000047]">{card.category}</span>
+              <div class="absolute top-6 right-6 rounded-full bg-white/90 px-4 py-2 shadow-lg backdrop-blur-sm">
+                <span class="text-sm font-semibold text-[#000047]">
+                  {card.category}
+                </span>
               </div>
             </div>
           </div>
 
           {/* Content Container */}
-          <div class="content-container lg:w-1/2 flex flex-col justify-center">
+          <div class="content-container flex flex-col justify-center lg:w-1/2">
             {/* Tags */}
-            <div class="flex gap-2 mb-4">
+            <div class="mb-4 flex gap-2">
               {card.tags.map((tag) => (
-                <span class="tag px-3 py-1 bg-[#9D7EFF]/10 text-[#9D7EFF] rounded-full text-xs font-medium">
+                <span class="tag rounded-full bg-[#9D7EFF]/10 px-3 py-1 text-xs font-medium text-[#9D7EFF]">
                   {tag}
                 </span>
               ))}
             </div>
 
-            <h3 class="card-title text-2xl lg:text-3xl xl:text-4xl font-bold text-[#000047] mb-4">
+            <h3 class="card-title mb-4 text-2xl font-bold text-[#000047] lg:text-3xl xl:text-4xl">
               {card.title}
             </h3>
-            
-            <p class="card-description text-gray-600 text-base lg:text-lg mb-6 leading-relaxed">
+
+            <p class="card-description mb-6 text-base leading-relaxed text-gray-600 lg:text-lg">
               {card.description}
             </p>
 
             {/* Stats Grid */}
-            <div class="stats-grid grid grid-cols-3 gap-4 mb-6">
+            <div class="stats-grid mb-6 grid grid-cols-3 gap-4">
               {card.stats.map((stat) => (
-                <div class="stat-item bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-4 text-center">
-                  <div class="stat-value text-2xl lg:text-3xl font-bold text-[#9D7EFF] mb-1">
+                <div class="stat-item rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-4 text-center">
+                  <div class="stat-value mb-1 text-2xl font-bold text-[#9D7EFF] lg:text-3xl">
                     {stat.value}
                   </div>
-                  <div class="stat-label text-xs lg:text-sm text-gray-600 font-medium">
+                  <div class="stat-label text-xs font-medium text-gray-600 lg:text-sm">
                     {stat.label}
                   </div>
                 </div>
@@ -107,10 +111,20 @@ import Image from "astro/components/Image.astro";
             </div>
 
             {/* CTA Button */}
-            <button class="cta-button group/btn w-fit flex items-center gap-2 bg-gradient-to-r from-[#9D7EFF] to-[#7C5FD3] text-white px-6 py-3 rounded-full font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300">
+            <button class="cta-button group/btn flex w-fit items-center gap-2 rounded-full bg-gradient-to-r from-[#9D7EFF] to-[#7C5FD3] px-6 py-3 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl">
               View Case Study
-              <svg class="w-5 h-5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <svg
+                class="h-5 w-5 transform transition-transform group-hover/btn:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </button>
           </div>
@@ -144,7 +158,10 @@ import Image from "astro/components/Image.astro";
       gsap.set(imageContainer, { x: index % 2 === 0 ? -50 : 50 });
       gsap.set(contentContainer, { x: index % 2 === 0 ? 50 : -50 });
       gsap.set(appImage, { scale: 0.9 });
-      gsap.set([tags, title, description, stats, ctaButton], { opacity: 0, y: 20 });
+      gsap.set([tags, title, description, stats, ctaButton], {
+        opacity: 0,
+        y: 20,
+      });
 
       // Create timeline
       const tl = gsap.timeline({
@@ -164,43 +181,67 @@ import Image from "astro/components/Image.astro";
         ease: "power3.out",
         stagger: 0.2,
       })
-      .to(appImage, {
-        scale: 1,
-        duration: 0.6,
-        ease: "back.out(1.2)",
-      }, "-=0.4")
-      .to(tags, {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        stagger: 0.1,
-        ease: "power2.out",
-      }, "-=0.3")
-      .to(title, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      }, "-=0.2")
-      .to(description, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      }, "-=0.3")
-      .to(stats, {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        stagger: 0.1,
-        ease: "back.out(1.5)",
-      }, "-=0.2")
-      .to(ctaButton, {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        ease: "power2.out",
-      }, "-=0.2");
+        .to(
+          appImage,
+          {
+            scale: 1,
+            duration: 0.6,
+            ease: "back.out(1.2)",
+          },
+          "-=0.4",
+        )
+        .to(
+          tags,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            stagger: 0.1,
+            ease: "power2.out",
+          },
+          "-=0.3",
+        )
+        .to(
+          title,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "-=0.2",
+        )
+        .to(
+          description,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "-=0.3",
+        )
+        .to(
+          stats,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            stagger: 0.1,
+            ease: "back.out(1.5)",
+          },
+          "-=0.2",
+        )
+        .to(
+          ctaButton,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          "-=0.2",
+        );
 
       // Continuous floating animation for images
       gsap.to(appImage, {
@@ -219,7 +260,7 @@ import Image from "astro/components/Image.astro";
           duration: 0.4,
           ease: "power2.out",
         });
-        
+
         gsap.to(card.querySelector(".image-wrapper"), {
           boxShadow: "0 20px 60px rgba(0, 0, 0, 0.15)",
           duration: 0.4,
@@ -233,7 +274,7 @@ import Image from "astro/components/Image.astro";
           duration: 0.4,
           ease: "power2.out",
         });
-        
+
         gsap.to(card.querySelector(".image-wrapper"), {
           boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
           duration: 0.4,
@@ -251,7 +292,7 @@ import Image from "astro/components/Image.astro";
           duration: 0.3,
           ease: "power2.out",
         });
-        
+
         gsap.to(stat.querySelector(".stat-value"), {
           scale: 1.1,
           duration: 0.3,
@@ -267,7 +308,7 @@ import Image from "astro/components/Image.astro";
           duration: 0.3,
           ease: "power2.out",
         });
-        
+
         gsap.to(stat.querySelector(".stat-value"), {
           scale: 1,
           duration: 0.3,
@@ -312,13 +353,18 @@ import Image from "astro/components/Image.astro";
   }
 
   .cta-button::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
     transition: left 0.5s ease;
   }
 

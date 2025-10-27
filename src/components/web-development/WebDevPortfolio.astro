@@ -60,7 +60,8 @@ const websiteProjects = [
       Modern Website Designs
     </h2>
     <p class="mx-auto max-w-2xl text-base leading-6 text-[#707070]">
-      We create responsive, high-performance websites that engage users and deliver exceptional results for businesses across industries.
+      We create responsive, high-performance websites that engage users and
+      deliver exceptional results for businesses across industries.
     </p>
   </header>
 
@@ -71,9 +72,7 @@ const websiteProjects = [
     >
       {
         websiteProjects.map((project, index) => (
-          <div
-            class="portfolio-item website-card group relative aspect-[4/3] overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 shadow-lg transition-all duration-300"
-          >
+          <div class="portfolio-item website-card group relative aspect-[4/3] overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 shadow-lg transition-all duration-300">
             <div class="website-device-frame laptop relative mx-auto my-4 overflow-hidden transition-all duration-500">
               <div class="device-laptop relative mx-auto overflow-hidden">
                 <div class="laptop-bezel">
@@ -128,7 +127,7 @@ const websiteProjects = [
   document.addEventListener("DOMContentLoaded", () => {
     // Setup website cards
     const websiteCards = document.querySelectorAll(".website-card");
-    
+
     websiteCards.forEach((card) => {
       // Add 3D tilt effect
       card.addEventListener("mousemove", handleWebsiteCardTilt);
@@ -196,16 +195,19 @@ const websiteProjects = [
         // Set initial state
         card.style.opacity = "0";
         card.style.transform = "translateY(20px)";
-        
+
         // Animate in with a stagger
-        setTimeout(() => {
-          card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-          card.style.opacity = "1";
-          card.style.transform = "translateY(0)";
-        }, 100 + (index * 100)); // 100ms delay between each card
+        setTimeout(
+          () => {
+            card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          },
+          100 + index * 100,
+        ); // 100ms delay between each card
       });
     }
-    
+
     // Run animation
     animateCardsIn();
 
@@ -230,7 +232,7 @@ const websiteProjects = [
 <style>
   /* Text gradient */
   .text-gradient-start {
-    background: linear-gradient(to right, #9D7EFF, #8067CE);
+    background: linear-gradient(to right, #9d7eff, #8067ce);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -411,13 +413,13 @@ const websiteProjects = [
   .website-card:hover {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   }
-  
+
   /* Button styles */
   .bg-indigo-600 {
-    background: linear-gradient(90deg, #8067CE 0%, #4338CA 100%);
+    background: linear-gradient(90deg, #8067ce 0%, #4338ca 100%);
   }
-  
+
   .bg-indigo-600:hover {
-    background: linear-gradient(90deg, #9D7EFF 0%, #6366F1 100%);
+    background: linear-gradient(90deg, #9d7eff 0%, #6366f1 100%);
   }
 </style>

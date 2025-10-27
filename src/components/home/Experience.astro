@@ -4,27 +4,35 @@ const {
   typewriter = "We have Passion for our craft",
   experience = "With over two decades of experience and a global footprint, our teams operate as a cohesive unit, consistently exceeding expectations and delivering unparalleled service to our diverse clientele worldwide.",
   actionButton = true,
-
 } = Astro.props;
 
 // Calculate width based on typewriter length (+2ch for safety)
 const typewriterWidth = `${typewriter.length - 5}ch`;
 ---
 
-<section class={`internal-padding ${actionButton ? "my-16 2xl:my-24" : "mt-16 2xl:mt-24"} `}>
+<section
+  class={`internal-padding ${actionButton ? "my-16 2xl:my-24" : "mt-16 2xl:mt-24"} `}
+>
   <div class="flex flex-wrap items-center gap-4">
     <h2
-      class="3xl:text-4xl m-0 font-normal text-[#000047] text-sm md:text-base lg:text-lg lg:leading-8 xl:text-2xl xl:leading-10 2xl:text-3xl 2xl:leading-12"
+      class="3xl:text-4xl m-0 text-sm font-normal text-[#000047] md:text-base lg:text-lg lg:leading-8 xl:text-2xl xl:leading-10 2xl:text-3xl 2xl:leading-12"
     >
       <span
         id="typewriter"
-        class="from-gradient-start to-gradient-end align-center pr-1 my-auto mb-[4px] inline-flex items-center bg-gradient-to-r bg-clip-text text-xs xl:text-sm font-semibold whitespace-nowrap text-transparent 2xl:text-base"
+        class="from-gradient-start to-gradient-end align-center my-auto mb-[4px] inline-flex items-center bg-gradient-to-r bg-clip-text pr-1 text-xs font-semibold whitespace-nowrap text-transparent xl:text-sm 2xl:text-base"
         style={`width: ${typewriterWidth};`}
         data-text={typewriter}></span>
       {experience}
     </h2>
   </div>
-  {actionButton && <CommonButton className="mt-4 md:mt-6 lg:mt-10"> Learn More </CommonButton>}
+  {
+    actionButton && (
+      <CommonButton className="mt-4 md:mt-6 lg:mt-10">
+        {" "}
+        Learn More{" "}
+      </CommonButton>
+    )
+  }
 </section>
 
 <script>
