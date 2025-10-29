@@ -34,7 +34,7 @@ const Cards = [
 import Image from "astro/components/Image.astro";
 ---
 
-<section class="internal-padding py-16 lg:py-24">
+<section class="internal-padding py-16 lg:py-24 overflow-x-hidden"> <!-- added overflow-x-hidden -->
   <div class="mb-12 text-center lg:mb-20">
     <h2
       class="mb-4 text-[32px] font-bold text-[#000047] lg:text-[40px] xl:text-[48px] 2xl:text-[56px]"
@@ -97,7 +97,7 @@ import Image from "astro/components/Image.astro";
             </p>
 
             {/* Stats Grid */}
-            <div class="stats-grid mb-6 grid grid-cols-3 gap-4">
+            <div class="stats-grid mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4"> <!-- responsive cols -->
               {card.stats.map((stat) => (
                 <div class="stat-item rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-4 text-center">
                   <div class="stat-value mb-1 text-2xl font-bold text-[#9D7EFF] lg:text-3xl">
@@ -322,15 +322,20 @@ import Image from "astro/components/Image.astro";
 <style>
   .success-card {
     position: relative;
+   overflow-x: hidden; /* prevent card from causing page horizontal overflow */
   }
 
   .image-wrapper {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.4s ease;
+   transition: box-shadow 0.4s ease;
+   box-sizing: border-box;
   }
 
   .app-image {
     will-change: transform;
+   max-width: 100%;
+   height: auto;
+   display: block;
   }
 
   .tag {
