@@ -26,10 +26,10 @@ const {
     >
       {
         services.map((service) => (
-          <button class="service-tab flex min-w-[150px] flex-col items-center justify-between gap-4 rounded-md bg-white pt-5 pb-6 text-xs font-medium transition md:text-sm lg:min-w-[220px] lg:text-base">
+          <a href={service.href} class="service-tab flex min-w-[150px] flex-col items-center justify-between gap-4 rounded-md bg-white pt-5 pb-6 text-xs font-medium transition md:text-sm lg:min-w-[220px] lg:text-base">
             <span class="service-icon" set:html={service.icon} />
             <span class="service-name">{service.name}</span>
-          </button>
+          </a>
         ))
       }
     </div>
