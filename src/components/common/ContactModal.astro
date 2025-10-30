@@ -5,7 +5,7 @@ import ContactForm from "../common/ContactForm.astro";
 
 <div
   id="contact-modal"
-  class={`font-manrope fixed inset-0 z-50 flex  items-center  justify-center bg-[#dee4ff] transition-opacity duration-300  ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+  class={`font-manrope fixed inset-0 z-100 flex  items-center  justify-center bg-[#dee4ff] transition-opacity duration-300  ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
 >
   <!-- Modal Box -->
   <div
@@ -124,23 +124,26 @@ import ContactForm from "../common/ContactForm.astro";
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("contact-modal");
-    const openBtn = document.querySelector(".chat-cta");
+    const openBtns = document.querySelectorAll(".chat-cta");
     const closeBtn = document.getElementById("close-modal");
 
     function openModal() {
       modal.classList.remove("invisible", "opacity-0");
       modal.classList.add("visible", "opacity-100");
-      document.body.style.overflow = "hidden"; // Prevent background scroll
+      document.body.style.overflow = "hidden";
     }
 
     function closeModal() {
       modal.classList.remove("visible", "opacity-100");
       modal.classList.add("invisible", "opacity-0");
-      document.body.style.overflow = ""; // Restore scroll
+      document.body.style.overflow = "";
     }
 
-    if (openBtn && modal) {
-      openBtn.addEventListener("click", openModal);
+    // Add event listener to all chat-cta buttons
+    if (openBtns && modal) {
+      openBtns.forEach((btn) => {
+        btn.addEventListener("click", openModal);
+      });
     }
 
     if (closeBtn && modal) {
@@ -149,6 +152,13 @@ import ContactForm from "../common/ContactForm.astro";
 
     modal.addEventListener("click", (e) => {
       if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close modal on ESC key press
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("visible")) {
         closeModal();
       }
     });

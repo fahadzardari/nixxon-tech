@@ -2,16 +2,29 @@
 const {
   className,
   typography = "text-[10px] sm:text-xs lg:text-sm xl:text-base 2xl:text-lg",
+  href = null,
 } = Astro.props;
 ---
 
-<button
-  class={`relative overflow-hidden capitalize animated-btn group  text-white bg-button-gradient py-1 sm:py-2 md:py-[10px] px-3 sm:px-6 md:px-10 rounded-3xl cursor-pointer ${className} ${typography} `}
->
-  <span class="button-text flex items-center justify-center text-nowrap"
-    ><slot /></span
+{href ? (
+  <a href={href}>
+    <button
+      class={`relative overflow-hidden capitalize animated-btn group text-white bg-button-gradient py-1 sm:py-2 md:py-[10px] px-3 sm:px-6 md:px-10 rounded-3xl cursor-pointer ${className} ${typography}`}
+    >
+      <span class="button-text flex items-center justify-center text-nowrap">
+        <slot />
+      </span>
+    </button>
+  </a>
+) : (
+  <button
+    class={`relative overflow-hidden capitalize animated-btn group text-white bg-button-gradient py-1 sm:py-2 md:py-[10px] px-3 sm:px-6 md:px-10 rounded-3xl cursor-pointer ${className} ${typography}`}
   >
-</button>
+    <span class="button-text flex items-center justify-center text-nowrap">
+      <slot />
+    </span>
+  </button>
+)}
 
 <script>
   document.querySelectorAll(".animated-btn").forEach((btn) => {
