@@ -48,3 +48,28 @@ body {
     padding-left: 11dvw;
   }
 }
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+span,
+li,
+button {
+  cursor: default;
+  user-select: none; /* Prevent text selection */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Prevent video download and right-click */
+video {
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+}

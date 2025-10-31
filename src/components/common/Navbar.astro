@@ -5,6 +5,50 @@ import CommonButton from "./CommonButton.astro";
 
 // Get current URL to determine active page
 const currentPath = Astro.url.pathname;
+
+// Navigation items configuration
+const navItems = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  {
+    label: "Services",
+    href: "/services",
+    dropdown: [
+      {
+        label: "Web Development",
+        href: "/services/web-development",
+        icon: "M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
+      },
+      {
+        label: "Logo Design",
+        href: "/services/logo-design",
+        icon: "M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+      },
+      {
+        label: "Branding",
+        href: "/services/branding",
+        icon: "M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z"
+      },
+      {
+        label: "Digital Marketing",
+        href: "/services/digital-marketing",
+        icon: "M3 3h14v2H3V3zm2 4h10v2H5V7zm-2 4h14v6H3v-6z"
+      },
+      {
+        label: "Mobile Application",
+        href: "/services/mobile-application",
+        icon: "M7 2h6v1H7V2zm6 15H7V4h6v13zM9 18h2v1H9v-1z"
+      },
+      {
+        label: "Video Animation",
+        href: "/services/video-animation",
+        icon: "M4 4h8v12H4zM14 7l4 3-4 3V7z"
+      }
+    ]
+  },
+  { label: "Portfolios", href: "/portfolios" },
+
+];
 ---
 
 <aside id="wrapper-sidebar">
@@ -52,188 +96,65 @@ const currentPath = Astro.url.pathname;
       <ul
         class="3xl:text-xl hidden items-center gap-x-2 text-sm font-medium text-nowrap text-[#000000] md:gap-x-4 md:text-base lg:flex lg:gap-x-6 lg:text-[15px] xl:gap-x-10 2xl:gap-x-12 2xl:text-lg"
       >
-        <li>
-          <a
-            href="/"
-            class={`3xl:px-4 3xl:py-3 rounded-full px-2.5 py-1.5 text-sm md:text-base xl:px-3 xl:py-2 transition-all duration-200 ${
-              currentPath === "/"
-                ? "bg-[#9D7EFF] text-white shadow-md"
-                : "hover:bg-[#9D7EFF]/10 hover:text-[#9D7EFF]"
-            }`}>Home</a
-          >
-        </li>
-        <li>
-          <a
-            href="/about"
-            class={`rounded-full px-2.5 py-1.5 text-sm md:text-base xl:px-3 xl:py-2 transition-all duration-200 ${
-              currentPath === "/about"
-                ? "bg-[#9D7EFF] text-white shadow-md"
-                : "hover:bg-[#9D7EFF]/10 hover:text-[#9D7EFF]"
-            }`}>About Us</a
-          >
-        </li>
-        <li class="group relative" id="services-dropdown-container">
-          <button
-            id="services-dropdown-toggle"
-            class={`flex items-center space-x-1 rounded-full px-2.5 py-1.5 text-sm md:text-base xl:px-3 xl:py-2 transition-all duration-200 ${
-              currentPath.startsWith("/services/")
-                ? "bg-[#9D7EFF] text-white shadow-md"
-                : "hover:bg-[#9D7EFF]/10 hover:text-[#9D7EFF] group-hover:bg-[#9D7EFF]/10 group-hover:text-[#9D7EFF]"
-            }`}
-            aria-expanded="false"
-            aria-controls="services-dropdown-menu"
-          >
-            <span>Services</span>
-            <svg
-              id="services-dropdown-arrow"
-              class="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180 md:h-4 md:w-4"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </button>
-          <ul
-            id="services-dropdown-menu"
-            class="animate-fade-in absolute left-0 hidden w-56 overflow-hidden rounded-xl border border-gray-200 bg-white pt-2 text-sm shadow-xl group-hover:block md:w-64 md:text-base"
-            aria-labelledby="services-dropdown-toggle"
-          >
-            <!-- Services dropdown content -->
-            <li>
-              <a
-                href="/services/web-development"
-                class={`block px-4 py-3 transition-all duration-150 border-l-4 ${
-                  currentPath === "/services/web-development"
-                    ? "bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold"
-                    : "border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5"
-                }`}
-              >
-                <div class="flex items-center space-x-3">
-                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
-                    ></path>
-                  </svg>
-                  <span>Web Development</span>
-                </div>
-              </a>
-            </li>
-            <!-- Other service items -->
-            <li>
-              <a
-                href="/services/logo-design"
-                class={`block px-4 py-3 transition-all duration-150 border-l-4 ${
-                  currentPath === "/services/logo-design"
-                    ? "bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold"
-                    : "border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5"
-                }`}
-              >
-                <div class="flex items-center space-x-3">
-                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  <span>Logo Design</span>
-                </div>
-              </a>
-            </li>
-
-            <li>
-              <a
-                href="/services/branding"
-                class={`block px-4 py-3 transition-all duration-150 border-l-4 ${
-                  currentPath === "/services/branding"
-                    ? "bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold"
-                    : "border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5"
-                }`}
-              >
-                <div class="flex items-center space-x-3">
-                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  <span>Branding</span>
-                </div>
-              </a>
-            </li>
-
-            <!-- New service items -->
-            <li>
-              <a
-                href="/services/digital-marketing"
-                class={`block px-4 py-3 transition-all duration-150 border-l-4 ${
-                  currentPath === "/services/digital-marketing"
-                    ? "bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold"
-                    : "border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5"
-                }`}
-              >
-                <div class="flex items-center space-x-3">
-                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
-                    ><path d="M3 3h14v2H3V3zm2 4h10v2H5V7zm-2 4h14v6H3v-6z"
-                    ></path></svg
+        {navItems.map((item) => (
+          <li class={item.dropdown ? "group relative" : ""}>
+            {item.dropdown ? (
+              <div>
+                <a
+                  href={item.href}
+                  class={`flex items-center space-x-1 rounded-full px-2.5 py-1.5 text-sm md:text-base xl:px-3 xl:py-2 transition-all duration-200 ${
+                    currentPath === item.href || currentPath.startsWith(item.href + "/")
+                      ? "bg-[#9D7EFF] text-white shadow-md"
+                      : "hover:bg-[#9D7EFF]/10 hover:text-[#9D7EFF] group-hover:bg-[#9D7EFF]/10 group-hover:text-[#9D7EFF]"
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  <svg
+                    class="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180 md:h-4 md:w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
                   >
-                  <span>Digital Marketing</span>
-                </div>
-              </a>
-            </li>
-
-            <li>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+                <ul class="animate-fade-in absolute left-0 hidden w-56 overflow-hidden rounded-xl border border-gray-200 bg-white pt-2 text-sm shadow-xl group-hover:block md:w-64 md:text-base">
+                  {item.dropdown.map((subItem) => (
+                    <li>
+                      <a
+                        href={subItem.href}
+                        class={`block px-4 py-3 transition-all duration-150 border-l-4 ${
+                          currentPath === subItem.href
+                            ? "bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold"
+                            : "border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5"
+                        }`}
+                      >
+                        <div class="flex items-center space-x-3">
+                          <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d={subItem.icon} fill-rule="evenodd" clip-rule="evenodd" />
+                          </svg>
+                          <span>{subItem.label}</span>
+                        </div>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
               <a
-                href="/services/mobile-application"
-                class={`block px-4 py-3 transition-all duration-150 border-l-4 ${
-                  currentPath === "/services/mobile-application"
-                    ? "bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold"
-                    : "border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5"
+                href={item.href}
+                class={`rounded-full px-2.5 py-1.5 text-sm md:text-base xl:px-3 xl:py-2 transition-all duration-200 ${
+                  currentPath === item.href
+                    ? "bg-[#9D7EFF] text-white shadow-md"
+                    : "hover:bg-[#9D7EFF]/10 hover:text-[#9D7EFF]"
                 }`}
               >
-                <div class="flex items-center space-x-3">
-                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
-                    ><path d="M7 2h6v1H7V2zm6 15H7V4h6v13zM9 18h2v1H9v-1z"
-                    ></path></svg
-                  >
-                  <span>Mobile Application</span>
-                </div>
+                {item.label}
               </a>
-            </li>
-
-            <li>
-              <a
-                href="/services/video-animation"
-                class={`block px-4 py-3 transition-all duration-150 border-l-4 ${
-                  currentPath === "/services/video-animation"
-                    ? "bg-[#9D7EFF]/10 text-[#9D7EFF] border-l-[#9D7EFF] font-semibold"
-                    : "border-l-transparent hover:bg-[#9D7EFF]/5 hover:border-l-[#9D7EFF]/50 hover:text-[#9D7EFF] hover:pl-5"
-                }`}
-              >
-                <div class="flex items-center space-x-3">
-                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
-                    ><path d="M4 4h8v12H4zM14 7l4 3-4 3V7z"></path></svg
-                  >
-                  <span>Video Animation</span>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <!-- <li>
-          <a 
-            href="/portfolio" 
-            class={`rounded-full px-2.5 py-1.5 text-sm md:text-base xl:px-3 xl:py-2 transition-all duration-200 ${
-              currentPath === '/portfolio' 
-                ? 'bg-[#9D7EFF] text-white shadow-md' 
-                : 'hover:bg-[#9D7EFF]/10 hover:text-[#9D7EFF]'
-            }`}
-          >Portfolio</a>
-        </li> -->
+            )}
+          </li>
+        ))}
       </ul>
 
       <div
@@ -260,14 +181,8 @@ const currentPath = Astro.url.pathname;
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <line
-            x1="52"
-            y1="0.5"
-            x2="-4.37114e-08"
-            y2="0.499995"
-            stroke="#000047"></line>
-          <line x1="52" y1="12.5" x2="-4.37114e-08" y2="12.5" stroke="#000047"
-          ></line>
+          <line x1="52" y1="0.5" x2="-4.37114e-08" y2="0.499995" stroke="#000047" />
+          <line x1="52" y1="12.5" x2="-4.37114e-08" y2="12.5" stroke="#000047" />
         </svg>
       </button>
     </div>
@@ -306,172 +221,77 @@ const currentPath = Astro.url.pathname;
         stroke-linecap="round"
         stroke-linejoin="round"
       >
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
       </svg>
     </button>
   </div>
 
   <div class="px-4 py-8">
     <ul class="space-y-4">
-      <li>
-        <a
-          href="/"
-          class={`block py-2 px-4 rounded-full text-base ${
-            currentPath === "/" ? "bg-[#9D7EFF] text-white" : "text-black"
-          }`}
-        >
-          Home
-        </a>
-      </li>
-      <li>
-        <a
-          href="/about"
-          class={`block py-2 px-4 rounded-full text-base ${
-            currentPath === "/about" ? "bg-[#9D7EFF] text-white" : "text-black"
-          }`}
-        >
-          About Us
-        </a>
-      </li>
-      <li class="relative">
-        <button
-          id="mobile-services-toggle"
-          class={`flex items-center  py-2 px-4 text-center rounded-full text-base ${
-            currentPath.startsWith("/services/")
-              ? "bg-[#9D7EFF] text-white"
-              : "text-black"
-          }`}
-        >
-          <span>Services</span>
-          <svg
-            class="ml-1 h-4 w-4 transition-transform duration-200"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </button>
-        <ul id="mobile-services-dropdown" class="mt-2 hidden space-y-2 px-4">
-          <li>
-            <a
-              href="/services/web-development"
-              class={`flex items-center gap-3  px-1 py-2 ${
-                currentPath === "/services/web-development"
-                  ? "text-[#9D7EFF] font-semibold"
-                  : "text-black"
-              }`}
-            >
-              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
-                ></path>
-              </svg>
-              Web Development
-            </a>
-          </li>
-          <li>
-            <a
-              href="/services/logo-design"
-              class={`flex items-center gap-3  px-1 py-2 ${
-                currentPath === "/services/logo-design"
-                  ? "text-[#9D7EFF] font-semibold"
-                  : "text-black"
-              }`}
-            >
-              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clip-rule="evenodd"></path>
-              </svg>
-              Logo Design
-            </a>
-          </li>
-          <li>
-            <a
-              href="/services/branding"
-              class={`flex items-center gap-3  px-1 py-2 ${
-                currentPath === "/services/branding"
-                  ? "text-[#9D7EFF] font-semibold"
-                  : "text-black"
-              }`}
-            >
-              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z"
-                  clip-rule="evenodd"></path>
-              </svg>
-              Branding
-            </a>
-          </li>
-          <li>
-            <a
-              href="/services/digital-marketing"
-              class={`flex items-center gap-3  px-1 py-2 ${
-                currentPath === "/services/digital-marketing"
-                  ? "text-[#9D7EFF] font-semibold"
-                  : "text-black"
-              }`}
-            >
-              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
-                ><path d="M3 3h14v2H3V3zm2 4h10v2H5V7zm-2 4h14v6H3v-6z"
-                ></path></svg
+      {navItems.map((item) => (
+        <li class={item.dropdown ? "relative" : ""}>
+          {item.dropdown ? (
+            <>
+              <a
+                href={item.href}
+                class={`flex items-center justify-between py-2 px-4 rounded-full text-base ${
+                  currentPath === item.href || currentPath.startsWith(item.href + "/")
+                    ? "bg-[#9D7EFF] text-white"
+                    : "text-black"
+                }`}
               >
-              Digital Marketing
-            </a>
-          </li>
-          <li>
+                <span>{item.label}</span>
+                <button
+                  class="mobile-services-toggle p-2"
+                  data-dropdown-id={`mobile-${item.label.toLowerCase().replace(/\s+/g, '-')}-dropdown`}
+                >
+                  <svg
+                    class="h-4 w-4 transition-transform duration-200"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </a>
+              <ul
+                id={`mobile-${item.label.toLowerCase().replace(/\s+/g, '-')}-dropdown`}
+                class="mt-2 hidden space-y-2 px-4"
+              >
+                {item.dropdown.map((subItem) => (
+                  <li>
+                    <a
+                      href={subItem.href}
+                      class={`flex items-center gap-3 px-1 py-2 ${
+                        currentPath === subItem.href
+                          ? "text-[#9D7EFF] font-semibold"
+                          : "text-black"
+                      }`}
+                    >
+                      <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d={subItem.icon} fill-rule="evenodd" clip-rule="evenodd" />
+                      </svg>
+                      {subItem.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
             <a
-              href="/services/mobile-application"
-              class={`flex items-center gap-3  px-1 py-2 ${
-                currentPath === "/services/mobile-application"
-                  ? "text-[#9D7EFF] font-semibold"
-                  : "text-black"
+              href={item.href}
+              class={`block py-2 px-4 rounded-full text-base ${
+                currentPath === item.href ? "bg-[#9D7EFF] text-white" : "text-black"
               }`}
             >
-              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
-                ><path d="M7 2h6v1H7V2zm6 15H7V4h6v13zM9 18h2v1H9v-1z"
-                ></path></svg
-              >
-              Mobile Application
+              {item.label}
             </a>
-          </li>
-          <li>
-            <a
-              href="/services/video-animation"
-              class={`flex items-center gap-3  px-1 py-2 ${
-                currentPath === "/services/video-animation"
-                  ? "text-[#9D7EFF] font-semibold"
-                  : "text-black"
-              }`}
-            >
-              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
-                ><path d="M4 4h8v12H4zM14 7l4 3-4 3V7z"></path></svg
-              >
-              Video Animation
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a
-          href="/portfolio"
-          class={`block py-2 px-4 rounded-full text-base ${
-            currentPath === "/portfolio"
-              ? "bg-[#9D7EFF] text-white"
-              : "text-black"
-          }`}
-        >
-          Portfolios
-        </a>
-      </li>
+          )}
+        </li>
+      ))}
     </ul>
   </div>
 
@@ -497,12 +317,6 @@ const currentPath = Astro.url.pathname;
     const mobileMenuButton = document.getElementById("mobile-menu-button");
     const closeMenuButton = document.getElementById("close-menu-button");
     const mobileMenu = document.getElementById("mobile-menu");
-    const mobileServicesToggle = document.getElementById(
-      "mobile-services-toggle",
-    );
-    const mobileServicesDropdown = document.getElementById(
-      "mobile-services-dropdown",
-    );
 
     // Mobile menu toggle
     if (mobileMenuButton && closeMenuButton && mobileMenu) {
@@ -514,83 +328,42 @@ const currentPath = Astro.url.pathname;
         mobileMenu.classList.add("translate-x-full");
       });
 
-      // Close menu when clicking a link (except service dropdown)
-      const mobileLinks = mobileMenu.querySelectorAll(
-        "a:not([href^='/services/'])",
-      );
+      // Close menu when clicking a link
+      const mobileLinks = mobileMenu.querySelectorAll("a");
       mobileLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.add("translate-x-full");
+        link.addEventListener("click", (e) => {
+          // Don't close if clicking the services parent link with dropdown
+          if (!e.target.closest('.mobile-services-toggle')) {
+            mobileMenu.classList.add("translate-x-full");
+          }
         });
       });
     }
 
-    // Mobile services dropdown toggle
-    if (mobileServicesToggle && mobileServicesDropdown) {
-      mobileServicesToggle.addEventListener("click", () => {
-        const isExpanded =
-          mobileServicesToggle.getAttribute("aria-expanded") === "true";
-        mobileServicesToggle.setAttribute("aria-expanded", !isExpanded);
-
-        if (isExpanded) {
-          mobileServicesDropdown.classList.add("hidden");
-          mobileServicesToggle
-            .querySelector("svg")
-            .classList.remove("rotate-180");
-        } else {
-          mobileServicesDropdown.classList.remove("hidden");
-          mobileServicesToggle.querySelector("svg").classList.add("rotate-180");
-        }
-      });
-    }
-
-    // Desktop services dropdown functionality (existing code)
-    const dropdownContainer = document.getElementById(
-      "services-dropdown-container",
-    );
-    const dropdownToggle = document.getElementById("services-dropdown-toggle");
-    const dropdownMenu = document.getElementById("services-dropdown-menu");
-    const dropdownArrow = document.getElementById("services-dropdown-arrow");
-
-    if (dropdownToggle && dropdownMenu && dropdownArrow) {
-      // Existing desktop dropdown functionality
-      let isDropdownOpen = false;
-
-      // Toggle dropdown on click
-      dropdownToggle.addEventListener("click", (e) => {
+    // Mobile services dropdown toggles
+    const mobileServicesToggles = document.querySelectorAll(".mobile-services-toggle");
+    mobileServicesToggles.forEach((toggle) => {
+      toggle.addEventListener("click", (e) => {
+        e.preventDefault();
         e.stopPropagation();
-        isDropdownOpen = !isDropdownOpen;
+        const dropdownId = toggle.getAttribute("data-dropdown-id");
+        const dropdown = document.getElementById(dropdownId);
+        const svg = toggle.querySelector("svg");
 
-        // Update aria-expanded
-        dropdownToggle.setAttribute("aria-expanded", isDropdownOpen.toString());
-
-        // Toggle display
-        if (isDropdownOpen) {
-          dropdownMenu.classList.add("block");
-          dropdownMenu.classList.remove("hidden");
-          dropdownArrow.classList.add("rotate-180");
-        } else {
-          closeDropdown();
+        if (dropdown) {
+          if (dropdown.classList.contains("hidden")) {
+            dropdown.classList.remove("hidden");
+            svg?.classList.add("rotate-180");
+          } else {
+            dropdown.classList.add("hidden");
+            svg?.classList.remove("rotate-180");
+          }
         }
       });
+    });
 
-      // Function to close dropdown
-      function closeDropdown() {
-        isDropdownOpen = false;
-        dropdownToggle.setAttribute("aria-expanded", "false");
-        dropdownMenu.classList.remove("block");
-        dropdownMenu.classList.add("hidden");
-        dropdownArrow.classList.remove("rotate-180");
-      }
-    }
-
-    // Desktop navigation animations (existing code)
-    if (
-      navContainer &&
-      innerButton &&
-      outerButton &&
-      window.innerWidth >= 1024
-    ) {
+    // Desktop navigation animations
+    if (navContainer && innerButton && outerButton && window.innerWidth >= 1024) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".hero-section",
@@ -603,9 +376,7 @@ const currentPath = Astro.url.pathname;
 
       tl.fromTo(
         navContainer,
-        {
-          width: "60%",
-        },
+        { width: "60%" },
         {
           width: "100%",
           borderRadius: 0,
@@ -640,42 +411,38 @@ const currentPath = Astro.url.pathname;
         );
     }
 
-    // Sidebar pinning (existing code)
-    if (sidebar && nav) {
-      // Only apply ScrollTrigger on large screens and above
-      if (window.innerWidth >= 1024) {
-        // 1024px is Tailwind's 'lg'
-        ScrollTrigger.create({
-          trigger: sidebar,
-          start: "top top",
-          endTrigger: ".our-services",
-          end: "bottom top",
-          pin: true,
-          anticipatePin: 1,
-          onLeave: () => {
-            const isXL = window.innerWidth >= 1280;
-            nav.style.left = isXL ? "0" : "0";
-            nav.style.width = "100vw";
-            nav.classList.remove(
-              isXL ? "left-[88px]" : "left-[65px]",
-              isXL ? "w-[calc(100vw-88px)]" : "w-[calc(100vw-65px)]",
-            );
-            nav.classList.add("w-full");
-            sidebar.style.display = "none";
-          },
-          onEnterBack: () => {
-            const isXL = window.innerWidth >= 1280;
-            nav.style.left = isXL ? "88px" : "65px";
-            nav.style.width = "";
-            nav.classList.remove("w-full");
-            nav.classList.add(
-              isXL ? "left-[88px]" : "left-[65px]",
-              isXL ? "w-[calc(100vw-88px)]" : "w-[calc(100vw-65px)]",
-            );
-            sidebar.style.display = "";
-          },
-        });
-      }
+    // Sidebar pinning
+    if (sidebar && nav && window.innerWidth >= 1024) {
+      ScrollTrigger.create({
+        trigger: sidebar,
+        start: "top top",
+        endTrigger: ".our-services",
+        end: "bottom top",
+        pin: true,
+        anticipatePin: 1,
+        onLeave: () => {
+          const isXL = window.innerWidth >= 1280;
+          nav.style.left = "0";
+          nav.style.width = "100vw";
+          nav.classList.remove(
+            isXL ? "left-[88px]" : "left-[65px]",
+            isXL ? "w-[calc(100vw-88px)]" : "w-[calc(100vw-65px)]",
+          );
+          nav.classList.add("w-full");
+          sidebar.style.display = "none";
+        },
+        onEnterBack: () => {
+          const isXL = window.innerWidth >= 1280;
+          nav.style.left = isXL ? "88px" : "65px";
+          nav.style.width = "";
+          nav.classList.remove("w-full");
+          nav.classList.add(
+            isXL ? "left-[88px]" : "left-[65px]",
+            isXL ? "w-[calc(100vw-88px)]" : "w-[calc(100vw-65px)]",
+          );
+          sidebar.style.display = "";
+        },
+      });
     }
   });
 </script>

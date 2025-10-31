@@ -9,13 +9,15 @@ import HomeReel from "../../assets/home-reel.mp4";
     <div class="video-scroll-wrapper">
       <video
         src={HomeReel}
-        class="video-scroll-img mx-auto rounded-lg w-full object-cover"
+        class="video-scroll-img mx-auto w-full rounded-lg object-cover"
         autoplay
         controls={false}
         muted
         loop
         playsinline
-      />
+        controlslist="nodownload nofullscreen noremoteplayback"
+        disablepictureinpicture
+        oncontextmenu="return false;"><ay/video>
     </div>
   </div>
   <!-- Add a spacer div to create distance between sections -->
