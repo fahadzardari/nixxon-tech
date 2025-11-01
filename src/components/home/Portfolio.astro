@@ -1,5 +1,5 @@
 ---
-const { projects = [] } = Astro.props;
+const { projects = [], header = true } = Astro.props;
 import Image from "astro/components/Image.astro";
 import Logo1 from "../../assets/home/portfolio/logos/1.png";
 import Logo2 from "../../assets/home/portfolio/logos/2.png";
@@ -131,24 +131,26 @@ const websiteProjects = [
 
 <section class="internal-padding py-20">
   <header class="relative mx-auto mb-12 max-w-6xl text-center">
-    <h1
-      class="portfolio-bg-title absolute top-[0px] left-[30%] -z-100 mx-auto transform text-[60px] font-semibold text-[#9D7EFF] opacity-10 md:left-[35%] lg:left-0 lg:translate-x-1/2 lg:text-[144px]"
-      id="portfolio-bg-title"
-    >
-      Portfolio
-    </h1>
-    <p
-      class="text-gradient-start mb-2 text-xl font-semibold tracking-wider uppercase"
-    >
-      Our Project Collection
-    </p>
-    <h2 class="mb-3 text-4xl font-semibold text-black md:text-[54px]">
-      Award Winning Portfolio
-    </h2>
-    <p class="mx-auto max-w-2xl text-base leading-6 text-[#707070]">
-      Most of our customers give us a call promptly after going through our
-      professional portfolio.
-    </p>
+   {header && <>
+      <h1
+        class="portfolio-bg-title absolute top-[0px] left-[30%] -z-100 mx-auto transform text-[60px] font-semibold text-[#9D7EFF] opacity-10 md:left-[35%] lg:left-0 lg:translate-x-1/2 lg:text-[144px]"
+        id="portfolio-bg-title"
+      >
+        Portfolio
+      </h1>
+      <p
+        class="text-gradient-start mb-2 text-xl font-semibold tracking-wider uppercase"
+      >
+        Our Project Collection
+      </p>
+      <h2 class="mb-3 text-4xl font-semibold text-black md:text-[54px]">
+        Award Winning Portfolio
+      </h2>
+      <p class="mx-auto max-w-2xl text-base leading-6 text-[#707070]">
+        Most of our customers give us a call promptly after going through our
+        professional portfolio.
+      </p>
+   </>}
 
     <!-- filters -->
     <nav
@@ -443,7 +445,8 @@ const websiteProjects = [
     }
 
     // Animate filter buttons on scroll in
-    gsap.from(".portfolio-filter-btn", {
+    //
+    gsap.from(".portfolio-filter-b", {
       y: 20,
       opacity: 0,
       stagger: 0.1,

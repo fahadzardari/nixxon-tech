@@ -1,4 +1,6 @@
 ---
+import Collaborate from "../components/common/Collaborate.astro";
+import Portfolio from "../components/home/Portfolio.astro";
 import HeroPortfolio from "../components/portfolios/HeroPortfolio.astro";
 import Layout from "../layouts/Layout.astro";
 
@@ -6,9 +8,9 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Portfolios - Nixxon Tech">
   <HeroPortfolio />
-  <h1>Our Services</h1>
-  <p>
-    Welcome to our services page. Here you can find information about the
-    various services we offer.
-  </p>
+  <span class="our-services h-0 w-0"> </span>
+ 
+  <Portfolio header={false} />
+  <Collaborate />
+  <span class="mt-24" />
 </Layout>

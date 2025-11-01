@@ -18,6 +18,8 @@ const serviceLinks = [
   { label: "App Development", href: "/services/mobile-application" },
 
 ];
+
+const currentYear = new Date().getFullYear();
 ---
 
 <footer
@@ -160,11 +162,11 @@ const serviceLinks = [
   </div>
 
   <div class="group chat-cta mb-8 flex cursor-pointer items-center gap-x-4">
-    <p
+    <a
       class="chat-cta-text border-b-[2px] border-b-white pb-2 text-lg sm:text-[24px] font-medium transition-all duration-300 md:text-[50px] lg:border-b-[5px] xl:text-[80px] 2xl:text-[110px]"
     >
       Hey, let's Have a Chat
-    </p>
+    </a>
     <svg
       width="70"
       height="70"
@@ -216,7 +218,7 @@ const serviceLinks = [
                   href={link.href}
                   class="text-xs text-white hover:underline md:text-sm lg:text-base"
                 >
-                  <p>{link.label}</p>
+                  {link.label}
                 </a>
               </li>
             ))
@@ -234,7 +236,7 @@ const serviceLinks = [
                   href={link.href}
                   class="text-xs text-white hover:underline md:text-sm lg:text-base"
                 >
-                  <p>{link.label}</p>
+                  {link.label}
                 </a>
               </li>
             ))
@@ -248,11 +250,11 @@ const serviceLinks = [
   >
     <div class="">
       <p class="gradient-text mb-1">
-        Copyright © Nixxon Australia 2025. All Rights Reserved
+        Copyright © Nixxon Australia {currentYear}. All Rights Reserved
       </p>
       <p class="">
-        <a class="cursor-pointer hover:underline">Privacy Policy</a> |
-        <a class="cursor-pointer hover:underline">Terms & Conditions</a>
+        <a class="cursor-pointer hover:underline" href="/privacy-policy">Privacy Policy</a> |
+        <a class="cursor-pointer hover:underline" href="/terms-conditions">Terms & Conditions</a>
       </p>
     </div>
     <div class="">
