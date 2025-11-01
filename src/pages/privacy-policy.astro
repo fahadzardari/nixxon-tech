@@ -9,7 +9,7 @@ const policy = [
   {
     title: "2. Information We Collect",
     content: `<p>We meticulously collect various categories of personal information, including but not limited to:</p>
-            <ul class="list-disc pl-12 mt-4">
+            <ul class="list-disc pl-6 md:pl-8 lg:pl-12 mt-4">
               <li><strong>Contact Information:</strong> Such as name, email address, and phone number.</li>
               <li><strong>Account Information:</strong> Including usernames and passwords.</li>
               <li><strong>Business Information:</strong> Such as company name and job title.</li>
@@ -20,7 +20,7 @@ const policy = [
   {
     title: "3. How We Use Your Information",
     content: `<p>The collected information serves pivotal roles, encompassing:</p>
-                        <ul class="list-disc pl-12 mt-4">
+                        <ul class="list-disc pl-6 md:pl-8 lg:pl-12 mt-4">
 
               <li><strong>Service Provision and Maintenance:</strong> To ensure seamless delivery of our services.</li>
               <li><strong>Communication:</strong> Facilitating effective interaction regarding our services.</li>
@@ -32,7 +32,7 @@ const policy = [
   },
   {
     title: "4. Data Security",
-    content: `<p>Nixxon Australia employs stringent security measures to uphold the confidentiality and integrity of your personal information. It is imperative to note, however, that no method of data transmission over the Internet or electronic storage is entirely impervious.</p>`,
+    content: `<p><span class="uppercase">Nixxon Australia</span> employs stringent security measures to uphold the confidentiality and integrity of your personal information. It is imperative to note, however, that no method of data transmission over the Internet or electronic storage is entirely impervious.</p>`,
   },
   {
     title: "5. Cookies and Tracking Technologies",
@@ -40,12 +40,12 @@ const policy = [
   },
   {
     title: "6. Third-Party Services",
-    content: `<p>In certain instances, Nixxon Australia may engage third-party services for analytics, marketing, or payment processing. These entities may have access to your personal information, with their usage governed by their respective privacy policies.</p>`,
+    content: `<p>In certain instances, <span class="uppercase">Nixxon Australia</span> may engage third-party services for analytics, marketing, or payment processing. These entities may have access to your personal information, with their usage governed by their respective privacy policies.</p>`,
   },
   {
     title: "7. Your Rights",
     content: `<p>You, as a user, possess the following rights:</p>
-                        <ul class="list-disc pl-12 mt-4">
+                        <ul class="list-disc pl-6 md:pl-8 lg:pl-12 mt-2 lg:mt-4">
 
               <li><strong>Access, Correction, or Deletion:</strong> Control over your personal information.</li>
               <li><strong>Objection:</strong> The right to contest the processing of your personal information.</li>
@@ -58,8 +58,12 @@ const policy = [
   },
   {
     title: "9. Contact Information",
-    content: `<p>For any inquiries or concerns regarding this Privacy Policy, please direct your communication to our contact channels listed on the site.</p>
-            <p>By availing yourself of our services, you implicitly agree to the stipulations outlined in this Privacy Policy. Thank you for entrusting Nixxon Australia with your privacy.</p>`,
+    content: `<p>For any inquiries or concerns regarding this Privacy Policy, please direct your communication here.</p>
+              <br>        
+    <p>By availing yourself of our services, you implicitly agree to the stipulations outlined in this Privacy Policy.</p>
+              <br>
+              <p class="text-lg md:text-xl lg:text-[22px] xl:text-[24px] 2xl:text-[30px]">Thank you for entrusting NIXXON AUSTRALIA with your privacy.</p>
+    `,
   },
 ];
 ---
@@ -68,18 +72,18 @@ const policy = [
   <HeroPrivacy />
   <span class="our-services h-0 w-0"> </span>
 
-  <div class="internal-padding my-24 flex flex-col gap-y-12">
+  <div class="internal-padding my-12 md:my-16 lg:my-24 text-[#000000] flex flex-col gap-y-8 lg:gap-y-12">
     <p class="text-sm lg:text-base xl:text-lg 2xl:text-xl">
       Last Updated: January 2025
     </p>
     {
       policy.map((section) => (
-        <article>
-          <h1 class="mb-4 text-xl md:text-2xl lg:text-3xl xl:text-[40px] 2xl:text-[46px]">
+        <article class="capitalize">
+          <h1 class="mb-2 md:mb-4 text-xl md:text-2xl lg:text-3xl xl:text-[40px] 2xl:text-[46px]">
             {section.title}
           </h1>
           <div
-            class="text-sm lg:text-base xl:text-lg 2xl:text-xl"
+            class="text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl"
             set:html={section.content}
           />
         </article>
