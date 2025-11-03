@@ -161,7 +161,7 @@ const websiteProjects = [
         filters.map((filter, idx) => (
           <button
             type="button"
-            class={`cursor-pointer rounded portfolio-filter-btn${idx === 0 ? " selected" : ""}`}
+            class={`cursor-pointer uppercase portfolio-filter-btn${idx === 0 ? " selected" : ""}`}
             data-filter={filter}
           >
             {filter}
@@ -592,11 +592,11 @@ const websiteProjects = [
     cursor: pointer;
     border: none;
     outline: none;
-    padding: 0.625rem 1.5rem;
-    font-size: 1.125rem;
+    padding: 0.725rem 1.5rem;
+    font-size: 1.025rem;
     font-weight: 600;
-    background: var(--btn-inactive-bg);
-    color: var(--btn-inactive-text);
+    background: #D2D7FF;
+    color: #8067CE;
     transition:
       background 0.28s cubic-bezier(0.22, 1, 0.36, 1),
       color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
@@ -605,7 +605,7 @@ const websiteProjects = [
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
     position: relative;
     z-index: 1;
-    border-radius: 1.5rem;
+    border-radius: 0.3rem;
   }
 
   .portfolio-filter-btn.selected {

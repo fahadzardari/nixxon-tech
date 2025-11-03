@@ -1,7 +1,7 @@
 ---
 import Footer from "../components/common/Footer.astro";
 
-const { title = "Nixxon Tech" } = Astro.props;
+const { title = "Nixxon Tech" , bg = "#f8f8f8" } = Astro.props;
 import "../index.css";
 import Navbar from "../components/common/Navbar.astro";
 ---
@@ -16,7 +16,7 @@ import Navbar from "../components/common/Navbar.astro";
     <title>{title}</title>
   </head>
   <body
-    class="m-0 flex min-h-screen min-w-screen flex-col overflow-x-hidden bg-[#f8f8f8] p-0"
+    class={`m-0 flex min-h-screen min-w-screen flex-col overflow-x-hidden p-0 bg-[${bg}]`}
   >
     <Navbar />
     <slot />
