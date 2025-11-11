@@ -9,7 +9,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: "https://nixxontech.com",
+  site: "https://nixxonaustralia.com",
   output: "static",
   integrations: [sitemap()],
   devToolbar: {
