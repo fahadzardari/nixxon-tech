@@ -8,6 +8,11 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+    preview: {
+      // allow the production hostname for vite preview
+      allowedHosts: ["nixxonaustralia.com", "localhost"],
+      // alternatively to allow any host (less secure): allowedHosts: "all"
+    },
   },
   site: "https://nixxonaustralia.com",
   output: "static",
