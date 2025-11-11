@@ -10,7 +10,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
     preview: {
       // allow the production hostname for vite preview
-      allowedHosts: ["nixxonaustralia.com", "localhost"],
+      allowedHosts: ["nixxonaustralia.com", "localhost", "www.nixxonaustralia.com"],
       // alternatively to allow any host (less secure): allowedHosts: "all"
     },
   },
